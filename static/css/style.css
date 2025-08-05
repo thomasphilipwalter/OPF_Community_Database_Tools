@@ -51,10 +51,15 @@ header {
 
 .stats-card {
     background: rgb(175, 207, 208);
+    background-image: 
+        linear-gradient(rgba(128, 128, 128, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(128, 128, 128, 0.1) 1px, transparent 1px);
+    background-size: 10px 10px;
     padding: 10px 15px;
     border-radius: 8px;
     backdrop-filter: blur(10px);
     color: black;
+    border: 1px dashed black;
 }
 
 #stats-display {
