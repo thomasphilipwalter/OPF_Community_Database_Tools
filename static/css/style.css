@@ -7,7 +7,7 @@ body {
 
 /* Apply Inter Tight to all elements */
 * {
-    font-family: 'Inter Tight', sans-serif;
+    font-family: 'Inter Tight Regular', sans-serif;
 }
 
 /* Header Styles */
@@ -64,10 +64,12 @@ header {
 
 #stats-display {
     font-weight: normal !important;
+    font-family: 'Azeret Mono', monospace !important;
 }
 
 #stats-display div {
     font-weight: normal !important;
+    font-family: 'Azeret Mono', monospace !important;
 }
 
 /* Search Card */
