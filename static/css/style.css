@@ -86,11 +86,23 @@ header {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     overflow: hidden;
+    margin-bottom: 20px;
 }
 
 .result-card:hover {
     transform: translateY(-2px);
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+/* Full-width results layout */
+#resultsList .row {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+#resultsList .col-12 {
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
 .result-card .card-header {
@@ -173,6 +185,15 @@ header {
     .stats-card {
         text-align: center;
         margin-top: 15px;
+    }
+    
+    .result-card {
+        margin-bottom: 15px;
+    }
+    
+    #resultsList .col-12 {
+        padding-left: 10px;
+        padding-right: 10px;
     }
 }
 

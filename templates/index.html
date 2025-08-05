@@ -64,8 +64,8 @@
         </div>
 
         <!-- Results Section -->
-        <div class="container">
-            <div id="resultsContainer" style="display: none;">
+        <div id="resultsContainer" style="display: none;">
+            <div class="container">
                 <div class="row mb-3">
                     <div class="col">
                         <div class="results-header">
@@ -81,11 +81,15 @@
                         </div>
                     </div>
                 </div>
-                
+            </div>
+            
+            <div class="container-fluid">
                 <div id="resultsList"></div>
             </div>
+        </div>
 
-            <!-- Loading Spinner -->
+        <!-- Loading Spinner -->
+        <div class="container">
             <div id="loadingSpinner" class="text-center py-5" style="display: none;">
                 <div class="spinner-border text-primary" role="status">
                     <span class="visually-hidden">Loading...</span>
@@ -100,8 +104,8 @@
 
     <!-- Result Card Template -->
     <template id="resultCardTemplate">
-        <div class="col-lg-6 col-xl-4 mb-4">
-            <div class="card result-card h-100">
+        <div class="col-12 mb-4">
+            <div class="card result-card">
                 <div class="card-header">
                     <h5 class="card-title mb-0">
                         <i class="fas fa-user me-2"></i>
