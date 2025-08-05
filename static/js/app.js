@@ -76,8 +76,8 @@ class DatabaseSearchApp {
             const statsDisplay = document.getElementById('stats-display');
             statsDisplay.innerHTML = `
                 <div>${stats.total_records} Total Records</div>
-                <div>${stats.records_with_names} With Names</div>
-                <div>${stats.records_with_companies} With Companies</div>
+                <div>${stats.records_with_linkedins} With LinkedIn</div>
+                <div>${stats.records_with_resumes} With Resumes</div>
             `;
         } catch (error) {
             console.error('Error loading stats:', error);

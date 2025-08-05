@@ -90,19 +90,20 @@ def get_stats():
         cursor.execute("SELECT COUNT(*) FROM final")
         total_records = cursor.fetchone()[0]
         
-        # Get count of records with non-null values in key fields
-        cursor.execute("SELECT COUNT(*) FROM final WHERE first_name IS NOT NULL AND first_name != ''")
-        records_with_names = cursor.fetchone()[0]
+        # Get count of records with LinkedIn profiles
+        cursor.execute("SELECT COUNT(*) FROM final WHERE linkedin IS NOT NULL AND linkedin != ''")
+        records_with_linkedins = cursor.fetchone()[0]
         
-        cursor.execute("SELECT COUNT(*) FROM final WHERE current_company IS NOT NULL AND current_company != ''")
-        records_with_companies = cursor.fetchone()[0]
+        # Get count of records with resumes
+        cursor.execute("SELECT COUNT(*) FROM final WHERE resume IS NOT NULL AND resume != ''")
+        records_with_resumes = cursor.fetchone()[0]
         
         conn.close()
         
         return jsonify({
             'total_records': total_records,
-            'records_with_names': records_with_names,
-            'records_with_companies': records_with_companies
+            'records_with_linkedins': records_with_linkedins,
+            'records_with_resumes': records_with_resumes
         })
         
     except Exception as e:

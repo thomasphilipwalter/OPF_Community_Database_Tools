@@ -12,7 +12,7 @@ body {
 
 /* Header Styles */
 header {
-    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+    background: rgb(34, 212, 162);
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -50,10 +50,19 @@ header {
 }
 
 .stats-card {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgb(175, 207, 208);
     padding: 10px 15px;
     border-radius: 8px;
     backdrop-filter: blur(10px);
+    color: black;
+}
+
+#stats-display {
+    font-weight: normal !important;
+}
+
+#stats-display div {
+    font-weight: normal !important;
 }
 
 /* Search Card */
