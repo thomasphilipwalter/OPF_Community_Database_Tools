@@ -31,32 +31,73 @@
             </div>
         </header>
 
-        <!-- Search Section -->
+        <!-- Tab Navigation -->
         <div class="container mb-4">
-            <div class="row justify-content-center">
-                <div class="col-lg-8">
-                    <div class="search-card">
-                        <form id="searchForm" class="mb-3">
-                            <div class="input-group input-group-lg">
-                                <input type="text" 
-                                       id="searchInput" 
-                                       class="form-control" 
-                                       placeholder="Enter keyword or phrase to search..."
-                                       autocomplete="off">
-                                <button type="submit" class="btn btn-primary">
-                                    <i class="fas fa-search me-2"></i>Search
-                                </button>
+            <ul class="nav nav-tabs" id="mainTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="keyword-search-tab" data-bs-toggle="tab" data-bs-target="#keyword-search" type="button" role="tab" aria-controls="keyword-search" aria-selected="true">
+                        <i class="fas fa-search me-2"></i>Keyword Search
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="rfp-analysis-tab" data-bs-toggle="tab" data-bs-target="#rfp-analysis" type="button" role="tab" aria-controls="rfp-analysis" aria-selected="false">
+                        <i class="fas fa-file-alt me-2"></i>RFP Analysis
+                    </button>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Tab Content -->
+        <div class="tab-content" id="mainTabsContent">
+            <!-- Keyword Search Tab -->
+            <div class="tab-pane fade show active" id="keyword-search" role="tabpanel" aria-labelledby="keyword-search-tab">
+                <!-- Search Section -->
+                <div class="container mb-4">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+                            <div class="search-card">
+                                <form id="searchForm" class="mb-3">
+                                    <div class="input-group input-group-lg">
+                                        <input type="text" 
+                                               id="searchInput" 
+                                               class="form-control" 
+                                               placeholder="Enter keywords separated by commas (e.g., USAID, climate)..."
+                                               autocomplete="off">
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="fas fa-search me-2"></i>Search
+                                        </button>
+                                    </div>
+                                </form>
+                                
+                                <!-- Search Tips -->
+                                <div class="search-tips">
+                                    <h6><i class="fas fa-lightbulb me-2"></i>Search Tips:</h6>
+                                    <ul class="list-unstyled mb-0">
+                                        <li><small>• Search by name, company, skills, location, or any other field</small></li>
+                                        <li><small>• Use commas to search for multiple terms: "USAID, climate" finds profiles with BOTH terms</small></li>
+                                        <li><small>• Try searching for "sustainability", "consultant, Denver", "climate, USAID", etc.</small></li>
+                                    </ul>
+                                </div>
                             </div>
-                        </form>
-                        
-                        <!-- Search Tips -->
-                        <div class="search-tips">
-                            <h6><i class="fas fa-lightbulb me-2"></i>Search Tips:</h6>
-                            <ul class="list-unstyled mb-0">
-                                <li><small>• Search by name, company, skills, location, or any other field</small></li>
-                                <li><small>• Try searching for "sustainability", "consultant", "Denver", etc.</small></li>
-                                <li><small>• Results will show all records containing your keyword in any field</small></li>
-                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                
+            </div>
+
+            <!-- RFP Analysis Tab -->
+            <div class="tab-pane fade" id="rfp-analysis" role="tabpanel" aria-labelledby="rfp-analysis-tab">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+                            <div class="search-card">
+                                <div class="text-center">
+                                    <i class="fas fa-file-alt fa-3x text-muted mb-3"></i>
+                                    <h4 class="text-muted">RFP Analysis</h4>
+                                    <p class="text-muted">This feature is coming soon. Upload and analyze RFP documents to find relevant community members.</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

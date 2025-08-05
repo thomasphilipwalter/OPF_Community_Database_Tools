@@ -5,8 +5,8 @@ from datetime import datetime
 
 app = Flask(__name__)
 
-def search_database(keyword):
-    """Search for keyword across all columns in the final table"""
+def search_database(keywords):
+    """Search for multiple keywords across all columns in the final table using AND logic"""
     conn = sqlite3.connect('opfa_community.db')
     cursor = conn.cursor()
     
@@ -14,14 +14,27 @@ def search_database(keyword):
     cursor.execute("PRAGMA table_info(final)")
     columns = [column[1] for column in cursor.fetchall()]
     
-    # Build the search query to search across all columns
-    search_conditions = []
-    for column in columns:
-        search_conditions.append(f"LOWER({column}) LIKE LOWER('%{keyword}%')")
+    # Split keywords by comma and clean them
+    keyword_list = [kw.strip().lower() for kw in keywords.split(',') if kw.strip()]
     
+    if not keyword_list:
+        return []
+    
+    # Build the search query for each keyword
+    all_conditions = []
+    
+    for keyword in keyword_list:
+        # Build conditions for this keyword across all columns
+        keyword_conditions = []
+        for column in columns:
+            keyword_conditions.append(f"LOWER({column}) LIKE LOWER('%{keyword}%')")
+        # Each keyword must be found in at least one column (OR logic within keyword)
+        all_conditions.append(f"({' OR '.join(keyword_conditions)})")
+    
+    # All keywords must be found (AND logic between keywords)
     query = f"""
     SELECT * FROM final 
-    WHERE {' OR '.join(search_conditions)}
+    WHERE {' AND '.join(all_conditions)}
     ORDER BY first_name, last_name
     """
     
@@ -49,18 +62,18 @@ def index():
 def search():
     try:
         data = request.get_json()
-        keyword = data.get('keyword', '').strip()
+        keywords = data.get('keyword', '').strip()
         
-        if not keyword:
+        if not keywords:
             return jsonify({'error': 'Please enter a keyword or phrase to search for'})
         
-        results = search_database(keyword)
+        results = search_database(keywords)
         
         return jsonify({
             'success': True,
             'results': results,
             'count': len(results),
-            'keyword': keyword
+            'keyword': keywords
         })
         
     except Exception as e:

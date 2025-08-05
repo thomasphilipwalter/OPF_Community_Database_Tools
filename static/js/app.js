@@ -10,6 +10,7 @@ class DatabaseSearchApp {
     init() {
         this.loadStats();
         this.setupEventListeners();
+        this.setupTabHandling();
     }
 
     setupEventListeners() {
@@ -36,6 +37,28 @@ class DatabaseSearchApp {
             if (e.key === 'Enter') {
                 e.preventDefault();
                 this.performSearch();
+            }
+        });
+    }
+
+    setupTabHandling() {
+        // Handle tab switching to ensure results are shown in the correct tab
+        const keywordSearchTab = document.getElementById('keyword-search-tab');
+        const rfpAnalysisTab = document.getElementById('rfp-analysis-tab');
+
+        // When switching to RFP Analysis tab, hide any existing results
+        rfpAnalysisTab.addEventListener('click', () => {
+            const resultsContainer = document.getElementById('resultsContainer');
+            if (resultsContainer.style.display !== 'none') {
+                resultsContainer.style.display = 'none';
+            }
+        });
+
+        // When switching back to Keyword Search tab, show results if they exist
+        keywordSearchTab.addEventListener('click', () => {
+            const resultsContainer = document.getElementById('resultsContainer');
+            if (this.currentResults.length > 0 && resultsContainer.style.display === 'none') {
+                resultsContainer.style.display = 'block';
             }
         });
     }
@@ -226,11 +249,24 @@ class DatabaseSearchApp {
         return fieldGroup;
     }
 
-    highlightKeyword(text, keyword) {
-        if (!keyword || !text) return text;
+    highlightKeyword(text, keywords) {
+        if (!keywords || !text) return text;
         
-        const regex = new RegExp(`(${keyword.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
-        return text.replace(regex, '<span class="highlight">$1</span>');
+        // Split keywords by comma and clean them
+        const keywordList = keywords.split(',').map(kw => kw.trim()).filter(kw => kw);
+        
+        if (keywordList.length === 0) return text;
+        
+        let highlightedText = text;
+        
+        // Highlight each keyword with a different color
+        keywordList.forEach((keyword, index) => {
+            const regex = new RegExp(`(${keyword.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+            const colorClass = index === 0 ? 'highlight' : `highlight-${index + 1}`;
+            highlightedText = highlightedText.replace(regex, `<span class="${colorClass}">$1</span>`);
+        });
+        
+        return highlightedText;
     }
 
     clearResults() {

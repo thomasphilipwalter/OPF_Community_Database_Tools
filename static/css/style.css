@@ -11,6 +11,39 @@ header {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
+/* Tab Navigation Styles */
+.nav-tabs {
+    border-bottom: 2px solid #e9ecef;
+    margin-bottom: 0;
+}
+
+.nav-tabs .nav-link {
+    border: none;
+    border-bottom: 3px solid transparent;
+    color: #6c757d;
+    font-weight: 500;
+    padding: 15px 25px;
+    transition: all 0.3s ease;
+    background: transparent;
+}
+
+.nav-tabs .nav-link:hover {
+    border-color: transparent;
+    color: #007bff;
+    background: rgba(0, 123, 255, 0.05);
+}
+
+.nav-tabs .nav-link.active {
+    color: #007bff;
+    background: white;
+    border-bottom: 3px solid #007bff;
+    font-weight: 600;
+}
+
+.nav-tabs .nav-link i {
+    margin-right: 8px;
+}
+
 .stats-card {
     background: rgba(255, 255, 255, 0.1);
     padding: 10px 15px;
@@ -155,6 +188,34 @@ header {
 /* Highlight search terms */
 .highlight {
     background-color: #fff3cd;
+    padding: 2px 4px;
+    border-radius: 3px;
+    font-weight: 600;
+}
+
+.highlight-2 {
+    background-color: #d1ecf1;
+    padding: 2px 4px;
+    border-radius: 3px;
+    font-weight: 600;
+}
+
+.highlight-3 {
+    background-color: #d4edda;
+    padding: 2px 4px;
+    border-radius: 3px;
+    font-weight: 600;
+}
+
+.highlight-4 {
+    background-color: #f8d7da;
+    padding: 2px 4px;
+    border-radius: 3px;
+    font-weight: 600;
+}
+
+.highlight-5 {
+    background-color: #e2e3e5;
     padding: 2px 4px;
     border-radius: 3px;
     font-weight: 600;
