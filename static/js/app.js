@@ -45,7 +45,6 @@ class DatabaseSearchApp {
         // Handle tab switching to ensure results are shown in the correct tab
         const keywordSearchTab = document.getElementById('keyword-search-tab');
         const rfpAnalysisTab = document.getElementById('rfp-analysis-tab');
-
         // When switching to RFP Analysis tab, hide any existing results
         rfpAnalysisTab.addEventListener('click', () => {
             const resultsContainer = document.getElementById('resultsContainer');
@@ -353,6 +352,8 @@ class DatabaseSearchApp {
         const errorMessage = document.getElementById('errorMessage');
         errorMessage.style.display = 'none';
     }
+
+
 }
 
 // Global function for toggling resume content
@@ -371,6 +372,8 @@ function toggleResume(resumeId) {
         button.innerHTML = '<i class="fas fa-eye me-1"></i>View Resume';
     }
 }
+
+
 
 // Initialize the application when the DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {

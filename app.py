@@ -109,6 +109,8 @@ def get_stats():
     except Exception as e:
         return jsonify({'error': f'An error occurred: {str(e)}'})
 
+
+
 if __name__ == '__main__':
     # Use environment variables for production
     port = int(os.environ.get('PORT', 5000))
