@@ -26,15 +26,15 @@
                         <p class="mb-0 mt-2" style="color: black; font-family: 'Azeret Mono', monospace; font-size: 1.0em;">Tools and interfaces for OPF's community network</p>
                     </div>
                     <div class="col-md-4 text-end">
-                        <div class="d-flex justify-content-end align-items-start">
-                            <div class="stats-card me-3">
+                        <div class="d-flex flex-column align-items-end">
+                            <a href="{{ url_for('logout') }}" class="btn btn-outline-secondary btn-sm mb-2" 
+                               style="font-family: 'Inter Tight', sans-serif; font-size: 0.85em; background-color: white; border-color: #D8F15F; color: black;">
+                                <i class="fas fa-sign-out-alt me-1"></i>Logout
+                            </a>
+                            <div class="stats-card" style="min-width: 400px;">
                                 <small style="font-weight: 600; font-family: 'Inter Tight', sans-serif;">Database Stats</small>
                                 <div id="stats-display" style="font-weight: normal; font-family: 'Azeret Mono', monospace; font-size: 0.8em;"></div>
                             </div>
-                            <a href="{{ url_for('logout') }}" class="btn btn-outline-secondary btn-sm" 
-                               style="font-family: 'Inter Tight', sans-serif; font-size: 0.85em; margin-top: 5px;">
-                                <i class="fas fa-sign-out-alt me-1"></i>Logout
-                            </a>
                         </div>
                     </div>
                 </div>
