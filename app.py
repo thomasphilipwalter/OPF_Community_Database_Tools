@@ -30,7 +30,26 @@ def load_user(user_id):
 
 def search_database(keywords, source_filters=None, experience_filters=None, sustainability_experience_filters=None, competencies_filters=None, sectors_filters=None):
     """Search for multiple keywords across all columns in the final table using AND logic"""
-    conn = sqlite3.connect('opf_community.db')
+    # Use environment variable for database URL, fallback to SQLite
+    database_url = os.environ.get('DATABASE_URL', 'opf_community.db')
+    
+    # Handle PostgreSQL URL format from Heroku
+    if database_url.startswith('postgres://'):
+        database_url = database_url.replace('postgres://', 'postgresql://', 1)
+    
+    if database_url.startswith('postgresql://'):
+        import psycopg2
+        from urllib.parse import urlparse
+        parsed = urlparse(database_url)
+        conn = psycopg2.connect(
+            host=parsed.hostname,
+            port=parsed.port,
+            database=parsed.path[1:],
+            user=parsed.username,
+            password=parsed.password
+        )
+    else:
+        conn = sqlite3.connect(database_url)
     cursor = conn.cursor()
     
     # Get all column names from the final table
@@ -185,7 +204,26 @@ def search():
 def get_stats():
     """Get basic statistics about the database"""
     try:
-        conn = sqlite3.connect('opf_community.db')
+        # Use environment variable for database URL, fallback to SQLite
+        database_url = os.environ.get('DATABASE_URL', 'opf_community.db')
+        
+        # Handle PostgreSQL URL format from Heroku
+        if database_url.startswith('postgres://'):
+            database_url = database_url.replace('postgres://', 'postgresql://', 1)
+        
+        if database_url.startswith('postgresql://'):
+            import psycopg2
+            from urllib.parse import urlparse
+            parsed = urlparse(database_url)
+            conn = psycopg2.connect(
+                host=parsed.hostname,
+                port=parsed.port,
+                database=parsed.path[1:],
+                user=parsed.username,
+                password=parsed.password
+            )
+        else:
+            conn = sqlite3.connect(database_url)
         cursor = conn.cursor()
         
         # Get total number of records
