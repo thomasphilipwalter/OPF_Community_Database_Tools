@@ -78,6 +78,9 @@
                                     <button id="filterBtn" class="btn btn-outline-secondary btn-sm" onclick="toggleFilter()">
                                         <i class="fas fa-filter me-1"></i>Filters
                                     </button>
+                                    <button id="clearFiltersBtn" class="btn btn-outline-danger btn-sm ms-2" onclick="clearFilters()" style="display: none;">
+                                        <i class="fas fa-times me-1"></i>Clear Filters
+                                    </button>
                                 </div>
                                 
                                 <!-- Filter Options Box -->
@@ -87,7 +90,58 @@
                                             <h6 class="card-title mb-3">
                                                 <i class="fas fa-filter me-2"></i>Filter Options
                                             </h6>
-                                            <p class="text-muted">Filter options will be added here.</p>
+                                            
+                                            <!-- Source Filter -->
+                                            <div class="filter-section mb-3">
+                                                <label class="form-label fw-bold" style="font-family: 'Inter Tight', sans-serif; color: #495057;">
+                                                    <i class="fas fa-users me-1"></i>Source
+                                                </label>
+                                                <div class="source-checkboxes">
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="checkbox" id="source-cohort1" value="Cohort 1">
+                                                        <label class="form-check-label" for="source-cohort1">Cohort 1</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="checkbox" id="source-cohort2" value="Cohort 2">
+                                                        <label class="form-check-label" for="source-cohort2">Cohort 2</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="checkbox" id="source-cohort3" value="Cohort 3">
+                                                        <label class="form-check-label" for="source-cohort3">Cohort 3</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="checkbox" id="source-cohort4" value="Cohort 4">
+                                                        <label class="form-check-label" for="source-cohort4">Cohort 4</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="checkbox" id="source-cohort5" value="Cohort 5">
+                                                        <label class="form-check-label" for="source-cohort5">Cohort 5</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="checkbox" id="source-cohort6" value="Cohort 6">
+                                                        <label class="form-check-label" for="source-cohort6">Cohort 6</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="checkbox" id="source-cohort7" value="Cohort 7">
+                                                        <label class="form-check-label" for="source-cohort7">Cohort 7</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="checkbox" id="source-cohort8" value="Cohort 8">
+                                                        <label class="form-check-label" for="source-cohort8">Cohort 8</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="checkbox" id="source-expert" value="Expert Network">
+                                                        <label class="form-check-label" for="source-expert">Expert Network</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <!-- Apply Filters Button -->
+                                            <div class="text-center mt-3">
+                                                <button id="applyFiltersBtn" class="btn btn-primary btn-sm" onclick="applyFilters()">
+                                                    <i class="fas fa-check me-1"></i>Apply Filters
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

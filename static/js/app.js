@@ -96,12 +96,18 @@ class DatabaseSearchApp {
         this.hideError();
 
         try {
+            // Get selected source filters
+            const sourceFilters = this.getSelectedSourceFilters();
+            
             const response = await fetch('/search', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ keyword })
+                body: JSON.stringify({ 
+                    keyword,
+                    source_filters: sourceFilters
+                })
             });
 
             const data = await response.json();
@@ -121,6 +127,17 @@ class DatabaseSearchApp {
         } finally {
             this.showLoading(false);
         }
+    }
+
+    getSelectedSourceFilters() {
+        const sourceFilters = [];
+        const sourceCheckboxes = document.querySelectorAll('.source-checkboxes input[type="checkbox"]:checked');
+        
+        sourceCheckboxes.forEach(checkbox => {
+            sourceFilters.push(checkbox.value);
+        });
+        
+        return sourceFilters;
     }
 
     displayResults(data) {
@@ -377,12 +394,15 @@ function toggleResume(resumeId) {
 function toggleFilter() {
     const filterOptions = document.getElementById('filterOptions');
     const filterBtn = document.getElementById('filterBtn');
+    const clearFiltersBtn = document.getElementById('clearFiltersBtn');
     const icon = filterBtn.querySelector('i');
     
     if (filterOptions.style.display === 'none') {
         filterOptions.style.display = 'block';
         icon.className = 'fas fa-filter me-1';
         filterBtn.innerHTML = '<i class="fas fa-filter me-1"></i>Hide Filters';
+        // Hide clear filters button when opening filter box
+        clearFiltersBtn.style.display = 'none';
     } else {
         filterOptions.style.display = 'none';
         icon.className = 'fas fa-filter me-1';
@@ -390,9 +410,53 @@ function toggleFilter() {
     }
 }
 
+// Global function for applying filters
+function applyFilters() {
+    // Close the filter box
+    const filterOptions = document.getElementById('filterOptions');
+    const filterBtn = document.getElementById('filterBtn');
+    const clearFiltersBtn = document.getElementById('clearFiltersBtn');
+    const icon = filterBtn.querySelector('i');
+    
+    filterOptions.style.display = 'none';
+    icon.className = 'fas fa-filter me-1';
+    filterBtn.innerHTML = '<i class="fas fa-filter me-1"></i>Filters';
+    
+    // Show clear filters button if any filters are selected
+    const selectedFilters = getSelectedSourceFiltersGlobal();
+    if (selectedFilters.length > 0) {
+        clearFiltersBtn.style.display = 'inline-block';
+    }
+}
+
+// Global function to get selected source filters
+function getSelectedSourceFiltersGlobal() {
+    const sourceFilters = [];
+    const sourceCheckboxes = document.querySelectorAll('.source-checkboxes input[type="checkbox"]:checked');
+    
+    sourceCheckboxes.forEach(checkbox => {
+        sourceFilters.push(checkbox.value);
+    });
+    
+    return sourceFilters;
+}
+
+// Global function for clearing filters
+function clearFilters() {
+    // Uncheck all source checkboxes
+    const sourceCheckboxes = document.querySelectorAll('.source-checkboxes input[type="checkbox"]');
+    sourceCheckboxes.forEach(checkbox => {
+        checkbox.checked = false;
+    });
+    
+    // Hide clear filters button
+    const clearFiltersBtn = document.getElementById('clearFiltersBtn');
+    clearFiltersBtn.style.display = 'none';
+}
+
 
 
 // Initialize the application when the DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-    new DatabaseSearchApp();
+    window.databaseSearchApp = new DatabaseSearchApp();
 }); 

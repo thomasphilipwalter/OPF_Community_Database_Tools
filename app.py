@@ -5,7 +5,7 @@ from datetime import datetime
 
 app = Flask(__name__)
 
-def search_database(keywords):
+def search_database(keywords, source_filters=None):
     """Search for multiple keywords across all columns in the final table using AND logic"""
     conn = sqlite3.connect('opf_community.db')
     cursor = conn.cursor()
@@ -31,7 +31,16 @@ def search_database(keywords):
         # Each keyword must be found in at least one column (OR logic within keyword)
         all_conditions.append(f"({' OR '.join(keyword_conditions)})")
     
-    # All keywords must be found (AND logic between keywords)
+    # Add source filtering if specified
+    if source_filters and len(source_filters) > 0:
+        source_conditions = []
+        for source in source_filters:
+            # Handle comma-separated values in source column
+            source_conditions.append(f"source LIKE '%{source}%'")
+        source_filter_condition = f"({' OR '.join(source_conditions)})"
+        all_conditions.append(source_filter_condition)
+    
+    # All conditions must be met (AND logic)
     query = f"""
     SELECT * FROM final 
     WHERE {' AND '.join(all_conditions)}
@@ -63,11 +72,12 @@ def search():
     try:
         data = request.get_json()
         keywords = data.get('keyword', '').strip()
+        source_filters = data.get('source_filters', [])
         
         if not keywords:
             return jsonify({'error': 'Please enter a keyword or phrase to search for'})
         
-        results = search_database(keywords)
+        results = search_database(keywords, source_filters)
         
         return jsonify({
             'success': True,

@@ -203,6 +203,43 @@ header {
     background-color: white !important;
 }
 
+/* Filter section styling */
+.filter-section {
+    border-bottom: 1px solid #e9ecef;
+    padding-bottom: 15px;
+}
+
+.filter-section:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.source-checkboxes {
+    margin-top: 10px;
+}
+
+.form-check-inline {
+    margin-right: 15px;
+    margin-bottom: 8px;
+}
+
+.form-check-label {
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 0.9em;
+    color: #495057;
+}
+
+/* Apply filters button styling */
+#applyFiltersBtn {
+    border-radius: 10px !important;
+}
+
+/* Clear filters button styling */
+#clearFiltersBtn {
+    border-radius: 10px !important;
+    background-color: white !important;
+}
+
 
 
 .result-card .card-header {
