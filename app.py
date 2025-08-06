@@ -5,7 +5,7 @@ from datetime import datetime
 
 app = Flask(__name__)
 
-def search_database(keywords, source_filters=None):
+def search_database(keywords, source_filters=None, experience_filters=None, sustainability_experience_filters=None):
     """Search for multiple keywords across all columns in the final table using AND logic"""
     conn = sqlite3.connect('opf_community.db')
     cursor = conn.cursor()
@@ -17,33 +17,44 @@ def search_database(keywords, source_filters=None):
     # Split keywords by comma and clean them
     keyword_list = [kw.strip().lower() for kw in keywords.split(',') if kw.strip()]
     
-    if not keyword_list:
-        return []
-    
-    # Build the search query for each keyword
+    # Build the search query
     all_conditions = []
     
-    for keyword in keyword_list:
-        # Build conditions for this keyword across all columns
-        keyword_conditions = []
-        for column in columns:
-            keyword_conditions.append(f"LOWER({column}) LIKE LOWER('%{keyword}%')")
-        # Each keyword must be found in at least one column (OR logic within keyword)
-        all_conditions.append(f"({' OR '.join(keyword_conditions)})")
+    # Add keyword conditions if keywords are provided
+    if keyword_list:
+        for keyword in keyword_list:
+            # Build conditions for this keyword across all columns
+            keyword_conditions = []
+            for column in columns:
+                keyword_conditions.append(f"LOWER({column}) LIKE LOWER('%{keyword}%')")
+            # Each keyword must be found in at least one column (OR logic within keyword)
+            all_conditions.append(f"({' OR '.join(keyword_conditions)})")
     
     # Add source filtering if specified
     if source_filters and len(source_filters) > 0:
-        source_conditions = []
         for source in source_filters:
             # Handle comma-separated values in source column
-            source_conditions.append(f"source LIKE '%{source}%'")
-        source_filter_condition = f"({' OR '.join(source_conditions)})"
-        all_conditions.append(source_filter_condition)
+            all_conditions.append(f"source LIKE '%{source}%'")
     
-    # All conditions must be met (AND logic)
+    # Add experience filtering if specified
+    if experience_filters and len(experience_filters) > 0:
+        for exp_range in experience_filters:
+            all_conditions.append(f"years_xp = '{exp_range}'")
+    
+    # Add sustainability experience filtering if specified
+    if sustainability_experience_filters and len(sustainability_experience_filters) > 0:
+        for exp_range in sustainability_experience_filters:
+            all_conditions.append(f"years_sustainability_xp = '{exp_range}'")
+    
+    # Build the WHERE clause
+    if all_conditions:
+        where_clause = f"WHERE {' AND '.join(all_conditions)}"
+    else:
+        where_clause = ""
+    
     query = f"""
     SELECT * FROM final 
-    WHERE {' AND '.join(all_conditions)}
+    {where_clause}
     ORDER BY first_name, last_name
     """
     
@@ -73,11 +84,10 @@ def search():
         data = request.get_json()
         keywords = data.get('keyword', '').strip()
         source_filters = data.get('source_filters', [])
+        experience_filters = data.get('experience_filters', [])
+        sustainability_experience_filters = data.get('sustainability_experience_filters', [])
         
-        if not keywords:
-            return jsonify({'error': 'Please enter a keyword or phrase to search for'})
-        
-        results = search_database(keywords, source_filters)
+        results = search_database(keywords, source_filters, experience_filters, sustainability_experience_filters)
         
         return jsonify({
             'success': True,

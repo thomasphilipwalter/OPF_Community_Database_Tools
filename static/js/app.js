@@ -87,17 +87,16 @@ class DatabaseSearchApp {
         const searchInput = document.getElementById('searchInput');
         const keyword = searchInput.value.trim();
 
-        if (!keyword) {
-            this.showError('Please enter a keyword or phrase to search for');
-            return;
-        }
-
         this.showLoading(true);
         this.hideError();
 
         try {
             // Get selected source filters
             const sourceFilters = this.getSelectedSourceFilters();
+            // Get selected experience filters
+            const experienceFilters = this.getSelectedExperienceFilters();
+            // Get selected sustainability experience filters
+            const sustainabilityExperienceFilters = this.getSelectedSustainabilityExperienceFilters();
             
             const response = await fetch('/search', {
                 method: 'POST',
@@ -106,7 +105,9 @@ class DatabaseSearchApp {
                 },
                 body: JSON.stringify({ 
                     keyword,
-                    source_filters: sourceFilters
+                    source_filters: sourceFilters,
+                    experience_filters: experienceFilters,
+                    sustainability_experience_filters: sustainabilityExperienceFilters
                 })
             });
 
@@ -140,6 +141,28 @@ class DatabaseSearchApp {
         return sourceFilters;
     }
 
+    getSelectedExperienceFilters() {
+        const experienceFilters = [];
+        const experienceCheckboxes = document.querySelectorAll('.experience-checkboxes input[type="checkbox"]:checked');
+        
+        experienceCheckboxes.forEach(checkbox => {
+            experienceFilters.push(checkbox.value);
+        });
+        
+        return experienceFilters;
+    }
+
+    getSelectedSustainabilityExperienceFilters() {
+        const sustainabilityExperienceFilters = [];
+        const sustainabilityExperienceCheckboxes = document.querySelectorAll('.sustainability-experience-checkboxes input[type="checkbox"]:checked');
+        
+        sustainabilityExperienceCheckboxes.forEach(checkbox => {
+            sustainabilityExperienceFilters.push(checkbox.value);
+        });
+        
+        return sustainabilityExperienceFilters;
+    }
+
     displayResults(data) {
         const resultsContainer = document.getElementById('resultsContainer');
         const resultsTitle = document.getElementById('resultsTitle');
@@ -148,9 +171,10 @@ class DatabaseSearchApp {
         // Update title
         const count = data.count;
         const keyword = data.keyword;
+        const keywordText = keyword ? ` for "${keyword}"` : '';
         resultsTitle.innerHTML = `
             <i class="fas fa-search me-2"></i>
-            <span style="font-family: 'Inter Tight', sans-serif; font-weight: 400;">Found ${count} result${count !== 1 ? 's' : ''} for "${keyword}"</span>
+            <span style="font-family: 'Inter Tight', sans-serif; font-weight: 400;">Found ${count} result${count !== 1 ? 's' : ''}${keywordText}</span>
         `;
 
         // Clear previous results
@@ -186,7 +210,7 @@ class DatabaseSearchApp {
         const firstName = result.first_name || '';
         const lastName = result.last_name || '';
         const fullName = `${firstName} ${lastName}`.trim() || 'Unknown Name';
-        personName.textContent = this.highlightKeyword(fullName, keyword);
+        personName.innerHTML = this.highlightKeyword(fullName, keyword);
 
         // Set location
         const location = card.querySelector('.location');
@@ -423,8 +447,10 @@ function applyFilters() {
     filterBtn.innerHTML = '<i class="fas fa-filter me-1"></i>Filters';
     
     // Show clear filters button if any filters are selected
-    const selectedFilters = getSelectedSourceFiltersGlobal();
-    if (selectedFilters.length > 0) {
+    const selectedSourceFilters = getSelectedSourceFiltersGlobal();
+    const selectedExperienceFilters = getSelectedExperienceFiltersGlobal();
+    const selectedSustainabilityExperienceFilters = getSelectedSustainabilityExperienceFiltersGlobal();
+    if (selectedSourceFilters.length > 0 || selectedExperienceFilters.length > 0 || selectedSustainabilityExperienceFilters.length > 0) {
         clearFiltersBtn.style.display = 'inline-block';
     }
 }
@@ -441,11 +467,47 @@ function getSelectedSourceFiltersGlobal() {
     return sourceFilters;
 }
 
+// Global function to get selected experience filters
+function getSelectedExperienceFiltersGlobal() {
+    const experienceFilters = [];
+    const experienceCheckboxes = document.querySelectorAll('.experience-checkboxes input[type="checkbox"]:checked');
+    
+    experienceCheckboxes.forEach(checkbox => {
+        experienceFilters.push(checkbox.value);
+    });
+    
+    return experienceFilters;
+}
+
+// Global function to get selected sustainability experience filters
+function getSelectedSustainabilityExperienceFiltersGlobal() {
+    const sustainabilityExperienceFilters = [];
+    const sustainabilityExperienceCheckboxes = document.querySelectorAll('.sustainability-experience-checkboxes input[type="checkbox"]:checked');
+    
+    sustainabilityExperienceCheckboxes.forEach(checkbox => {
+        sustainabilityExperienceFilters.push(checkbox.value);
+    });
+    
+    return sustainabilityExperienceFilters;
+}
+
 // Global function for clearing filters
 function clearFilters() {
     // Uncheck all source checkboxes
     const sourceCheckboxes = document.querySelectorAll('.source-checkboxes input[type="checkbox"]');
     sourceCheckboxes.forEach(checkbox => {
+        checkbox.checked = false;
+    });
+    
+    // Uncheck all experience checkboxes
+    const experienceCheckboxes = document.querySelectorAll('.experience-checkboxes input[type="checkbox"]');
+    experienceCheckboxes.forEach(checkbox => {
+        checkbox.checked = false;
+    });
+    
+    // Uncheck all sustainability experience checkboxes
+    const sustainabilityExperienceCheckboxes = document.querySelectorAll('.sustainability-experience-checkboxes input[type="checkbox"]');
+    sustainabilityExperienceCheckboxes.forEach(checkbox => {
         checkbox.checked = false;
     });
     
