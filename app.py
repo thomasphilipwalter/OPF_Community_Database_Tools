@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 def search_database(keywords):
     """Search for multiple keywords across all columns in the final table using AND logic"""
-    conn = sqlite3.connect('opfa_community.db')
+    conn = sqlite3.connect('opf_community.db')
     cursor = conn.cursor()
     
     # Get all column names from the final table
@@ -83,7 +83,7 @@ def search():
 def get_stats():
     """Get basic statistics about the database"""
     try:
-        conn = sqlite3.connect('opfa_community.db')
+        conn = sqlite3.connect('opf_community.db')
         cursor = conn.cursor()
         
         # Get total number of records
