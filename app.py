@@ -53,8 +53,19 @@ def search_database(keywords, source_filters=None, experience_filters=None, sust
     cursor = conn.cursor()
     
     # Get all column names from the final table
-    cursor.execute("PRAGMA table_info(final)")
-    columns = [column[1] for column in cursor.fetchall()]
+    if database_url.startswith('postgresql://'):
+        # PostgreSQL way to get column names
+        cursor.execute("""
+            SELECT column_name 
+            FROM information_schema.columns 
+            WHERE table_name = 'final' 
+            ORDER BY ordinal_position
+        """)
+        columns = [column[0] for column in cursor.fetchall()]
+    else:
+        # SQLite way to get column names
+        cursor.execute("PRAGMA table_info(final)")
+        columns = [column[1] for column in cursor.fetchall()]
     
     # Split keywords by comma and clean them
     keyword_list = [kw.strip().lower() for kw in keywords.split(',') if kw.strip()]
