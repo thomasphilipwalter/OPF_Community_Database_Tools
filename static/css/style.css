@@ -93,7 +93,7 @@ header {
 
 .search-card .form-control::placeholder {
     font-family: 'Azeret Mono', monospace;
-    font-size: 0.8em;
+    font-size: 0.7em;
 }
 
 .search-card .form-control:focus {
@@ -176,6 +176,31 @@ header {
 #resultsList .col-12 {
     padding-left: 15px;
     padding-right: 15px;
+}
+
+/* Filter box styling */
+.filter-box {
+    margin-top: 15px;
+    transition: all 0.3s ease;
+}
+
+.filter-box .card {
+    border: 1px solid #e9ecef;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    background: white;
+}
+
+.filter-box .card-title {
+    font-family: 'Inter Tight', sans-serif;
+    font-weight: 600;
+    color: #495057;
+}
+
+/* Filter button styling */
+#filterBtn {
+    border-radius: 10px !important;
+    background-color: white !important;
 }
 
 

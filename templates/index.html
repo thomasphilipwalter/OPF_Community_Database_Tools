@@ -14,7 +14,7 @@
     <div class="container-fluid">
         <!-- Header -->
         <header class="text-white py-4 mb-4">
-            <div class="container">
+            <div class="container-fluid px-4">
                 <div class="row align-items-center">
                     <div class="col-md-8">
                         <h1 class="mb-0">
@@ -73,6 +73,25 @@
                                     </div>
                                 </form>
                                 
+                                <!-- Filter Button -->
+                                <div class="text-center mb-3">
+                                    <button id="filterBtn" class="btn btn-outline-secondary btn-sm" onclick="toggleFilter()">
+                                        <i class="fas fa-filter me-1"></i>Filters
+                                    </button>
+                                </div>
+                                
+                                <!-- Filter Options Box -->
+                                <div id="filterOptions" class="filter-box" style="display: none;">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h6 class="card-title mb-3">
+                                                <i class="fas fa-filter me-2"></i>Filter Options
+                                            </h6>
+                                            <p class="text-muted">Filter options will be added here.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
                                 <!-- Search Tips -->
                                 <div class="search-tips">
                                     <h6><i class="fas fa-lightbulb me-2"></i>Search Tips:</h6>
@@ -98,7 +117,7 @@
                             <div class="search-card">
                                 <div class="text-center">
                                     <i class="fas fa-file-alt fa-3x text-muted mb-3"></i>
-                                    <h4 class="text-muted">RFP Analysis</h4>
+                                    <h4 class="text-muted">RFP Analysis & Expert Matching</h4>
                                     <p class="text-muted">This feature is coming soon. Upload and analyze RFP documents to find relevant community members.</p>
                                 </div>
                             </div>

@@ -373,6 +373,23 @@ function toggleResume(resumeId) {
     }
 }
 
+// Global function for toggling filter options
+function toggleFilter() {
+    const filterOptions = document.getElementById('filterOptions');
+    const filterBtn = document.getElementById('filterBtn');
+    const icon = filterBtn.querySelector('i');
+    
+    if (filterOptions.style.display === 'none') {
+        filterOptions.style.display = 'block';
+        icon.className = 'fas fa-filter me-1';
+        filterBtn.innerHTML = '<i class="fas fa-filter me-1"></i>Hide Filters';
+    } else {
+        filterOptions.style.display = 'none';
+        icon.className = 'fas fa-filter me-1';
+        filterBtn.innerHTML = '<i class="fas fa-filter me-1"></i>Filters';
+    }
+}
+
 
 
 // Initialize the application when the DOM is loaded
