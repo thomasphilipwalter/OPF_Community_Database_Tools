@@ -7,6 +7,10 @@ opf_community.db
 *.sqlite
 *.sqlite3
 
+# Data export files (contain real data)
+*_export_*.csv
+*.csv
+
 # Environment variables
 .env
 .env.local
