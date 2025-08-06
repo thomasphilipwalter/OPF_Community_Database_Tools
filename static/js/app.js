@@ -99,6 +99,8 @@ class DatabaseSearchApp {
             const sustainabilityExperienceFilters = this.getSelectedSustainabilityExperienceFilters();
             // Get selected competencies filters
             const competenciesFilters = this.getSelectedCompetenciesFilters();
+            // Get selected sectors filters
+            const sectorsFilters = this.getSelectedSectorsFilters();
             
             const response = await fetch('/search', {
                 method: 'POST',
@@ -110,7 +112,8 @@ class DatabaseSearchApp {
                     source_filters: sourceFilters,
                     experience_filters: experienceFilters,
                     sustainability_experience_filters: sustainabilityExperienceFilters,
-                    competencies_filters: competenciesFilters
+                    competencies_filters: competenciesFilters,
+                    sectors_filters: sectorsFilters
                 })
             });
 
@@ -175,6 +178,17 @@ class DatabaseSearchApp {
         });
         
         return competenciesFilters;
+    }
+
+    getSelectedSectorsFilters() {
+        const sectorsFilters = [];
+        const sectorsCheckboxes = document.querySelectorAll('.sectors-checkboxes input[type="checkbox"]:checked');
+        
+        sectorsCheckboxes.forEach(checkbox => {
+            sectorsFilters.push(checkbox.value);
+        });
+        
+        return sectorsFilters;
     }
 
     displayResults(data) {
@@ -465,7 +479,8 @@ function applyFilters() {
     const selectedExperienceFilters = getSelectedExperienceFiltersGlobal();
     const selectedSustainabilityExperienceFilters = getSelectedSustainabilityExperienceFiltersGlobal();
     const selectedCompetenciesFilters = getSelectedCompetenciesFiltersGlobal();
-    if (selectedSourceFilters.length > 0 || selectedExperienceFilters.length > 0 || selectedSustainabilityExperienceFilters.length > 0 || selectedCompetenciesFilters.length > 0) {
+    const selectedSectorsFilters = getSelectedSectorsFiltersGlobal();
+    if (selectedSourceFilters.length > 0 || selectedExperienceFilters.length > 0 || selectedSustainabilityExperienceFilters.length > 0 || selectedCompetenciesFilters.length > 0 || selectedSectorsFilters.length > 0) {
         clearFiltersBtn.style.display = 'inline-block';
     }
 }
@@ -518,6 +533,18 @@ function getSelectedCompetenciesFiltersGlobal() {
     return competenciesFilters;
 }
 
+// Global function to get selected sectors filters
+function getSelectedSectorsFiltersGlobal() {
+    const sectorsFilters = [];
+    const sectorsCheckboxes = document.querySelectorAll('.sectors-checkboxes input[type="checkbox"]:checked');
+    
+    sectorsCheckboxes.forEach(checkbox => {
+        sectorsFilters.push(checkbox.value);
+    });
+    
+    return sectorsFilters;
+}
+
 // Global function for clearing filters
 function clearFilters() {
     // Uncheck all source checkboxes
@@ -541,6 +568,12 @@ function clearFilters() {
     // Uncheck all competencies checkboxes
     const competenciesCheckboxes = document.querySelectorAll('.competencies-checkboxes input[type="checkbox"]');
     competenciesCheckboxes.forEach(checkbox => {
+        checkbox.checked = false;
+    });
+    
+    // Uncheck all sectors checkboxes
+    const sectorsCheckboxes = document.querySelectorAll('.sectors-checkboxes input[type="checkbox"]');
+    sectorsCheckboxes.forEach(checkbox => {
         checkbox.checked = false;
     });
     
