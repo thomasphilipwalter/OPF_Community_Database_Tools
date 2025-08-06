@@ -5,7 +5,7 @@ from datetime import datetime
 
 app = Flask(__name__)
 
-def search_database(keywords, source_filters=None, experience_filters=None, sustainability_experience_filters=None):
+def search_database(keywords, source_filters=None, experience_filters=None, sustainability_experience_filters=None, competencies_filters=None):
     """Search for multiple keywords across all columns in the final table using AND logic"""
     conn = sqlite3.connect('opf_community.db')
     cursor = conn.cursor()
@@ -45,6 +45,11 @@ def search_database(keywords, source_filters=None, experience_filters=None, sust
     if sustainability_experience_filters and len(sustainability_experience_filters) > 0:
         for exp_range in sustainability_experience_filters:
             all_conditions.append(f"years_sustainability_xp = '{exp_range}'")
+    
+    # Add competencies filtering if specified
+    if competencies_filters and len(competencies_filters) > 0:
+        for competency in competencies_filters:
+            all_conditions.append(f"key_competencies LIKE '%{competency}%'")
     
     # Build the WHERE clause
     if all_conditions:
@@ -86,8 +91,9 @@ def search():
         source_filters = data.get('source_filters', [])
         experience_filters = data.get('experience_filters', [])
         sustainability_experience_filters = data.get('sustainability_experience_filters', [])
+        competencies_filters = data.get('competencies_filters', [])
         
-        results = search_database(keywords, source_filters, experience_filters, sustainability_experience_filters)
+        results = search_database(keywords, source_filters, experience_filters, sustainability_experience_filters, competencies_filters)
         
         return jsonify({
             'success': True,
