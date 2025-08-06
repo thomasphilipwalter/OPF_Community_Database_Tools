@@ -194,7 +194,7 @@ class DatabaseSearchApp {
             'current_job': { label: 'Current Job', icon: 'fas fa-briefcase' },
             'current_company': { label: 'Current Company', icon: 'fas fa-building' },
             'linkedin_summary': { label: 'LinkedIn Summary', icon: 'fas fa-file-alt' },
-            'resume': { label: 'Resume', icon: 'fas fa-file-pdf' },
+            'resume': { label: 'Resume', icon: 'fas fa-file-pdf', type: 'text' },
             'years_xp': { label: 'Years Experience', icon: 'fas fa-clock' },
             'years_sustainability_xp': { label: 'Sustainability Experience', icon: 'fas fa-leaf' },
             'linkedin_skills': { label: 'LinkedIn Skills', icon: 'fas fa-tools' },
@@ -232,6 +232,21 @@ class DatabaseSearchApp {
             fieldValue.innerHTML = `<a href="mailto:${value}" target="_blank">${this.highlightKeyword(value, keyword)}</a>`;
         } else if (type === 'link') {
             fieldValue.innerHTML = `<a href="${value}" target="_blank">${this.highlightKeyword(value, keyword)}</a>`;
+        } else if (label.toLowerCase().includes('resume')) {
+            // Handle resume as expandable toggle
+            const resumeId = 'resume-' + Math.random().toString(36).substr(2, 9);
+            fieldValue.innerHTML = `
+                <div class="resume-toggle">
+                    <button class="btn btn-sm btn-outline-secondary" onclick="toggleResume('${resumeId}')">
+                        <i class="fas fa-eye me-1"></i>View Resume
+                    </button>
+                    <div id="${resumeId}" class="resume-content" style="display: none; margin-top: 10px; padding: 10px; background: #f8f9fa; border-radius: 5px;">
+                        <div>
+                            ${this.highlightKeyword(value, keyword)}
+                        </div>
+                    </div>
+                </div>
+            `;
         } else if (label.toLowerCase().includes('skills') || label.toLowerCase().includes('competencies') || label.toLowerCase().includes('sectors')) {
             // Handle skills/competencies as tags
             const skills = value.split(',').map(skill => skill.trim()).filter(Boolean);
@@ -337,6 +352,23 @@ class DatabaseSearchApp {
     hideError() {
         const errorMessage = document.getElementById('errorMessage');
         errorMessage.style.display = 'none';
+    }
+}
+
+// Global function for toggling resume content
+function toggleResume(resumeId) {
+    const resumeContent = document.getElementById(resumeId);
+    const button = resumeContent.previousElementSibling;
+    const icon = button.querySelector('i');
+    
+    if (resumeContent.style.display === 'none') {
+        resumeContent.style.display = 'block';
+        icon.className = 'fas fa-eye-slash me-1';
+        button.innerHTML = '<i class="fas fa-eye-slash me-1"></i>Hide Resume';
+    } else {
+        resumeContent.style.display = 'none';
+        icon.className = 'fas fa-eye me-1';
+        button.innerHTML = '<i class="fas fa-eye me-1"></i>View Resume';
     }
 }
 
