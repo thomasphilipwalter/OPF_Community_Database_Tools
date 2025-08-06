@@ -76,12 +76,14 @@ def search_database(keywords, source_filters=None, experience_filters=None, sust
     # Add keyword conditions if keywords are provided
     if keyword_list:
         for keyword in keyword_list:
-            # Build conditions for this keyword across all columns
+            # Build conditions for this keyword across all columns (excluding id)
             keyword_conditions = []
             for column in columns:
-                keyword_conditions.append(f"LOWER({column}) LIKE LOWER('%{keyword}%')")
+                if column != 'id':  # Skip the id column since it's an integer
+                    keyword_conditions.append(f"LOWER({column}) LIKE LOWER('%{keyword}%')")
             # Each keyword must be found in at least one column (OR logic within keyword)
-            all_conditions.append(f"({' OR '.join(keyword_conditions)})")
+            if keyword_conditions:  # Only add condition if there are valid columns
+                all_conditions.append(f"({' OR '.join(keyword_conditions)})")
     
     # Add source filtering if specified
     if source_filters and len(source_filters) > 0:
