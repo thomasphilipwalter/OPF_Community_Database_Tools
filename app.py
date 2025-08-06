@@ -1,9 +1,32 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, redirect, url_for, flash, session
+from flask_login import LoginManager, login_user, logout_user, login_required, current_user
+from flask_session import Session
 import sqlite3
 import os
+import requests
+from auth import get_user_by_email, validate_email
 from datetime import datetime
+from config import config
+from google_auth import verify_google_token, create_user_from_google_info
 
 app = Flask(__name__)
+
+# Configuration
+config_name = os.environ.get('FLASK_ENV', 'development')
+app.config.from_object(config[config_name])
+
+# Initialize extensions
+Session(app)
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = 'login'
+login_manager.login_message = 'Please log in to access this page.'
+login_manager.login_message_category = 'info'
+
+@login_manager.user_loader
+def load_user(user_id):
+    """Load user by ID (email)"""
+    return get_user_by_email(user_id)
 
 def search_database(keywords, source_filters=None, experience_filters=None, sustainability_experience_filters=None, competencies_filters=None, sectors_filters=None):
     """Search for multiple keywords across all columns in the final table using AND logic"""
@@ -85,10 +108,56 @@ def search_database(keywords, source_filters=None, experience_filters=None, sust
     return formatted_results
 
 @app.route('/')
+@login_required
 def index():
     return render_template('index.html')
 
+@app.route('/login')
+def login():
+    """Show login page"""
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
+    return render_template('login.html', google_client_id=app.config['GOOGLE_CLIENT_ID'])
+
+@app.route('/verify-google-token', methods=['POST'])
+def verify_google_token_route():
+    """Verify Google ID token from client-side"""
+    if current_user.is_authenticated:
+        return jsonify({'success': True, 'redirect_url': url_for('index')})
+    
+    try:
+        data = request.get_json()
+        credential = data.get('credential')
+        
+        if not credential:
+            return jsonify({'success': False, 'error': 'No credential provided'})
+        
+        # Verify the token
+        user_info, error = verify_google_token(credential)
+        if error:
+            return jsonify({'success': False, 'error': error})
+        
+        # Create user and log in
+        user = create_user_from_google_info(user_info)
+        login_user(user, remember=True)
+        
+        # Return success response
+        next_page = request.args.get('next')
+        redirect_url = next_page or url_for('index')
+        return jsonify({'success': True, 'redirect_url': redirect_url})
+        
+    except Exception as e:
+        return jsonify({'success': False, 'error': str(e)})
+
+@app.route('/logout')
+@login_required
+def logout():
+    """Handle logout requests"""
+    logout_user()
+    return redirect(url_for('login'))
+
 @app.route('/search', methods=['POST'])
+@login_required
 def search():
     try:
         data = request.get_json()
@@ -112,6 +181,7 @@ def search():
         return jsonify({'error': f'An error occurred: {str(e)}'})
 
 @app.route('/api/stats')
+@login_required
 def get_stats():
     """Get basic statistics about the database"""
     try:
