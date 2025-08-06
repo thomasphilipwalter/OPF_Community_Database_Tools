@@ -381,6 +381,17 @@ header {
     animation: fadeInUp 0.5s ease-out;
 }
 
+/* Google Sign-In Button Centering */
+.g_id_signin {
+    display: flex !important;
+    justify-content: center !important;
+    width: 100% !important;
+}
+
+.g_id_signin > div {
+    margin: 0 auto !important;
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
     width: 8px;
