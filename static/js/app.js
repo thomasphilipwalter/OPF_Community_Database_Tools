@@ -133,7 +133,7 @@ class DatabaseSearchApp {
         const keyword = data.keyword;
         resultsTitle.innerHTML = `
             <i class="fas fa-search me-2"></i>
-            Found ${count} result${count !== 1 ? 's' : ''} for "${keyword}"
+            <span style="font-family: 'Inter Tight', sans-serif; font-weight: 400;">Found ${count} result${count !== 1 ? 's' : ''} for "${keyword}"</span>
         `;
 
         // Clear previous results
