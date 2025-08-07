@@ -10,40 +10,43 @@ bp = Blueprint('auth', __name__)
 def login():
     """Login page"""
     google_client_id = os.environ.get('GOOGLE_CLIENT_ID')
-    return render_template('login.html', google_client_id=google_client_id)
+    next_page = request.args.get('next')
+    return render_template('login.html', google_client_id=google_client_id, next_page=next_page)
 
 @bp.route('/verify-google-token', methods=['POST'])
 def verify_google_token_route():
-    """Verify Google OAuth token and log in user"""
+    """Verify Google OAuth token and log user in"""
     try:
         data = request.get_json()
         token = data.get('token')
+        next_page = data.get('next')
         
         if not token:
-            return jsonify({'error': 'No token provided'}), 400
+            return jsonify({'success': False, 'error': 'No token provided'})
         
-        # Verify the token and get user info
+        # Verify the token
         user_info, error = verify_google_token(token)
-        
         if error:
-            return jsonify({'error': error}), 401
+            return jsonify({'success': False, 'error': error})
         
-        # Create user object
-        user = create_user_from_google_info(user_info)
+        if not user_info:
+            return jsonify({'success': False, 'error': 'Invalid token'})
         
-        # Log in the user
+        # Get or create user
+        user = get_user_by_email(user_info['email'])
+        if not user:
+            user = create_user_from_google_info(user_info)
+        
+        # Log user in
         login_user(user)
         
         return jsonify({
-            'success': True,
-            'user': {
-                'email': user.email,
-                'name': user_info.get('name', '')
-            }
+            'success': True, 
+            'redirect_url': next_page if next_page else '/'
         })
         
     except Exception as e:
-        return jsonify({'error': f'Authentication failed: {str(e)}'}), 500
+        return jsonify({'success': False, 'error': str(e)})
 
 @bp.route('/logout')
 @login_required

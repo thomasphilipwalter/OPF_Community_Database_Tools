@@ -17,7 +17,7 @@
                     <div class="card-body p-5">
                         <div class="text-center mb-4">
                             <div class="d-flex justify-content-center mb-3">
-                                <img src="{{ url_for('static', filename='media/OPF_primary_logo.png') }}" alt="OPF Logo" style="height: 45px; width: auto;">
+                                <img src="{{ url_for('static', filename='media/OPF_primary_logo.png') }}" alt="OPF Logo" style="height: 45px; width: auto; display: block;">
                             </div>
                             <h4 class="mb-0" style="font-family: 'Inter Tight', sans-serif; font-weight: 600; color: #22D4A2;">Community Database</h4>
                         </div>
@@ -57,6 +57,10 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://accounts.google.com/gsi/client" async defer></script>
     <script>
+        // Get the next parameter from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const nextPage = urlParams.get('next');
+        
         function handleCredentialResponse(response) {
             // Send the credential to our server
             fetch('/verify-google-token', {
@@ -65,13 +69,15 @@
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    token: response.credential
+                    token: response.credential,
+                    next: nextPage
                 })
             })
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    window.location.href = '/';
+                    // Redirect to the intended page or home page
+                    window.location.href = data.redirect_url || '/';
                 } else {
                     alert('Authentication failed: ' + data.error);
                 }

@@ -1,5 +1,5 @@
-from flask import Blueprint, render_template, request, jsonify
-from flask_login import login_required
+from flask import Blueprint, render_template, request, jsonify, redirect, url_for
+from flask_login import login_required, current_user
 from app.services.database import search_database, get_user_by_email
 
 bp = Blueprint('main', __name__)
@@ -34,9 +34,13 @@ def search():
         return jsonify({'success': False, 'error': str(e)})
 
 @bp.route('/user/<email>')
-@login_required
 def user_page(email):
     """Individual user page showing full result card"""
+    # Check if user is logged in
+    if not current_user.is_authenticated:
+        # Redirect to login with the intended URL
+        return redirect(url_for('auth.login', next=request.url))
+    
     try:
         user_data = get_user_by_email(email)
         if not user_data:
