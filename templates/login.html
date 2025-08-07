@@ -65,13 +65,13 @@
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    credential: response.credential
+                    token: response.credential
                 })
             })
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    window.location.href = data.redirect_url;
+                    window.location.href = '/';
                 } else {
                     alert('Authentication failed: ' + data.error);
                 }

@@ -2,7 +2,7 @@ import os
 import requests
 from google.oauth2 import id_token
 from google.auth.transport import requests as google_requests
-from auth import User
+from app.utils.auth_utils import User
 
 # Google OAuth Configuration
 GOOGLE_CLIENT_ID = os.environ.get('GOOGLE_CLIENT_ID')
@@ -39,4 +39,4 @@ def verify_google_token(token):
 
 def create_user_from_google_info(user_info):
     """Create User object from Google user info"""
-    return User(user_info['email']) 
+    return User(user_info['email'])
