@@ -241,7 +241,13 @@ class DatabaseSearchApp {
         const firstName = result.first_name || '';
         const lastName = result.last_name || '';
         const fullName = `${firstName} ${lastName}`.trim() || 'Unknown Name';
-        personName.innerHTML = this.highlightKeyword(fullName, keyword);
+        
+        // Make the name clickable if email exists
+        if (result.email) {
+            personName.innerHTML = `<a href="/user/${encodeURIComponent(result.email)}" target="_blank" style="color: inherit; text-decoration: none;">${this.highlightKeyword(fullName, keyword)}</a>`;
+        } else {
+            personName.innerHTML = this.highlightKeyword(fullName, keyword);
+        }
 
         // Set location
         const location = card.querySelector('.location');

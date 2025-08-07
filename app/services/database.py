@@ -22,6 +22,7 @@ def get_database_connection():
         user=parsed.username,
         password=parsed.password
     )
+    
     return conn
 
 def search_database(keywords, source_filters=None, experience_filters=None, sustainability_experience_filters=None, competencies_filters=None, sectors_filters=None):
@@ -82,6 +83,10 @@ def search_database(keywords, source_filters=None, experience_filters=None, sust
         for sector in sectors_filters:
             all_conditions.append(f"key_sectors LIKE '%{sector}%'")
     
+    # If no keywords AND no filters, return empty results
+    if not keyword_list and not all_conditions:
+        return []
+    
     # Build the WHERE clause
     if all_conditions:
         where_clause = f"WHERE {' AND '.join(all_conditions)}"
@@ -136,3 +141,21 @@ def get_stats():
         'records_with_linkedins': records_with_linkedins,
         'records_with_resumes': records_with_resumes
     }
+
+def get_user_by_email(email):
+    """Get a single user by email address"""
+    conn = get_database_connection()
+    cursor = conn.cursor()
+    
+    try:
+        cursor.execute("SELECT * FROM final WHERE email = %s", (email,))
+        columns = [desc[0] for desc in cursor.description]
+        row = cursor.fetchone()
+        
+        if row:
+            return dict(zip(columns, row))
+        return None
+        
+    finally:
+        cursor.close()
+        conn.close()
