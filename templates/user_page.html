@@ -19,8 +19,10 @@
                     <div class="col-md-8">
                         <h1 class="mb-0">
                             <div style="display: inline-block; vertical-align: middle;">
-                                <img src="{{ url_for('static', filename='media/OPF_primary_logo.png') }}" alt="OnePointFive" style="height: 49.5px; width: auto; display: block;">
-                                <small style="display: block; text-align: left; margin-top: 2px; font-size: 0.63em; color: black;">Community Database</small>
+                                <a href="{{ url_for('main.index') }}" style="text-decoration: none; color: inherit;">
+                                    <img src="{{ url_for('static', filename='media/OPF_primary_logo.png') }}" alt="OnePointFive" style="height: 49.5px; width: auto; display: block;">
+                                    <small style="display: block; text-align: left; margin-top: 2px; font-size: 0.63em; color: black;">Community Database</small>
+                                </a>
                             </div>
                         </h1>
                         <p class="mb-0 mt-2" style="color: black; font-family: 'Azeret Mono', monospace; font-size: 1.0em;">Tools and interfaces for OPF's community network</p>
