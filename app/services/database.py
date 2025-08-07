@@ -83,10 +83,6 @@ def search_database(keywords, source_filters=None, experience_filters=None, sust
         for sector in sectors_filters:
             all_conditions.append(f"key_sectors LIKE '%{sector}%'")
     
-    # If no keywords AND no filters, return empty results
-    if not keyword_list and not all_conditions:
-        return []
-    
     # Build the WHERE clause
     if all_conditions:
         where_clause = f"WHERE {' AND '.join(all_conditions)}"

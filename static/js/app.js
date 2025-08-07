@@ -4,6 +4,12 @@ class DatabaseSearchApp {
     constructor() {
         this.currentResults = [];
         this.currentKeyword = '';
+        // Track applied filters (not just selected checkboxes)
+        this.appliedSourceFilters = [];
+        this.appliedExperienceFilters = [];
+        this.appliedSustainabilityExperienceFilters = [];
+        this.appliedCompetenciesFilters = [];
+        this.appliedSectorsFilters = [];
         this.init();
     }
 
@@ -94,17 +100,6 @@ class DatabaseSearchApp {
         this.hideError();
 
         try {
-            // Get selected source filters
-            const sourceFilters = this.getSelectedSourceFilters();
-            // Get selected experience filters
-            const experienceFilters = this.getSelectedExperienceFilters();
-            // Get selected sustainability experience filters
-            const sustainabilityExperienceFilters = this.getSelectedSustainabilityExperienceFilters();
-            // Get selected competencies filters
-            const competenciesFilters = this.getSelectedCompetenciesFilters();
-            // Get selected sectors filters
-            const sectorsFilters = this.getSelectedSectorsFilters();
-            
             const response = await fetch('/search', {
                 method: 'POST',
                 headers: {
@@ -112,11 +107,11 @@ class DatabaseSearchApp {
                 },
                 body: JSON.stringify({ 
                     keyword,
-                    source_filters: sourceFilters,
-                    experience_filters: experienceFilters,
-                    sustainability_experience_filters: sustainabilityExperienceFilters,
-                    competencies_filters: competenciesFilters,
-                    sectors_filters: sectorsFilters
+                    source_filters: this.appliedSourceFilters,
+                    experience_filters: this.appliedExperienceFilters,
+                    sustainability_experience_filters: this.appliedSustainabilityExperienceFilters,
+                    competencies_filters: this.appliedCompetenciesFilters,
+                    sectors_filters: this.appliedSectorsFilters
                 })
             });
 
@@ -714,6 +709,15 @@ function applyFilters() {
     icon.className = 'fas fa-filter me-1';
     filterBtn.innerHTML = '<i class="fas fa-filter me-1"></i>Filters';
     
+    // Store the current checkbox states as applied filters
+    if (window.databaseSearchApp) {
+        window.databaseSearchApp.appliedSourceFilters = getSelectedSourceFiltersGlobal();
+        window.databaseSearchApp.appliedExperienceFilters = getSelectedExperienceFiltersGlobal();
+        window.databaseSearchApp.appliedSustainabilityExperienceFilters = getSelectedSustainabilityExperienceFiltersGlobal();
+        window.databaseSearchApp.appliedCompetenciesFilters = getSelectedCompetenciesFiltersGlobal();
+        window.databaseSearchApp.appliedSectorsFilters = getSelectedSectorsFiltersGlobal();
+    }
+    
     // Show clear filters button if any filters are selected
     const selectedSourceFilters = getSelectedSourceFiltersGlobal();
     const selectedExperienceFilters = getSelectedExperienceFiltersGlobal();
@@ -816,6 +820,15 @@ function clearFilters() {
     sectorsCheckboxes.forEach(checkbox => {
         checkbox.checked = false;
     });
+    
+    // Clear applied filters in the app instance
+    if (window.databaseSearchApp) {
+        window.databaseSearchApp.appliedSourceFilters = [];
+        window.databaseSearchApp.appliedExperienceFilters = [];
+        window.databaseSearchApp.appliedSustainabilityExperienceFilters = [];
+        window.databaseSearchApp.appliedCompetenciesFilters = [];
+        window.databaseSearchApp.appliedSectorsFilters = [];
+    }
     
     // Hide clear filters button
     const clearFiltersBtn = document.getElementById('clearFiltersBtn');
