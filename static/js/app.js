@@ -39,6 +39,9 @@ class DatabaseSearchApp {
                 this.performSearch();
             }
         });
+
+        // RFP Upload functionality
+        this.setupRfpUpload();
     }
 
     setupTabHandling() {
@@ -422,7 +425,204 @@ class DatabaseSearchApp {
         errorMessage.style.display = 'none';
     }
 
+    setupRfpUpload() {
+        const uploadArea = document.getElementById('uploadArea');
+        const fileInput = document.getElementById('rfpFile');
+        const uploadForm = document.getElementById('rfpUploadForm');
+        const analyzeBtn = document.getElementById('analyzeBtn');
 
+        // File input change handler
+        fileInput.addEventListener('change', (e) => {
+            this.handleFileSelect(e.target.files[0]);
+        });
+
+        // Drag and drop handlers
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.classList.add('dragover');
+        });
+
+        uploadArea.addEventListener('dragleave', (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+        });
+
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                this.handleFileSelect(files[0]);
+            }
+        });
+
+        // Form submit handler
+        uploadForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            this.analyzeRfp();
+        });
+    }
+
+    handleFileSelect(file) {
+        if (!file) return;
+
+        // Validate file type
+        const allowedTypes = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+        if (!allowedTypes.includes(file.type)) {
+            alert('Please select a PDF, DOC, or DOCX file.');
+            return;
+        }
+
+        // Validate file size (10MB limit)
+        const maxSize = 10 * 1024 * 1024; // 10MB
+        if (file.size > maxSize) {
+            alert('File size must be less than 10MB.');
+            return;
+        }
+
+        // Update UI
+        this.updateFilePreview(file);
+        document.getElementById('analyzeBtn').disabled = false;
+    }
+
+    updateFilePreview(file) {
+        const uploadArea = document.getElementById('uploadArea');
+        const filePreview = document.getElementById('filePreview');
+        const fileName = document.getElementById('fileName');
+        const fileSize = document.getElementById('fileSize');
+
+        // Update file info
+        fileName.textContent = file.name;
+        fileSize.textContent = this.formatFileSize(file.size);
+
+        // Show preview
+        filePreview.style.display = 'block';
+        uploadArea.classList.add('has-file');
+    }
+
+    formatFileSize(bytes) {
+        if (bytes === 0) return '0 Bytes';
+        const k = 1024;
+        const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
+        return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+    }
+
+    async analyzeRfp() {
+        const fileInput = document.getElementById('rfpFile');
+        const analyzeBtn = document.getElementById('analyzeBtn');
+        const extractKeywords = document.getElementById('extractKeywords').checked;
+        const findExperts = document.getElementById('findExperts').checked;
+
+        if (!fileInput.files[0]) {
+            alert('Please select a file first.');
+            return;
+        }
+
+        // Show loading state
+        analyzeBtn.disabled = true;
+        analyzeBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Analyzing...';
+
+        try {
+            const formData = new FormData();
+            formData.append('rfp_file', fileInput.files[0]);
+            formData.append('extract_keywords', extractKeywords);
+            formData.append('find_experts', findExperts);
+
+            const response = await fetch('/analyze-rfp', {
+                method: 'POST',
+                body: formData
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+                this.displayAnalysisResults(result);
+            } else {
+                alert('Analysis failed: ' + result.error);
+            }
+        } catch (error) {
+            console.error('Error analyzing RFP:', error);
+            alert('An error occurred while analyzing the RFP. Please try again.');
+        } finally {
+            // Reset button
+            analyzeBtn.disabled = false;
+            analyzeBtn.innerHTML = '<i class="fas fa-search me-2"></i>Analyze RFP';
+        }
+    }
+
+    displayAnalysisResults(result) {
+        const analysisResults = document.getElementById('analysisResults');
+        const analysisContent = document.getElementById('analysisContent');
+
+        let content = '';
+
+        if (result.keywords && result.keywords.length > 0) {
+            content += `
+                <div class="mb-4">
+                    <h6><i class="fas fa-key me-2"></i>Key Requirements Identified</h6>
+                    <div class="d-flex flex-wrap gap-2">
+                        ${result.keywords.map(keyword => 
+                            `<span class="badge bg-primary">${keyword}</span>`
+                        ).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        if (result.experts && result.experts.length > 0) {
+            content += `
+                <div class="mb-4">
+                    <h6><i class="fas fa-users me-2"></i>Matching Experts (${result.experts.length} found)</h6>
+                    <div class="row">
+                        ${result.experts.map(expert => `
+                            <div class="col-md-6 mb-3">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h6 class="card-title">${expert.first_name} ${expert.last_name}</h6>
+                                        <p class="card-text text-muted">${expert.current_job || 'N/A'}</p>
+                                        <p class="card-text"><small>${expert.current_company || 'N/A'}</small></p>
+                                        <div class="d-flex flex-wrap gap-1">
+                                            ${expert.matched_skills ? expert.matched_skills.map(skill => 
+                                                `<span class="badge bg-success">${skill}</span>`
+                                            ).join('') : ''}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        if (!result.keywords && !result.experts) {
+            content = '<p class="text-muted">No specific requirements or matching experts found. Try uploading a different document or adjusting the analysis options.</p>';
+        }
+
+        analysisContent.innerHTML = content;
+        analysisResults.style.display = 'block';
+    }
+}
+
+// Global function to remove uploaded file
+function removeFile() {
+    const fileInput = document.getElementById('rfpFile');
+    const uploadArea = document.getElementById('uploadArea');
+    const filePreview = document.getElementById('filePreview');
+    const analyzeBtn = document.getElementById('analyzeBtn');
+
+    // Clear file input
+    fileInput.value = '';
+    
+    // Hide preview
+    filePreview.style.display = 'none';
+    
+    // Reset upload area
+    uploadArea.classList.remove('has-file');
+    
+    // Disable analyze button
+    analyzeBtn.disabled = true;
 }
 
 // Global function for toggling resume content

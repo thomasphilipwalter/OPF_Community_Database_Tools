@@ -4,6 +4,7 @@ from flask_session import Session
 import sqlite3
 import os
 import requests
+import re
 from auth import get_user_by_email, validate_email
 from datetime import datetime
 from config import config
@@ -263,6 +264,196 @@ def get_stats():
         return jsonify({'error': f'An error occurred: {str(e)}'})
 
 
+
+def extract_text_from_pdf(file_path):
+    """Extract text from PDF file"""
+    try:
+        import PyPDF2
+        with open(file_path, 'rb') as file:
+            pdf_reader = PyPDF2.PdfReader(file)
+            text = ""
+            for page in pdf_reader.pages:
+                text += page.extract_text()
+        return text
+    except Exception as e:
+        print(f"Error extracting text from PDF: {e}")
+        return ""
+
+def extract_text_from_docx(file_path):
+    """Extract text from DOCX file"""
+    try:
+        from docx import Document
+        doc = Document(file_path)
+        text = ""
+        for paragraph in doc.paragraphs:
+            text += paragraph.text + "\n"
+        return text
+    except Exception as e:
+        print(f"Error extracting text from DOCX: {e}")
+        return ""
+
+def extract_keywords_from_text(text):
+    """Extract key requirements and keywords from text"""
+    # Common RFP keywords and requirements
+    keywords = []
+    
+    # Look for specific patterns
+    patterns = [
+        r'required.*?experience',
+        r'must.*?have',
+        r'minimum.*?years',
+        r'qualifications.*?include',
+        r'experience.*?with',
+        r'knowledge.*?of',
+        r'proficiency.*?in',
+        r'expertise.*?in',
+        r'familiarity.*?with',
+        r'understanding.*?of'
+    ]
+    
+    # Extract sentences containing these patterns
+    sentences = re.split(r'[.!?]', text)
+    for sentence in sentences:
+        sentence = sentence.strip()
+        if len(sentence) > 20:  # Only consider substantial sentences
+            for pattern in patterns:
+                if re.search(pattern, sentence, re.IGNORECASE):
+                    # Extract key terms from the sentence
+                    words = re.findall(r'\b[A-Za-z]{4,}\b', sentence)
+                    keywords.extend(words[:5])  # Take first 5 words
+                    break
+    
+    # Remove duplicates and common words
+    common_words = {'the', 'and', 'or', 'but', 'in', 'on', 'at', 'to', 'for', 'of', 'with', 'by', 'is', 'are', 'was', 'were', 'be', 'been', 'have', 'has', 'had', 'do', 'does', 'did', 'will', 'would', 'could', 'should', 'may', 'might', 'can', 'must', 'shall', 'this', 'that', 'these', 'those', 'a', 'an', 'as', 'so', 'than', 'too', 'very', 'just', 'now', 'then', 'here', 'there', 'when', 'where', 'why', 'how', 'all', 'any', 'both', 'each', 'few', 'more', 'most', 'other', 'some', 'such', 'no', 'nor', 'not', 'only', 'own', 'same', 'such', 'that', 'theirs', 'them', 'they', 'this', 'those', 'through', 'to', 'too', 'under', 'until', 'up', 'very', 'was', 'we', 'were', 'what', 'when', 'where', 'which', 'while', 'who', 'whom', 'why', 'will', 'with', 'within', 'without', 'would', 'you', 'your', 'yours', 'yourself', 'yourselves'}
+    
+    keywords = [word.lower() for word in keywords if word.lower() not in common_words]
+    keywords = list(set(keywords))  # Remove duplicates
+    
+    return keywords[:20]  # Return top 20 keywords
+
+def find_matching_experts(keywords):
+    """Find experts matching the extracted keywords"""
+    if not keywords:
+        return []
+    
+    # Connect to database
+    database_url = os.environ.get('DATABASE_URL', 'opf_community.db')
+    
+    if database_url.startswith('postgres://'):
+        database_url = database_url.replace('postgres://', 'postgresql://', 1)
+    
+    if database_url.startswith('postgresql://'):
+        import psycopg2
+        from urllib.parse import urlparse
+        parsed = urlparse(database_url)
+        conn = psycopg2.connect(
+            host=parsed.hostname,
+            port=parsed.port,
+            database=parsed.path[1:],
+            user=parsed.username,
+            password=parsed.password
+        )
+    else:
+        conn = sqlite3.connect(database_url)
+    
+    cursor = conn.cursor()
+    
+    # Build search query for experts
+    keyword_conditions = []
+    for keyword in keywords[:10]:  # Use top 10 keywords
+        keyword_conditions.append(f"LOWER(current_job) LIKE LOWER('%{keyword}%')")
+        keyword_conditions.append(f"LOWER(key_competencies) LIKE LOWER('%{keyword}%')")
+        keyword_conditions.append(f"LOWER(linkedin_skills) LIKE LOWER('%{keyword}%')")
+        keyword_conditions.append(f"LOWER(current_company) LIKE LOWER('%{keyword}%')")
+    
+    if keyword_conditions:
+        where_clause = f"WHERE {' OR '.join(keyword_conditions)}"
+    else:
+        where_clause = ""
+    
+    query = f"""
+    SELECT first_name, last_name, current_job, current_company, key_competencies, linkedin_skills
+    FROM final 
+    {where_clause}
+    ORDER BY first_name, last_name
+    LIMIT 10
+    """
+    
+    cursor.execute(query)
+    results = cursor.fetchall()
+    
+    # Format results
+    experts = []
+    for row in results:
+        expert = {
+            'first_name': row[0] or '',
+            'last_name': row[1] or '',
+            'current_job': row[2] or '',
+            'current_company': row[3] or '',
+            'matched_skills': []
+        }
+        
+        # Find which skills matched
+        skills_text = f"{row[4] or ''} {row[5] or ''}"
+        for keyword in keywords[:5]:  # Check top 5 keywords
+            if keyword.lower() in skills_text.lower():
+                expert['matched_skills'].append(keyword)
+        
+        experts.append(expert)
+    
+    conn.close()
+    return experts
+
+@app.route('/analyze-rfp', methods=['POST'])
+@login_required
+def analyze_rfp():
+    """Analyze uploaded RFP document"""
+    try:
+        if 'rfp_file' not in request.files:
+            return jsonify({'success': False, 'error': 'No file uploaded'})
+        
+        file = request.files['rfp_file']
+        if file.filename == '':
+            return jsonify({'success': False, 'error': 'No file selected'})
+        
+        # Validate file type
+        allowed_extensions = {'.pdf', '.doc', '.docx'}
+        file_ext = os.path.splitext(file.filename)[1].lower()
+        if file_ext not in allowed_extensions:
+            return jsonify({'success': False, 'error': 'Invalid file type. Please upload PDF, DOC, or DOCX files.'})
+        
+        # Save file temporarily
+        temp_path = os.path.join('/tmp', f'rfp_{datetime.now().strftime("%Y%m%d_%H%M%S")}{file_ext}')
+        file.save(temp_path)
+        
+        # Extract text based on file type
+        if file_ext == '.pdf':
+            text = extract_text_from_pdf(temp_path)
+        elif file_ext in ['.doc', '.docx']:
+            text = extract_text_from_docx(temp_path)
+        else:
+            text = ""
+        
+        # Clean up temp file
+        os.remove(temp_path)
+        
+        if not text:
+            return jsonify({'success': False, 'error': 'Could not extract text from the document'})
+        
+        # Extract keywords
+        keywords = extract_keywords_from_text(text)
+        
+        # Find matching experts
+        experts = find_matching_experts(keywords)
+        
+        return jsonify({
+            'success': True,
+            'keywords': keywords,
+            'experts': experts
+        })
+        
+    except Exception as e:
+        return jsonify({'success': False, 'error': str(e)})
 
 if __name__ == '__main__':
     # Use environment variables for production
