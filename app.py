@@ -1,7 +1,6 @@
 from flask import Flask, render_template, request, jsonify, redirect, url_for, flash, session
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
 from flask_session import Session
-import sqlite3
 import os
 import requests
 import re
@@ -31,42 +30,37 @@ def load_user(user_id):
 
 def search_database(keywords, source_filters=None, experience_filters=None, sustainability_experience_filters=None, competencies_filters=None, sectors_filters=None):
     """Search for multiple keywords across all columns in the final table using AND logic"""
-    # Use environment variable for database URL, fallback to SQLite
-    database_url = os.environ.get('DATABASE_URL', 'opf_community.db')
+    # Use environment variable for database URL
+    database_url = os.environ.get('DATABASE_URL')
     
-    # Handle PostgreSQL URL format from Heroku
+    if not database_url:
+        raise Exception("DATABASE_URL environment variable is required")
+    
+    # Handle Railway's postgres:// format
     if database_url.startswith('postgres://'):
         database_url = database_url.replace('postgres://', 'postgresql://', 1)
     
-    if database_url.startswith('postgresql://'):
-        import psycopg2
-        from urllib.parse import urlparse
-        parsed = urlparse(database_url)
-        conn = psycopg2.connect(
-            host=parsed.hostname,
-            port=parsed.port,
-            database=parsed.path[1:],
-            user=parsed.username,
-            password=parsed.password
-        )
-    else:
-        conn = sqlite3.connect(database_url)
+    # Connect to PostgreSQL
+    import psycopg2
+    from urllib.parse import urlparse
+    parsed = urlparse(database_url)
+    conn = psycopg2.connect(
+        host=parsed.hostname,
+        port=parsed.port,
+        database=parsed.path[1:],
+        user=parsed.username,
+        password=parsed.password
+    )
     cursor = conn.cursor()
     
     # Get all column names from the final table
-    if database_url.startswith('postgresql://'):
-        # PostgreSQL way to get column names
-        cursor.execute("""
-            SELECT column_name 
-            FROM information_schema.columns 
-            WHERE table_name = 'final' 
-            ORDER BY ordinal_position
-        """)
-        columns = [column[0] for column in cursor.fetchall()]
-    else:
-        # SQLite way to get column names
-        cursor.execute("PRAGMA table_info(final)")
-        columns = [column[1] for column in cursor.fetchall()]
+    cursor.execute("""
+        SELECT column_name 
+        FROM information_schema.columns 
+        WHERE table_name = 'final' 
+        ORDER BY ordinal_position
+    """)
+    columns = [column[0] for column in cursor.fetchall()]
     
     # Split keywords by comma and clean them
     keyword_list = [kw.strip().lower() for kw in keywords.split(',') if kw.strip()]
@@ -218,26 +212,27 @@ def search():
 def get_stats():
     """Get basic statistics about the database"""
     try:
-        # Use environment variable for database URL, fallback to SQLite
-        database_url = os.environ.get('DATABASE_URL', 'opf_community.db')
+        # Use environment variable for database URL
+        database_url = os.environ.get('DATABASE_URL')
         
-        # Handle PostgreSQL URL format from Heroku
+        if not database_url:
+            raise Exception("DATABASE_URL environment variable is required")
+        
+        # Handle Railway's postgres:// format
         if database_url.startswith('postgres://'):
             database_url = database_url.replace('postgres://', 'postgresql://', 1)
         
-        if database_url.startswith('postgresql://'):
-            import psycopg2
-            from urllib.parse import urlparse
-            parsed = urlparse(database_url)
-            conn = psycopg2.connect(
-                host=parsed.hostname,
-                port=parsed.port,
-                database=parsed.path[1:],
-                user=parsed.username,
-                password=parsed.password
-            )
-        else:
-            conn = sqlite3.connect(database_url)
+        # Connect to PostgreSQL
+        import psycopg2
+        from urllib.parse import urlparse
+        parsed = urlparse(database_url)
+        conn = psycopg2.connect(
+            host=parsed.hostname,
+            port=parsed.port,
+            database=parsed.path[1:],
+            user=parsed.username,
+            password=parsed.password
+        )
         cursor = conn.cursor()
         
         # Get total number of records
@@ -262,7 +257,6 @@ def get_stats():
         
     except Exception as e:
         return jsonify({'error': f'An error occurred: {str(e)}'})
-
 
 
 def extract_text_from_pdf(file_path):
@@ -337,24 +331,26 @@ def find_matching_experts(keywords):
         return []
     
     # Connect to database
-    database_url = os.environ.get('DATABASE_URL', 'opf_community.db')
+    database_url = os.environ.get('DATABASE_URL')
     
+    if not database_url:
+            raise Exception("DATABASE_URL environment variable is required")
+        
+    # Handle Railway's postgres:// format
     if database_url.startswith('postgres://'):
         database_url = database_url.replace('postgres://', 'postgresql://', 1)
-    
-    if database_url.startswith('postgresql://'):
-        import psycopg2
-        from urllib.parse import urlparse
-        parsed = urlparse(database_url)
-        conn = psycopg2.connect(
-            host=parsed.hostname,
-            port=parsed.port,
-            database=parsed.path[1:],
-            user=parsed.username,
-            password=parsed.password
-        )
-    else:
-        conn = sqlite3.connect(database_url)
+        
+    # Connect to PostgreSQL
+    import psycopg2
+    from urllib.parse import urlparse
+    parsed = urlparse(database_url)
+    conn = psycopg2.connect(
+        host=parsed.hostname,
+        port=parsed.port,
+        database=parsed.path[1:],
+        user=parsed.username,
+        password=parsed.password
+    )
     
     cursor = conn.cursor()
     

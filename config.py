@@ -15,7 +15,7 @@ class Config:
     GOOGLE_CLIENT_ID = os.environ.get('GOOGLE_CLIENT_ID')
     
     # Database Configuration
-    DATABASE_URL = os.environ.get('DATABASE_URL', 'sqlite:///opf_community.db')
+    DATABASE_URL = os.environ.get('DATABASE_URL')
     
 class DevelopmentConfig(Config):
     """Development configuration"""

@@ -304,16 +304,17 @@ class DatabaseSearchApp {
         } else if (type === 'link') {
             fieldValue.innerHTML = `<a href="${value}" target="_blank">${this.highlightKeyword(value, keyword)}</a>`;
         } else if (label.toLowerCase().includes('resume')) {
-            // Handle resume as expandable toggle
+            // Enhanced resume display with better formatting
             const resumeId = 'resume-' + Math.random().toString(36).substr(2, 9);
+            const formattedResume = this.formatResumeText(value);
             fieldValue.innerHTML = `
                 <div class="resume-toggle">
                     <button class="btn btn-sm btn-outline-secondary" onclick="toggleResume('${resumeId}')">
                         <i class="fas fa-eye me-1"></i>View Resume
                     </button>
-                    <div id="${resumeId}" class="resume-content" style="display: none; margin-top: 10px; padding: 10px; background: #f8f9fa; border-radius: 5px;">
-                        <div>
-                            ${this.highlightKeyword(value, keyword)}
+                    <div id="${resumeId}" class="resume-content" style="display: none;">
+                        <div class="resume-text">
+                            ${this.highlightKeyword(formattedResume, keyword)}
                         </div>
                     </div>
                 </div>
@@ -333,6 +334,39 @@ class DatabaseSearchApp {
         fieldGroup.appendChild(fieldValue);
 
         return fieldGroup;
+    }
+
+    formatResumeText(text) {
+        if (!text) return '';
+        
+        // Preserve line breaks and formatting
+        let formattedText = text
+            // Preserve line breaks
+            .replace(/\n/g, '<br>')
+            // Preserve multiple spaces (for indentation)
+            .replace(/  /g, '&nbsp;&nbsp;')
+            // Make headers bold (lines that end with ** or are in ALL CAPS)
+            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+            // Make section headers stand out (lines that are mostly uppercase)
+            .replace(/^([A-Z\s]{3,}):?$/gm, '<h6 class="resume-section">$1</h6>')
+            // Make bullet points more visible
+            .replace(/^[\s]*•[\s]*(.*)$/gm, '<div class="resume-bullet">• $1</div>')
+            .replace(/^[\s]*[-*][\s]*(.*)$/gm, '<div class="resume-bullet">• $1</div>')
+            // Make numbered lists
+            .replace(/^[\s]*(\d+\.)[\s]*(.*)$/gm, '<div class="resume-numbered">$1 $2</div>')
+            // Highlight contact information
+            .replace(/([A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,})/g, '<span class="resume-email">$1</span>')
+            .replace(/(\d{3}[-.\s]?\d{3}[-.\s]?\d{4})/g, '<span class="resume-phone">$1</span>')
+            // Make LinkedIn URLs clickable
+            .replace(/(linkedin\.com\/in\/[^\s]+)/g, '<a href="https://$1" target="_blank" class="resume-link">$1</a>')
+            // Make URLs clickable
+            .replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank" class="resume-link">$1</a>')
+            // Preserve bold text
+            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+            // Preserve italic text
+            .replace(/\*(.*?)\*/g, '<em>$1</em>');
+        
+        return formattedText;
     }
 
     highlightKeyword(text, keywords) {

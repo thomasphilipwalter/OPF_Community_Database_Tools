@@ -469,3 +469,121 @@ header {
     border-color: #28a745;
     background: #f8fff9;
 } 
+
+/* Resume Display Styles */
+.resume-content {
+    margin-top: 15px;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+    max-height: 500px;
+    overflow-y: auto;
+    font-family: 'Azeret Mono', monospace;
+    font-size: 0.9em;
+    line-height: 1.6;
+}
+
+.resume-text {
+    white-space: pre-line;
+    word-wrap: break-word;
+}
+
+.resume-section {
+    color: #008B9E;
+    font-weight: 600;
+    font-size: 1.1em;
+    margin: 15px 0 8px 0;
+    padding-bottom: 5px;
+    border-bottom: 2px solid #e9ecef;
+    font-family: 'Inter Tight', sans-serif;
+}
+
+.resume-bullet {
+    margin: 5px 0;
+    padding-left: 15px;
+    position: relative;
+}
+
+.resume-bullet:before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: #008B9E;
+    font-weight: bold;
+}
+
+.resume-numbered {
+    margin: 5px 0;
+    padding-left: 15px;
+}
+
+.resume-email {
+    color: #007bff;
+    font-weight: 500;
+}
+
+.resume-phone {
+    color: #28a745;
+    font-weight: 500;
+}
+
+.resume-link {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.resume-link:hover {
+    text-decoration: underline;
+    color: #0056b3;
+}
+
+.resume-toggle .btn {
+    transition: all 0.3s ease;
+}
+
+.resume-toggle .btn:hover {
+    background-color: #008B9E;
+    border-color: #008B9E;
+    color: white;
+}
+
+/* Resume scrollbar styling */
+.resume-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.resume-content::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.resume-content::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 4px;
+}
+
+.resume-content::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+
+/* Enhanced field styling for resumes */
+.field-group:has(.resume-toggle) {
+    border-left: 3px solid #008B9E;
+    padding-left: 15px;
+    margin: 15px 0;
+}
+
+/* Responsive resume display */
+@media (max-width: 768px) {
+    .resume-content {
+        padding: 15px;
+        font-size: 0.85em;
+        max-height: 400px;
+    }
+    
+    .resume-section {
+        font-size: 1em;
+    }
+} 
