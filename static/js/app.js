@@ -10,6 +10,9 @@ class DatabaseSearchApp {
         this.appliedSustainabilityExperienceFilters = [];
         this.appliedCompetenciesFilters = [];
         this.appliedSectorsFilters = [];
+        this.currentRfps = []; // Store current RFP list
+        this.editingRfpId = null; // Store RFP ID being edited
+        this.uploadingRfpId = null; // Store RFP ID for document upload
         this.init();
     }
 
@@ -46,7 +49,29 @@ class DatabaseSearchApp {
             }
         });
 
-        // RFP functionality removed
+        // RFP form submission
+        const saveRfpBtn = document.getElementById('saveRfpBtn');
+        if (saveRfpBtn) {
+            saveRfpBtn.addEventListener('click', () => {
+                this.saveRfp();
+            });
+        }
+
+        // RFP edit form submission
+        const saveEditRfpBtn = document.getElementById('saveEditRfpBtn');
+        if (saveEditRfpBtn) {
+            saveEditRfpBtn.addEventListener('click', () => {
+                this.saveEditRfp();
+            });
+        }
+
+        // Document upload form submission
+        const uploadDocumentBtn = document.getElementById('uploadDocumentBtn');
+        if (uploadDocumentBtn) {
+            uploadDocumentBtn.addEventListener('click', () => {
+                this.uploadDocumentFile();
+            });
+        }
     }
 
     setupTabHandling() {
@@ -461,6 +486,13 @@ class DatabaseSearchApp {
         errorMessage.style.display = 'none';
     }
 
+    escapeHtml(text) {
+        if (!text) return '';
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
+
     // RFP functionality
     async loadRfpList() {
         try {
@@ -472,6 +504,7 @@ class DatabaseSearchApp {
                 return;
             }
 
+            this.currentRfps = data.rfps; // Store RFPs in class
             this.displayRfpList(data.rfps);
         } catch (error) {
             console.error('Error loading RFP list:', error);
@@ -496,7 +529,7 @@ class DatabaseSearchApp {
         rfps.forEach(rfp => {
             const listItem = document.createElement('div');
             listItem.className = 'list-group-item list-group-item-action';
-            listItem.onclick = () => this.selectRfp(rfp);
+            listItem.onclick = (event) => this.selectRfp(rfp, event);
             
             const dueDate = rfp.due_date ? new Date(rfp.due_date).toLocaleDateString() : 'No due date';
             const isOverdue = rfp.due_date && new Date(rfp.due_date) < new Date();
@@ -514,6 +547,10 @@ class DatabaseSearchApp {
                     <div class="text-end">
                         <small class="text-muted">${dueDate}</small>
                         ${isOverdue ? '<br><span class="badge bg-danger">Overdue</span>' : ''}
+                        <br>
+                        <button class="btn btn-outline-danger btn-sm mt-1" onclick="event.stopPropagation(); app.deleteRfp(${rfp.id}, '${this.escapeHtml(rfp.project_name)}')" title="Delete RFP">
+                            <i class="fas fa-trash"></i>
+                        </button>
                     </div>
                 </div>
             `;
@@ -522,59 +559,166 @@ class DatabaseSearchApp {
         });
     }
 
-    selectRfp(rfp) {
+    selectRfp(rfp, event = null) {
         // Remove active class from all items
         document.querySelectorAll('#rfpList .list-group-item').forEach(item => {
             item.classList.remove('active');
         });
         
-        // Add active class to selected item
-        event.target.closest('.list-group-item').classList.add('active');
+        // Add active class to selected item (if event provided)
+        if (event && event.target.closest('.list-group-item')) {
+            event.target.closest('.list-group-item').classList.add('active');
+        }
         
         // Display RFP details
         this.displayRfpDetails(rfp);
+        
+        // Load documents for this RFP
+        this.loadDocuments(rfp.id);
     }
 
     displayRfpDetails(rfp) {
         const rfpDetails = document.getElementById('rfpDetails');
         const dueDate = rfp.due_date ? new Date(rfp.due_date).toLocaleDateString() : 'Not specified';
         const isOverdue = rfp.due_date && new Date(rfp.due_date) < new Date();
+        const createdDate = rfp.created_at ? new Date(rfp.created_at).toLocaleDateString() : 'Unknown';
+        const projectCost = rfp.project_cost ? `${rfp.currency || ''} ${rfp.project_cost}` : 'Not specified';
         
         rfpDetails.innerHTML = `
-            <div class="row">
-                <div class="col-md-8">
-                    <h4>${this.escapeHtml(rfp.project_name)}</h4>
-                    <p class="text-muted mb-3">${this.escapeHtml(rfp.organization_group)}</p>
-                    
-                    <div class="row mb-3">
-                        <div class="col-md-6">
-                            <strong>Country:</strong> ${this.escapeHtml(rfp.country)}
-                        </div>
-                        <div class="col-md-6">
-                            <strong>Region:</strong> ${this.escapeHtml(rfp.region)}
+            <div class="row mb-3">
+                <div class="col-12">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h4 class="mb-0">${this.escapeHtml(rfp.project_name)}</h4>
+                        <div>
+                            <button class="btn btn-primary btn-sm me-2" onclick="app.uploadDocument(${rfp.id})" title="Upload Document">
+                                <i class="fas fa-upload"></i>
+                            </button>
+                            <button class="btn btn-outline-secondary btn-sm" onclick="app.editRfp(${rfp.id})" title="Edit RFP">
+                                <i class="fas fa-edit"></i>
+                            </button>
                         </div>
                     </div>
-                    
-                    <div class="row mb-3">
-                        <div class="col-md-6">
-                            <strong>Industry:</strong> ${this.escapeHtml(rfp.industry)}
-                        </div>
-                        <div class="col-md-6">
-                            <strong>Due Date:</strong> 
-                            <span class="${isOverdue ? 'text-danger' : ''}">${dueDate}</span>
-                            ${isOverdue ? ' <span class="badge bg-danger">Overdue</span>' : ''}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            
+                            <div class="mb-3">
+                                <strong>Organization/Group:</strong><br>
+                                ${rfp.organization_group ? `<span class="text-muted" style="font-family: 'Azeret Mono', monospace;">${this.escapeHtml(rfp.organization_group)}</span>` : ''}
+                            </div>
+                            
+                            <div class="mb-3">
+                                <strong>Link:</strong><br>
+                                ${rfp.link ? `<a href="${this.escapeHtml(rfp.link)}" target="_blank" class="text-primary" style="font-family: 'Azeret Mono', monospace;">${this.escapeHtml(rfp.link)}</a>` : ''}
+                            </div>
+                            
+                            <div class="mb-3">
+                                <strong>Country:</strong><br>
+                                ${rfp.country ? `<span class="text-muted" style="font-family: 'Azeret Mono', monospace;">${this.escapeHtml(rfp.country)}</span>` : ''}
+                            </div>
+                            
+                            <div class="mb-3">
+                                <strong>Region:</strong><br>
+                                ${rfp.region ? `<span class="text-muted" style="font-family: 'Azeret Mono', monospace;">${this.escapeHtml(rfp.region)}</span>` : ''}
+                            </div>
+                            
+                            <div class="mb-3">
+                                <strong>Project Focus:</strong><br>
+                                ${rfp.project_focus ? `<span class="text-muted" style="font-family: 'Azeret Mono', monospace;">${this.escapeHtml(rfp.project_focus)}</span>` : ''}
+                            </div>
+                            
+                            <div class="mb-3">
+                                <strong>Industry:</strong><br>
+                                ${rfp.industry ? `<span class="text-muted" style="font-family: 'Azeret Mono', monospace;">${this.escapeHtml(rfp.industry)}</span>` : ''}
+                            </div>
+                            
+                            <div class="mb-3">
+                                <strong>OPF Gap Size:</strong><br>
+                                ${rfp.opf_gap_size ? `<span class="text-muted" style="font-family: 'Azeret Mono', monospace;">${this.escapeHtml(rfp.opf_gap_size)}</span>` : ''}
+                            </div>
+                            
+                            <div class="mb-3">
+                                <strong>Due Date:</strong><br>
+                                ${rfp.due_date ? `<span class="${isOverdue ? 'text-danger' : 'text-muted'}" style="font-family: 'Azeret Mono', monospace;">${dueDate}</span>${isOverdue ? ' <span class="badge bg-danger">Overdue</span>' : ''}` : ''}
+                            </div>
+                            
+                            <div class="mb-3">
+                                <strong>Project Cost:</strong><br>
+                                ${rfp.project_cost ? `<span class="text-muted" style="font-family: 'Azeret Mono', monospace;">${projectCost}</span>` : ''}
+                            </div>
+                            
+                            <div class="mb-3">
+                                <strong>Posting Contact:</strong><br>
+                                ${rfp.posting_contact ? `<span class="text-muted" style="font-family: 'Azeret Mono', monospace;">${this.escapeHtml(rfp.posting_contact)}</span>` : ''}
+                            </div>
+                            
+                            <div class="mb-3">
+                                <strong>Uploaded At:</strong><br>
+                                ${rfp.created_at ? `<span class="text-muted" style="font-family: 'Azeret Mono', monospace;">${createdDate}</span>` : ''}
+                            </div>
+                            
+                            <div class="mb-3">
+                                <strong>OPF Gaps:</strong><br>
+                                ${rfp.opf_gaps ? `<span class="text-muted" style="font-family: 'Azeret Mono', monospace;">${this.escapeHtml(rfp.opf_gaps)}</span>` : ''}
+                            </div>
+                            
+                            <div class="mb-3">
+                                <strong>Deliverables:</strong><br>
+                                ${rfp.deliverables ? `<span class="text-muted" style="font-family: 'Azeret Mono', monospace;">${this.escapeHtml(rfp.deliverables)}</span>` : ''}
+                            </div>
+                            
+                            <div class="mb-3">
+                                <strong>Potential Experts:</strong><br>
+                                ${rfp.potential_experts ? `<span class="text-muted" style="font-family: 'Azeret Mono', monospace;">${this.escapeHtml(rfp.potential_experts)}</span>` : ''}
+                            </div>
+                            
+                            <div class="mb-3">
+                                <strong>Specific Staffing Needs:</strong><br>
+                                ${rfp.specific_staffing_needs ? `<span class="text-muted" style="font-family: 'Azeret Mono', monospace;">${this.escapeHtml(rfp.specific_staffing_needs)}</span>` : ''}
+                            </div>
                         </div>
                     </div>
                 </div>
                 
-                <div class="col-md-4 text-end">
-                    <button class="btn btn-primary mb-2" onclick="app.uploadDocument(${rfp.id})">
-                        <i class="fas fa-upload me-2"></i>Upload Document
-                    </button>
-                    <br>
-                    <button class="btn btn-outline-secondary btn-sm" onclick="app.editRfp(${rfp.id})">
-                        <i class="fas fa-edit me-1"></i>Edit
-                    </button>
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <h5 class="card-title mb-0">Document Management</h5>
+                                <small class="text-muted">Upload and manage documents for this RFP project.</small>
+                            </div>
+                            <div id="documentsList">
+                                <div class="text-center text-muted">
+                                    <i class="fas fa-spinner fa-spin"></i>
+                                    <p class="mt-2">Loading documents...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- AI Analysis Section -->
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    <h5 class="card-title mb-0">AI Analysis</h5>
+                                    <small class="text-muted">Analyze uploaded documents using AI to extract insights and recommendations.</small>
+                                </div>
+                                <div id="aiAnalysisContent">
+                                    <div class="text-center text-muted">
+                                        <i class="fas fa-robot fa-2x mb-3"></i>
+                                        <p>No documents available for analysis</p>
+                                        <small>Upload documents to enable AI analysis features</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         `;
@@ -582,18 +726,428 @@ class DatabaseSearchApp {
 
     showAddRfpModal() {
         console.log('Add RFP button clicked!');
-        // TODO: Implement add RFP modal
-        alert('Add RFP functionality coming soon!');
+        // Clear the form
+        document.getElementById('addRfpForm').reset();
+        // Show the modal
+        const modal = new bootstrap.Modal(document.getElementById('addRfpModal'));
+        modal.show();
     }
 
     uploadDocument(rfpId) {
-        // TODO: Implement document upload
-        alert('Document upload functionality coming soon!');
+        // Store the RFP ID for the upload
+        this.uploadingRfpId = rfpId;
+        
+        // Clear the form
+        document.getElementById('uploadDocumentForm').reset();
+        document.getElementById('uploadProgress').style.display = 'none';
+        
+        // Show the modal
+        const uploadModal = new bootstrap.Modal(document.getElementById('uploadDocumentModal'));
+        uploadModal.show();
+    }
+
+    async uploadDocumentFile() {
+        const fileInput = document.getElementById('documentFile');
+        const file = fileInput.files[0];
+        
+        if (!file) {
+            this.showError('Please select a file to upload');
+            return;
+        }
+        
+        // Validate file size (10MB limit)
+        if (file.size > 10 * 1024 * 1024) {
+            this.showError('File size must be less than 10MB');
+            return;
+        }
+        
+        // Validate file type
+        const allowedTypes = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+        if (!allowedTypes.includes(file.type)) {
+            this.showError('Please upload a PDF, DOC, or DOCX file');
+            return;
+        }
+        
+        // Show progress bar
+        const progressBar = document.getElementById('uploadProgress');
+        const progressBarInner = progressBar.querySelector('.progress-bar');
+        progressBar.style.display = 'block';
+        progressBarInner.style.width = '0%';
+        progressBarInner.textContent = 'Uploading...';
+        
+        // Disable upload button
+        const uploadBtn = document.getElementById('uploadDocumentBtn');
+        const originalText = uploadBtn.innerHTML;
+        uploadBtn.disabled = true;
+        uploadBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Uploading...';
+        
+        try {
+            const formData = new FormData();
+            formData.append('document', file);
+            
+            // Simulate progress
+            let progress = 0;
+            const progressInterval = setInterval(() => {
+                progress += 10;
+                progressBarInner.style.width = progress + '%';
+                if (progress >= 90) {
+                    clearInterval(progressInterval);
+                }
+            }, 200);
+            
+            const response = await fetch(`/api/document-upload/${this.uploadingRfpId}`, {
+                method: 'POST',
+                body: formData
+            });
+            
+            clearInterval(progressInterval);
+            progressBarInner.style.width = '100%';
+            progressBarInner.textContent = 'Complete!';
+            
+            const result = await response.json();
+            
+            if (result.success) {
+                // Close the modal
+                const uploadModal = bootstrap.Modal.getInstance(document.getElementById('uploadDocumentModal'));
+                uploadModal.hide();
+                
+                // Show success message
+                this.showSuccess(`Document "${result.document.document_name}" uploaded successfully!`);
+                
+                // Refresh the document list
+                this.loadDocuments(this.uploadingRfpId);
+                
+            } else {
+                this.showError(result.error || 'Failed to upload document');
+            }
+        } catch (error) {
+            console.error('Error uploading document:', error);
+            this.showError('An error occurred while uploading the document');
+        } finally {
+            // Reset button
+            uploadBtn.disabled = false;
+            uploadBtn.innerHTML = originalText;
+            
+            // Hide progress bar after a delay
+            setTimeout(() => {
+                progressBar.style.display = 'none';
+            }, 2000);
+        }
+    }
+
+    async saveRfp() {
+        const projectName = document.getElementById('projectName').value.trim();
+        const projectLink = document.getElementById('projectLink').value.trim();
+        
+        if (!projectName) {
+            alert('Please enter a project name.');
+            return;
+        }
+        
+        // Disable save button and show loading
+        const saveBtn = document.getElementById('saveRfpBtn');
+        const originalText = saveBtn.innerHTML;
+        saveBtn.disabled = true;
+        saveBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Saving...';
+        
+        try {
+            const response = await fetch('/api/rfp-create', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    project_name: projectName,
+                    link: projectLink
+                })
+            });
+            
+            const data = await response.json();
+            
+            if (data.success) {
+                // Close the modal
+                const modal = bootstrap.Modal.getInstance(document.getElementById('addRfpModal'));
+                modal.hide();
+                
+                // Reload the RFP list to show the new entry
+                this.loadRfpList();
+                
+                // Select the newly created RFP
+                setTimeout(() => {
+                    this.selectRfp(data.rfp);
+                }, 100);
+                
+            } else {
+                alert('Error creating RFP: ' + data.error);
+            }
+        } catch (error) {
+            console.error('Error saving RFP:', error);
+            alert('An error occurred while saving the RFP. Please try again.');
+        } finally {
+            // Reset button
+            saveBtn.disabled = false;
+            saveBtn.innerHTML = originalText;
+        }
     }
 
     editRfp(rfpId) {
-        // TODO: Implement edit RFP
-        alert('Edit RFP functionality coming soon!');
+        // Find the current RFP data
+        const currentRfp = this.currentRfps.find(rfp => rfp.id === rfpId);
+        if (!currentRfp) {
+            console.error('RFP not found:', rfpId);
+            return;
+        }
+        
+        // Populate the edit form
+        document.getElementById('editProjectName').value = currentRfp.project_name || '';
+        document.getElementById('editOrganizationGroup').value = currentRfp.organization_group || '';
+        document.getElementById('editLink').value = currentRfp.link || '';
+        document.getElementById('editCountry').value = currentRfp.country || '';
+        document.getElementById('editRegion').value = currentRfp.region || '';
+        document.getElementById('editProjectFocus').value = currentRfp.project_focus || '';
+        document.getElementById('editIndustry').value = currentRfp.industry || '';
+        document.getElementById('editOpfGapSize').value = currentRfp.opf_gap_size || '';
+        document.getElementById('editDueDate').value = currentRfp.due_date ? currentRfp.due_date.split('T')[0] : '';
+        document.getElementById('editProjectCost').value = currentRfp.project_cost || '';
+        document.getElementById('editCurrency').value = currentRfp.currency || '';
+        document.getElementById('editPostingContact').value = currentRfp.posting_contact || '';
+        document.getElementById('editOpfGaps').value = currentRfp.opf_gaps || '';
+        document.getElementById('editDeliverables').value = currentRfp.deliverables || '';
+        document.getElementById('editPotentialExperts').value = currentRfp.potential_experts || '';
+        document.getElementById('editSpecificStaffingNeeds').value = currentRfp.specific_staffing_needs || '';
+        
+        // Store the RFP ID for the save operation
+        this.editingRfpId = rfpId;
+        
+        // Show the modal
+        const editModal = new bootstrap.Modal(document.getElementById('editRfpModal'));
+        editModal.show();
+    }
+
+    async saveEditRfp() {
+        try {
+            const form = document.getElementById('editRfpForm');
+            const formData = new FormData(form);
+            
+            // Convert FormData to JSON
+            const data = {};
+            for (let [key, value] of formData.entries()) {
+                data[key] = value;
+            }
+            
+            // Make the API call
+            const response = await fetch(`/api/rfp-update/${this.editingRfpId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            });
+            
+            const result = await response.json();
+            
+            if (result.success) {
+                // Update the current RFP in the list
+                const index = this.currentRfps.findIndex(rfp => rfp.id === this.editingRfpId);
+                if (index !== -1) {
+                    this.currentRfps[index] = result.rfp;
+                }
+                
+                // Refresh the display
+                this.displayRfpList(this.currentRfps);
+                this.displayRfpDetails(result.rfp);
+                
+                // Reload documents for the updated RFP
+                this.loadDocuments(this.editingRfpId);
+                
+                // Close the modal
+                const editModal = bootstrap.Modal.getInstance(document.getElementById('editRfpModal'));
+                editModal.hide();
+                
+                // Show success message
+                this.showSuccess('RFP updated successfully!');
+            } else {
+                this.showError(result.error || 'Failed to update RFP');
+            }
+        } catch (error) {
+            console.error('Error updating RFP:', error);
+            this.showError('An error occurred while updating the RFP');
+        }
+    }
+
+    showSuccess(message) {
+        // Create a temporary success alert
+        const alertDiv = document.createElement('div');
+        alertDiv.className = 'alert alert-success alert-dismissible fade show position-fixed';
+        alertDiv.style.cssText = 'top: 20px; right: 20px; z-index: 9999; min-width: 300px;';
+        alertDiv.innerHTML = `
+            ${message}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        `;
+        document.body.appendChild(alertDiv);
+        
+        // Remove after 3 seconds
+        setTimeout(() => {
+            if (alertDiv.parentNode) {
+                alertDiv.remove();
+            }
+        }, 3000);
+    }
+
+    async loadDocuments(rfpId) {
+        try {
+            const response = await fetch(`/api/documents/${rfpId}`);
+            const result = await response.json();
+            
+            if (result.success) {
+                this.displayDocuments(result.documents);
+            } else {
+                console.error('Error loading documents:', result.error);
+                this.displayDocuments([]);
+            }
+        } catch (error) {
+            console.error('Error loading documents:', error);
+            this.displayDocuments([]);
+        }
+    }
+
+    displayDocuments(documents) {
+        const documentsList = document.getElementById('documentsList');
+        
+        if (documents.length === 0) {
+            documentsList.innerHTML = `
+                <div class="text-center text-muted">
+                    <i class="fas fa-file-alt fa-2x mb-3"></i>
+                    <p>No documents uploaded yet</p>
+                    <small>Upload documents to see them here</small>
+                </div>
+            `;
+            return;
+        }
+        
+        let documentsHtml = '';
+        documents.forEach(doc => {
+            const uploadDate = doc.created_at ? new Date(doc.created_at).toLocaleDateString() : 'Unknown date';
+            const fileExtension = doc.document_name.split('.').pop().toUpperCase();
+            
+            documentsHtml += `
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div class="flex-grow-1">
+                                <div class="d-flex align-items-center mb-2">
+                                    <span class="badge bg-secondary me-2">${fileExtension}</span>
+                                    <h6 class="mb-0">${this.escapeHtml(doc.document_name)}</h6>
+                                </div>
+                                <small class="text-muted">
+                                    <i class="fas fa-calendar me-1"></i>Uploaded ${uploadDate}
+                                </small>
+                                <div class="mt-2">
+                                    <small class="text-muted">
+                                        <i class="fas fa-file-text me-1"></i>Text preview:
+                                    </small>
+                                    <p class="mt-1 mb-0" style="font-family: 'Azeret Mono', monospace; font-size: 0.85em; color: #666;">
+                                        ${this.escapeHtml(doc.text_preview)}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="ms-3">
+                                <button class="btn btn-outline-danger btn-sm" onclick="event.stopPropagation(); app.deleteDocument(${doc.id}, '${this.escapeHtml(doc.document_name)}')" title="Delete Document">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+        
+        documentsList.innerHTML = documentsHtml;
+    }
+
+    deleteDocument(documentId, documentName) {
+        // Show confirmation dialog
+        const confirmed = confirm(`Are you sure you want to delete the document "${documentName}"?\n\nThis will permanently delete:\n• The document file\n• All extracted text content\n\nThis action cannot be undone.`);
+        
+        if (confirmed) {
+            this.performDeleteDocument(documentId);
+        }
+    }
+
+    async performDeleteDocument(documentId) {
+        try {
+            const response = await fetch(`/api/document-delete/${documentId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            });
+            
+            const result = await response.json();
+            
+            if (result.success) {
+                // Show success message
+                this.showSuccess(result.message);
+                
+                // Refresh the documents list for the current RFP
+                if (result.rfp_id) {
+                    this.loadDocuments(result.rfp_id);
+                }
+            } else {
+                this.showError(result.error || 'Failed to delete document');
+            }
+        } catch (error) {
+            console.error('Error deleting document:', error);
+            this.showError('An error occurred while deleting the document');
+        }
+    }
+
+    deleteRfp(rfpId, projectName) {
+        // Show confirmation dialog
+        const confirmed = confirm(`Are you sure you want to delete the RFP project "${projectName}"?\n\nThis will permanently delete:\n• The RFP project and all its metadata\n• All associated documents\n\nThis action cannot be undone.`);
+        
+        if (confirmed) {
+            this.performDeleteRfp(rfpId);
+        }
+    }
+
+    async performDeleteRfp(rfpId) {
+        try {
+            const response = await fetch(`/api/rfp-delete/${rfpId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            });
+            
+            const result = await response.json();
+            
+            if (result.success) {
+                // Remove the RFP from the current list
+                this.currentRfps = this.currentRfps.filter(rfp => rfp.id !== rfpId);
+                
+                // Refresh the display
+                this.displayRfpList(this.currentRfps);
+                
+                // Clear the details panel if the deleted RFP was selected
+                const rfpDetails = document.getElementById('rfpDetails');
+                if (rfpDetails.innerHTML.includes(`app.editRfp(${rfpId})`)) {
+                    rfpDetails.innerHTML = `
+                        <div class="text-center text-muted">
+                            <p>Choose an RFP from the list to view details and upload documents</p>
+                        </div>
+                    `;
+                }
+                
+                // Show success message
+                this.showSuccess('RFP project deleted successfully!');
+            } else {
+                this.showError(result.error || 'Failed to delete RFP');
+            }
+        } catch (error) {
+            console.error('Error deleting RFP:', error);
+            this.showError('An error occurred while deleting the RFP');
+        }
     }
 }
 

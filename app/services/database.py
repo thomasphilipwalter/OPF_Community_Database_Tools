@@ -6,8 +6,17 @@ def get_database_connection():
     """Get database connection based on environment"""
     database_url = os.environ.get('DATABASE_URL')
     
+    # For local development, connect to local database if DATABASE_URL is not set
     if not database_url:
-        raise Exception("DATABASE_URL environment variable is required")
+        # Local development connection
+        conn = psycopg2.connect(
+            host='localhost',
+            port=5432,
+            database='opf_community_local',
+            user='thomaswalter',
+            password=''  # No password for local development
+        )
+        return conn
     
     # Handle Railway's postgres:// format
     if database_url.startswith('postgres://'):

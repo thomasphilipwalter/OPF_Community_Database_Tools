@@ -536,10 +536,11 @@
                         <!-- RFP Details Panel -->
                         <div class="col-md-8 col-lg-9">
                             <div class="card">
-                                <div class="card-header">
+                                <div class="card-header d-flex justify-content-between align-items-center">
                                     <h5 class="mb-0">
                                         <i class="fas fa-file-alt me-2"></i>RFP Details
                                     </h5>
+                                    <div style="width: 32px; height: 32px;"></div>
                                 </div>
                                 <div class="card-body">
                                     <div id="rfpDetails" class="text-center">
@@ -620,7 +621,187 @@
         </div>
     </template>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+    <!-- Resume Modal -->
+    <div class="modal fade" id="resumeModal" tabindex="-1" aria-labelledby="resumeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <!-- Modal content will be dynamically inserted here -->
+            </div>
+        </div>
+    </div>
+
+                 <!-- Add RFP Modal -->
+             <div class="modal fade" id="addRfpModal" tabindex="-1" aria-labelledby="addRfpModalLabel" aria-hidden="true">
+                 <div class="modal-dialog">
+                     <div class="modal-content">
+                         <div class="modal-header">
+                             <h5 class="modal-title" id="addRfpModalLabel">
+                                 <i class="fas fa-plus me-2"></i>Add New RFP
+                             </h5>
+                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                         </div>
+                         <div class="modal-body">
+                             <form id="addRfpForm">
+                                 <div class="mb-3">
+                                     <label for="projectName" class="form-label">Project Name *</label>
+                                     <input type="text" class="form-control" id="projectName" name="project_name" required>
+                                     <div class="form-text">Enter a descriptive name for this RFP project</div>
+                                 </div>
+                                 <div class="mb-3">
+                                     <label for="projectLink" class="form-label">Project Link</label>
+                                     <input type="url" class="form-control" id="projectLink" name="link" placeholder="https://...">
+                                     <div class="form-text">Optional: URL to the RFP document or project page</div>
+                                 </div>
+                             </form>
+                         </div>
+                         <div class="modal-footer">
+                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                             <button type="button" class="btn btn-primary" id="saveRfpBtn">
+                                 <i class="fas fa-save me-2"></i>Save RFP
+                             </button>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+
+             <!-- Edit RFP Modal -->
+             <div class="modal fade" id="editRfpModal" tabindex="-1" aria-labelledby="editRfpModalLabel" aria-hidden="true">
+                 <div class="modal-dialog modal-lg">
+                     <div class="modal-content">
+                         <div class="modal-header">
+                             <h5 class="modal-title" id="editRfpModalLabel">
+                                 <i class="fas fa-edit me-2"></i>Edit RFP Project
+                             </h5>
+                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                         </div>
+                         <div class="modal-body">
+                             <form id="editRfpForm">
+                                 <div class="row">
+                                     <div class="col-md-6">
+                                         <div class="mb-3">
+                                             <label for="editProjectName" class="form-label">Project Name *</label>
+                                             <input type="text" class="form-control" id="editProjectName" name="project_name" required>
+                                         </div>
+                                         <div class="mb-3">
+                                             <label for="editOrganizationGroup" class="form-label">Organization/Group</label>
+                                             <input type="text" class="form-control" id="editOrganizationGroup" name="organization_group">
+                                         </div>
+                                         <div class="mb-3">
+                                             <label for="editLink" class="form-label">Link</label>
+                                             <input type="url" class="form-control" id="editLink" name="link" placeholder="https://...">
+                                         </div>
+                                         <div class="mb-3">
+                                             <label for="editCountry" class="form-label">Country</label>
+                                             <input type="text" class="form-control" id="editCountry" name="country">
+                                         </div>
+                                         <div class="mb-3">
+                                             <label for="editRegion" class="form-label">Region</label>
+                                             <input type="text" class="form-control" id="editRegion" name="region">
+                                         </div>
+                                         <div class="mb-3">
+                                             <label for="editProjectFocus" class="form-label">Project Focus</label>
+                                             <textarea class="form-control" id="editProjectFocus" name="project_focus" rows="2"></textarea>
+                                         </div>
+                                         <div class="mb-3">
+                                             <label for="editIndustry" class="form-label">Industry</label>
+                                             <input type="text" class="form-control" id="editIndustry" name="industry">
+                                         </div>
+                                         <div class="mb-3">
+                                             <label for="editOpfGapSize" class="form-label">OPF Gap Size</label>
+                                             <input type="text" class="form-control" id="editOpfGapSize" name="opf_gap_size">
+                                         </div>
+                                     </div>
+                                     <div class="col-md-6">
+                                         <div class="mb-3">
+                                             <label for="editDueDate" class="form-label">Due Date</label>
+                                             <input type="date" class="form-control" id="editDueDate" name="due_date">
+                                         </div>
+                                         <div class="mb-3">
+                                             <label for="editProjectCost" class="form-label">Project Cost</label>
+                                             <div class="input-group">
+                                                 <input type="number" class="form-control" id="editProjectCost" name="project_cost" step="0.01" min="0">
+                                                 <select class="form-select" id="editCurrency" name="currency" style="max-width: 100px;">
+                                                     <option value="">Currency</option>
+                                                     <option value="USD">USD</option>
+                                                     <option value="EUR">EUR</option>
+                                                     <option value="GBP">GBP</option>
+                                                     <option value="CAD">CAD</option>
+                                                     <option value="AUD">AUD</option>
+                                                     <option value="JPY">JPY</option>
+                                                     <option value="CHF">CHF</option>
+                                                     <option value="SEK">SEK</option>
+                                                     <option value="NOK">NOK</option>
+                                                     <option value="DKK">DKK</option>
+                                                 </select>
+                                             </div>
+                                         </div>
+                                         <div class="mb-3">
+                                             <label for="editPostingContact" class="form-label">Posting Contact</label>
+                                             <input type="text" class="form-control" id="editPostingContact" name="posting_contact">
+                                         </div>
+                                         <div class="mb-3">
+                                             <label for="editOpfGaps" class="form-label">OPF Gaps</label>
+                                             <textarea class="form-control" id="editOpfGaps" name="opf_gaps" rows="2"></textarea>
+                                         </div>
+                                         <div class="mb-3">
+                                             <label for="editDeliverables" class="form-label">Deliverables</label>
+                                             <textarea class="form-control" id="editDeliverables" name="deliverables" rows="2"></textarea>
+                                         </div>
+                                         <div class="mb-3">
+                                             <label for="editPotentialExperts" class="form-label">Potential Experts</label>
+                                             <textarea class="form-control" id="editPotentialExperts" name="potential_experts" rows="2"></textarea>
+                                         </div>
+                                         <div class="mb-3">
+                                             <label for="editSpecificStaffingNeeds" class="form-label">Specific Staffing Needs</label>
+                                             <textarea class="form-control" id="editSpecificStaffingNeeds" name="specific_staffing_needs" rows="2"></textarea>
+                                         </div>
+                                     </div>
+                                 </div>
+                             </form>
+                         </div>
+                         <div class="modal-footer">
+                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                             <button type="button" class="btn btn-primary" id="saveEditRfpBtn">
+                                 <i class="fas fa-save me-2"></i>Save Changes
+                             </button>
+                         </div>
+                     </div>
+                 </div>
+                          </div>
+
+             <!-- Upload Document Modal -->
+             <div class="modal fade" id="uploadDocumentModal" tabindex="-1" aria-labelledby="uploadDocumentModalLabel" aria-hidden="true">
+                 <div class="modal-dialog">
+                     <div class="modal-content">
+                         <div class="modal-header">
+                             <h5 class="modal-title" id="uploadDocumentModalLabel">
+                                 <i class="fas fa-upload me-2"></i>Upload Document
+                             </h5>
+                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                         </div>
+                         <div class="modal-body">
+                             <form id="uploadDocumentForm" enctype="multipart/form-data">
+                                 <div class="mb-3">
+                                     <label for="documentFile" class="form-label">Select Document</label>
+                                     <input type="file" class="form-control" id="documentFile" name="document" accept=".pdf,.doc,.docx" required>
+                                     <div class="form-text">Supported formats: PDF, DOC, DOCX (max 10MB)</div>
+                                 </div>
+                                 <div id="uploadProgress" class="progress mb-3" style="display: none;">
+                                     <div class="progress-bar" role="progressbar" style="width: 0%"></div>
+                                 </div>
+                             </form>
+                         </div>
+                         <div class="modal-footer">
+                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                             <button type="button" class="btn btn-primary" id="uploadDocumentBtn">
+                                 <i class="fas fa-upload me-2"></i>Upload Document
+                             </button>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+ 
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+     <script src="{{ url_for('static', filename='js/app.js') }}"></script>
 </body>
 </html> 
