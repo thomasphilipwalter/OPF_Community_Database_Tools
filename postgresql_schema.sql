@@ -41,3 +41,47 @@ CREATE INDEX IF NOT EXISTS idx_final_search ON final USING gin(to_tsvector('engl
     COALESCE(key_competencies, '') || ' ' || 
     COALESCE(key_sectors, '')
 ));
+
+-- RFP Tables
+-- Create the rfp_metadata table (parent table for RFP projects)
+CREATE TABLE IF NOT EXISTS rfp_metadata (
+    id SERIAL PRIMARY KEY,
+    project_name VARCHAR(255),
+    due_date DATE,
+    organization_group VARCHAR(255),
+    link TEXT,
+    country VARCHAR(100),
+    project_focus TEXT,
+    region VARCHAR(100),
+    industry VARCHAR(100),
+    opf_gap_size VARCHAR(50),
+    opf_gaps TEXT,
+    deliverables TEXT,
+    posting_contact VARCHAR(255),
+    potential_experts TEXT,
+    project_cost DECIMAL(15,2),
+    currency VARCHAR(50),
+    specific_staffing_needs TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Create the documents table (child table for RFP documents)
+CREATE TABLE IF NOT EXISTS documents (
+    id SERIAL PRIMARY KEY,
+    rfp_id INTEGER NOT NULL REFERENCES rfp_metadata(id) ON DELETE CASCADE,
+    document_name VARCHAR(255) NOT NULL,
+    document_text TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Create indexes for RFP tables
+CREATE INDEX IF NOT EXISTS idx_rfp_metadata_project_name ON rfp_metadata(project_name);
+CREATE INDEX IF NOT EXISTS idx_rfp_metadata_organization_group ON rfp_metadata(organization_group);
+CREATE INDEX IF NOT EXISTS idx_rfp_metadata_country ON rfp_metadata(country);
+CREATE INDEX IF NOT EXISTS idx_rfp_metadata_due_date ON rfp_metadata(due_date);
+CREATE INDEX IF NOT EXISTS idx_documents_rfp_id ON documents(rfp_id);
+CREATE INDEX IF NOT EXISTS idx_documents_document_name ON documents(document_name);
+
+-- Add a full-text search index for document content
+CREATE INDEX IF NOT EXISTS idx_documents_text_search ON documents USING gin(to_tsvector('english', document_text));
