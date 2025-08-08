@@ -53,12 +53,14 @@ class DatabaseSearchApp {
         // Handle tab switching to ensure results are shown in the correct tab
         const keywordSearchTab = document.getElementById('keyword-search-tab');
         const rfpAnalysisTab = document.getElementById('rfp-analysis-tab');
-        // When switching to RFP Analysis tab, hide any existing results
+        
+        // When switching to RFP Analysis tab, hide any existing results and load RFP list
         rfpAnalysisTab.addEventListener('click', () => {
             const resultsContainer = document.getElementById('resultsContainer');
             if (resultsContainer.style.display !== 'none') {
                 resultsContainer.style.display = 'none';
             }
+            this.loadRfpList();
         });
 
         // When switching back to Keyword Search tab, show results if they exist
@@ -459,7 +461,140 @@ class DatabaseSearchApp {
         errorMessage.style.display = 'none';
     }
 
-    // RFP functionality removed
+    // RFP functionality
+    async loadRfpList() {
+        try {
+            const response = await fetch('/api/rfp-list');
+            const data = await response.json();
+            
+            if (data.error) {
+                console.error('Error loading RFP list:', data.error);
+                return;
+            }
+
+            this.displayRfpList(data.rfps);
+        } catch (error) {
+            console.error('Error loading RFP list:', error);
+        }
+    }
+
+    displayRfpList(rfps) {
+        const rfpList = document.getElementById('rfpList');
+        const noRfpsMessage = document.getElementById('noRfpsMessage');
+        
+        if (rfps.length === 0) {
+            rfpList.style.display = 'none';
+            noRfpsMessage.style.display = 'block';
+            return;
+        }
+
+        rfpList.style.display = 'block';
+        noRfpsMessage.style.display = 'none';
+        
+        rfpList.innerHTML = '';
+        
+        rfps.forEach(rfp => {
+            const listItem = document.createElement('div');
+            listItem.className = 'list-group-item list-group-item-action';
+            listItem.onclick = () => this.selectRfp(rfp);
+            
+            const dueDate = rfp.due_date ? new Date(rfp.due_date).toLocaleDateString() : 'No due date';
+            const isOverdue = rfp.due_date && new Date(rfp.due_date) < new Date();
+            
+            listItem.innerHTML = `
+                <div class="d-flex justify-content-between align-items-start">
+                    <div class="flex-grow-1">
+                        <h6 class="mb-1">${this.escapeHtml(rfp.project_name)}</h6>
+                        <small class="text-muted">${this.escapeHtml(rfp.organization_group)}</small>
+                        <br>
+                        <small class="text-muted">
+                            <i class="fas fa-map-marker-alt me-1"></i>${this.escapeHtml(rfp.country)} • ${this.escapeHtml(rfp.region)}
+                        </small>
+                    </div>
+                    <div class="text-end">
+                        <small class="text-muted">${dueDate}</small>
+                        ${isOverdue ? '<br><span class="badge bg-danger">Overdue</span>' : ''}
+                    </div>
+                </div>
+            `;
+            
+            rfpList.appendChild(listItem);
+        });
+    }
+
+    selectRfp(rfp) {
+        // Remove active class from all items
+        document.querySelectorAll('#rfpList .list-group-item').forEach(item => {
+            item.classList.remove('active');
+        });
+        
+        // Add active class to selected item
+        event.target.closest('.list-group-item').classList.add('active');
+        
+        // Display RFP details
+        this.displayRfpDetails(rfp);
+    }
+
+    displayRfpDetails(rfp) {
+        const rfpDetails = document.getElementById('rfpDetails');
+        const dueDate = rfp.due_date ? new Date(rfp.due_date).toLocaleDateString() : 'Not specified';
+        const isOverdue = rfp.due_date && new Date(rfp.due_date) < new Date();
+        
+        rfpDetails.innerHTML = `
+            <div class="row">
+                <div class="col-md-8">
+                    <h4>${this.escapeHtml(rfp.project_name)}</h4>
+                    <p class="text-muted mb-3">${this.escapeHtml(rfp.organization_group)}</p>
+                    
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <strong>Country:</strong> ${this.escapeHtml(rfp.country)}
+                        </div>
+                        <div class="col-md-6">
+                            <strong>Region:</strong> ${this.escapeHtml(rfp.region)}
+                        </div>
+                    </div>
+                    
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <strong>Industry:</strong> ${this.escapeHtml(rfp.industry)}
+                        </div>
+                        <div class="col-md-6">
+                            <strong>Due Date:</strong> 
+                            <span class="${isOverdue ? 'text-danger' : ''}">${dueDate}</span>
+                            ${isOverdue ? ' <span class="badge bg-danger">Overdue</span>' : ''}
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4 text-end">
+                    <button class="btn btn-primary mb-2" onclick="app.uploadDocument(${rfp.id})">
+                        <i class="fas fa-upload me-2"></i>Upload Document
+                    </button>
+                    <br>
+                    <button class="btn btn-outline-secondary btn-sm" onclick="app.editRfp(${rfp.id})">
+                        <i class="fas fa-edit me-1"></i>Edit
+                    </button>
+                </div>
+            </div>
+        `;
+    }
+
+    showAddRfpModal() {
+        console.log('Add RFP button clicked!');
+        // TODO: Implement add RFP modal
+        alert('Add RFP functionality coming soon!');
+    }
+
+    uploadDocument(rfpId) {
+        // TODO: Implement document upload
+        alert('Document upload functionality coming soon!');
+    }
+
+    editRfp(rfpId) {
+        // TODO: Implement edit RFP
+        alert('Edit RFP functionality coming soon!');
+    }
 }
 
 // RFP functionality removed
@@ -643,5 +778,6 @@ function clearFilters() {
 
 // Initialize the application when the DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-    window.databaseSearchApp = new DatabaseSearchApp();
+    window.app = new DatabaseSearchApp();
+    window.databaseSearchApp = window.app; // Keep backward compatibility
 }); 

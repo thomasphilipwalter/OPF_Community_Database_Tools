@@ -76,11 +76,16 @@ header {
 
 /* Search Card */
 .search-card {
-    background: white;
+    background: #FBFBFB;
+    background-image: 
+        linear-gradient(rgba(128, 128, 128, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(128, 128, 128, 0.1) 1px, transparent 1px);
+    background-size: 10px 10px;
     border-radius: 15px;
     padding: 30px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-    border: 1px solid #e9ecef;
+    border: 1px dashed black;
+    backdrop-filter: blur(10px);
 }
 
 .search-card .form-control {
@@ -116,7 +121,7 @@ header {
 }
 
 .search-tips {
-    background: #f8f9fa;
+    background: white;
     border-radius: 10px;
     padding: 20px;
     margin-top: 20px;
@@ -445,7 +450,83 @@ header {
     font-weight: 500;
 }
 
-/* RFP Upload Styles - Disabled */ 
+/* RFP Styles */
+.rfp-list-container {
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+.list-group-item {
+    border-left: none;
+    border-right: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.list-group-item:hover {
+    background-color: #f8f9fa;
+}
+
+.list-group-item.active {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.list-group-item.active h6,
+.list-group-item.active small {
+    color: white !important;
+}
+
+.rfp-details-card {
+    min-height: 400px;
+}
+
+/* RFP Analysis Tab - All text in Inter Tight */
+#rfp-analysis {
+    font-family: 'Inter Tight', sans-serif;
+}
+
+#rfp-analysis h1,
+#rfp-analysis h2,
+#rfp-analysis h3,
+#rfp-analysis h4,
+#rfp-analysis h5,
+#rfp-analysis h6,
+#rfp-analysis p,
+#rfp-analysis span,
+#rfp-analysis div,
+#rfp-analysis button,
+#rfp-analysis input,
+#rfp-analysis label {
+    font-family: 'Inter Tight', sans-serif !important;
+}
+
+/* RFP Add buttons styling */
+#rfp-analysis .btn-primary {
+    background-color: #008B9E !important;
+    border-color: #008B9E !important;
+}
+
+#rfp-analysis .btn-primary:hover {
+    background-color: #007a8a !important;
+    border-color: #007a8a !important;
+}
+
+#rfp-analysis .btn-outline-primary {
+    color: #008B9E !important;
+    border-color: #008B9E !important;
+}
+
+#rfp-analysis .btn-outline-primary:hover {
+    background-color: #008B9E !important;
+    border-color: #008B9E !important;
+}
+
+/* RFP empty state messages - Azeret Mono */
+#noRfpsMessage p,
+#rfpDetails p {
+    font-family: 'Azeret Mono', monospace !important;
+} 
 
 /* Resume Display Styles */
 .resume-content {

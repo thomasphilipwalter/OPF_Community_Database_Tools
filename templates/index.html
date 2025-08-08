@@ -505,19 +505,54 @@
 
             <!-- RFP Analysis Tab -->
             <div class="tab-pane fade" id="rfp-analysis" role="tabpanel" aria-labelledby="rfp-analysis-tab">
-                <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-lg-8">
-                            <div class="search-card">
-                                <div class="text-center mb-4">
-                                    <i class="fas fa-file-alt fa-3x text-muted mb-3"></i>
-                                    <h4>RFP Analysis</h4>
-                                    <p class="text-muted">This feature is currently disabled.</p>
+                <div class="container-fluid">
+                    <div class="row">
+                        <!-- RFP List Sidebar -->
+                        <div class="col-md-4 col-lg-3">
+                            <div class="card">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                    <h5 class="mb-0">
+                                        <i class="fas fa-list me-2"></i>RFP Projects
+                                    </h5>
+                                    <button class="btn btn-sm btn-primary" onclick="app.showAddRfpModal()">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                                <div class="card-body p-0">
+                                    <div id="rfpList" class="list-group list-group-flush">
+                                        <!-- RFP items will be loaded here -->
+                                    </div>
+                                    <div id="noRfpsMessage" class="text-center p-4" style="display: none;">
+                                        <i class="fas fa-inbox fa-2x text-muted mb-3"></i>
+                                        <p class="text-muted">No RFP projects yet</p>
+                                        <button class="btn btn-sm btn-outline-primary" onclick="app.showAddRfpModal()">
+                                            <i class="fas fa-plus me-1"></i>Add First RFP
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- RFP Details Panel -->
+                        <div class="col-md-8 col-lg-9">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="mb-0">
+                                        <i class="fas fa-file-alt me-2"></i>RFP Details
+                                    </h5>
+                                </div>
+                                <div class="card-body">
+                                    <div id="rfpDetails" class="text-center">
+                                        <i class="fas fa-hand-pointer fa-3x text-muted mb-3"></i>
+                                        <h5>Select an RFP</h5>
+                                        <p class="text-muted">Choose an RFP from the list to view details and upload documents</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
             </div>
 
 
