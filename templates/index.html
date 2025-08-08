@@ -510,89 +510,9 @@
                         <div class="col-lg-8">
                             <div class="search-card">
                                 <div class="text-center mb-4">
-                                    <i class="fas fa-file-alt fa-3x text-primary mb-3"></i>
-                                    <h4>RFP Analysis & Expert Matching</h4>
-                                    <p class="text-muted">Upload an RFP document to analyze requirements and find relevant community members.</p>
-                                </div>
-                                
-                                <!-- File Upload Form -->
-                                <form id="rfpUploadForm" enctype="multipart/form-data">
-                                    <div class="mb-4">
-                                        <div class="upload-area" id="uploadArea">
-                                            <div class="text-center p-4">
-                                                <i class="fas fa-cloud-upload-alt fa-2x text-muted mb-3"></i>
-                                                <h5>Upload RFP Document</h5>
-                                                <p class="text-muted mb-3">Drag and drop your file here or click to browse</p>
-                                                <input type="file" id="rfpFile" name="rfp_file" accept=".pdf,.doc,.docx" style="display: none;">
-                                                <button type="button" class="btn btn-outline-primary" onclick="document.getElementById('rfpFile').click()">
-                                                    <i class="fas fa-file-upload me-2"></i>Choose File
-                                                </button>
-                                                <p class="text-muted mt-2 mb-0">
-                                                    <small>Supported formats: PDF, DOC, DOCX (Max 10MB)</small>
-                                                </p>
-                                            </div>
-                                        </div>
-                                        
-                                        <!-- File Preview -->
-                                        <div id="filePreview" class="mt-3" style="display: none;">
-                                            <div class="alert alert-info">
-                                                <div class="d-flex align-items-center">
-                                                    <i class="fas fa-file-alt me-3"></i>
-                                                    <div class="flex-grow-1">
-                                                        <strong id="fileName"></strong>
-                                                        <br><small id="fileSize" class="text-muted"></small>
-                                                    </div>
-                                                    <button type="button" class="btn btn-sm btn-outline-danger" onclick="removeFile()">
-                                                        <i class="fas fa-times"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                    <!-- Analysis Options -->
-                                    <div class="mb-4">
-                                        <h6 class="mb-3">Analysis Options</h6>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" id="extractKeywords" checked>
-                                                    <label class="form-check-label" for="extractKeywords">
-                                                        Extract key requirements
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" id="findExperts" checked>
-                                                    <label class="form-check-label" for="findExperts">
-                                                        Find matching experts
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                    <!-- Submit Button -->
-                                    <div class="text-center">
-                                        <button type="submit" id="analyzeBtn" class="btn btn-primary btn-lg" disabled>
-                                            <i class="fas fa-search me-2"></i>Analyze RFP
-                                        </button>
-                                    </div>
-                                </form>
-                                
-                                <!-- Analysis Results -->
-                                <div id="analysisResults" class="mt-4" style="display: none;">
-                                    <div class="card">
-                                        <div class="card-header">
-                                            <h5 class="mb-0">
-                                                <i class="fas fa-chart-bar me-2"></i>Analysis Results
-                                            </h5>
-                                        </div>
-                                        <div class="card-body">
-                                            <div id="analysisContent"></div>
-                                        </div>
-                                    </div>
+                                    <i class="fas fa-file-alt fa-3x text-muted mb-3"></i>
+                                    <h4>RFP Analysis</h4>
+                                    <p class="text-muted">This feature is currently disabled.</p>
                                 </div>
                             </div>
                         </div>

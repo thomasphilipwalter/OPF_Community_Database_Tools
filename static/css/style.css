@@ -445,30 +445,7 @@ header {
     font-weight: 500;
 }
 
-/* RFP Upload Styles */
-.upload-area {
-    border: 2px dashed #dee2e6;
-    border-radius: 10px;
-    background: #f8f9fa;
-    transition: all 0.3s ease;
-    cursor: pointer;
-}
-
-.upload-area:hover {
-    border-color: #007bff;
-    background: #f0f8ff;
-}
-
-.upload-area.dragover {
-    border-color: #007bff;
-    background: #e3f2fd;
-    transform: scale(1.02);
-}
-
-.upload-area.has-file {
-    border-color: #28a745;
-    background: #f8fff9;
-} 
+/* RFP Upload Styles - Disabled */ 
 
 /* Resume Display Styles */
 .resume-content {
