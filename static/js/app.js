@@ -1211,8 +1211,167 @@ class DatabaseSearchApp {
             return;
         }
         
-        // Show message that feature is still in development
-        alert('This feature is still in development. AI analysis will be available soon!');
+        // Show loading state
+        const aiContent = document.getElementById('aiAnalysisContent');
+        aiContent.innerHTML = `
+            <div class="text-center">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+                <p class="mt-3">Analyzing RFP against company knowledge base...</p>
+                <small class="text-muted">This may take a few moments</small>
+            </div>
+        `;
+        
+        // Call AI analysis API
+        fetch(`/api/ai-analyze/${this.selectedRfp.id}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('AI Analysis response:', data); // Debug logging
+            if (data.success) {
+                console.log('Analysis data:', data.analysis); // Debug logging
+                this.displayAiAnalysis(data.analysis);
+            } else {
+                this.showError(data.error || 'AI analysis failed');
+                aiContent.innerHTML = `
+                    <div class="text-center">
+                        <button class="btn btn-primary" onclick="app.generateAiAnalysis()">
+                            <i class="fas fa-robot me-2"></i>Generate AI Analysis
+                        </button>
+                    </div>
+                `;
+            }
+        })
+        .catch(error => {
+            console.error('AI Analysis error:', error);
+            this.showError('An error occurred during AI analysis');
+            aiContent.innerHTML = `
+                <div class="text-center">
+                    <button class="btn btn-primary" onclick="app.generateAiAnalysis()">
+                        <i class="fas fa-robot me-2"></i>Generate AI Analysis
+                    </button>
+                </div>
+            `;
+        });
+    }
+
+    displayAiAnalysis(analysis) {
+        console.log('Displaying analysis:', analysis); // Debug logging
+        const aiContent = document.getElementById('aiAnalysisContent');
+        
+        // Check if analysis has the expected structure
+        if (!analysis || typeof analysis !== 'object') {
+            console.error('Invalid analysis data:', analysis);
+            aiContent.innerHTML = '<div class="alert alert-danger">Invalid analysis data received</div>';
+            return;
+        }
+        
+        const analysisHtml = `
+            <div class="ai-analysis-results">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card mb-3">
+                            <div class="card-header bg-primary text-white">
+                                <h6 class="mb-0"><i class="fas fa-chart-line me-2"></i>Fit Assessment</h6>
+                            </div>
+                            <div class="card-body">
+                                <span class="badge bg-${this.getFitBadgeColor(analysis.fit_assessment)} fs-6">${analysis.fit_assessment || 'N/A'}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card mb-3">
+                            <div class="card-header bg-info text-white">
+                                <h6 class="mb-0"><i class="fas fa-users me-2"></i>Competitive Position</h6>
+                            </div>
+                            <div class="card-body">
+                                <p class="mb-0">${analysis.competitive_position || 'N/A'}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card mb-3">
+                            <div class="card-header bg-success text-white">
+                                <h6 class="mb-0"><i class="fas fa-star me-2"></i>Key Strengths</h6>
+                            </div>
+                            <div class="card-body">
+                                <p class="mb-0">${analysis.key_strengths || 'N/A'}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card mb-3">
+                            <div class="card-header bg-warning text-dark">
+                                <h6 class="mb-0"><i class="fas fa-exclamation-triangle me-2"></i>Gaps & Challenges</h6>
+                            </div>
+                            <div class="card-body">
+                                <p class="mb-0">${analysis.gaps_challenges || 'N/A'}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card mb-3">
+                            <div class="card-header bg-secondary text-white">
+                                <h6 class="mb-0"><i class="fas fa-tools me-2"></i>Resource Requirements</h6>
+                            </div>
+                            <div class="card-body">
+                                <p class="mb-0">${analysis.resource_requirements || 'N/A'}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card mb-3">
+                            <div class="card-header bg-danger text-white">
+                                <h6 class="mb-0"><i class="fas fa-shield-alt me-2"></i>Risk Assessment</h6>
+                            </div>
+                            <div class="card-body">
+                                <p class="mb-0">${analysis.risk_assessment || 'N/A'}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card mb-3">
+                            <div class="card-header bg-primary text-white">
+                                <h6 class="mb-0"><i class="fas fa-lightbulb me-2"></i>Recommendations</h6>
+                            </div>
+                            <div class="card-body">
+                                <p class="mb-0">${analysis.recommendations || 'N/A'}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-3">
+                    <button class="btn btn-outline-primary" onclick="app.generateAiAnalysis()">
+                        <i class="fas fa-refresh me-2"></i>Re-run Analysis
+                    </button>
+                </div>
+            </div>
+        `;
+        
+        aiContent.innerHTML = analysisHtml;
+    }
+
+    getFitBadgeColor(fitAssessment) {
+        const fit = fitAssessment.toLowerCase();
+        if (fit.includes('high')) return 'success';
+        if (fit.includes('medium')) return 'warning';
+        if (fit.includes('low')) return 'danger';
+        return 'secondary';
     }
 }
 

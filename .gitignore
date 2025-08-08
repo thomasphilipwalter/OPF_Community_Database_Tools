@@ -40,3 +40,7 @@ __pycache__/
 
 # Flask session files
 flask_session/
+
+# Knowledge base and AI analysis
+knowledge_base/
+chroma_db/

@@ -364,3 +364,77 @@ def update_rfp(rfp_id):
     except Exception as e:
         return jsonify({'error': f'An error occurred: {str(e)}'}), 500
 
+@bp.route('/api/ai-analyze/<int:rfp_id>', methods=['POST'])
+@login_required
+def ai_analyze_rfp(rfp_id):
+    """Analyze RFP using AI against company knowledge base"""
+    try:
+        from app.services.knowledge_base import KnowledgeBaseService
+        
+        # Get RFP metadata and documents
+        conn = get_database_connection()
+        cursor = conn.cursor()
+        
+        # Get RFP metadata
+        cursor.execute("""
+            SELECT project_name, organization_group, project_focus, due_date, 
+                   country, region, industry, opf_gap_size, opf_gaps, deliverables
+            FROM rfp_metadata 
+            WHERE id = %s
+        """, (rfp_id,))
+        rfp_result = cursor.fetchone()
+        
+        if not rfp_result:
+            return jsonify({'error': 'RFP not found'}), 404
+        
+        # Get all documents for this RFP
+        cursor.execute("""
+            SELECT document_name, document_text 
+            FROM documents 
+            WHERE rfp_id = %s 
+            ORDER BY created_at DESC
+        """, (rfp_id,))
+        documents = cursor.fetchall()
+        
+        if not documents:
+            return jsonify({'error': 'No documents found for this RFP. Please upload documents first.'}), 400
+        
+        cursor.close()
+        conn.close()
+        
+        # Prepare RFP metadata
+        rfp_metadata = {
+            'project_name': rfp_result[0] or '',
+            'organization_group': rfp_result[1] or '',
+            'project_focus': rfp_result[2] or '',
+            'due_date': rfp_result[3].isoformat() if rfp_result[3] else None,
+            'country': rfp_result[4] or '',
+            'region': rfp_result[5] or '',
+            'industry': rfp_result[6] or '',
+            'opf_gap_size': rfp_result[7] or '',
+            'opf_gaps': rfp_result[8] or '',
+            'deliverables': rfp_result[9] or ''
+        }
+        
+        # Combine all document text
+        rfp_text = "\n\n".join([
+            f"Document: {doc[0]}\n{doc[1]}" 
+            for doc in documents
+        ])
+        
+        # Initialize knowledge base service
+        kb_service = KnowledgeBaseService()
+        
+        # Perform AI analysis
+        analysis = kb_service.analyze_rfp(rfp_text, rfp_metadata)
+        
+        return jsonify({
+            'success': True,
+            'analysis': analysis,
+            'rfp_id': rfp_id,
+            'documents_analyzed': len(documents)
+        })
+        
+    except Exception as e:
+        return jsonify({'error': f'An error occurred during AI analysis: {str(e)}'}), 500
+
