@@ -11,6 +11,7 @@ class DatabaseSearchApp {
         this.appliedCompetenciesFilters = [];
         this.appliedSectorsFilters = [];
         this.currentRfps = []; // Store current RFP list
+        this.selectedRfp = null; // Store currently selected RFP
         this.editingRfpId = null; // Store RFP ID being edited
         this.uploadingRfpId = null; // Store RFP ID for document upload
         this.init();
@@ -429,20 +430,69 @@ class DatabaseSearchApp {
     }
 
     exportResults() {
-        if (!this.currentResults.length) {
+        if (!this.currentResults || !this.currentResults.length) {
             this.showError('No results to export');
             return;
         }
 
+        // Define the fields we want to export in order
+        const exportFields = [
+            'first_name',
+            'last_name', 
+            'email',
+            'email_other',
+            'city',
+            'country',
+            'current_job',
+            'current_company',
+            'linkedin',
+            'linkedin_summary',
+            'years_xp',
+            'years_sustainability_xp',
+            'linkedin_skills',
+            'key_competencies',
+            'key_sectors',
+            'executive_summary',
+            'gender_identity',
+            'race_ethnicity',
+            'lgbtqia',
+            'source'
+        ];
+
+        // Create headers
+        const headers = [
+            'First Name',
+            'Last Name',
+            'Email',
+            'Other Email',
+            'City',
+            'Country',
+            'Current Job',
+            'Current Company',
+            'LinkedIn',
+            'LinkedIn Summary',
+            'Years Experience',
+            'Sustainability Experience',
+            'LinkedIn Skills',
+            'Key Competencies',
+            'Key Sectors',
+            'Executive Summary',
+            'Gender Identity',
+            'Race/Ethnicity',
+            'LGBTQIA+',
+            'Source'
+        ];
+
         // Create CSV content
-        const headers = Object.keys(this.currentResults[0]);
         const csvContent = [
             headers.join(','),
             ...this.currentResults.map(result => 
-                headers.map(header => {
-                    const value = result[header] || '';
+                exportFields.map(field => {
+                    const value = result[field] || '';
+                    // Clean the value - remove newlines and extra spaces
+                    const cleanValue = value.toString().replace(/\n/g, ' ').replace(/\r/g, ' ').replace(/\s+/g, ' ').trim();
                     // Escape commas and quotes in CSV
-                    return `"${value.replace(/"/g, '""')}"`;
+                    return `"${cleanValue.replace(/"/g, '""')}"`;
                 }).join(',')
             )
         ].join('\n');
@@ -452,11 +502,13 @@ class DatabaseSearchApp {
         const url = window.URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = `opfa_search_results_${this.currentKeyword}_${new Date().toISOString().split('T')[0]}.csv`;
+        a.download = `opfa_search_results_${this.currentKeyword || 'all'}_${new Date().toISOString().split('T')[0]}.csv`;
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
         window.URL.revokeObjectURL(url);
+        
+        this.showSuccess(`Exported ${this.currentResults.length} results to CSV`);
     }
 
     showLoading(show) {
@@ -570,6 +622,9 @@ class DatabaseSearchApp {
             event.target.closest('.list-group-item').classList.add('active');
         }
         
+        // Store the selected RFP
+        this.selectedRfp = rfp;
+        
         // Display RFP details
         this.displayRfpDetails(rfp);
         
@@ -600,90 +655,72 @@ class DatabaseSearchApp {
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-4">
+            <!-- Metadata Section -->
+            <div class="row mb-4">
+                <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            
-                            <div class="mb-3">
-                                <strong>Organization/Group:</strong><br>
-                                ${rfp.organization_group ? `<span class="text-muted" style="font-family: 'Azeret Mono', monospace;">${this.escapeHtml(rfp.organization_group)}</span>` : ''}
-                            </div>
-                            
-                            <div class="mb-3">
-                                <strong>Link:</strong><br>
-                                ${rfp.link ? `<a href="${this.escapeHtml(rfp.link)}" target="_blank" class="text-primary" style="font-family: 'Azeret Mono', monospace;">${this.escapeHtml(rfp.link)}</a>` : ''}
-                            </div>
-                            
-                            <div class="mb-3">
-                                <strong>Country:</strong><br>
-                                ${rfp.country ? `<span class="text-muted" style="font-family: 'Azeret Mono', monospace;">${this.escapeHtml(rfp.country)}</span>` : ''}
-                            </div>
-                            
-                            <div class="mb-3">
-                                <strong>Region:</strong><br>
-                                ${rfp.region ? `<span class="text-muted" style="font-family: 'Azeret Mono', monospace;">${this.escapeHtml(rfp.region)}</span>` : ''}
-                            </div>
-                            
-                            <div class="mb-3">
-                                <strong>Project Focus:</strong><br>
-                                ${rfp.project_focus ? `<span class="text-muted" style="font-family: 'Azeret Mono', monospace;">${this.escapeHtml(rfp.project_focus)}</span>` : ''}
-                            </div>
-                            
-                            <div class="mb-3">
-                                <strong>Industry:</strong><br>
-                                ${rfp.industry ? `<span class="text-muted" style="font-family: 'Azeret Mono', monospace;">${this.escapeHtml(rfp.industry)}</span>` : ''}
-                            </div>
-                            
-                            <div class="mb-3">
-                                <strong>OPF Gap Size:</strong><br>
-                                ${rfp.opf_gap_size ? `<span class="text-muted" style="font-family: 'Azeret Mono', monospace;">${this.escapeHtml(rfp.opf_gap_size)}</span>` : ''}
-                            </div>
-                            
-                            <div class="mb-3">
-                                <strong>Due Date:</strong><br>
-                                ${rfp.due_date ? `<span class="${isOverdue ? 'text-danger' : 'text-muted'}" style="font-family: 'Azeret Mono', monospace;">${dueDate}</span>${isOverdue ? ' <span class="badge bg-danger">Overdue</span>' : ''}` : ''}
-                            </div>
-                            
-                            <div class="mb-3">
-                                <strong>Project Cost:</strong><br>
-                                ${rfp.project_cost ? `<span class="text-muted" style="font-family: 'Azeret Mono', monospace;">${projectCost}</span>` : ''}
-                            </div>
-                            
-                            <div class="mb-3">
-                                <strong>Posting Contact:</strong><br>
-                                ${rfp.posting_contact ? `<span class="text-muted" style="font-family: 'Azeret Mono', monospace;">${this.escapeHtml(rfp.posting_contact)}</span>` : ''}
-                            </div>
-                            
-                            <div class="mb-3">
-                                <strong>Uploaded At:</strong><br>
-                                ${rfp.created_at ? `<span class="text-muted" style="font-family: 'Azeret Mono', monospace;">${createdDate}</span>` : ''}
-                            </div>
-                            
-                            <div class="mb-3">
-                                <strong>OPF Gaps:</strong><br>
-                                ${rfp.opf_gaps ? `<span class="text-muted" style="font-family: 'Azeret Mono', monospace;">${this.escapeHtml(rfp.opf_gaps)}</span>` : ''}
-                            </div>
-                            
-                            <div class="mb-3">
-                                <strong>Deliverables:</strong><br>
-                                ${rfp.deliverables ? `<span class="text-muted" style="font-family: 'Azeret Mono', monospace;">${this.escapeHtml(rfp.deliverables)}</span>` : ''}
-                            </div>
-                            
-                            <div class="mb-3">
-                                <strong>Potential Experts:</strong><br>
-                                ${rfp.potential_experts ? `<span class="text-muted" style="font-family: 'Azeret Mono', monospace;">${this.escapeHtml(rfp.potential_experts)}</span>` : ''}
-                            </div>
-                            
-                            <div class="mb-3">
-                                <strong>Specific Staffing Needs:</strong><br>
-                                ${rfp.specific_staffing_needs ? `<span class="text-muted" style="font-family: 'Azeret Mono', monospace;">${this.escapeHtml(rfp.specific_staffing_needs)}</span>` : ''}
+                            <div class="table-responsive">
+                                <table class="table" style="border-collapse: collapse; table-layout: fixed; width: 100%;">
+                                    <thead>
+                                        <tr>
+                                            <th style="border: 1px solid #dee2e6; padding: 8px; width: 12.5%; word-wrap: break-word; white-space: normal; background-color: #AFCFD0;">Org. / Group</th>
+                                            <th style="border: 1px solid #dee2e6; padding: 8px; width: 12.5%; word-wrap: break-word; white-space: normal; background-color: #AFCFD0;">Country</th>
+                                            <th style="border: 1px solid #dee2e6; padding: 8px; width: 12.5%; word-wrap: break-word; white-space: normal; background-color: #AFCFD0;">Region</th>
+                                            <th style="border: 1px solid #dee2e6; padding: 8px; width: 12.5%; word-wrap: break-word; white-space: normal; background-color: #AFCFD0;">Industry</th>
+                                            <th style="border: 1px solid #dee2e6; padding: 8px; width: 12.5%; word-wrap: break-word; white-space: normal; background-color: #AFCFD0;">Project Focus</th>
+                                            <th style="border: 1px solid #dee2e6; padding: 8px; width: 12.5%; word-wrap: break-word; white-space: normal; background-color: #AFCFD0;">OPF Gap Size</th>
+                                            <th style="border: 1px solid #dee2e6; padding: 8px; width: 12.5%; word-wrap: break-word; white-space: normal; background-color: #AFCFD0;">OPF Gaps</th>
+                                            <th style="border: 1px solid #dee2e6; padding: 8px; width: 12.5%; word-wrap: break-word; white-space: normal; background-color: #AFCFD0;">Due Date</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td style="border: 1px solid #dee2e6; padding: 8px; word-wrap: break-word; white-space: normal; vertical-align: top;">${rfp.organization_group ? `<span class="text-muted" style="font-family: 'Azeret Mono', monospace;">${this.escapeHtml(rfp.organization_group)}</span>` : ''}</td>
+                                            <td style="border: 1px solid #dee2e6; padding: 8px; word-wrap: break-word; white-space: normal; vertical-align: top;">${rfp.country ? `<span class="text-muted" style="font-family: 'Azeret Mono', monospace;">${this.escapeHtml(rfp.country)}</span>` : ''}</td>
+                                            <td style="border: 1px solid #dee2e6; padding: 8px; word-wrap: break-word; white-space: normal; vertical-align: top;">${rfp.region ? `<span class="text-muted" style="font-family: 'Azeret Mono', monospace;">${this.escapeHtml(rfp.region)}</span>` : ''}</td>
+                                            <td style="border: 1px solid #dee2e6; padding: 8px; word-wrap: break-word; white-space: normal; vertical-align: top;">${rfp.industry ? `<span class="text-muted" style="font-family: 'Azeret Mono', monospace;">${this.escapeHtml(rfp.industry)}</span>` : ''}</td>
+                                            <td style="border: 1px solid #dee2e6; padding: 8px; word-wrap: break-word; white-space: normal; vertical-align: top;">${rfp.project_focus ? `<span class="text-muted" style="font-family: 'Azeret Mono', monospace;">${this.escapeHtml(rfp.project_focus)}</span>` : ''}</td>
+                                            <td style="border: 1px solid #dee2e6; padding: 8px; word-wrap: break-word; white-space: normal; vertical-align: top;">${rfp.opf_gap_size ? `<span class="text-muted" style="font-family: 'Azeret Mono', monospace;">${this.escapeHtml(rfp.opf_gap_size)}</span>` : ''}</td>
+                                            <td style="border: 1px solid #dee2e6; padding: 8px; word-wrap: break-word; white-space: normal; vertical-align: top;">${rfp.opf_gaps ? `<span class="text-muted" style="font-family: 'Azeret Mono', monospace;">${this.escapeHtml(rfp.opf_gaps)}</span>` : ''}</td>
+                                            <td style="border: 1px solid #dee2e6; padding: 8px; word-wrap: break-word; white-space: normal; vertical-align: top;">${rfp.due_date ? `<span class="${isOverdue ? 'text-danger' : 'text-muted'}" style="font-family: 'Azeret Mono', monospace;">${dueDate}</span>${isOverdue ? ' <span class="badge bg-danger">Overdue</span>' : ''}` : ''}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                
+                                <table class="table" style="border-collapse: collapse; table-layout: fixed; width: 100%;">
+                                    <thead>
+                                        <tr>
+                                            <th style="border: 1px solid #dee2e6; padding: 8px; width: 14.28%; word-wrap: break-word; white-space: normal; background-color: #AFCFD0;">Project Cost</th>
+                                            <th style="border: 1px solid #dee2e6; padding: 8px; width: 14.28%; word-wrap: break-word; white-space: normal; background-color: #AFCFD0;">Posting Contact</th>
+                                            <th style="border: 1px solid #dee2e6; padding: 8px; width: 14.28%; word-wrap: break-word; white-space: normal; background-color: #AFCFD0;">Deliverables</th>
+                                            <th style="border: 1px solid #dee2e6; padding: 8px; width: 14.28%; word-wrap: break-word; white-space: normal; background-color: #AFCFD0;">Potential Experts</th>
+                                            <th style="border: 1px solid #dee2e6; padding: 8px; width: 14.28%; word-wrap: break-word; white-space: normal; background-color: #AFCFD0;">Specific Staffing Needs</th>
+                                            <th style="border: 1px solid #dee2e6; padding: 8px; width: 14.28%; word-wrap: break-word; white-space: normal; background-color: #AFCFD0;">Link</th>
+                                            <th style="border: 1px solid #dee2e6; padding: 8px; width: 14.28%; word-wrap: break-word; white-space: normal; background-color: #AFCFD0;">Uploaded At</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td style="border: 1px solid #dee2e6; padding: 8px; word-wrap: break-word; white-space: normal; vertical-align: top;">${rfp.project_cost ? `<span class="text-muted" style="font-family: 'Azeret Mono', monospace;">${projectCost}</span>` : ''}</td>
+                                            <td style="border: 1px solid #dee2e6; padding: 8px; word-wrap: break-word; white-space: normal; vertical-align: top;">${rfp.posting_contact ? `<span class="text-muted" style="font-family: 'Azeret Mono', monospace;">${this.escapeHtml(rfp.posting_contact)}</span>` : ''}</td>
+                                            <td style="border: 1px solid #dee2e6; padding: 8px; word-wrap: break-word; white-space: normal; vertical-align: top;">${rfp.deliverables ? `<span class="text-muted" style="font-family: 'Azeret Mono', monospace;">${this.escapeHtml(rfp.deliverables)}</span>` : ''}</td>
+                                            <td style="border: 1px solid #dee2e6; padding: 8px; word-wrap: break-word; white-space: normal; vertical-align: top;">${rfp.potential_experts ? `<span class="text-muted" style="font-family: 'Azeret Mono', monospace;">${this.escapeHtml(rfp.potential_experts)}</span>` : ''}</td>
+                                            <td style="border: 1px solid #dee2e6; padding: 8px; word-wrap: break-word; white-space: normal; vertical-align: top;">${rfp.specific_staffing_needs ? `<span class="text-muted" style="font-family: 'Azeret Mono', monospace;">${this.escapeHtml(rfp.specific_staffing_needs)}</span>` : ''}</td>
+                                            <td style="border: 1px solid #dee2e6; padding: 8px; word-wrap: break-word; white-space: normal; vertical-align: top;">${rfp.link ? `<a href="${this.escapeHtml(rfp.link)}" target="_blank" class="text-primary" style="font-family: 'Azeret Mono', monospace;">${this.escapeHtml(rfp.link)}</a>` : ''}</td>
+                                            <td style="border: 1px solid #dee2e6; padding: 8px; word-wrap: break-word; white-space: normal; vertical-align: top;">${rfp.created_at ? `<span class="text-muted" style="font-family: 'Azeret Mono', monospace;">${createdDate}</span>` : ''}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
                 </div>
-                
-                <div class="col-md-8">
+            </div>
+            
+            <!-- Document Management Section -->
+            <div class="row mb-4">
+                <div class="col-12">
                     <div class="card">
                         <div class="card-body">
                             <div class="mb-3">
@@ -699,22 +736,23 @@ class DatabaseSearchApp {
                         </div>
                     </div>
                 </div>
-                
-                <!-- AI Analysis Section -->
-                <div class="row mt-4">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="mb-3">
-                                    <h5 class="card-title mb-0">AI Analysis</h5>
-                                    <small class="text-muted">Analyze uploaded documents using AI to extract insights and recommendations.</small>
-                                </div>
-                                <div id="aiAnalysisContent">
-                                    <div class="text-center text-muted">
-                                        <i class="fas fa-robot fa-2x mb-3"></i>
-                                        <p>No documents available for analysis</p>
-                                        <small>Upload documents to enable AI analysis features</small>
-                                    </div>
+            </div>
+            </div>
+            
+            <!-- AI Analysis Section -->
+            <div class="row mt-4">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <h5 class="card-title mb-0">AI Analysis</h5>
+                                <small class="text-muted">Analyze uploaded documents using AI to extract insights and recommendations.</small>
+                            </div>
+                            <div id="aiAnalysisContent">
+                                <div class="text-center">
+                                    <button class="btn btn-primary" onclick="app.generateAiAnalysis()">
+                                        <i class="fas fa-robot me-2"></i>Generate AI Analysis
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -1000,13 +1038,23 @@ class DatabaseSearchApp {
             const result = await response.json();
             
             if (result.success) {
+                // Store documents in the selectedRfp object
+                if (this.selectedRfp && this.selectedRfp.id === rfpId) {
+                    this.selectedRfp.documents = result.documents;
+                }
                 this.displayDocuments(result.documents);
             } else {
                 console.error('Error loading documents:', result.error);
+                if (this.selectedRfp && this.selectedRfp.id === rfpId) {
+                    this.selectedRfp.documents = [];
+                }
                 this.displayDocuments([]);
             }
         } catch (error) {
             console.error('Error loading documents:', error);
+            if (this.selectedRfp && this.selectedRfp.id === rfpId) {
+                this.selectedRfp.documents = [];
+            }
             this.displayDocuments([]);
         }
     }
@@ -1148,6 +1196,23 @@ class DatabaseSearchApp {
             console.error('Error deleting RFP:', error);
             this.showError('An error occurred while deleting the RFP');
         }
+    }
+
+    generateAiAnalysis() {
+        // Check if there are documents for the current RFP
+        if (!this.selectedRfp) {
+            alert('Please select an RFP first.');
+            return;
+        }
+        
+        if (!this.selectedRfp.documents || this.selectedRfp.documents.length === 0) {
+            // Show popup for no documents
+            alert('You must first upload documents to run the analysis.');
+            return;
+        }
+        
+        // Show message that feature is still in development
+        alert('This feature is still in development. AI analysis will be available soon!');
     }
 }
 
