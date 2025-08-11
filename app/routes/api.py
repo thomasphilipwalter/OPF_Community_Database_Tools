@@ -470,12 +470,37 @@ def ai_analyze_rfp(rfp_id):
         # Perform AI analysis
         analysis = kb_service.analyze_rfp(rfp_text, rfp_metadata)
         
+        # Debug: Print analysis structure
+        print(f"Analysis structure: {type(analysis)}")
+        print(f"Analysis keys: {list(analysis.keys()) if isinstance(analysis, dict) else 'Not a dict'}")
+        
+        # Ensure analysis is a dictionary
+        if not isinstance(analysis, dict):
+            analysis = {'error': 'Analysis result is not a dictionary'}
+        
         # Save analysis results to database
         conn = get_database_connection()
         cursor = conn.cursor()
         
         # Get extracted metadata if available
         extracted_metadata = analysis.get('extracted_metadata', {})
+        
+        # Debug: Print extracted metadata structure
+        print(f"Extracted metadata: {extracted_metadata}")
+        print(f"Extracted metadata type: {type(extracted_metadata)}")
+        
+        # Helper function to safely extract string values
+        def safe_get_string(data, key, default=''):
+            value = data.get(key, default)
+            print(f"Processing key '{key}' with value: {value} (type: {type(value)})")
+            if isinstance(value, dict):
+                return str(value)  # Convert dict to string
+            elif isinstance(value, list):
+                return str(value)  # Convert list to string
+            elif value is None:
+                return default
+            else:
+                return str(value)  # Convert any other type to string
         
         # Update both AI analysis results and extracted metadata
         cursor.execute("""
@@ -492,101 +517,106 @@ def ai_analyze_rfp(rfp_id):
                 updated_at = CURRENT_TIMESTAMP
             WHERE id = %s
         """, (
-            analysis.get('fit_assessment', ''),
-            analysis.get('competitive_position', ''),
-            analysis.get('key_strengths', ''),
-            analysis.get('gaps_challenges', ''),
-            analysis.get('resource_requirements', ''),
-            analysis.get('risk_assessment', ''),
-            analysis.get('recommendations', ''),
+            safe_get_string(analysis, 'fit_assessment', ''),
+            safe_get_string(analysis, 'competitive_position', ''),
+            safe_get_string(analysis, 'key_strengths', ''),
+            safe_get_string(analysis, 'gaps_challenges', ''),
+            safe_get_string(analysis, 'resource_requirements', ''),
+            safe_get_string(analysis, 'risk_assessment', ''),
+            safe_get_string(analysis, 'recommendations', ''),
             rfp_id
         ))
         
         # Update metadata fields individually to avoid type conflicts
-        if extracted_metadata.get('organization_group'):
-            cursor.execute("UPDATE rfp_metadata SET organization_group = %s WHERE id = %s", 
-                         (extracted_metadata['organization_group'], rfp_id))
-        
-        if extracted_metadata.get('country'):
-            cursor.execute("UPDATE rfp_metadata SET country = %s WHERE id = %s", 
-                         (extracted_metadata['country'], rfp_id))
-        
-        if extracted_metadata.get('region'):
-            cursor.execute("UPDATE rfp_metadata SET region = %s WHERE id = %s", 
-                         (extracted_metadata['region'], rfp_id))
-        
-        if extracted_metadata.get('industry'):
-            cursor.execute("UPDATE rfp_metadata SET industry = %s WHERE id = %s", 
-                         (extracted_metadata['industry'], rfp_id))
-        
-        if extracted_metadata.get('project_focus'):
-            cursor.execute("UPDATE rfp_metadata SET project_focus = %s WHERE id = %s", 
-                         (extracted_metadata['project_focus'], rfp_id))
-        
-        if extracted_metadata.get('opf_gap_size'):
-            cursor.execute("UPDATE rfp_metadata SET opf_gap_size = %s WHERE id = %s", 
-                         (extracted_metadata['opf_gap_size'], rfp_id))
-        
-        if extracted_metadata.get('opf_gaps'):
-            cursor.execute("UPDATE rfp_metadata SET opf_gaps = %s WHERE id = %s", 
-                         (extracted_metadata['opf_gaps'], rfp_id))
-        
-        if extracted_metadata.get('deliverables'):
-            cursor.execute("UPDATE rfp_metadata SET deliverables = %s WHERE id = %s", 
-                         (extracted_metadata['deliverables'], rfp_id))
-        
-        if extracted_metadata.get('posting_contact'):
-            cursor.execute("UPDATE rfp_metadata SET posting_contact = %s WHERE id = %s", 
-                         (extracted_metadata['posting_contact'], rfp_id))
-        
-        if extracted_metadata.get('potential_experts'):
-            cursor.execute("UPDATE rfp_metadata SET potential_experts = %s WHERE id = %s", 
-                         (extracted_metadata['potential_experts'], rfp_id))
-        
-        if extracted_metadata.get('project_cost'):
-            # Validate and format the project cost
-            project_cost = extracted_metadata['project_cost']
-            try:
-                # Try to convert to float and ensure it's a valid number
-                if project_cost and project_cost != 'null':
-                    cost_value = float(project_cost)
-                    if cost_value > 0:  # Only accept positive costs
-                        cursor.execute("UPDATE rfp_metadata SET project_cost = %s WHERE id = %s", 
-                                     (cost_value, rfp_id))
-            except (ValueError, TypeError) as e:
-                print(f"Invalid project cost '{project_cost}': {e}")
-                # Skip updating this field if cost is invalid
-        
-        if extracted_metadata.get('currency'):
-            cursor.execute("UPDATE rfp_metadata SET currency = %s WHERE id = %s", 
-                         (extracted_metadata['currency'], rfp_id))
-        
-        if extracted_metadata.get('specific_staffing_needs'):
-            cursor.execute("UPDATE rfp_metadata SET specific_staffing_needs = %s WHERE id = %s", 
-                         (extracted_metadata['specific_staffing_needs'], rfp_id))
-        
-        if extracted_metadata.get('due_date'):
-            # Validate and format the due date
-            due_date = extracted_metadata['due_date']
-            try:
-                # Try to parse the date and ensure it's in YYYY-MM-DD format
-                if due_date and due_date != 'null':
-                    # If it's just a year, convert to YYYY-01-01
-                    if len(due_date) == 4 and due_date.isdigit():
-                        due_date = f"{due_date}-01-01"
-                    # If it's YYYY-MM, convert to YYYY-MM-01
-                    elif len(due_date) == 7 and due_date.count('-') == 1:
-                        due_date = f"{due_date}-01"
-                    
-                    # Validate the final date format
-                    from datetime import datetime
-                    datetime.strptime(due_date, '%Y-%m-%d')
-                    
-                    cursor.execute("UPDATE rfp_metadata SET due_date = %s WHERE id = %s", 
-                                 (due_date, rfp_id))
-            except (ValueError, TypeError) as e:
-                print(f"Invalid date format '{due_date}': {e}")
-                # Skip updating this field if date is invalid
+        try:
+            if extracted_metadata.get('organization_group'):
+                cursor.execute("UPDATE rfp_metadata SET organization_group = %s WHERE id = %s", 
+                             (str(extracted_metadata['organization_group']), rfp_id))
+            
+            if extracted_metadata.get('country'):
+                cursor.execute("UPDATE rfp_metadata SET country = %s WHERE id = %s", 
+                             (str(extracted_metadata['country']), rfp_id))
+            
+            if extracted_metadata.get('region'):
+                cursor.execute("UPDATE rfp_metadata SET region = %s WHERE id = %s", 
+                             (str(extracted_metadata['region']), rfp_id))
+            
+            if extracted_metadata.get('industry'):
+                cursor.execute("UPDATE rfp_metadata SET industry = %s WHERE id = %s", 
+                             (str(extracted_metadata['industry']), rfp_id))
+            
+            if extracted_metadata.get('project_focus'):
+                cursor.execute("UPDATE rfp_metadata SET project_focus = %s WHERE id = %s", 
+                             (str(extracted_metadata['project_focus']), rfp_id))
+            
+            if extracted_metadata.get('opf_gap_size'):
+                cursor.execute("UPDATE rfp_metadata SET opf_gap_size = %s WHERE id = %s", 
+                             (str(extracted_metadata['opf_gap_size']), rfp_id))
+            
+            if extracted_metadata.get('opf_gaps'):
+                cursor.execute("UPDATE rfp_metadata SET opf_gaps = %s WHERE id = %s", 
+                             (str(extracted_metadata['opf_gaps']), rfp_id))
+            
+            if extracted_metadata.get('deliverables'):
+                cursor.execute("UPDATE rfp_metadata SET deliverables = %s WHERE id = %s", 
+                             (str(extracted_metadata['deliverables']), rfp_id))
+            
+            if extracted_metadata.get('posting_contact'):
+                cursor.execute("UPDATE rfp_metadata SET posting_contact = %s WHERE id = %s", 
+                             (str(extracted_metadata['posting_contact']), rfp_id))
+            
+            if extracted_metadata.get('potential_experts'):
+                cursor.execute("UPDATE rfp_metadata SET potential_experts = %s WHERE id = %s", 
+                             (str(extracted_metadata['potential_experts']), rfp_id))
+            
+            if extracted_metadata.get('project_cost'):
+                # Validate and format the project cost
+                project_cost = extracted_metadata['project_cost']
+                try:
+                    # Try to convert to float and ensure it's a valid number
+                    if project_cost and project_cost != 'null':
+                        cost_value = float(project_cost)
+                        if cost_value > 0:  # Only accept positive costs
+                            cursor.execute("UPDATE rfp_metadata SET project_cost = %s WHERE id = %s", 
+                                         (cost_value, rfp_id))
+                except (ValueError, TypeError) as e:
+                    print(f"Invalid project cost '{project_cost}': {e}")
+                    # Skip updating this field if cost is invalid
+            
+            if extracted_metadata.get('currency'):
+                cursor.execute("UPDATE rfp_metadata SET currency = %s WHERE id = %s", 
+                             (str(extracted_metadata['currency']), rfp_id))
+            
+            if extracted_metadata.get('specific_staffing_needs'):
+                cursor.execute("UPDATE rfp_metadata SET specific_staffing_needs = %s WHERE id = %s", 
+                             (str(extracted_metadata['specific_staffing_needs']), rfp_id))
+            
+            if extracted_metadata.get('due_date'):
+                # Validate and format the due date
+                due_date = extracted_metadata['due_date']
+                try:
+                    # Try to parse the date and ensure it's in YYYY-MM-DD format
+                    if due_date and due_date != 'null':
+                        # If it's just a year, convert to YYYY-01-01
+                        if len(due_date) == 4 and due_date.isdigit():
+                            due_date = f"{due_date}-01-01"
+                        # If it's YYYY-MM, convert to YYYY-MM-01
+                        elif len(due_date) == 7 and due_date.count('-') == 1:
+                            due_date = f"{due_date}-01"
+                        
+                        # Validate the final date format
+                        from datetime import datetime
+                        datetime.strptime(due_date, '%Y-%m-%d')
+                        
+                        cursor.execute("UPDATE rfp_metadata SET due_date = %s WHERE id = %s", 
+                                     (due_date, rfp_id))
+                except (ValueError, TypeError) as e:
+                    print(f"Invalid date format '{due_date}': {e}")
+                    # Skip updating this field if date is invalid
+        except Exception as e:
+            print(f"Error updating extracted metadata: {e}")
+            print(f"Error type: {type(e)}")
+            raise  # Re-raise to see the full error
         
         conn.commit()
         cursor.close()
