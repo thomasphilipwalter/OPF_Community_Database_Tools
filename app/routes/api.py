@@ -25,7 +25,9 @@ def get_rfp_list():
         cursor.execute("""
             SELECT id, project_name, organization_group, due_date, country, region, industry, 
                    link, project_focus, opf_gap_size, opf_gaps, deliverables, posting_contact, 
-                   potential_experts, project_cost, currency, specific_staffing_needs, created_at
+                   potential_experts, project_cost, currency, specific_staffing_needs, created_at,
+                   ai_fit_assessment, ai_competitive_position, ai_key_strengths, ai_gaps_challenges,
+                   ai_resource_requirements, ai_risk_assessment, ai_recommendations, ai_analysis_date
             FROM rfp_metadata 
             ORDER BY created_at DESC
         """)
@@ -50,7 +52,15 @@ def get_rfp_list():
                 'project_cost': row[14],
                 'currency': row[15] or '',
                 'specific_staffing_needs': row[16] or '',
-                'created_at': row[17].isoformat() if row[17] else None
+                'created_at': row[17].isoformat() if row[17] else None,
+                'ai_fit_assessment': row[18] or '',
+                'ai_competitive_position': row[19] or '',
+                'ai_key_strengths': row[20] or '',
+                'ai_gaps_challenges': row[21] or '',
+                'ai_resource_requirements': row[22] or '',
+                'ai_risk_assessment': row[23] or '',
+                'ai_recommendations': row[24] or '',
+                'ai_analysis_date': row[25].isoformat() if row[25] else None
             })
         
         cursor.close()
@@ -427,6 +437,128 @@ def ai_analyze_rfp(rfp_id):
         
         # Perform AI analysis
         analysis = kb_service.analyze_rfp(rfp_text, rfp_metadata)
+        
+        # Save analysis results to database
+        conn = get_database_connection()
+        cursor = conn.cursor()
+        
+        # Get extracted metadata if available
+        extracted_metadata = analysis.get('extracted_metadata', {})
+        
+        # Update both AI analysis results and extracted metadata
+        cursor.execute("""
+            UPDATE rfp_metadata 
+            SET 
+                ai_fit_assessment = %s,
+                ai_competitive_position = %s,
+                ai_key_strengths = %s,
+                ai_gaps_challenges = %s,
+                ai_resource_requirements = %s,
+                ai_risk_assessment = %s,
+                ai_recommendations = %s,
+                ai_analysis_date = CURRENT_TIMESTAMP,
+                updated_at = CURRENT_TIMESTAMP
+            WHERE id = %s
+        """, (
+            analysis.get('fit_assessment', ''),
+            analysis.get('competitive_position', ''),
+            analysis.get('key_strengths', ''),
+            analysis.get('gaps_challenges', ''),
+            analysis.get('resource_requirements', ''),
+            analysis.get('risk_assessment', ''),
+            analysis.get('recommendations', ''),
+            rfp_id
+        ))
+        
+        # Update metadata fields individually to avoid type conflicts
+        if extracted_metadata.get('organization_group'):
+            cursor.execute("UPDATE rfp_metadata SET organization_group = %s WHERE id = %s", 
+                         (extracted_metadata['organization_group'], rfp_id))
+        
+        if extracted_metadata.get('country'):
+            cursor.execute("UPDATE rfp_metadata SET country = %s WHERE id = %s", 
+                         (extracted_metadata['country'], rfp_id))
+        
+        if extracted_metadata.get('region'):
+            cursor.execute("UPDATE rfp_metadata SET region = %s WHERE id = %s", 
+                         (extracted_metadata['region'], rfp_id))
+        
+        if extracted_metadata.get('industry'):
+            cursor.execute("UPDATE rfp_metadata SET industry = %s WHERE id = %s", 
+                         (extracted_metadata['industry'], rfp_id))
+        
+        if extracted_metadata.get('project_focus'):
+            cursor.execute("UPDATE rfp_metadata SET project_focus = %s WHERE id = %s", 
+                         (extracted_metadata['project_focus'], rfp_id))
+        
+        if extracted_metadata.get('opf_gap_size'):
+            cursor.execute("UPDATE rfp_metadata SET opf_gap_size = %s WHERE id = %s", 
+                         (extracted_metadata['opf_gap_size'], rfp_id))
+        
+        if extracted_metadata.get('opf_gaps'):
+            cursor.execute("UPDATE rfp_metadata SET opf_gaps = %s WHERE id = %s", 
+                         (extracted_metadata['opf_gaps'], rfp_id))
+        
+        if extracted_metadata.get('deliverables'):
+            cursor.execute("UPDATE rfp_metadata SET deliverables = %s WHERE id = %s", 
+                         (extracted_metadata['deliverables'], rfp_id))
+        
+        if extracted_metadata.get('posting_contact'):
+            cursor.execute("UPDATE rfp_metadata SET posting_contact = %s WHERE id = %s", 
+                         (extracted_metadata['posting_contact'], rfp_id))
+        
+        if extracted_metadata.get('potential_experts'):
+            cursor.execute("UPDATE rfp_metadata SET potential_experts = %s WHERE id = %s", 
+                         (extracted_metadata['potential_experts'], rfp_id))
+        
+        if extracted_metadata.get('project_cost'):
+            # Validate and format the project cost
+            project_cost = extracted_metadata['project_cost']
+            try:
+                # Try to convert to float and ensure it's a valid number
+                if project_cost and project_cost != 'null':
+                    cost_value = float(project_cost)
+                    if cost_value > 0:  # Only accept positive costs
+                        cursor.execute("UPDATE rfp_metadata SET project_cost = %s WHERE id = %s", 
+                                     (cost_value, rfp_id))
+            except (ValueError, TypeError) as e:
+                print(f"Invalid project cost '{project_cost}': {e}")
+                # Skip updating this field if cost is invalid
+        
+        if extracted_metadata.get('currency'):
+            cursor.execute("UPDATE rfp_metadata SET currency = %s WHERE id = %s", 
+                         (extracted_metadata['currency'], rfp_id))
+        
+        if extracted_metadata.get('specific_staffing_needs'):
+            cursor.execute("UPDATE rfp_metadata SET specific_staffing_needs = %s WHERE id = %s", 
+                         (extracted_metadata['specific_staffing_needs'], rfp_id))
+        
+        if extracted_metadata.get('due_date'):
+            # Validate and format the due date
+            due_date = extracted_metadata['due_date']
+            try:
+                # Try to parse the date and ensure it's in YYYY-MM-DD format
+                if due_date and due_date != 'null':
+                    # If it's just a year, convert to YYYY-01-01
+                    if len(due_date) == 4 and due_date.isdigit():
+                        due_date = f"{due_date}-01-01"
+                    # If it's YYYY-MM, convert to YYYY-MM-01
+                    elif len(due_date) == 7 and due_date.count('-') == 1:
+                        due_date = f"{due_date}-01"
+                    
+                    # Validate the final date format
+                    from datetime import datetime
+                    datetime.strptime(due_date, '%Y-%m-%d')
+                    
+                    cursor.execute("UPDATE rfp_metadata SET due_date = %s WHERE id = %s", 
+                                 (due_date, rfp_id))
+            except (ValueError, TypeError) as e:
+                print(f"Invalid date format '{due_date}': {e}")
+                # Skip updating this field if date is invalid
+        
+        conn.commit()
+        cursor.close()
+        conn.close()
         
         return jsonify({
             'success': True,

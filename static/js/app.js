@@ -749,11 +749,13 @@ class DatabaseSearchApp {
                                 <small class="text-muted">Analyze uploaded documents using AI to extract insights and recommendations.</small>
                             </div>
                             <div id="aiAnalysisContent">
-                                <div class="text-center">
-                                    <button class="btn btn-primary" onclick="app.generateAiAnalysis()">
-                                        <i class="fas fa-robot me-2"></i>Generate AI Analysis
-                                    </button>
-                                </div>
+                                ${this.hasExistingAnalysis(rfp) ? this.displayExistingAnalysis(rfp) : `
+                                    <div class="text-center">
+                                        <button class="btn btn-primary" onclick="app.generateAiAnalysis()">
+                                            <i class="fas fa-robot me-2"></i>Generate AI Analysis
+                                        </button>
+                                    </div>
+                                `}
                             </div>
                         </div>
                     </div>
@@ -1235,7 +1237,31 @@ class DatabaseSearchApp {
             console.log('AI Analysis response:', data); // Debug logging
             if (data.success) {
                 console.log('Analysis data:', data.analysis); // Debug logging
+                
+                // Check if metadata was extracted and populated
+                const extractedMetadata = data.analysis.extracted_metadata || {};
+                const populatedFields = Object.keys(extractedMetadata).filter(key => 
+                    extractedMetadata[key] && extractedMetadata[key] !== 'null' && extractedMetadata[key] !== ''
+                );
+                
+                if (populatedFields.length > 0) {
+                    this.showSuccess(`AI Analysis completed! Automatically populated ${populatedFields.length} metadata fields: ${populatedFields.join(', ')}`);
+                } else {
+                    this.showSuccess('AI Analysis completed successfully!');
+                }
+                
                 this.displayAiAnalysis(data.analysis);
+                
+                // Refresh RFP details to show the saved analysis and populated metadata
+                this.loadRfpList().then(() => {
+                    const updatedRfp = this.currentRfps.find(rfp => rfp.id === this.selectedRfp.id);
+                    if (updatedRfp) {
+                        this.selectedRfp = updatedRfp;
+                        this.displayRfpDetails(updatedRfp);
+                        // Also reload documents to fix the loading state
+                        this.loadDocuments(updatedRfp.id);
+                    }
+                });
             } else {
                 this.showError(data.error || 'AI analysis failed');
                 aiContent.innerHTML = `
@@ -1280,7 +1306,7 @@ class DatabaseSearchApp {
                                 <h6 class="mb-0"><i class="fas fa-chart-line me-2"></i>Fit Assessment</h6>
                             </div>
                             <div class="card-body">
-                                <span class="badge bg-${this.getFitBadgeColor(analysis.fit_assessment)} fs-6">${analysis.fit_assessment || 'N/A'}</span>
+                                <p class="mb-0">${analysis.fit_assessment || 'N/A'}</p>
                             </div>
                         </div>
                     </div>
@@ -1345,7 +1371,7 @@ class DatabaseSearchApp {
                 <div class="row">
                     <div class="col-12">
                         <div class="card mb-3">
-                            <div class="card-header bg-primary text-white">
+                            <div class="card-header bg-light text-dark">
                                 <h6 class="mb-0"><i class="fas fa-lightbulb me-2"></i>Recommendations</h6>
                             </div>
                             <div class="card-body">
@@ -1372,6 +1398,107 @@ class DatabaseSearchApp {
         if (fit.includes('medium')) return 'warning';
         if (fit.includes('low')) return 'danger';
         return 'secondary';
+    }
+
+    hasExistingAnalysis(rfp) {
+        return rfp.ai_fit_assessment && rfp.ai_fit_assessment.trim() !== '';
+    }
+
+    displayExistingAnalysis(rfp) {
+        const analysisDate = rfp.ai_analysis_date ? new Date(rfp.ai_analysis_date).toLocaleDateString() : 'Unknown';
+        
+        return `
+            <div class="ai-analysis-results">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <small class="text-muted">Last analyzed: ${analysisDate}</small>
+                    <button class="btn btn-outline-primary btn-sm" onclick="app.generateAiAnalysis()">
+                        <i class="fas fa-refresh me-2"></i>Re-run Analysis
+                    </button>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card mb-3">
+                            <div class="card-header bg-primary text-white">
+                                <h6 class="mb-0"><i class="fas fa-chart-line me-2"></i>Fit Assessment</h6>
+                            </div>
+                            <div class="card-body">
+                                <p class="mb-0">${rfp.ai_fit_assessment || 'N/A'}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card mb-3">
+                            <div class="card-header bg-info text-white">
+                                <h6 class="mb-0"><i class="fas fa-users me-2"></i>Competitive Position</h6>
+                            </div>
+                            <div class="card-body">
+                                <p class="mb-0">${rfp.ai_competitive_position || 'N/A'}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card mb-3">
+                            <div class="card-header bg-success text-white">
+                                <h6 class="mb-0"><i class="fas fa-star me-2"></i>Key Strengths</h6>
+                            </div>
+                            <div class="card-body">
+                                <p class="mb-0">${rfp.ai_key_strengths || 'N/A'}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card mb-3">
+                            <div class="card-header bg-warning text-dark">
+                                <h6 class="mb-0"><i class="fas fa-exclamation-triangle me-2"></i>Gaps & Challenges</h6>
+                            </div>
+                            <div class="card-body">
+                                <p class="mb-0">${rfp.ai_gaps_challenges || 'N/A'}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card mb-3">
+                            <div class="card-header bg-secondary text-white">
+                                <h6 class="mb-0"><i class="fas fa-tools me-2"></i>Resource Requirements</h6>
+                            </div>
+                            <div class="card-body">
+                                <p class="mb-0">${rfp.ai_resource_requirements || 'N/A'}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card mb-3">
+                            <div class="card-header bg-danger text-white">
+                                <h6 class="mb-0"><i class="fas fa-shield-alt me-2"></i>Risk Assessment</h6>
+                            </div>
+                            <div class="card-body">
+                                <p class="mb-0">${rfp.ai_risk_assessment || 'N/A'}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card mb-3">
+                            <div class="card-header bg-light text-dark">
+                                <h6 class="mb-0"><i class="fas fa-lightbulb me-2"></i>Recommendations</h6>
+                            </div>
+                            <div class="card-body">
+                                <p class="mb-0">${rfp.ai_recommendations || 'N/A'}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
     }
 }
 

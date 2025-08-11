@@ -62,6 +62,15 @@ CREATE TABLE IF NOT EXISTS rfp_metadata (
     project_cost DECIMAL(15,2),
     currency VARCHAR(50),
     specific_staffing_needs TEXT,
+    -- AI Analysis Results
+    ai_fit_assessment TEXT,
+    ai_competitive_position TEXT,
+    ai_key_strengths TEXT,
+    ai_gaps_challenges TEXT,
+    ai_resource_requirements TEXT,
+    ai_risk_assessment TEXT,
+    ai_recommendations TEXT,
+    ai_analysis_date TIMESTAMP,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

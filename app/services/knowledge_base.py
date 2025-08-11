@@ -99,7 +99,7 @@ class KnowledgeBaseService:
         if len(context) > 4000:
             context = context[:4000] + "... [truncated]"
         
-        # Create analysis prompt with specific company focus
+        # Create analysis prompt with specific company focus and metadata extraction
         prompt = f"""
         You are an expert RFP analyst for OPF. Analyze this RFP against our SPECIFIC company capabilities and past projects.
 
@@ -131,10 +131,64 @@ class KnowledgeBaseService:
 
         IMPORTANT: Every point must reference specific information from our company context above. Do not make generic statements.
         """
+
+        # Create metadata extraction prompt
+        metadata_prompt = f"""
+        You are an expert at extracting structured information from RFP documents. Extract ONLY the information that is clearly stated in the RFP text below.
+
+        RFP TEXT TO ANALYZE:
+        {rfp_text[:2000]}
+
+        Extract ONLY information that is explicitly stated or clearly implied. If information is not present or unclear, return null for that field.
+
+        Return JSON with these fields:
+        {{
+            "organization_group": "The organization or group issuing the RFP (if clearly stated)",
+            "country": "The country where the project will be implemented (if clearly stated)",
+            "region": "The region or geographic area (if clearly stated)",
+            "industry": "The industry sector (if clearly stated)",
+            "project_focus": "The main focus or objective of the project (if clearly stated)",
+            "opf_gap_size": "The size or scope of OPF gaps mentioned (if clearly stated)",
+            "opf_gaps": "Specific OPF gaps or areas mentioned (if clearly stated)",
+            "deliverables": "The expected deliverables (if clearly stated)",
+            "posting_contact": "Contact information for the posting (if clearly stated)",
+            "potential_experts": "Required expertise or expert profiles (if clearly stated)",
+            "project_cost": "The project budget or cost (if clearly stated, as a number only)",
+            "currency": "The currency for the project cost (if clearly stated)",
+            "specific_staffing_needs": "Specific staffing requirements (if clearly stated)",
+            "due_date": "The project due date (if clearly stated, in YYYY-MM-DD format)"
+        }}
+
+        IMPORTANT: 
+        - Only extract information that is EXPLICITLY stated in the text
+        - If a field is not mentioned or unclear, use null
+        - For dates, you MUST use FULL YYYY-MM-DD format (e.g., '2029-12-31', not just '2029')
+        - If only year is given, use YYYY-01-01 format
+        - If year and month are given, use YYYY-MM-01 format
+        - For costs, extract only the numeric value
+        - Be conservative - it's better to return null than to guess
+        """
         
-        # Call OpenAI API with reduced token limits
+        # Call OpenAI API for both analysis and metadata extraction
         client = openai.OpenAI(api_key=self.openai_api_key)
         
+        # First, extract metadata from RFP text
+        try:
+            metadata_response = client.chat.completions.create(
+                model="gpt-4",
+                messages=[
+                    {"role": "system", "content": "You are an expert at extracting structured information from RFP documents. Extract ONLY information that is explicitly stated."},
+                    {"role": "user", "content": metadata_prompt}
+                ],
+                temperature=0.1,  # Very low temperature for consistent extraction
+                max_tokens=1000
+            )
+            extracted_metadata = metadata_response.choices[0].message.content.strip()
+        except Exception as e:
+            print(f"Metadata extraction failed: {e}")
+            extracted_metadata = "{}"
+        
+        # Then, perform the main analysis
         try:
             # Try with GPT-4 first
             response = client.chat.completions.create(
@@ -165,7 +219,16 @@ class KnowledgeBaseService:
         # Parse and return analysis
         analysis_text = response.choices[0].message.content.strip()
         
-        # Try to extract JSON from the response
+        # Parse extracted metadata
+        extracted_metadata_dict = {}
+        try:
+            import json
+            extracted_metadata_dict = json.loads(extracted_metadata)
+        except json.JSONDecodeError:
+            print(f"Metadata JSON parsing failed: {extracted_metadata}")
+            extracted_metadata_dict = {}
+        
+        # Try to extract JSON from the analysis response
         try:
             import json
             # Try to parse the response directly
@@ -220,5 +283,9 @@ class KnowledgeBaseService:
                             analysis["key_strengths"] = strengths_match.group(1)
                     except:
                         pass
+        
+        # Add extracted metadata to the analysis results
+        if extracted_metadata_dict:
+            analysis['extracted_metadata'] = extracted_metadata_dict
         
         return analysis

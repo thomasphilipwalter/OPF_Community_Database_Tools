@@ -518,11 +518,72 @@ header {
 }
 
 #rfp-analysis .btn-outline-primary:hover {
-    background-color: #008B9E !important;
-    border-color: #008B9E !important;
+    background-color: #008B9E;
+    border-color: #008B9E;
+    color: white;
 }
 
-/* RFP empty state messages - Azeret Mono */
+/* AI Analysis Results Styling */
+.ai-analysis-results .card-body {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+
+
+.ai-analysis-results .card {
+    height: 100%;
+}
+
+.ai-analysis-results .card-body p {
+    margin-bottom: 0;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+/* AI Analysis Box Spacing and Colors */
+.ai-analysis-results .row {
+    margin-bottom: 2.5rem !important;
+}
+
+.ai-analysis-results .row:last-child {
+    margin-bottom: 0 !important;
+}
+
+.ai-analysis-results .card {
+    margin-bottom: 0 !important;
+}
+
+/* Custom banner colors for AI analysis boxes */
+.ai-analysis-results .card-header.bg-primary {
+    background-color: #22D4A2 !important;
+}
+
+.ai-analysis-results .card-header.bg-info {
+    background-color: #AFCFD0 !important;
+}
+
+.ai-analysis-results .card-header.bg-success {
+    background-color: #75492D !important;
+}
+
+.ai-analysis-results .card-header.bg-warning {
+    background-color: #D8F15F !important;
+}
+
+.ai-analysis-results .card-header.bg-secondary {
+    background-color: #F66F3F !important;
+}
+
+.ai-analysis-results .card-header.bg-danger {
+    background-color: #008B9E !important;
+}
+
+/* Recommendations box (full width) gets a different color */
+.ai-analysis-results .card-header.bg-light {
+    background-color: #9E91BE !important;
+}
+
 #noRfpsMessage p,
 #rfpDetails p {
     font-family: 'Azeret Mono', monospace !important;
