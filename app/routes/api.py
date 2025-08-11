@@ -437,19 +437,35 @@ def ai_analyze_rfp(rfp_id):
         
         # Try to initialize knowledge base if it doesn't exist
         try:
-            # Check if knowledge base is already initialized
-            if not kb_service.vector_store or kb_service.vector_store._collection.count() == 0:
-                print("Knowledge base not initialized, initializing now...")
-                kb_service.process_knowledge_base("knowledge_base")
-                print("Knowledge base initialization completed")
+            global _kb_initializing
+            
+            # Check current status using helper function
+            status_result = _check_knowledge_base_status()
+            
+            if not status_result['success']:
+                return jsonify({'error': status_result['error']}), 500
+            
+            # If not initialized, initialize it
+            if status_result['status'] == 'not_initialized':
+                # Check if another process is already initializing
+                if _kb_initializing:
+                    return jsonify({'error': 'Knowledge base is currently being initialized by another process. Please wait a moment and try again.'}), 429
+                
+                # Set lock and initialize
+                _kb_initializing = True
+                try:
+                    print("Knowledge base not initialized, initializing now...")
+                    doc_count = kb_service.process_knowledge_base("knowledge_base")
+                    print(f"Knowledge base initialization completed with {doc_count} document chunks")
+                finally:
+                    _kb_initializing = False
+            else:
+                print(f"Knowledge base already initialized with {status_result['document_count']} document chunks, proceeding with analysis")
         except Exception as e:
-            print(f"Error checking/initializing knowledge base: {e}")
-            # Try to initialize anyway
-            try:
-                kb_service.process_knowledge_base("knowledge_base")
-                print("Knowledge base initialization completed after error")
-            except Exception as init_error:
-                return jsonify({'error': f'Failed to initialize knowledge base: {str(init_error)}'}), 500
+            print(f"Error during knowledge base initialization: {e}")
+            # Ensure lock is released on error
+            _kb_initializing = False
+            return jsonify({'error': f'Failed to initialize knowledge base: {str(e)}'}), 500
         
         # Perform AI analysis
         analysis = kb_service.analyze_rfp(rfp_text, rfp_metadata)
@@ -587,34 +603,65 @@ def ai_analyze_rfp(rfp_id):
         return jsonify({'error': f'An error occurred during AI analysis: {str(e)}'}), 500
 
 
-@bp.route('/api/knowledge-base-status', methods=['GET'])
-@login_required
-def get_knowledge_base_status():
-    """Check the status of the knowledge base"""
+# Global flag to prevent multiple simultaneous initializations
+_kb_initializing = False
+
+def _check_knowledge_base_status():
+    """Helper function to check knowledge base status consistently"""
     try:
+        import os
         from app.services.knowledge_base import KnowledgeBaseService
+        from langchain_chroma import Chroma
         
         kb_service = KnowledgeBaseService()
+        
+        # Try to load existing vector store if it exists on disk
+        if not kb_service.vector_store:
+            try:
+                # Check if the chroma_db directory exists and has content
+                if os.path.exists(kb_service.chroma_db_path):
+                    # Try to load the existing vector store
+                    kb_service.vector_store = Chroma(
+                        persist_directory=kb_service.chroma_db_path,
+                        embedding_function=kb_service.embeddings
+                    )
+            except Exception as e:
+                print(f"Could not load existing vector store: {e}")
+                pass
         
         # Check if knowledge base exists and has documents
         if kb_service.vector_store and kb_service.vector_store._collection.count() > 0:
             doc_count = kb_service.vector_store._collection.count()
-            return jsonify({
+            return {
                 'success': True,
                 'status': 'initialized',
                 'document_count': doc_count,
                 'message': f'Knowledge base is initialized with {doc_count} document chunks'
-            })
+            }
         else:
-            return jsonify({
+            return {
                 'success': True,
                 'status': 'not_initialized',
                 'document_count': 0,
                 'message': 'Knowledge base is not initialized'
-            })
+            }
             
     except Exception as e:
-        return jsonify({'error': f'Error checking knowledge base status: {str(e)}'}), 500
+        return {
+            'success': False,
+            'error': f'Error checking knowledge base status: {str(e)}'
+        }
+
+@bp.route('/api/knowledge-base-status', methods=['GET'])
+@login_required
+def get_knowledge_base_status():
+    """Check the status of the knowledge base"""
+    result = _check_knowledge_base_status()
+    
+    if result['success']:
+        return jsonify(result)
+    else:
+        return jsonify({'error': result['error']}), 500
 
 
 @bp.route('/api/init-knowledge-base', methods=['POST'])
@@ -622,16 +669,31 @@ def get_knowledge_base_status():
 def init_knowledge_base():
     """Manually initialize the knowledge base"""
     try:
-        from app.services.knowledge_base import KnowledgeBaseService
+        # First check current status
+        status_result = _check_knowledge_base_status()
         
-        kb_service = KnowledgeBaseService()
+        if not status_result['success']:
+            return jsonify({'error': status_result['error']}), 500
+        
+        # If already initialized, return status
+        if status_result['status'] == 'initialized':
+            return jsonify({
+                'success': True,
+                'already_initialized': True,
+                'message': f"Knowledge base is already initialized with {status_result['document_count']} document chunks. No action needed.",
+                'document_count': status_result['document_count']
+            })
         
         # Initialize the knowledge base
+        from app.services.knowledge_base import KnowledgeBaseService
+        kb_service = KnowledgeBaseService()
         doc_count = kb_service.process_knowledge_base("knowledge_base")
         
         return jsonify({
             'success': True,
-            'message': f'Knowledge base initialized successfully with {doc_count} document chunks'
+            'already_initialized': False,
+            'message': f'Knowledge base initialized successfully with {doc_count} document chunks',
+            'document_count': doc_count
         })
         
     except Exception as e:

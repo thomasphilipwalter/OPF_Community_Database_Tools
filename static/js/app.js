@@ -1531,7 +1531,14 @@ class DatabaseSearchApp {
             const data = await response.json();
             
             if (data.success) {
-                this.showSuccess(data.message);
+                if (data.already_initialized) {
+                    // Knowledge base was already initialized
+                    this.showSuccess(data.message);
+                } else {
+                    // Knowledge base was newly initialized
+                    this.showSuccess(data.message);
+                }
+                
                 // Reset to the normal AI analysis interface
                 aiContent.innerHTML = `
                     <div class="text-center">
