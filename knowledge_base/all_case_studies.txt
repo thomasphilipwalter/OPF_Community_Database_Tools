@@ -1,0 +1,99 @@
+Case study 1:
+OnePointFive supported a carbon footprinting technology startup based in Europe in the development of their product technology to comply with environmental standards and industry measurement best practices. The carbon footprint technology provides carbon measurement APIs for select industries, with product development plans to expand into carbon tracking, offsets, and reporting.
+OnePointFive partnered with the customer as their fractional climate / environmental leads, working with their C-suite, product manager, software engineer and data scientist on a wide range of activities, including:
+         Performing environmental validations for carbon footprint measurement models and outputs for our client’s customers
+         Developing basic and advanced carbon measurement flow diagrams & robust approaches for several industries - including transportation & logistics (road, oceans, flights, road), last-mile distribution and fintech sectors
+         Researching environmental standards across geographies and specific to target industries, to ensure compliance with best-practice measurement methodologies
+         Developing detailed product methodologies and catalogues by target industries - including calculation methodologies, data sources, methodology assessments, competitor insights
+         Reaching out to over 20 industry and climate technology experts to validate our customers’ market positioning, and to inform their product development strategy
+OnePointFive delivered this project on a three-monthly recurring contract on a fixed retainer, working closely with the client for on-demand customer requests, expert outreach, and weekly check-ins to progress on the climate technology development towards an investment round.
+
+Case study 2:
+
+OnePointFive supported a UK-based climate risk platform startup with the market adoption of its climate risk analysis platform in the US. The climate risk platform enables companies with a portfolio of physical assets to, in real time, analyze climate physical risks such as heat stress, flooding, drought, and strong wind, at an asset level.
+OnePointFive supported the client on industry research and lead generation to build the US customer adoption pipeline, on usability tests to provide product development feedback and guidance, and on business development to form long-term, strategic partnerships. Our expert team spearheaded efforts in the following aspects to support the US market adoption of the platform:
+         Industry research and market segmentation to identify high potential sectors, industries, and early-adopter customers
+         Lead generation through a combination of mass and targeted outreach and engagement
+         Market opportunity identification, intelligence gathering, and connection building through expert and industry interviews
+         Product development assessment through usability tests and customer interviews
+         Policy and advocacy connections to enhance long-term, strategic partnerships with key stakeholders
+OnePointFive built a pipeline with experts and practitioners from more than 10 industries. This generated over 20 leads with high potential and led to interest and enrollments in the client’s pilot program of the climate risk platform. The team’s efforts helped the client gain insights, establish connections, and at the same time build its reputation in the field of climate physical risk analysis and forecasting within the US. The collaboration also created opportunities for the client to foster strategic partnerships in advocacy and policy making.
+Case study 3:
+
+OnePointFive developed and delivered a remote, cohort-based climate education curriculum across seven important learning areas to upskill and train professionals working in sustainability and climate roles. Over six-weeks we delivered over 12 hours of interactive climate education content synchronously to over 150 professionals across the globe, in partnership with Climatebase and their careers accelerator program.
+From a survey of over 2,000 professionals working in climate and/or entering into climate careers, seven climate topics were identified as important learning areas. These also aligned with skills employers needed for their climate teams, contracting and hiring. OnePointFive developed this content to be modular, replicable, and flexible for organizations to pick-and-choose education and training content for their sustainability leaders, teams, and new hires – see topics and learning objectives (see table below).
+Feedback from fellows about the program was exceptional, with 80% calling out the climate curriculum as the biggest value-add to increasing their skills/knowledge to act on climate within their respective sectors/industries. The majority of fellows would recommend the program to others - scoring a Net Promoter Score (NPS) of >60 on average, compared to the average for cohort-based learnings of ~30. Given the popularity and value of the programming, we have been asked to facilitate another two climate industry training programs with a further 300+ professionals this year.
+
+Case study 4:
+
+Sweef Capital,  a women-led independent impact investment firm anchored in Southeast Asia, has launched a new report, in partnership with OnePointFive (opf.degree), highlighting best practices for integrating gender equality and climate action into impact investment strategies.
+The report details the frameworks, methodologies, and outcomes of Sweef and OnePointFive’s partnership, which is aimed at addressing gender and climate issues at a systems level.
+Read Sweef Capital's Full Report
+Key themes addressed in the report include:
+Holistic integration: Sweef Capital’s unique approach integrates climate and gender considerations into investment decisions, fostering sustainability and resilience across various sectors.
+Synergy between gender and climate: Research shows a correlation between gender-smart businesses and their performance in climate-related metrics – Sweef Capital leverages this synergy to indirectly support climate goals by promoting diversity and gender equality in its investments.
+Climate framework development: In collaboration with OnePointFive, Sweef Capital has developed a robust Climate Impact Assessment Framework that aligns investments with climate-conscious practices.
+Partnerships for impact: The collaboration highlights the potential for innovative sustainability approaches, transforming business models to integrate climate preparedness into corporate strategies.
+Continuous improvement: Sweef Capital emphasizes the importance of regular assessments, including gender and climate-specific due diligence, to drive progress and ensure long-term impact and sustainability.
+Aligning Finance with Climate: Best Practices from TCFD Integration
+It exemplifies how to apply Task Force on Climate-Related Financial Disclosures (TCFD) recommendations in practice, particularly as they are incorporated into upcoming sustainability disclosure regulations, requiring the finance sector to execute on them and produce climate disclosures. The report is a good example of how to adapt and align TCFD recommendations, as well as other regulatory requirements, to current & future investment strategy, .
+For example, given the geographical footprint of Sweef Capital’s portfolio companies and their investors, OPF helped align Sweef’s Climate Impact Assessment Framework with TCFD, the Joint Multilateral Development Banks (MDB) Assessment Framework for Paris Alignment, and the EU’s Sustainable Finance Disclosure Regulation (SFDR) recommendations & requirements for climate disclosures.
+Overcoming Sustainability Challenges for LPs and GPs
+The report recognizes the distinct challenges that both Limited Partners (LPs) and General Partners (GPs) face in engaging their portfolio companies to tackle and progress on sustainability topics. The approach that OnePointFive developed enables Sweef to operate within its capabilities as a GP, to screen investments, execute investment decisions, monitor, and advise portfolio companies to address sustainability & climate-related concerns.
+
+Case study 5:
+
+As part of OnePointFive’s continued support for a UK-based customer, our team aided with driving strategic partnerships for the go-to-market adoption of our customer’s climate risk intelligence platform in the US. The climate risk intelligence solution enables companies with a portfolio of physical assets to analyze climate physical risks such as heat stress, flooding, drought, and strong wind, at the asset level and in real time.
+OnePointFive conducted sector- and customer-level analysis to identify anchor strategic customers within target sectors to explore potential partnerships for an upcoming product launch. Our expert team of business strategists and researchers led the engagement to identify the top 50 target organizations across 10 sectors.
+Our project efforts included:
+
+Product-market fit analysis
+         Leading virtual client workshops on Miro to co-build and identify ideal qualities of both target sectors and customers, and requisite criteria that would drive strong strategic partnership potential
+         Conducting extensive research using sustainability reports, company filings and public commitments, among other data points; analyzed and applied sector- and customer-level filtering criteria to 45 sectors and 100+ brands, ultimately identifying 50 customer brands to target for upcoming product launch 
+         Collaborating with the client team to prioritize 10 sectors for outreach based on the current product roadmap, optimizing for product-market fit and providing recommendations for phasing by quarter, aligned with roll-out of 10 different product features 
+         Identifying five key decision makers from each target brand, prioritizing sustainability, risk and supply chain leads;  built a customer outreach tracker in Notion, allowing for seamless export and integration of leads into client’s CRM
+         Developing case studies for each target sector highlighting sector nuances, strategic customer highlights, and deep-dives into contrasting brand profiles, both standout companies and “quiet achievers”   
+         Designing a strategic partner outreach approach and workflow, tailored to incorporate organization-specific insights and broader considerations, such as upcoming regulations and sector nuances
+
+Source: Notion page
+Overall, our efforts provided the client with a detailed outreach strategy and playbook across key target sectors, and a rich database of research on anchor brands from which to build out their strategic partnership pipeline and achieve sales growth targets. We optimized our deliverables for seamless integration into their own Notion workspace and CRM, and collaborated to create alignment on user and product build prioritization within their Product & Go-to-Market teams. 
+Does our work align with challenges or needs you currently have? Get in touch with the OnePointFive team. 
+ 
+
+ 
+Case study 6:
+Sarona Asset Management approached OnePointFive to help solve a common challenge: incorporate TCFD (Task Force on Climate-related Financial Disclosures) principles into investment processes, to be able to provide education and support to its GPs, and foster compliance for climate-related disclosures. This prevalent challenge, frequently arising from the complexity of industry requirements, can be effectively addressed with readily available free tools. OnePointFive entered the collaboration ready to bridge the knowledge gap, leveraging our wealth of experience in the financial sector and with investment funds to align seamlessly with Sarona's unique position and objectives.
+OPF's Approach: Tailored Solutions for TCFD Alignment
+1. Gap Assessment and Recommendations:
+We started by comparing Sarona's current investment strategies and policies with TCFD guidance (links to resources to help enable a robust climate analysis below). This helped us identify important gaps and led to over 33 recommendations to better align with TCFD.
+2. Quantitative and Qualitative Climate Risk Assessment:
+Our analysis spanned Sarona's portfolio of over 30 funds, focusing on emissions hotspots and evaluating climate risks in key countries like Brazil, India, and Vietnam. Going forward, this assessment will not only guide Sarona's mitigation and resilience planning, but will also enable Sarona to offer guidance and support to GPs for conducting similar assessments.
+3. Capacity Building and Upskilling:
+We created a climate risk assessment cheat sheet and conducted an educational TCFD webinar for GPs, upskilling key stakeholders to seamlessly integrate climate considerations into their strategies. The cheat sheet contained links to free tools and industry-approved, publicly-available guidance documents, with descriptions on how to use each one.
+We designed the educational webinar to not only walk through the outcomes of our project, but also share our expertise on how to build a climate strategy, the latest climate-related standards and frameworks, sustainability reporting best practices via TCFD, understanding and analyzing climate risk, and measuring GHG emissions from Private Equity.
+
+Case study 7:
+OnePointFive supported an artificial intelligence and machine learning climate risk software start up with the commercialization and international scaling of their business within the US. The climate risk platform has the capabilities to identify physical asset-based risk across a range of climate signals including flood, ravine flooding, extreme precipitation, and wildfire risk.
+OnePointFive supported the client on market entry strategy and lead generation to build the initial pipeline of customers and potential strategic partnerships for the solution. When exploring a commercialization strategy for their technology, our team led market analysis and benchmarking activities, including: 
+         Pricing discovery and pricing strategy for product technology offering
+         Pain points and market opportunities from customer interviews/voices
+         Competitor landscape analysis, and positioning - opportunities/threats
+         Market segment by high potential sectors and geographic regions
+         Assessment of product-market-fit of their premium product offering in development
+         Development and assessment of go-to-market strategy approaches with customers
+         Recommendations for customer acquisition strategy within key industries
+OnePointFive reached out to external industry experts, coordinating and leading 33 interviews with potential customers who align with our client’s market entry objectives across key industries. These discussions uncovered key pain points and business needs from customer voices - leading to go-to-market strategy approaches based on customer interests, including unbiased opinions of the client’s premium offering. OnePointFive helped to build out a tangible market entry plan and direct connections to support the aspirations.
+
+Case study 8:
+OnePointFive conducted user interviews and insights gathering for the CRANE Tool, which is an open-source tool that helps to assess the emissions reduction potential of climate technologies. The CRANE tool includes emission reduction potential, sensitivities, and market sizing for ~234 climate technologies, and has over 1,500 users including notable climate technology investors.
+Given OnePointFive’s experience in the solution development and use cases of climate technologies within the finance sector, our expert team:
+         Conducted 33 user interviews* with climate investors, enabling organizations (e.g. incubators, accelerators, etc), climate tech entrepreneurs
+         Collated user interview insights on the use cases, benefits, pain points, user feedback, and impact of the CRANE Tool
+         Aggregated and co-developed 10 key insights alongside survey results conducted by the solution development team
+         Help to draft and review the CRANE User Report 2021 which was published in July 2021 to the general public to improve uptake of emissions reduction potential evaluation when investing into early-stage climate technologies 
+Overall our user interviews,resulting feedback and insights informed climate technology and emissions reduction measurement solutions needed by the climate finance sector - and improvements to the future development of the CRANE Tool.
+*Our interviewees included: Analog Devices, Autodesk Foundation, BCG, Breakthrough Energy, Caprock, CleanTech Open, Cleantech Scandinavia, EarthShot, Ecosia, Elemental Excelerator, Energetix Climate, ESG Capital Group, Generation IM, GIIN, Impact Beacon (City Light Ventures), Load AI, MaRS Discovery District, Mars Materials, MassCEC, Muon Vision, OGCI, Prime Impact Fund, CEA Consulting, RenewCO2, RSK Labs, SYSTEMIQ, Zero Carbon, and Climate-KIC
+
+
+
+

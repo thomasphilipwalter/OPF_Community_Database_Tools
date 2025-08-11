@@ -1,0 +1,437 @@
+STATEMENT OF WORK PURSUANT TO FRAMEWORK AGREEMENT RELATED TO SERVICES FALLING UNDER LOT N 1 OF THE RFP 'EIT Food Professional Advisory Services Framework" AND ACCORDING TO THE MICRO-RFP "Commercial due-diligence and innovative financing instruments for impact"
+This statement of work is entered into by and between:
+Earthbase Ltd with address at 6 Gloucester Road, Teddington, TW110NU, UK, and registered under the Companies Number 14598507, herein represented by Mark Hodgson as founder and managing director (hereinafter "Contractor").
+AND
+EIT Food ivzw, Ubicenter A, Philipssite 5 (bus 34), 3001 Heverlee herein represented by Richard Zaltzman as CEO and Nicolas Perrin as CFO (hereinafter "EIT Food").
+Pursuant to the Framework Services Agreement executed between the Contractor and EIT Food on 4th December 2024, in accordance with the Request for Proposal (RFP) titled "EIT Food Professional Advisory Services Framework", and specifically concerning the award of Services falling under Lot 1 of the above mentioned RFP and under the terms of the Micro-RFP titled "Commercial due-diligence and innovative financing instruments for impact", through which the Services listed in this SoW were awarded to the Contractor by EIT Food.
+	1	Description of the Specific Request for Services
+EIT Food has retained Contractor for financial planning and analysis and business advisory services related to financial opportunities and specific commercial due diligence to support the strategy and execution of the EIT Food Success Sharing Mechanisms.
+The work to be undertaken for this project is stated below, herein described as objectives and activities across Workstream A and Workstream B, below, and which alongside the original RFP requirements, takes into account project scoping discussions and email exchanges with the EIT Food team that followed Contractor's notification on February 24th 2025 as preferred supplier for this project.
+For reference, the original proposal submitted by the Contractor is in Annex 1 – "Earthbase Technical Proposal for RFP: commercial due-diligence and financial modelling related to the Impact Funding Framework".
+WORKSTREAM A: EXECUTION OF COMMERCIAL DUE DILIGENCE
+Phase: A1: IFF Window 5 Initial Due Diligence (March-April 2025) Objective: Build proprietary tools for activation and complete diligence on identified focus areas Activities: i) Adjust existing Earthbase & OPF tools needed to refine & enhance diligence processes for use ii) Review current due diligence process on agreed-upon and identified project focuses for SSM() assessing commercial feasibility and capacity of the candidate organisation, based on the existing IFF application process () To be co-determined based on priority EIT Food objectives, relevancy of project to overall diligence process discovery. iii) Conduct light-touch research on Fast Track Programme iv) Document strengths, implications and shortcomings of SSM and Fast Track Programme work covered ii) and iii) above, to be used by EIT Food in future evaluation v) Benchmark new results to past diligence processes for SSM
+Phase: A2: IFF Window 6 Due Diligence Revamp (May-July 2025) Objective: Consolidate and streamline Phase A1 diligence process into sustainable architecture including standardised term sheet Activities: i) Finalise integrating existing Earthbase & OPF tools into EIT Food environment Bring learnings from initial stakeholder interviews & modelling process review into diligence programme, also considering potential implications for Fast Track Programme
+Phase: A3: Due Diligence Standardisation and Training (September-October 2025) Objective: Clarify diligence process for external use and deliver training on diligence execution Activities: Finalise diligence process and tooling, considering review of key parameters (e.g. forecasting, monitoring of returns, risk-reward, funding and term sheet negotiation & approach, etc.) Ensure robust and repeatable documentation on diligence process Deliver training session for EIT Food staff members to be able to drive future diligence processes
+WORKSTREAM B: DEVELOPMENT AND REFINEMENT OF INNOVATIVE FINANCE INSTRUMENTS FOR IMPACT
+Phase: B1: Modelling Workplan Development (March 2025) Objective: Develop workplan and background understanding of SSM, plus basic evaluation of Fast Track Programme Activities: Kick off meeting, covering
+	•	Intro the other team members
+	•	Run through the agreed and signed SoW
+	•	Planned project management ground rules and norms
+	•	Planned governance
+	•	Proposed discovery work Desktop research into innovation funding & SSM solutions Stakeholder interviews: a) SSM distributors b) EIT Food's Fast Track Programme stakeholders c) EIT Food Innovation Programme Managers, covering Horizon & Europe regulations and EIT Food guidelines) d) Funding recipients e) Other relevant stakeholders, based on initial discovery
+Phase: B2: IFF Window 5 Modelling Process Oversight (March-April 2025) Objective: Experience first-hand funding window process strengths & shortcomings, develop & update hypotheses Activities: Closely observe and document IFF Window 5, including: a) Applicant intake b) Modelling procedure c) Internal communications d) Funding outcomes, including term sheet approach, negotiation and uptake e) Applicant pipeline makeup Develop hypotheses on necessary improvements and modelling solution options for SSM process, including key parameters (e.g. forecasting, monitoring of returns, risk-reward, funding and term sheet design & approach) (* see B3) Begin developing MVP model from initial hypotheses Compare funding results with prior window results once IFF Window 5 analysis ends
+Phase: B3: IFF Window 6 Hypotheses Testing (June-July 2025) Objective: Test hypotheses from Phase B2 against incoming applicant data and developing outcomes from IFF Window 5 Activities: Utilise the IFF Window 6 to action hypotheses from phase B2 outputs
+	•	Verify impact of hypotheses on funding outcomes if implemented
+	•	(*referring to B2) Where SSM-specific hypotheses also relate to revenue-based financing, or potentially fit with the Fast Track Programme, we will highlight for future evaluation within Fast Track Programme Review outcomes of IFF Window 5 as first results become available Finalise resulting modelling assumptions and structural thinking Co-develop feasible modelling KPIs to prioritise on in development and tuning process
+Phase: B4: IFF Window 7 Parallel Analysis (October-December 2025) Objective: Run parallel analysis using new and legacy SSM models and present outcome differences Activities: Utilise the IFF Window 7 to test new SSM model efficacy, running live analysis of applicants using developed financial model
+	•	Prepare comparison of initial SSM vs updated model results, ensuring alignment to Horizon Europe regulations and EIT guidelines
+	•	Finalise new model mechanics based on newest inputs and datasets Prepare model for SSM process overhaul in IFF Window 8, ensuring the tool allows for implementation at the company / project term-sheet level, as relevant and where possible Develop and deliver training session(s) for priority EIT Food staff to manage SSM model implementation and results, covering key updates on revenue sharing, equity sharing, infrastructure sharing, asset sharing etc. Develop presentation and final report on changes to SSM working process and SSM final model update results Develop feedback mechanism for individual SSM applicants to improve application quality over time
+	2	Requirements stated by EIT Food in the original RFP
+	1	Development and continuous refinement of innovative financing instruments for impact: a. Creation and professionalization of financing instruments for innovation, education, and business creation. b. Implementation of success-sharing mechanisms (e.g., revenue sharing, equity sharing, infrastructure sharing, asset sharing). c. Compliance with Horizon Europe regulations and EIT guidelines.
+	2	Execution of commercial due diligence a. Conduct light-touch commercial due diligence for high-risk projects b. Assess commercial feasibility and capacity of the candidate organization. c. Term-sheet design to aid negotiations with the required risk-reward balance.
+	3	Financial modelling to assess the potential of new financing instruments and project/company specific term-sheets. a. Develop a financial modelling tool/methodology for accurate forecasting and monitoring of returns. b. Ensure the tool allows for implementation at the project term-sheet level.
+	3	Location
+The Services will be provided remotely.
+	4	Compensation
+The fees to be paid by EIT Food for the Statement of Work as detailed in section 3 and for the period 17th March 2025 – 31st December 2025, is € 54,375.00, excluding VAT. VAT is € 10,875.00.
+	5	Changes to Statement of Work
+Any changes to this Statement of Work will be subject to discussion and agreement between EIT Food and Contractor. In this event, any change or activity may be added in an addendum to this Statement of Work.
+	6	Payment Conditions
+EIT Food will issue a Purchase Order within fourteen (14) days of signing date of this Statement of Work.
+Contractor will issue a total of three (3) invoices based on the payment schedule below. Each invoice will state invoice date, total fee amount, VAT amount, name, address, VAT number, actual costs related to any incidentals and/or travel costs, and bank details, as well as reference to the Framework Services Agreement, statement of work, and the Purchase Order number provided by EIT Food.
+Payment schedule and amount is as follows:
+	•	Commencement: 17th of March 2025 (35% of total amount due)
+	•	Midpoint: 8th of August 2025 (35% of total amount due)
+	•	End: 31st of December 2025 (30% of total amount due)
+Payments will be made to Contractor within thirty (30) days after receipt of the invoice.
+	7	Term
+This statement of work will enter retroactively into force on 17th March 2025 and will terminate on 31st December 2025.
+EIT Food IVSW Earthbase Ltd ("Contractor")
+Signature ________________________ Signature ________________________
+Name: Richard Zaltzman Name: Mark Hodgson
+Title: Chief Executive Officer Title: Founder & Managing Director
+Date: Date:
+Nicolas Perrin Chief Finance Officer
+Annex 1: "Earthbase Technical Proposal for RFP: commercial due-diligence and innovative financing instruments for impact"
+For the attention of Peter Groothius, EIT Food February 14th, 2025
+A technical response to the RFP: "Commercial due-diligence and innovative financing instruments for impact"
+Prepared by: Mark Hodgson, Founder and Managing Director, Earthbase Ltd
+Contact: Mark Hodgson mark@earthbase.earth
+OVERVIEW
+Earthbase Ltd (Earthbase) is pleased to submit this proposal for services to support EIT Food, specifically commercial due-diligence and innovative financing instruments for impact, tailored to EIT Food's unique mission and operational environment as the world's largest food innovation community. Our work will help create more efficient financial instruments and the processes EIT Food utilises in running them.
+At Earthbase, we and our partners are proud of our engagement with agencies, corporates, investors and accelerators in helping them create their collaboration and ecosystem projects from discovery, through scoping, to delivery, integration, training and further iteration, and we'd be delighted to deliver our same highly regarded service to EIT Food through this project, which is acknowledged as essential for driving systemic and sustainable change in the food system.
+This proposal covers the following, based on the requirements and desired outcomes laid out by EIT Food in the RFP document:
+	1	Earthbase And Our Expertise
+	2	Approach
+	3	Programme Structure
+	4	Methodology for Programme Deliverables and Outcomes
+	5	Our Team, Qualifications, And Experiences
+	6	Financial Offer
+	7	Closing Remarks
+	8	Appendices (Measurement Framework, Examples of Relevant Work/Projects, Longer Term Innovation from Earthbase)
+Earthbase is committed to deliver this work through a 12-month service agreement.
+	1	EARTHBASE AND OUR EXPERTISE
+Earthbase is an advisory firm set up in 2023 to help sustainability-focused players across the food system commercialise faster and on a greater scale. A strategic supplier to EIT Food, we are headquartered in the UK with a network of associate experts and partners across Europe and the Americas from which we assemble the best teams and deploy into global and European agrifood, technology and public sector organisations in several key areas, notably commercial strategy, Go-To-Market (GTM) strategy & modelling, startup / SME / Corporate innovation economics, partnering methods, training, team resourcing, and sales execution.
+Earthbase will be partnering with OnePointFive (OPF) to deliver this project. OPF is a leading Climate Advisory and Training firm and has successfully collaborated with Earthbase for several years. OPF works with organisations including midsize to large-cap companies, multinational nonprofits, and climate technology startup solutions, located across Europe, US and Asia Pacific. OPF has extensive experience partnering with global development organisations & agricultural standards bodies, as well as global startups, regenerative agriculture initiatives, and international financing groups looking to maximise impact.
+In the past 2 years, we have collectively provided services to over 50 agrifood and climate startups, SMEs, corporates, accelerators, agencies, and VCs including CGAIR, Agricarbon, Barry Callebaut, Wiliot, Tech Nation, EIT Food, OECD, Agrimetrics, Sustained.com, and Oxera.
+Combined, we are experts in:
+	•	Understanding, evaluating and rating the commercial viability of startups and SME innovation and their proposals' commercial value / target / timeline viability. In turn this provides EIT Food with more robust contract term sheets per project
+	•	Financial modelling and tooling to evaluate, plan and deliver the most appropriate mechanisms for maximising the commercial efficacy of the programme and individual projects
+	•	Cost-effective, high-quality project management, monitoring, and iteration, tailored to EIT Food's goals
+	•	The agrifood innovation ecosystem across Europe and globally
+EIT Food has a well-deserved reputation for driving a healthier, resilient and decarbonised food system. Earthbase's experts and partners are committed to generate both tangible deliverables and measurable outcomes in this programme which in turn will attract and propel innovation across the food system, ultimately contributing to sustainable organisational and systemic change. The strategies & insights, modelling structures, and due diligence processes developed through our work will inform and constitute a baseline for integrated developments with EIT Food.
+	2	APPROACH
+OVERVIEW: EIT Food's Impact Funding Framework (IFF) seeks to mobilise €30m, over 3 years, of concessionary capital towards social, environmental, and innovation challenges within the global food system. The programme funds initial cheques of €250k with follow-on funding up to €1m, for a consortium of organisations or a single project focused on an innovative food idea (Source: EIT Food).
+This is part of EIT Food's overarching three-pronged mission of bringing healthier lives through food, a Net Zero food system, and reducing risk for a fair and resilient food system (EIT Food), focusing on important priority advancements in regenerative agriculture, labelling, packaging & transparency, and protein diversification. The programme prioritises involvement with other mission-driven programmes, projects, & organisations and seeks to structure its engagements using a proprietary Success Sharing Mechanism (SSM). The next outcomes of the IFF and SSM will include the analysis of the funding candidates applying across the three funding windows through to the end of 2025, where each round includes roughly 10-15 consortium-based projects, 50 participants, 8-10 term-sheet agreements (high-level commercial due diligence will be expected for 5-7 projects). Furthermore, an improved financing model will be required for a new Impact Funding Programme, the foundations of which will be undertaken in this programme of work. Commercial due diligence and resulting modelling will also be fed into the new Fast Track to Market program, introduced in 2025.
+CHALLENGES: EIT Food's IFF European Commission-originated funding has legacy funding requirements and limits the type of innovation funding (neither debt, nor equity), and 'intellectual property recovery' clauses in the event the enterprise fails as part of the SSM. These requirements complicate an innovation-first, startup-friendly model of funding which can throttle the innovation ecosystem and work counterproductively with startups in the Food & Agriculture sector.
+Specifically, initial briefing discussions and materials have highlighted that:
+	•	The SSM payback mechanism is linear, with milestones at month 3 and month 15, meaning that this disadvantages commercialisation of non-linear hard- climate technology innovation within the Agrifood space (e.g. Protein Diversification)
+	•	The SSM payback mechanism is not aligned to common reporting cycles, meaning that investees will need to prepare audited or unaudited financials off-cycle, increasing compliance cost and reducing likelihood to comply
+	•	Clauses such as "Intellectual Property Recovery" complicate the investment terms by adding more liability to the company, meaning that future investors will take on additional liability and reduce investment attractiveness
+	•	The difficulty in managing trade-offs between consistency in deal structures, comparability of different revenue models, ability to forecast early-stage revenue growth and deal terms that accurately manage risk and return, means that negotiations are protracted and unstandardised.
+As part of this engagement team's lived experience, having collectively founded and operated 3+ companies, ran diligence on 2000+ startups, invested in ~70 companies, and successfully navigated investment rounds from seed to Series A, the above challenges need to be urgently addressed in order to improve both the quality and quantity of the innovation pipeline, the success-sharing of funds post-investment, and the overarching three-pronged mission of EIT Food.
+OUR APPROACH: To address this proposal, refer to the below table where our proposal team has mapped the key RFP scope items to relevant key outcomes and deliverables, and highlighted where to reference within this document.
+Table: Our Approach
+Scope Item: 1. Development and Refinement of Innovative Finance Instruments for Impact Key Outcome: Actionable financial projection model and updated SSM methodology Deliverables: Financial Tools, KPI Alignment & Fulfilment Framework, Training, Funding Application Decision Communication, and Impact Report Proposal Reference: 3. Programme Structure, 4. Methodology for Key Programme Deliverables & Outcomes, 8A. Measurement Framework, 8B. Examples of relevant Work / Projects
+Scope Item: 2. Execution of Commercial Due Diligence Key Outcome: Streamlined process for performing due diligence aligned with financial modelling principles and outcomes Deliverables: Due Diligence, V2 Term Sheet Template, Training
+Scope Item: 3. Financial Modelling Key Outcome: Combined in Scope Item 1 above Deliverables: Combined in Scope Item 1 above
+Scope Item: 4. Team Key Outcome: Experience from food industry & global startup ecosystem utilised to inform deliverables Deliverables: N/A Proposal Reference: 5. Our Team, Qualifications, and Experiences, 8B. Examples of relevant Work / Projects
+Scope Item: 5. Resources Key Outcome: Prior financial analysis models and detailed startup application review processes utilised to revamp SSM & due diligence process Deliverables: N/A Proposal Reference: 3. Programme Structure, 4. Methodology for Key Programme Deliverables & Outcomes
+Scope Item: 6. Pricing Key Outcome: Project delivered for $54,375 (VAT is not included) Deliverables: N/A Proposal Reference: 6. Financial Offer
+	3	PROGRAMME STRUCTURE
+To track progress and refine the EIT Food participant/applicant evaluation in real time, we propose a rapid, high touch phased approach of 7 rapid phases, each one of 2-12 weeks in duration, based on EIT Food's funding schedule.
+Table: Overview and Timeline (March 2025 – December 2025) Phase: Mar Apr May Jun Jul Aug Sep Oct Nov Dec
+Workstream A: Execution of Commercial Due Diligence A1: IFF Window 5 Initial Due Diligence A2: IFF Window 6 Due Diligence Revamp A3: Due Diligence Standardisation and Training
+Workstream B: Development and Refinement of Innovative Finance Instruments for Impact B1: Modelling Workplan Development B2: IFF Window 5 Modelling Process Oversight B3: IFF Window 6 Modelling Hypotheses Testing B4: IFF Window 7 Modelling Parallel Analysis
+The following table provide details of the specific activities per phase and cohort, timetabled above.
+WORKSTREAM A: EXECUTION OF COMMERCIAL DUE DILIGENCE
+Phase: A1: IFF Window 5 Initial Due Diligence (March-April) Objective: Build proprietary tools for activation and complete diligence on identified focus areas Activities: Adjust existing Earthbase & OPF tools needed to refine & enhance diligence processes for use Complete due diligence process on identified project focuses and Fast Track to Market program Document strengths and shortcomings of initial diligence programme for iteration with time Benchmark new results to past diligence processes
+Phase: A2: IFF Window 6 Due Diligence Revamp (May-July) Objective: Consolidate and streamline Phase A1 diligence process into sustainable architecture including standardised term sheet Activities: Finalise integrating existing Earthbase & OPF tools into EIT Food environment Bring learnings from initial stakeholder interviews & modelling process review into diligence programme
+Phase: A3: Due Diligence Standardisation and Training (September-October) Objective: Clarify diligence process for external use and deliver training on diligence execution Activities: Finalise diligence process and tooling Ensure robust and repeatable documentation on diligence process Deliver training session for EIT Food staff members to be able to drive future diligence processes Complete remaining diligence needed before internal staff own process
+WORKSTREAM B: DEVELOPMENT AND REFINEMENT OF INNOVATIVE FINANCE INSTRUMENTS FOR IMPACT
+Phase: B1: Modelling Workplan Development (March) Objective: Develop workplan & SSM background understanding Activities: Kick off meeting, covering
+	•	Intro the team
+	•	The initial project scope statement, encompassing the objectives, outcomes
+	•	Planned project management ground rules and norms
+	•	Planned governance
+	•	Proposed discovery work Desktop research into innovation funding & SSM solutions Stakeholder interviews of IFF and SSM distributors, EC oversight, and funding recipients
+Phase: B2: IFF Window 5 Modelling Process Oversight (March-April) Objective: Experience first-hand funding window process strengths & shortcomings, develop & update hypotheses Activities: Closely observe and document Window 5, including
+	•	Applicant intake
+	•	Modelling procedure
+	•	Internal communications
+	•	Funding outcomes
+	•	Applicant pipeline makeup Develop hypotheses on necessary improvements and modelling solution options Begin developing MVP model from initial hypotheses Compare funding results with prior window results once IFF Window 5 analysis ends
+Phase: B3: IFF Window 6 Hypotheses Testing (June-July) Objective: Test hypotheses from Phase B2 against incoming applicant data and developing outcomes from IFF Window 5 Activities: Utilise the IFF Window 6 to action hypotheses from phase B2 outputs
+	•	Verify impact of hypotheses on funding outcomes if implemented Review outcomes of IFF Window 5 as first results become available Finalise modelling assumptions and structural thinking Co-develop modelling KPIs to prioritise in development and tuning process
+Phase: B4: IFF Window 7 Parallel Analysis (October-December) Objective: Run parallel analysis using new and legacy SSM models and present outcome differences Activities: Utilise the IFF Window 7 to prove new SSM model efficacy, running live analysis of applicants using developed financial model
+	•	Prepare comparison of initial SSM vs updated model results
+	•	Finalise new model mechanics based on newest inputs and datasets Prepare model for process overhaul in IFF Window 8 Develop and deliver training for EIT Food staff to manage SSM model and results Develop presentation and final report on changes to working process and final model update results Develop feedback mechanism for individual applicants to improve application quality over time
+	4	METHODOLOGY FOR PROGRAMME DELIVERABLES & OUTCOMES
+This section details our methodology we will undertake for this project, as well as a detailed breakdown of programme deliverables and outcomes.
+We have embedded key principles and design considerations, based on our investing and operating experience, as well as our research at Yale University's Center for Business and Environment (CBEY) on investing in nascent climate technologies.
+We will integrate through our project methodology and approach, where possible, by:
+	•	Improving collaboration and coordination among investors across multiple stages of technology development and investment type
+	•	Derisking the multiple innovation "valleys of death", through providing industry connections for pilots, or investors securing sufficient upstream or downstream pipeline investment for follow-on funding through leveraging corporate-partnership ecosystems (e.g. EIT Food's ecosystem partners, Circulate Capital's model)
+	•	Reducing complexity of deploying non-traditional investment tools, thereby reducing the amount of time to sign deal terms
+	•	Using standardised tools and methodology supported by the latest climate science, as well as emissions databases- e.g. CRANE Tool, Project Frame Forward-looking emissions modelling, KOI by Rho AI and Ecoinvent for Life-Cycle Assessment
+	•	Tailoring the payback period to the maturity of the company, considering valuation or annual revenue generation thresholds
+	•	Embedding founder & startup-friendly principles, considering the nature of nascent, deep-tech, especially for overlapping agrifood areas in protein diversification (e.g. molecular biology), packaging & textiles (e.g. advanced materials science), and regenerative agriculture (e.g. soil testing & agronomy, satellite mapping)
+	•	Integrating a holistic investment approach by understanding how the new candidates' innovations complement existing portfolio
+The above list is non-exhaustive but presents a starting foundation for best practice.
+The following table lists the expected deliverables from the phases detailed in Section 3 Programme Structure above, integrating best practice principles. Deliverable output timing can be adjusted as needed for internal process development.
+KEY PROGRAMME DELIVERABLES:
+Phase: A2 Deliverable: V2 term sheet template Description: Prioritising the following variables, informed by Earthbase's Funding Evaluation and Eligibility Score ("FEES") model assessment per application and other agreed key programme inputs (see next section below):
+	•	Applicant Name (including consortia members)
+	•	Purpose of funding (project and 3-5 areas of work to be funded / supplementally funded; split by %)
+	•	Agreed revenue targets and timeline
+	•	Repayment terms (including SSM parameters and distribution across consortia members)
+	•	Risk adjustments (co-funding etc)
+	•	Additional clauses
+Phase: A3 Deliverable: Due Diligence Description: Aligned with modelling principles on identified projects and as part of the Fast Track Go-to-Market programme
+Phase: B3 Deliverable: KPI Alignment & Fulfilment Framework Description: Co-developed KPIs to track and measure running financial projection performance and impact performance, aligning with EIT Food's strategic objectives
+Phase: B4 Deliverable: Financial Tools Description: Updated SSM process with integrated analysis of applicant financials culminating in a simplified decision tool based on the following principles:
+	•	Impact Funding Framework financial & impact projection and risk score by applicant: o Using Earthbase's Funding Evaluation and Eligibility Score ("FEES") model, EIT Food get a clear quantifiable assessment on the viability of each applicant's commercial, revenue and repayment capabilities. See Key Programme Inputs section below.
+	•	Success Sharing Mechanism evaluation & upgrade
+	•	Decision-making quick-reference summary table
+Phase: B4 Deliverable: Funding Application Decision Communication Description: Standardise providing quantified (high level) assessment on each individual application (e.g. "scored high in x, y; low in a, b") to improve future application quality
+Phase: B4 Deliverable: Impact Report Description: A final report detailing the work's outcomes:
+	•	Key insights on existing instrumentation - areas of weakness / strength;
+	•	Results of the new areas introduced
+	•	Overview of collateral and tools provided for further use
+	•	Case studies / survey results
+	•	Recommended actions based on findings throughout 2025
+	•	Ideation on future food system modelling to provide EIT Food and ecosystem building capability (see appendices)
+Phase: A3 & B4 Deliverable: Training Description: Workshops & content for EIT Food staff to be able to deploy financial tools and due diligence between application cycles Training and content materials for applicants
+KEY PROGRAMME INPUTS
+The following table details the key resources and tooling inputs that will enable Earthbase and OPF to execute the deliverables. Our team will draw from our collective prior experiences and the existing outputs from other work to provide us with a proven starting point for fitting custom instruments to EIT Food's IFF analysis and due diligence process.
+Table: Key resources and tooling inputs to enable execution of deliverables
+Input: Profit-sharing model for multi-stakeholder large-scale agroforestry developments Contents: Prior OPF-led engagement to project the financial returns of a profit-sharing partnership focused on foresting land in Canada. Key model parameters:
+	•	Scenarios: Base, Upside, Downside, Natural Disaster, No Grant Funding, etc
+	•	Available grant funding and its impact on partnership costs
+	•	Adjustable profit margin and profit sharing
+	•	Growth rates, tree mortality rates
+	•	Project costs and upkeep expenses with escalators Utilisation in EIT Food IFF Project: Individual applicant analysis leading to SSM development will repurpose the structure of the existing model
+Input: Funding Evaluation and Eligibility Score ('FEES') Contents: Early-stage startup (to Series A+) funding application evaluator Key model outputs:
+	•	Financial Projection Accuracy Check
+	•	Breakeven & Profitability Check
+	•	Cash Flow & Loan Repayment Test
+	•	Example Calculation
+	•	Risk Scoring & Final Decision based on commercial and project viability vs. funding request and other terms Utilisation in EIT Food IFF Project: Can provide a framework for building application analysis and developing SSM offers
+Input: Startup Go-To-Market (GTM) Evaluation tool Contents: Multivariable assessment of a startup's market strategy, execution plan, status, projected direction of travel, and course correction recommendations Key model parameters:
+	•	Absolute and Relative Weighting for each evaluation variable
+	•	Key Assumptions used in the assessment (which can be informed by EIT Food)
+	•	Citations/Sources for data validation (external, such as benchmarking with similar startups through Pitchbook or Crunchbase, and internal)
+	•	Gap Risk: For each gap identified, the model considers 1-5 most viable recommended activities to course correct Utilisation in EIT Food IFF Project: Can provide insight into the application review and due diligence process
+These resourcing and tooling inputs, combined with our past experiences in financial analysis and funding applicant review, have crystallised the below table, as the initial set of parameters we will use to drive early due diligence. These principles and evaluation processes can be mobilised from input tools to a working IFF-driven structure within days of project activation.
+Table: Commercial Due Diligence Process used to assess Candidates' Proposals
+Area: Viability of Candidate's GTM Strategy
+Market Analysis Variables Evaluated:
+	•	Total Addressable Market (TAM), Serviceable Available Market (SAM), Service Obtainable Market (SOM) with timeframe
+	•	Competitive Landscape Measurement Process:
+	•	Use Earthbase's + EIT Food's Startup Evaluation methods to benchmark and score each startup based on these business fundamentals
+	•	Assign a weighted score based on key success factors
+	•	Set a threshold score (e.g., 70/100) to determine if a startup qualifies for funding based on GTM
+	•	Feed into Section "Overall Financial Viability" (see below) Benchmarking:
+	•	TAM estimated based on industry reports
+	•	SAM adjusted for realistic penetration rates
+	•	Competitor analysis based on latest market trends
+Customer Definition Variables Evaluated:
+	•	Target Customer Segment
+	•	Customer pain points and needs Benchmarking:
+	•	Defined based on surveys and market research
+	•	Validated through customer interviews and pain point analysis
+Product Roadmap Alignment Variables Evaluated:
+	•	Feature roadmap vs market need alignment
+	•	Time-to-market readiness Benchmarking:
+	•	Product-market-fit checked through customer feedback
+	•	Benchmarked feature comparisons
+	•	Development timelines validated against benchmarks
+Geographic Strategy Variables Evaluated:
+	•	Primary target locations/regions
+	•	Market entry barriers Benchmarking:
+	•	Regions chosen based on demand and ease of entry
+	•	Barriers assessed through regulatory review
+Resource Allocation Variables Evaluated:
+	•	Leadership Team
+	•	Sales and marketing resources and capacity (current and plans for period of EIT Food financing input)
+	•	Operational capacity Benchmarking:
+	•	Increase investment in GTM hiring and training
+	•	Expand operational capacity with supply chain partners
+Overall Financial Viability
+Financial Health Projection of the applicant (A Startup/ SME's ability to meet repayment targets depends on how realistic their revenue projections are) Variables Evaluated:
+	•	Existing financial burn rate / planned runway
+	•	Income profile
+	•	Investment profile
+	•	Breakeven and profitability check & timeframe
+	•	Cash Flow & Loan Repayment capability Measurement Process: Following GTM evaluation (as an input to Overall Financial Viability): Conduct Financial Projection Accuracy Check:
+	•	Compare startup's revenue projections for Years 1-5 with industry benchmarks.
+	•	Use historical data, if available, or market growth rates to validate assumptions
+	•	Adjust projected revenue using a risk-adjusted discount rate (e.g., reducing projections by 20%-30% if assumptions seem overly optimistic) Conduct Breakeven & Profitability Check:
+	•	Calculate the breakeven point (fixed costs ÷ gross margin %) considering consortia relationship or single entity
+	•	Assess expected profitability: Net income = Revenue – Expenses: If the startup remains unprofitable beyond 3 years, repayment viability is questionable Conduct Cash Flow & Loan Repayment Test:
+	•	Map expected cash flow to repayment schedule
+	•	Ensure the entities have enough projected free cash flow (FCF) combined to cover repayment phases, e.g.
+o Year 1-2: Cash reserves / existing investment should cover the first 10% repayment
+o Year 3-4: Existing Investment Profitability should support the next 20% repayment
+o Year 5: Sustainable operations should ensure the final 70% repayment
+Benchmarking: As required
+The successful activation of the above diligence principles and financial modelling development strategies will lead to direct achievement of the below outcomes.
+KEY PROGRAMME OUTCOMES:
+
+Better Commercial due diligence of the candidate and the proposal
+Increased ROI at programme level and individual funding level
+Improved additional KPIs at programme level and individual funding level
+o EIT Food decision velocity
+o EIT Food resources utilised
+o Proposing Candidate's satisfaction on process
+Collaboration and Team Dynamics: Increased effectiveness and (cross-functional) team collaboration on funding decisions, evidenced by participant feedback and project outcomes. Training provided on continual usage of the delivered financial tool will also enable streamlining of goals & communications
+Organisational Impact: Contribution to EIT Food's core objectives, evidenced by impact and revenue KPIs (e.g. revenue, partnership recruitment, 3rd party co-funding acquisition, impact case studies)
+Critical, quantifiable inputs into EIT Food's 2026+ investment strategy and operational improvements including co-development of advanced food system-level modelling to provide EIT Food unmatched value and ecosystem building capability and a holistic, portfolio investment capability
+Clear measurement framework (see Section 8 Appendices for details)
+
+
+OUR TEAM, QUALIFICATIONS, AND EXPERIENCES
+
+Earthbase has assembled an expert internal and partner team with extensive experience in commercial models and initiative funding expectations across global corporations, startups, accelerators, and impact organisations. Our team brings deep expertise in food systems, agritech, climate, cloud, and AI innovation, including experience working directly with EIT Food as well as other leading organisations such as Accenture, Dalberg, PwC, KPMG, Google, and Microsoft.
+This diverse expertise enables us to design and deliver the right high-level work tailored to EIT Food's mission, empowering its innovation staff to drive change in the global food system. The tables below provide an overview of team.
+KEY PERSONNEL
+Team Member: Mark Hodgson
+Project Role & Responsibilities: Project Director
+
+Relationship management lead
+Commercial DD analysis
+Escalations
+Experience:
+20+ years in Digital/ Cloud Technology (Microsoft, Google), incl. extensive leadership and management experience
+10+ years in accelerating agrifood, supply chain, Cloud / AI & climate innovation ecosystems, corporates and startups: Cervest, Metail, Sustained.com, PES, TFT, Barry Callebaut, Wiliot, Agrimetrics, Wildly Tasty, Future Greens, Google's Startup for Sustainable Development programme, Tech Nation
+Prior engagement at EIT Food (2023/4 – partner programme value proposition)
+Location: London, UK
+
+Team Member: Matthias Muehlbauer
+Project Role & Responsibilities: Programme Lead
+
+Programme design and management
+Content development & delivery
+Leadership coaching
+Stakeholder relationships
+Programme evaluation
+Experience:
+10+ years commercial experience across consulting, sustainability, climate tech
+Co-Founder and COO of OPF, New-York headquartered Climate Advisory and Training firm
+Landscape Analysis, Stakeholder mapping & Strategy across projects with TELUS, Rivian Foundation, Ellison Institute of Technology, WWF, Bank of New York Mellon, American Society of Mechanical Engineers
+PwC Australia
+Yale MAM and Hitotsubashi University MBA, University of Melbourne, Monash University
+OPF, an Earthbase partner
+Location: New York, USA
+
+Team Member: Neil Yeoh
+Project Role & Responsibilities: Commercial Model Lead
+
+Pricing evaluation
+Term sheet development
+Analysis of commercial models
+Experience:
+12+ years management and consulting experience at Dalberg, Accenture & KPMG
+Ex-Portfolio Manager at Echoing Green, a $10m Climate Fund, and has reviewed over 2000 startup ideas, invested in ~70 companies
+Founder of New-York headquartered Climate Advisory and Training Firm, OPF
+Strategy projects across Sanofi, Travelers Insurance, L'Oréal, H&M, New Balance, FAI
+Emissions Allocation Methodology for the Cattle Supply Chain
+Yale MEM, University of Oxford MBA, University of Adelaide
+OPF, an Earthbase partner
+Location: London, UK
+
+Team Member: Jack Kozyrski
+Project Role & Responsibilities: Research & Analysis Lead
+Experience:
+
+3+ years sustainability consulting experience
+Landscape Analysis for Climate Tech Due Diligence, Allocation Methodology, including stakeholder mapping and analysis for Food & Ag. Global Cattle Supply Chain
+Yale MBA, University of Michigan B.Eng
+OPF, an Earthbase partner
+Location: New York, USA
+
+Team Member: Partha Bose
+Project Role & Responsibilities: Portfolio Design & Finance Expert
+Experience:
+
+University of Oxford, Doctoral Thesis: Patterns of Linkage Disequilibrium and Population Structure across Different Populations
+15+ years' AI, Data Science, Financial & Data Modelling, Strategy, Change Management & Digital transformation at eBay, Cervest, Beamly, Argos
+Earthbase Advisor
+Location: London, UK
+
+
+FINANCIAL OFFER
+
+Our financial offer is outlined below in Euros. The costs cover all resource costs, with VAT stated separately.
+Total Fee - VAT not included: € 54,375
+VAT (20%): € 10,875
+A detailed financial breakdown is provided in the spreadsheet, "Earthbase - Financial Offer - EIT Food - Commercial due-diligence and innovative financing instruments for impact.xlsx", which accompanied this document in our submission email to Peter Groothius on February 14th, 2025.
+We believe our work is highly cost-effective, industry-competitive, and high-impact within the budget allocated.
+
+FINAL REMARKS
+
+EIT Food is a critical player in driving systemic and sustainable change across the global food system, and we do not underestimate the importance of being a partner who you can trust to help get the work done.
+We are committed to help you improve and manage highly efficient, well-regarded funding mechanisms to support the widest-possible sustainable innovation development and impact in the food system. With that in mind, we will ensure you get:
+
+accountability from the get-go: named individuals across the project team, with a clear project plan to hold us to account by
+the right skills and ethos: all team members are aligned to the mission, and individually bring the span of specific skills required for this project. They are fully indemnified and supported throughout
+value: this will be a high quality, cost-effective implementation.
+
+If you have questions on this proposal, feel free to contact Mark Hodgson via email, mark@earthbase.earth
+Thank you for your consideration.
+Mark Hodgson.
+Founder and Managing Director, Earthbase.
+
+APPENDICES
+
+CONTENTS:
+A. MEASUREMENT FRAMEWORK
+B. EXAMPLES OF RELEVANT WORK / PROJECTS
+C. LONGER TERM MODELLING INNOVATION FROM EARTHBASE
+A. MEASUREMENT FRAMEWORK
+To ensure that this project is both effective and impactful, we propose a Measurement Framework that tracks progress, ensures alignment with the programme's objectives, and evaluates the long-term benefits of the financial instruments.
+From the outset, we will align to EIT Food's KPIs, to measure success and refine the programme in real time through all stages and final review, ensuring we are driven by outcomes and the work remains relevant to organisational goals.
+This will include:
+
+Outcome-based design: Ensuring the programme is tailored to meet the needs and goals of participants.
+Easy to understand and use financial modelling tools to assess commercial capability of any applicant, and where best the applicant fits in the scheme.
+Term-sheet construction: present and test incremental changes to the existing mechanisms-pricing model, segmentation, payback horizons/terms, ROI terms etc by analysing and integrating prior customers and financing mechanism success in each instance. Build / revise existing terms based on deeper understanding of the commercial status of each applicant and their proposal
+Evaluating ROI across all investments past and future, to identify successful characteristics and to tune SSM and financial model mechanics
+Periodic review with EIT Food to ensure that KPIs are aligning with focus areas and providing insights beyond returns and overall financial performance
+
+B. EXAMPLES OF RELEVANT WORK / PROJECTS
+Commercial Due Diligence:
+
+Obtaining pre-seed to Series B funding through Financial & Commercial DD: Cervest, Metail, Wildly Tasty, Future Greens, Antler Bio, Wildfarmed, Ruumi, Agrimetrics (transition from public to private funding sources)
+Improving Agrifood Startup GTM strategy and execution: Agricarbon, Wildly Tasty, Sustained, PES Technologies
+Improving NGO / Innovation Agency commercial models and GTMs: CGIAR, Bioversity Alliance (Climate Resilience Platform assessing climate hazard impact on crop yield), EIT Food (Corporate and Academic Partner Programme value proposition)
+Increasing sales velocity: commercial and licensing contract improvements: Microsoft Enterprise Agreements and public sector outsourcing deals, Google Cloud Partner Programme unit economics assessment
+Created investment strategy with executive leadership and supported deployment of initial $10m of funding: Supported Rivian Foundation on initial due diligence methodology, criteria, and approach, and assessed and ranked 10 investments in Nature-based solutions opportunities
+Ran diligence project on key climate technology partners: worked with Travelers Insurance' Energy division to develop key selection criteria & methodology, vetted 20 climate-tech startups focused on methane and carbon accounting solutions, and identified the top 5 technologies for both solution areas
+
+Modelling & Tools:
+
+Built a robust profit-sharing DCF model for large-scale agroforestry development: Developed distinct methodology integrating carbon growth, environmental science and business & financial modelling best practice to develop a financial model that could enable partnership negotiation between Canadian Telecommunication conglomerate and potential technology partner
+Built an environmental and financial DCF model to compare virgin vs recycled PET material for New Balance: Integrated existing product and sales data, material inputs and emission factors from databases such as Ecoinvent, and built a scenario modeller with multiple cases to enable global procurement planning decisions
+Profiled prominent climate impact investors and funds (e.g. Autodesk Foundation, Elemental Excelerator, Climate-KIC, Generation Investment Management) to evaluate their needs for forward-looking GHG emissions measurement tool, CRANE Tool
+Developed an on-farm emissions methodology and measurement tool for World Wildlife Fund: Developed a life-cycle-assessment model integrating regional farmers from the Pampas region of Argentina to model out Scope 3 on-farm emissions, integrating leading cattle supply chain regulations and best practice
+Re-designing emissions measurement, tracing, and allocation methodology of agrifood industry: FAI & Standard Soil paper in circulation process, covering the US beef / cattle supply chain
+
+Funding proposals for Agrifood, Climate, and AI projects/initiatives/product development:
+
+To / with VCs: 3Ventures, TFT Ventures, Molten, Future Positive Capital, Astenor
+To grant-giving bodies: Innovate UK (Metail), Newton Fund (Colco project, Colombia) Ellison Institute of Technology (Commercial DD on battery startup; built investment strategy across 3 themes)
+
+Training materials & delivery:
+
+Trained 5000+ sustainability professionals globally, including 800+ across 50 countries via OnePointFive's flagship program OPF Academy and Climatebase Fellowship, covering topics ranging from Corporate Sustainability to Climate Innovation (E.g. Food & Agriculture, Nature-based Solutions, Energy, Climate Finance etc.) As recognised in LinkedIn's 2024 Green Skills Report
+Designed executive, management & staff training on topics ranging from Climate Finance, GHG Accounting, Emissions Measurement, Food & Agriculture and Climate Innovation
+Pilot ongoing with Enterprise Software Company Cisco to launch GHG Accounting training course to 3 million global learners
+
+C. LONGER TERM INNOVATION FROM EARTHBASE
+Advanced innovation funding and collaboration decision-making
+Earthbase sees huge potential for EIT Food, in their position as system thinkers looking at food system impact through multiple points of innovation, to be able to model and analyse multi-dimensional economic, financial and environmental systems as a way to produce competitively-advantageous funding decisions across their for the SSM/IFF mechanisms, plus provide data-driven decisions on other critical aspects of their business, such as partner selection, programme co-development, and international expansion strategy.
+EIT Food, like many organisations, face the challenge of understanding and analysing complex environmental, economic, and social systems, due to the multi-dimensional nature of the questions they are seeking to answer. For example, EIT Food decision makers responsible for identifying which areas of food innovation to focus on to drive the mission must include in their opportunity and risk calculus both known and potential economic and policy changes and future scenarios, in an ever-changing climate and technology landscape. A complete approach may reduce the risk making partially informed business critical decisions, instead resulting in a higher ROI and attracting more investment from wider private and public sources.
+In 2025, Earthbase and its development partners (Syndetic and OPF) will be seeking pilot candidates to test a new AI modelling environment containing various modules describing how different sectors of the economy interact with each other and the environment.
+These 'modules' bridge the gap between economic, environmental, and technological policies, offering insights into the long-term consequences of different policy pathways. We believe that the pilot could rapidly test and prove the value for EIT Food:
+
+Interdisciplinary modelling: We'd provide a framework where EIT Food can explore complex interactions across different sectors and policies relating to the issue they are dealing with, for example a startup seeking funding, as well as creating comprehensive models that include variables from related production systems and sectors: energy, product manufacturing, climate, agronomics, transportation, storage, waste, and so on
+Decision-making support: EIT Food could simulate different policy scenarios and their impacts on a specific innovation area through their influence on the economy, the environment, and technology
+High adaptability: we'd provide a toolset is tailored to EIT Food's specific needs and business processes/infrastructure
+
+End of Document
+EIT Food - SoW attached to FA - Commercial DD & Innovative Financing Instruments | Earthbase LTD
+Final Audit Report 2025-03-24
+Created: 2025-03-24 (Central European Time)
+By: EIT Food Legal Department (contracts@eitfood.eu)
+Status: Signed
+Transaction ID: CBJCHBCAABAAPV10YJ5bCsnA0rnMHWx3zX8VdRlEsFfZ
+"EIT Food - SoW attached to FA - Commercial DD & Innovative Financing Instruments | Earthbase LTD" History
+Document created by EIT Food Legal Department (contracts@eitfood.eu)
+2025-03-24 - 11:32:24 GMT+1- IP address: 213.224.22.9
+Document emailed to richard.zaltzman@eitfood.eu for signature
+2025-03-24 - 11:35:22 GMT+1
+Document emailed to nicolas.perrin@eitfood.eu for signature
+2025-03-24 - 11:35:22 GMT+1
+Document emailed to mark@earthbase.earth for signature
+2025-03-24 - 11:35:23 GMT+1
+Email viewed by mark@earthbase.earth
+2025-03-24 - 11:49:49 GMT+1- IP address: 82.35.68.122
+Email viewed by nicolas.perrin@eitfood.eu
+2025-03-24 - 11:57:32 GMT+1- IP address: 109.88.75.46
+Signer nicolas.perrin@eitfood.eu entered name at signing as Nicolas Perrin
+2025-03-24 - 11:58:52 GMT+1- IP address: 109.88.75.46
+Document e-signed by Nicolas Perrin (nicolas.perrin@eitfood.eu)
+Signature Date: 2025-03-24 - 11:58:54 GMT+1 - Time Source: server- IP address: 109.88.75.46
+Email viewed by richard.zaltzman@eitfood.eu
+2025-03-24 - 14:20:28 GMT+1- IP address: 104.47.11.254
+Signer richard.zaltzman@eitfood.eu entered name at signing as Richard Zaltzman
+2025-03-24 - 14:21:05 GMT+1- IP address: 87.75.163.136
+Document e-signed by Richard Zaltzman (richard.zaltzman@eitfood.eu)
+Signature Date: 2025-03-24 - 14:21:07 GMT+1 - Time Source: server- IP address: 87.75.163.136
+Signer mark@earthbase.earth entered name at signing as Mark Hodgson
+2025-03-24 - 14:49:49 GMT+1- IP address: 159.65.54.53
+Document e-signed by Mark Hodgson (mark@earthbase.earth)
+Signature Date: 2025-03-24 - 14:49:51 GMT+1 - Time Source: server- IP address: 159.65.54.53
+Agreement completed.
+2025-03-24 - 14:49:51 GMT+1

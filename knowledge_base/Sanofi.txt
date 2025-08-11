@@ -1,0 +1,175 @@
+
+Project Proposal November 19th, 2024 Draft v1.2
+Sanofi MPP CSR Impact Measurement
+Table of Contents: I. Our Understanding 1 II. OnePointFive Company Background 2 III. Detailed Project Plan, Milestones, & Outputs 3 Summary of Milestones for MPP Phase 1 Project Effort 4 IV. Preliminary Project Scoping & Approach 5 Pre-Launch CSR Impact Strategy & Set-Up 5 Launch: CSR Data Collection & Impact Assessment Modeling 6 Post-Launch: CSR Data Insights, Recommendations & Communication 7 V. Detailed Commercials Breakdown 8 VI. Our Engagement Agreement Clauses 10 VI. Engagement Team, References & Experience 10 Engagement Team & Our Expert Network 10 Customer & Organizational References 12 2023 Past Project Work with Sanofi 12
+I. Our Understanding
+Over the past few years, Sanofi has been developing innovative Digital Healthcare (DHC) solutions to expand global access to quality healthcare, and address broader unmet needs. At the forefront of Sanofi's DHC developments is a new digital platform with two distinct programs, the Managed Patient Program (MPP) and Life Management Program (LMP), which aim to enhance care through optimizing education and support resources for patients and caregivers. The MPP is designed to consolidate various branded patient programs into a single, streamlined digital program, with a planned launch in early-to-mid 2025 in India and Spain. The LMP focuses on broader well-being of patients, their families, and caregivers beyond just disease treatment, with an unbranded and universal approach, and will be launched sometime after the MPP launch.
+Sanofi has significant opportunities to deliver measurable environmental and social impacts at a global scale by integrating CSR indicators into MPP and LMP programs during product development stages. Nonetheless, Sanofi requires seasoned sustainability expertise and experience to develop impact measures, data collection needs, and methodologies to quantify and communicate environmental & social impact outputs. OnePointFive is well-positioned to serve Sanofi in providing sustainability expertise and technical guidance, and has worked with Sanofi previously to build an emissions model & assess CSR (i.e. social & ethical) impacts. Our work will enable Sanofi to:
+	1	Quantify environmental & social impacts aligned with MPP and LMP program offerings to enhance patient & caregiver benefits beyond traditional health outcomes, including: a) (Phase 1, this proposal) For MPP, environmental impacts may include avoided emissions achieved through optimizing care, and avoiding hospitalizations and in-person doctor visits. Social impacts may include improved quality of life for patients and caregivers from decreased medication and medication administration needs, and the opportunity to reach patients in remote/distant areas where visiting their HCPs or getting educator support is more difficult. b) (Phase 2, future proposal) For LMP, environmental impacts may occur across a patient care pathway and due to lifestyle choices, such as by adjusting diet, adopting exercise routines, engaging caregivers, and engaging in better health & wellbeing practices. Additionally, the program intends that patients from all backgrounds have equal access, are equally valued, and have the same opportunities as others to receive care, emphasizing social and equity impact.
+	2	Publicly communicate environmental and social impact achievements, enhancing Sanofi's overall sustainability narrative and progressing on existing SMI commitments
+	3	Lead the global healthcare sector in delivering significant sustainability outcomes, catalyzing the sector to take accountability for its global emissions & CSR impacts
+Sanofi's MPP and LMP programs present a unique opportunity to deliver substantial environmental and social value and establish sustainability leadership in the healthcare sector. However, Sanofi must leverage the product development phase to fully realize sustainability impacts, positioning itself ahead of competitors in an increasingly sustainability-driven market.
+II. OnePointFive Company Background
+OnePointFive (OPF) is a US-based, climate advisory & academy firm providing access to remote, vetted multidisciplinary expert teams to deliver climate strategy, modeling, technology, finance, and business-related policy projects. We have a full-time team of experienced management, environmental and business-policy consultants, and a roster of 800+ trained and activated climate experts within our network across 50 countries, who we engage as subject matter experts to bolster our project outcomes. Our collective mission is to help organizations unlock sustainable growth through intentional climate solutions developed by vetted climate experts.
+OnePointFive is a small business, 100% minority, and immigrant owned. We have incorporated justice, equity, diversity and inclusion (JEDI) approaches into our values, and formation of our Experts-In-Residence Network, with >50% of professionals who are female, BIPOC or living in the Global South. We recognize and elevate critical voices needed to recommend and implement climate solutions with our customers. With remote technology embedded into our operations, we also create more opportunities to engage people and expertise from diverse backgrounds to deliver better outcomes for communities and the planet.
+OnePointFive currently works with organizations — including Fortune 500, small to midsize companies, multinational nonprofits, and climate technology companies — located across Europe, US and Asia Pacific.
+Our core team has over 60+ combined years of business, environmental, and policy experience and includes graduates from Oxford, Yale & Cornell Universities, with consulting experience at firms such as Accenture, KPMG, PwC, EY, and Dalberg.
+We have also provided customer & organizational professional references from L'Oréal, MunichRe Ventures, and ASME (see "Customer & Organizational References"), who can be available upon request to attest to our team at OnePointFive, including our project work delivery, management, and relevant expertise. We have also included relevant case study examples of our project work within "2023 Past Project Work with Sanofi" aligned with the needs above.
+III. Detailed Project Plan, Milestones, & Outputs
+Sanofi MPP (Phase 1) CSR Impact Measurement Project Plan
+2025 2026 Jan | Feb | Mar | Apr | May | Jun | Jul | Aug | Sep | Oct | Nov | Dec | Jan | Feb | Mar
+Jan 20. Project kick-off | Feb 24. Define CSR data input needs | Apr 21. Integrate data collection into MPP platform | Jun 30. Start CSR data collection for MPP program patients | Feb 27. Align on and finalize CSR insights, recommendations
+Feb 10. Identify key instances in MPP journey | Mar 10. Gather feedback & refine CSR data collection process | Jul 18. Setup LCA model & CSR impact measurement analysis | Jan 5. Assess data in LCA model & for CSR impacts | Feb 20. Complete & present on emissions and CSR impact results | Mar 6. Complete public communications guidance
+Phase #1: Managed Patient Program (MPP) | Phase #1 (continued): MPP
+	1	Pre-launch: CSR Strategy & Impact Assessment Design OPF pauses work effort to wait for patient data collection
+	•	Collect and analyze existing internal studies and research informing MPP development and current state of DHC tools in India & Spain
+	•	Understand the target patient profile(s) and pre-existing care journeys, if available, and compare to planned interventions and "missions" over the 4-6 month MPP span
+	•	Conduct external desktop research & analysis to inform environmental and social impact measurement approach
+	•	Integrate CSR impact measurement within MPP Service Touchpoints, and associated scenarios (e.g. with and without MPP) for emissions, environmental modeling (i.e. using LCA principles)
+	•	Identify key instances within the MPP patient journey and Service Touchpoints across 4-5 months for CSR-related data & information collection across social and/or environmental indicators
+	•	Conduct stakeholder interviews with Sanofi teams and digital healthcare partner (inc. MPP project & product teams) to understand current data collection methods, limitations & integration needs, and other considerations
+	•	Assess pre-launch data constraints and limitations (i.e. due to patient data privacy, regulatory) which may impact CSR data collection, and impact assessment modeling
+	•	Define initial hypotheses, build data collection inputs inventory, and develop initial data collection surveys to track CSR outcomes for MPP, including mix of standardized & localized elements for launch in India & Spain
+	•	Assess platform design blueprints to evaluate system requirements, provides recommendations to ensure effective integration, including mix of surveys and questions
+	•	Work with MPP team members to setup CSR data collection & measurement indicators directly in the platform (e.g. questions & surveys), and indirectly outside of the platform (e.g. care team scripts)
+	2	Launch: CSR Data Collection & Impact Assessment Modeling
+	•	Align CSR data collection approach and timeline with the MPP launch milestones and planned program functional updates
+	•	Outline how data & information should be collected, informing data collection design directly (e.g. from patients on the platform) or indirectly (e.g. from care team using scripts when interacting with patients)
+	•	Coordinate with MPP team members to launch iterative data collection process (e.g., in-platform surveys) aligned with MPP Service Touchpoints to inform impact measurement analysis and development
+	•	Provide sufficient time for data collection, checking in periodically for any issues or gaps to address
+	•	When sufficient data is collected, work with MPP team to extract and integrate data into a centralized place
+	•	Analyze results, iterate on user testing; assess patient responses related to environmental and social indicators
+	•	As needed, propose and conduct focus groups to gather additional information on lifestyle outcomes from targeted patient sub-populations
+	•	Build LCA model to quantitatively assess environmental indicators, and qualitatively assess social indicators
+	3	Post-Launch: CSR Data Insights, Recs & Comms
+	•	Analyze environmental and social impact assessments, and extract out key insights
+	•	Integrate insights into an executive-level presentation-style report, including limitations, assumptions & recommendations (e.g. local data & information needs)
+	•	Present recommendations and interim results to the MPP team and Sanofi leadership, informing how to improve CSR indicators and impact measurement for future expansion
+	•	Provide guidance on communicating CSR impacts of MPP for both internal and external audiences
+Phase #2: LMP (not in this scope, but for separate discussion as applicable)
+Summary of Milestones for MPP Phase 1 Project Effort
+Phase #1: MPP | Key outcomes | Key milestones
+Pre-launch: CSR Strategy & Impact Assessment Design
+	•	Map a single cross-geographic Patient Care Pathway (PCP) for MP, aligned with Service Touchpoints, for environmental modeling
+	•	Identify key instances within the MPP patient journey across 4-5 months for CSR-related data & information collection across social and/or environmental indicators
+	•	Define the data & information elements to collect to integrate into environmental model, including scripts, questions & surveys
+→ Jan 20, 2025. Project kick-off meeting → Feb 10, 2025. Identify key instances in MPP journey → Feb 24, 2025. Define CSR data input needs
+Launch: CSR Data Collection & Impact Assessment Modeling
+	•	Outline how data & information should be collected, directly (e.g. from patients on the platform) or indirectly (e.g. from care team using scripts when interacting with patients)
+	•	Define how data & information is integrated with the MPP UX as defined by the Sanofi team
+	•	Build an environmental model (i.e. using LCA standards & principles) and detail social impact indicators
+→ Mar 10, 2025. Gather feedback & refine CSR data collection process → Apr 21, 2025. Integrate data collection into MPP platform → Jun 30, 2025. Launch CSR data collection for MPP program patients → Jul 18, 2025. Setup LCA model & CSR impact measurement analysis → Jan 5, 2026. Assess data in LCA model & for CSR impacts
+Post-Launch: CSR Data Insights, Recommendations & Communication
+	•	Prepare environmental & social insights, results & recommendations into presentation-style report
+	•	Present to Sanofi team on CSR impact results limitations & assumptions, and recommendations going forward (e.g. local data & information requirements)
+	•	Provide public communication guidance of CSR impacts from MPP to internal and external audiences
+→ Feb 20. Complete & present on emissions and CSR impact results → Feb 27. Align on and finalize CSR insights, recommendations → Mar 6. Complete public communications guidance
+IV. Preliminary Project Scoping & Approach
+Pre-Launch CSR Impact Strategy & Set-Up
+The first phase of the project will define a CSR Impact Strategy and key impact indicators for Sanofi, tailored to MPP and LMP program capabilities and based on a single cross-geographic PCP mapping. OnePointFive's prior work with Sanofi in developing an emissions model to assess Type 2 Diabetes PCPs in Taiwan and Japan provides a solid foundation for this strategic work. Our findings—such as identifying emissions hotspots in the PCPs, assessing environmental, social and ethical impacts, and clarifying data needs— make us well-positioned to develop the CSR strategy and impact indicators to integrate within MPP and LMP. The table below outlines initial hypotheses for how MPP and LMP can enhance environmental, and social outcomes:
+MPP (Phase 1, this proposal) | LMP (Phase 2, not in scope in this proposal) ^
+Environmental Emissions reductions from reduced in-person Doctor's Visits, as these were the top driver of PCP emissions in Taiwan & Japan and DHC solutions have the potential to reduce in-person visits
+Avoided emissions by optimizing care and reducing hospitalizations, given proxy studies from Sanofi's US DHC rollout showed the potential to significantly reduce the frequency of hospitalizations
+Reduced waste in long-term from improved health outcomes, achieving environmental savings by optimizing care and using less resource-intensive options (e.g., no medication, oral medication)
+Emissions reductions from behavioral changes, such as by adopting a plant-based or seasonal diets
+Emissions reductions from sustainable transportation choices, such as opting to walk, bike, or carpool to appointments, instead of driving independently, can contribute to significant emissions reductions
+Environmental benefits from community activities, such as recommending community-focused actions like clean-up events or outdoor fitness classes that provide positive environmental impacts
+Other environmental savings, beyond emissions, tied to behavioral changes such as from shifting exercise and diet preferences
+Social Increased access to disease management information through digital connectivity, particularly expanding accessibility for underserved populations, such as those living in rural areas
+Improved treatment adherence and patient engagement through remote patient monitoring, medication tracking, and goal-setting tools that enhance health outcomes
+Increase in community engagement via app integrations and conversation forums
+Decrease in response time between patients and doctors, enabled by digital connectivity
+Increase in engagement of caregivers, helping to advance treatment adherence
+Greater autonomy over personal data with control over its use within the data marketplace and related integrations within the LMP
+Delayed need for treatment management & titration from improved health outcomes, contributing to patient autonomy over lifestyle
+^hypotheses to align on at a later date as LMP gets setup
+Note: Ethical principles should be integrated into platform design and functions, aligning with Sanofi's defined RAISE principles and guidelines set by Sanofi's two established governance bodies ensuring responsible development and use of digital solutions: Interim Responsible AI Governance (IRAG) for high-risk Artificial Intelligence (AI) projects, and the Responsible Innovation Governance (RIG).
+Launch: CSR Data Collection & Impact Assessment Modeling
+The second phase of the project calls for developing the data collection inputs to integrate defined environmental and social impact indicators into MPP and LMP programs. Specifying data collection needs and impact quantification methodologies is essential for Sanofi to quantify achieved environmental and social impacts over time and publicly communicate progress to define sustainability leadership against competitors.
+The table below outlines potential data & information to collect for the environmental modeling & CSR impact assessment aligned with MPP and LMP program capabilities and local nuances:
+(Prospective) Data Collection & Metrics | Testing
+Environmental Impact Reduced In-person Doctor Visits → Number of avoided visits due to telehealth features → CO₂ emissions saved from reduced patient travel
+Reduced Hospitalizations → Decrease in hospitalization rates among users
+DHC energy consumption → Potential increase in energy consumption from DHC technologies + mobile app
+Visit trends → Baseline in-person Doctor Visits pre-MPP / LMP → # in-person Doctor Visits with MPP / LMP → # virtual Doctor Visits pre-MPP/LMP → # virtual Doctor Visits with MPP/LMP
+Environmental impact of DHC → Internet to smartphone-related usage → Electricity required for data upload, download, & storage processes
+Patient transportation, baseline + with DHC → Average transportation mode(s) to hospitals / clinics and pharmacies → Average round-trip distance traveled to hospitals / clinics and pharmacies
+Social Impact Accessibility → Number of users from rural and remote areas → Number of users from underserved populations (e.g., low socioeconomic background)
+Patient Engagement Levels → Frequency of app usage, participation in support forums
+Treatment Adherence Rates → Self-reported improvement percentages
+Equity of Access → Demographics of user base
+Lifestyle Changes → Number of users adopting healthy habits (e.g., exercising, healthy dietary habits, etc.)
+User Surveys and Feedback Forms → Data on satisfaction, engagement, and perceived benefits
+App Usage Analytics → Frequency and duration of app interactions
+Health Outcome Tracking → Self-reported health improvements (i.e. weight, HbA1c, Blood glucose levels)
+Demographic Studies → Reach among various socio-economic groups and by gender
+Focus Group Discussions → Qualitative insights from users and caregivers
+OnePointFive will work closely with Sanofi to integrate defined data collection needs into the programs, ensuring alignment with impact quantification methodologies and platform designs. Post initial data collection, OnePointFive will evaluate leverage points for Sanofi to optimize environmental & social impacts aligned with defined CSR impact indicators. The data collection and analysis phase of the project will inform development of the Life-Cycle Assessment model, enabling quantification of environmental impacts.
+Post-Launch: CSR Data Insights, Recommendations & Communication
+The third and final phase of the project will evaluate environmental and social impact modeling results to quantify how MPP and LMP offer value beyond traditional health outcomes. OnePointFive will consolidate key findings and recommendations from model results to inform Sanofi on key leverage points where MPP and LMP programs, and the app integrations within them, can promote further environmental and social outcomes. These recommendations and results will be detailed in a presentation deck and/or report, in addition to communications guidance, to ensure Sanofi can publicly communicate study findings to promote additional value-adds of MPP and LMP programs.
+The below graphic exemplifies how program integrations could drive additional value promoting environmental and social impacts.
+Impact | Sustainable Transportation: | Plant-based Diets:
+Description | Informing platform users of sustainable transportation options could contribute to avoided emissions and optimize health outcomes (i.e. by walking or biking to appointments) | Providing options for platform users to adopt plant-based diets can enhance environmental and health outcomes, as plant-based diets can lead to 75% reduction in climate-heating emissions
+Ex. Graphic | [Map/transportation interface showing route options] | [Diet/nutrition app interface showing plant-based options]
+Sources: (Guardian, 2023), (CNN, 2024), (LinkedIn, 2024)
+Connecting the above examples to tangible data collection inputs and impact indicators is essential for Sanofi to quantify environmental and social impact outcomes driven by MPP and LMP programs.
+V. Detailed Commercials Breakdown
+Based on the above project brief, OnePointFive proposes the following pricing (see detailed table further below) to be delivered within a ~11 month period between January to late December. The work will be delivered for the Managed Patient Program, with a total project commercial cost of $USD 141,870
+We generally work with our customers using a fixed project rate accounting for the project scope, expected timeline, team resourcing requirements, and the complexity and expert needs for a given project or initiative. Our OnePointFive engagement team works closely with our customers' engagement team as a fractional addition to their existing team to successfully deliver project work on time, and in-line with a jointly agreed-upon project timeline and scope. As per Sanofi's project contracting procedures, we propose aligning invoices with key project milestones (See II. Detailed Project Plan, Timeline with Key Milestones) at the end of each project work phase. OnePointFive will follow Sanofi's Finance / Procurement teams & vendor platform guidance to process invoices, including currency conversion calculations (as required).
+| Project Phase | Invoicing By Project Milestone | Project invoice (% of total) | Project Invoice ($)
+1 | Pre-Launch: CSR Strategy & Impact Assessment Setup Jan 20, 2025. Project kick-off Feb 10, 2025. Identify key instances in MPP journey | 20% | $28,374.00 Feb 24, 2025. Define CSR data input needs Mar 10, 2025. Gather feedback & refine CSR data collection process | 20% | $28,374.00 Apr 21, 2025. Integrate data collection into MPP platform
+2 | Launch: CSR Data Collection & Impact Assessment Modeling Jun 30, 2025. Start CSR data collection for MPP program patients | 20% | $28,374.00 Jul 18, 2025. Setup LCA model & CSR impact measurement analysis OPF pauses work effort to wait for patient data collection Jan 5, 2026. Assess data in LCA model & for CSR impacts | 20% | $28,374.00
+3 | CSR Data Insights, Recs & Comms Feb 20, 2026. Complete & present on emissions and CSR impact results Feb 27, 2026. Align on and finalize CSR insights, recommendations | 20% | $28,374.00 Mar 6, 2026. Complete public communications guidances
+Grand Total: | 100% | $141,870.00
+Below is an estimate of the fees per project scope item, applying a ~40% discount from our commercial rates, generally offered to mid-cap organization customers. We propose these rates given our working relationship. Note that time spent by the OnePointFive engagement team, by position and per week, will likely vary week by week, but the commercial rate for the project will remain fixed, to ensure that we are delivering on project outcomes over time spent.
+Breakdown by number of working days
+Working Days by Phase / Role Project Phase | Partner | Director | Associate | Sub-Total by Phase
+	1	Pre-Launch: CSR Strategy & Impact Assessment Setup | 3.50 | 7.75 | 15.50 | 26.75
+	2	Launch: CSR Data Collection & Impact Assessment Modeling | 3.50 | 11.00 | 20.00 | 34.50
+	3	CSR Data Insights, Recs & Comms | 2.00 | 3.50 | 5.50 | 11.00 Sub-total by Role: | 9.00 | 22.25 | 41.00 Grand Total: | 72.25
+Cost by Phase / Role Project Phase | Partner | Director | Associate | Sub-Total by Phase
+	1	Pre-Launch: CSR Strategy & Impact Assessment Setup | $9,450.00 | $19,530.00 | $23,250.00 | $52,230.00
+	2	Launch: CSR Data Collection & Impact Assessment Modeling | $9,450.00 | $27,720.00 | $30,000.00 | $67,170.00
+	3	CSR Data Insights, Recs & Comms | $5,400.00 | $8,820.00 | $8,250.00 | $22,470.00 Sub-total by Role: | $24,300.00 | $56,070.00 | $61,500.00 Grand Total: | $141,870.00
+OPF Position | Partner | Assoc. Director | Associate / Expert Day rate (75% of full rate) | $3,375.00 | $2,925.00 | $1,950.00 Hourly rate | $421.88 | $365.63 | $243.75
+VI. Our Engagement Agreement Clauses
+As per Sanofi's guidance, below are a few additional engagement clauses to this project proposal to align with project agreement best-practices and to ensure work is completed confidentially, and on-time with quality. Within this, OnePointFive will:
+	•	Personnel Continuity Clause: Should unforeseen circumstances such as illness, resignation, or termination lead to the unavailability of initially assigned OnePointFive consultant(s), we will promptly ensure resource continuity by providing equivalent, qualified replacements. This ensures project progression, quality, and timeliness are not compromised. Both OnePointFive and the Client recognize the importance of continuity and commit to facilitate smooth personnel transitions when needed
+	•	Confidentiality Clause: OnePointFive commits to maintain strict confidentiality of all Client's project-related information, including business data, strategies, operations, financials, and intellectual property. The use or disclosure of such information to third parties will not occur without the Client's prior written consent, and this obligation persists post-project completion
+	•	Purchase Order and Payment Terms Clause: OnePointFive acknowledges that the purchase order under this agreement will be issued from the United States. Upon receipt of valid invoices for services delivered by OnePointFive, Sanofi agrees to remit payment within a period of 90 days from the invoice submission date.
+VI. Engagement Team, References & Experience
+Engagement Team & Our Expert Network
+Neil is the CEO and Founder of OnePointFive (opf.degree). Neil is a climate expert and investor. He has over a decade of experience in environmental consulting across four continents and previously managed a $8.5 million climate startup investment portfolio at Echoing Green. Neil has reviewed over 2,000 climate-related startup applications, investing in and advising 70 companies globally. His expertise includes developing financial and life cycle analysis modeling tools for consumer product companies, leading GHG reduction initiatives, and aligning OnePointFive's offerings with ISO 14000 standards and the GHG protocol. Neil holds advanced degrees in Environmental Management from Yale University and an MBA from Oxford University.
+Julia is an Associate Director at OnePointFive with 6+ years of business consulting experience at EY. She leads sustainability strategy and operations projects, including Scope 1-3 GHG emissions calculations, LCA model development, and implementation plans for consumer product clients. Julia recently worked with a Fortune 500 company to create a bespoke emissions model and has developed and leads teaching of OnePointFive's GHG Accounting curriculum. A Cornell graduate, Julia specializes in sustainable food systems and has taught over 700 fellows on climate-related topics. She is a native Russian speaker and proficient in Spanish.
+Abby is a Strategy Associate at OnePointFive, specializing in Greenhouse gas (GHG) accounting, Life-Cycle Assessment (LCA), and corporate sustainability regulations & disclosure topics. She developed an LCA model for a Fortune 500 pharmaceutical company to assess emissions from managing Type 2 Diabetes, and supported Scope 3 Financed Emissions calculations for an asset management firm. Abby is fluent in English and Spanish, holds a degree from Cornell University where she graduated magna cum laude, and contributes to the GHG Accounting and LCA courses for OnePointFive academy.
+Jack is a Strategy Associate at OnePointFive, focused on developing strategies for climate action and evaluating technical environmental solutions. He supports clients in GHG accounting and LCA model development and is pursuing an MBA at Yale with a focus on renewable energy finance. Jack previously worked at Duke Energy, where he modernized nuclear plant operations, and holds dual degrees in Mechanical and Industrial Engineering from the University of Michigan.
+Our Expert Network supports projects through interviews and specialized advice as needed, at no additional cost to ensure focus on client outcomes. Engagements with experts are confidential and governed by strict NDAs to protect client information.
+Our Trained Experts 800+ experts across 50 countries
+Snapshot of Expertise Domains & Areas
+Functions: → ESG / Sustainability Strat. & Ops → Financial & Environ. Modelling → GHG Accounting & LCA → Expert Research & Insights
+Sectors: → Renewable Energy Solutions → Built Environment → Eng & Nature Carbon Removal → Food & Agriculture
+Industries: → Consumer Products & Fashion → Medical & Pharmaceutical → Climate Tech, Hard / Software → Climate Finance & Investment
+~25% Scientists ~25% Academics ~12% Engineers ~20% Product Mgrs ~2% Technical
+See more: opf.degree/experts
+Our Expert Network supports projects through interviews and specialized advice as needed, at no additional cost to ensure focus on client outcomes. Engagements with experts are confidential and governed by strict NDAs to protect client information.
+Customer & Organizational References
+References available on request from: small- to large- consumer product companies for whom we have recently developed GHG & LCA-related emission models
+Organization | Reference | Contact
+L'Oréal, research building management systems for tracking energy, water & waste for net zero goals, and renewable energy investment solutions | Alison Partie, Sustainability Director at L'Oréal | available on request
+MunichRe Ventures, research & delivery of carbon accounting & markets executive workshop, and go-to-market strategy for portfolio company HSB | Sabeeha Islam, Vice President of Portfolio Development | available on request
+ASME, calculating their Scope 1 & 2 emissions, and go-to-market for climate strategies & initiatives | Iana Aranda, Director of Engineering Global Development | available on request
+2023 Past Project Work with Sanofi
+In late 2023, OnePointFive worked with Sanofi's Global CSR team to develop a detailed comparative Life Cycle Assessment (LCA) model, and analyzed associated social & ethical outcomes. The LCA model evaluated the emissions impacts and avoided emissions potential of Type 2 Diabetes patients using DHC and non-DHC solutions in two countries, Taiwan (TW) and Japan (JP). This model set the foundation for OnePointFive to assess environmental, social & ethical impacts & benefits related to Sanofi's DHC rollout and scale. The table below outlines key insights, which establish the rationale for further work.
+Impact Areas | Key insights from TW & JP project
+Environmental → DHC solutions have potential to significantly reduce emissions from Doctor's Visits: Doctor's Visits are the #1 hotspot for emissions in TW & JP, and the potential for DHC solutions to reduce in-person doctor's visits would have significant emissions reduction impacts
+→ With the right interventions, DHC solutions could contribute to significant avoided emissions through avoided hospitalizations: Significant avoided emissions potential exists if DHC can reduce the frequency of patient hospitalizations, referencing proxy studies from Sanofi's US DHC rollout
+→ Targeted data collection is key in DHC rollouts to improve accuracy of emission calculations and confidence in communication of results: Data gaps were identified when building out the emissions model for TW & JP, limiting calculation accuracy and communication of results of Sanofi's DHC efforts. Setting up primary data collection strategies & approaches for DHC future rollouts, and ability to validate & public communicate claims
+→ Additional country assessments will help validate global vs. local nuances of DHC interventions: There are country-specific healthcare systems and local PCP cultural behaviors, which influence impact measurement assumptions. Further country assessments in the Asia region, will help stress-test model findings, and help validate global trends compare to local nuances, which must be accounted for to confidently measure & report CSR impacts & benefits
+Social → Unequal access to DHC for certain groups: DHC may be less accessible to rural, indigenous, and socio-economically disadvantaged patients, and older & visually impaired patients, due to variable needs for education, technology, language, etc.; solutions should be designed with these considerations in mind, to ensure they do not exacerbate existing issues
+Ethical → Sanofi has established governance bodies & principles to support high ethical standards with DHC rollout: Sanofi has established the Interim Responsible AI Governance (IRAG) body and RAISE principles to ensure the responsible development and use of DHC solutions to protect patients.
+→ Data privacy is top of mind for Sanofi patients: The RAISE principles ensure patients have rights to data privacy & protection of personal health information, and RIG is currently being set up to assess ethical, legal, intellectual property and data privacy considerations.
+Figures 1 & 2 below visually show emission hotspots, mitigation and avoided emissions reduction potential for T2D patients in TW and JP with DHC at scale, identified in our 2023 project work
+Emissions of Type 2 Diabetes Patients Over 1-Year, with 1 Reduced Doctor's Visit per Year, Comparing Taiwan & Japan Current States 2023 to Future States (Prospective 100% DHC)
+[Figure 1: Emissions] with DHC at-scale hotspots from T2D PCP including reductions (from reduced doctor's visits
+Emissions (including Avoided Emissions per Hospitalization Day) of Type 2 Diabetes Patients Over 1-Year, Comparing Future State (100% DHC) in Taiwan & Japan
+[Figure 2: Avoided emissions potential (from hospitalizations) identified for Taiwan & Japan with DHC at-scale
