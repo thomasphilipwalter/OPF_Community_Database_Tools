@@ -85,7 +85,9 @@ class KnowledgeBaseService:
                     raise Exception("Vector store is empty")
                     
             except Exception as e:
-                raise Exception(f"Knowledge base not initialized and could not be loaded: {e}. Please process company documents first.")
+                # Don't raise exception here - let the calling code handle initialization
+                print(f"Knowledge base not loaded: {e}")
+                self.vector_store = None
         
         # Retrieve more specific context (increased to 8 for better coverage)
         relevant_docs = self.vector_store.similarity_search(rfp_text, k=8)

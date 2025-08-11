@@ -754,6 +754,11 @@ class DatabaseSearchApp {
                                         <button class="btn btn-primary" onclick="app.generateAiAnalysis()">
                                             <i class="fas fa-robot me-2"></i>Generate AI Analysis
                                         </button>
+                                        <div class="mt-2">
+                                            <button class="btn btn-outline-secondary btn-sm" onclick="app.initKnowledgeBase()">
+                                                <i class="fas fa-database me-2"></i>Initialize Knowledge Base
+                                            </button>
+                                        </div>
                                     </div>
                                 `}
                             </div>
@@ -1499,6 +1504,100 @@ class DatabaseSearchApp {
                 </div>
             </div>
         `;
+    }
+
+    async initKnowledgeBase() {
+        try {
+            // Show loading state
+            const aiContent = document.getElementById('aiAnalysisContent');
+            aiContent.innerHTML = `
+                <div class="text-center">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <p class="mt-3">Initializing knowledge base...</p>
+                    <small class="text-muted">This may take a few minutes</small>
+                </div>
+            `;
+            
+            // Call the initialization endpoint
+            const response = await fetch('/api/init-knowledge-base', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            });
+            
+            const data = await response.json();
+            
+            if (data.success) {
+                this.showSuccess(data.message);
+                // Reset to the normal AI analysis interface
+                aiContent.innerHTML = `
+                    <div class="text-center">
+                        <button class="btn btn-primary" onclick="app.generateAiAnalysis()">
+                            <i class="fas fa-robot me-2"></i>Generate AI Analysis
+                        </button>
+                        <div class="mt-2">
+                            <button class="btn btn-outline-secondary btn-sm" onclick="app.initKnowledgeBase()">
+                                <i class="fas fa-database me-2"></i>Initialize Knowledge Base
+                            </button>
+                        </div>
+                    </div>
+                `;
+            } else {
+                this.showError(data.error || 'Failed to initialize knowledge base');
+                // Reset to normal interface
+                aiContent.innerHTML = `
+                    <div class="text-center">
+                        <button class="btn btn-primary" onclick="app.generateAiAnalysis()">
+                            <i class="fas fa-robot me-2"></i>Generate AI Analysis
+                        </button>
+                        <div class="mt-2">
+                            <button class="btn btn-outline-secondary btn-sm" onclick="app.initKnowledgeBase()">
+                                <i class="fas fa-database me-2"></i>Initialize Knowledge Base
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }
+        } catch (error) {
+            console.error('Knowledge base initialization error:', error);
+            this.showError('An error occurred during knowledge base initialization');
+            // Reset to normal interface
+            aiContent.innerHTML = `
+                <div class="text-center">
+                    <button class="btn btn-primary" onclick="app.generateAiAnalysis()">
+                        <i class="fas fa-robot me-2"></i>Generate AI Analysis
+                    </button>
+                    <div class="mt-2">
+                        <button class="btn btn-outline-secondary btn-sm" onclick="app.initKnowledgeBase()">
+                            <i class="fas fa-database me-2"></i>Initialize Knowledge Base
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+    }
+
+    async checkKnowledgeBaseStatus() {
+        try {
+            const response = await fetch('/api/knowledge-base-status');
+            const data = await response.json();
+            
+            if (data.success) {
+                if (data.status === 'initialized') {
+                    this.showSuccess(`Knowledge base is ready with ${data.document_count} document chunks`);
+                } else {
+                    this.showError('Knowledge base is not initialized');
+                }
+            } else {
+                this.showError(data.error || 'Failed to check knowledge base status');
+            }
+        } catch (error) {
+            console.error('Error checking knowledge base status:', error);
+            this.showError('An error occurred while checking knowledge base status');
+        }
     }
 }
 
