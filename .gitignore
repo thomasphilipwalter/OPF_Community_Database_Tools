@@ -44,3 +44,5 @@ flask_session/
 # Knowledge base and AI analysis
 # knowledge_base/
 chroma_db/
+
+output.txt
