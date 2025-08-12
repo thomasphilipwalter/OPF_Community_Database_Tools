@@ -1525,7 +1525,8 @@ class DatabaseSearchApp {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                }
+                },
+                body: JSON.stringify({})  // Send empty JSON object instead of no body
             });
             
             const data = await response.json();
