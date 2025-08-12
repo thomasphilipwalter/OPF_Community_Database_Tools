@@ -455,12 +455,12 @@ def ai_analyze_rfp(rfp_id):
                 _kb_initializing = True
                 try:
                     print("Knowledge base not initialized, initializing now...")
-                    doc_count = kb_service.process_knowledge_base("knowledge_base")
-                    print(f"Knowledge base initialization completed with {doc_count} document chunks")
+                    char_count = kb_service.load_knowledge_base("knowledge_base")
+                    print(f"Knowledge base initialization completed with {char_count} characters loaded")
                 finally:
                     _kb_initializing = False
             else:
-                print(f"Knowledge base already initialized with {status_result['document_count']} document chunks, proceeding with analysis")
+                print(f"Knowledge base already initialized with {status_result['char_count']} characters, proceeding with analysis")
         except Exception as e:
             print(f"Error during knowledge base initialization: {e}")
             # Ensure lock is released on error
@@ -641,39 +641,45 @@ def _check_knowledge_base_status():
     try:
         import os
         from app.services.knowledge_base import KnowledgeBaseService
-        from langchain_chroma import Chroma
         
         kb_service = KnowledgeBaseService()
         
-        # Try to load existing vector store if it exists on disk
-        if not kb_service.vector_store:
-            try:
-                # Check if the chroma_db directory exists and has content
-                if os.path.exists(kb_service.chroma_db_path):
-                    # Try to load the existing vector store
-                    kb_service.vector_store = Chroma(
-                        persist_directory=kb_service.chroma_db_path,
-                        embedding_function=kb_service.embeddings
-                    )
-            except Exception as e:
-                print(f"Could not load existing vector store: {e}")
-                pass
-        
-        # Check if knowledge base exists and has documents
-        if kb_service.vector_store and kb_service.vector_store._collection.count() > 0:
-            doc_count = kb_service.vector_store._collection.count()
-            return {
-                'success': True,
-                'status': 'initialized',
-                'document_count': doc_count,
-                'message': f'Knowledge base is initialized with {doc_count} document chunks'
-            }
-        else:
+        # Check if knowledge base directory exists and has text files
+        if not os.path.exists(kb_service.knowledge_base_path):
             return {
                 'success': True,
                 'status': 'not_initialized',
-                'document_count': 0,
-                'message': 'Knowledge base is not initialized'
+                'char_count': 0,
+                'message': 'Knowledge base directory not found'
+            }
+        
+        # Count text files in knowledge base directory
+        txt_files = [f for f in os.listdir(kb_service.knowledge_base_path) if f.endswith('.txt')]
+        
+        if not txt_files:
+            return {
+                'success': True,
+                'status': 'not_initialized',
+                'char_count': 0,
+                'message': 'No text files found in knowledge base directory'
+            }
+        
+        # Try to load knowledge base to get character count
+        try:
+            char_count = kb_service.load_knowledge_base()
+            return {
+                'success': True,
+                'status': 'initialized',
+                'char_count': char_count,
+                'file_count': len(txt_files),
+                'message': f'Knowledge base is initialized with {len(txt_files)} files ({char_count} characters)'
+            }
+        except Exception as e:
+            return {
+                'success': True,
+                'status': 'not_initialized',
+                'char_count': 0,
+                'message': f'Knowledge base files found but could not load: {str(e)}'
             }
             
     except Exception as e:
@@ -713,21 +719,27 @@ def init_knowledge_base():
             return jsonify({
                 'success': True,
                 'already_initialized': True,
-                'message': f"Knowledge base is already initialized with {status_result['document_count']} document chunks. Use force_reset=true to reinitialize.",
-                'document_count': status_result['document_count']
+                'message': f"Knowledge base is already initialized with {status_result.get('file_count', 0)} files ({status_result['char_count']} characters). Use force_reset=true to reinitialize.",
+                'char_count': status_result['char_count'],
+                'file_count': status_result.get('file_count', 0)
             })
         
         # Initialize the knowledge base
         from app.services.knowledge_base import KnowledgeBaseService
         kb_service = KnowledgeBaseService()
-        doc_count = kb_service.process_knowledge_base("knowledge_base", force_reset=force_reset)
+        char_count = kb_service.load_knowledge_base("knowledge_base", force_reset=force_reset)
+        
+        # Count files loaded
+        txt_files = [f for f in os.listdir("knowledge_base") if f.endswith('.txt')]
+        file_count = len(txt_files)
         
         action = "reinitialized" if force_reset else "initialized"
         return jsonify({
             'success': True,
             'already_initialized': False,
-            'message': f'Knowledge base {action} successfully with {doc_count} document chunks',
-            'document_count': doc_count,
+            'message': f'Knowledge base {action} successfully with {file_count} files ({char_count} characters)',
+            'char_count': char_count,
+            'file_count': file_count,
             'force_reset': force_reset
         })
         
