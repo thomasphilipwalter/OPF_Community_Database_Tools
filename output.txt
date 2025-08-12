@@ -1,0 +1,876 @@
+=== DEBUG: OpenAI Combined Prompt and Context ===
+
+=== COMBINED METADATA EXTRACTION & ANALYSIS PROMPT ===
+
+        You are an expert RFP analyst for OPF with deep knowledge of the company's capabilities, projects, and expertise. You will perform TWO tasks in a single response:
+
+        1. EXTRACT METADATA from the RFP
+        2. ANALYZE the RFP against OPF's specific capabilities
+
+        RFP DETAILS:
+        - Project Name: Climate Resilient Communities
+        - Organization: 
+        - Project Focus: 
+        - RFP Content: Document: DFAT 1066 - Approach to Market CRC QTAG - Final.docx
+
+
+
+Approach to Market
+To establish Contract for Quality and Technical Assurance Group for the Climate Resilient Communities Program
+Reference ID: DFAT - 1066
+UNSPSC: 80100000 Management Advisory Services
+This Approach to Market (ATM) is for the provision of: A Quality Technical and Assurance Group (QTAG), comprising a small team of experts, is required to provide independent advice to DFAT on the Climate Resilient Communities (CRC) program, in support of accountability and learning.   
+
+The purpose of the QTAG is: 
+- Accountability: To provide independent support, advice and reporting to DFAT (the CRC Secretariat) on the performance of the CRC program. 
+- Learning: To improve the performance of the CRC program by fostering learning and adaptation in DFAT, the CRC Support Unit and CRC implementing partners. 
+
+The CRC is a five-year investment (2024-29) with the option to extend a further four years, with a current value of $221.9m million. It is designed to deliver impact so that people in the Indo-Pacific are more resilient to climate change and disasters.  
+
+CRC will contribute to this goal by achieving two End-of-Facility Outcomes (EoFOs):   
+- Indo-Pacific partner governments have taken gender-responsive and inclusive actions that strengthen climate and disaster resilience, particularly in the water, food and energy sectors.   
+- Indo-Pacific development partners have implemented gender-responsive, inclusive and locally led programs and partnerships that strengthen climate and disaster resilience, particularly in the water, food and energy sectors. 
+
+The EoFOs are being delivered through six workstreams, providing: co-funding for programs; program cycle (design, implementation and monitoring and review) support; climate integration and disaster risk reduction technical assistance; mobilising additional climate finance; sharing of lessons learnt and public diplomacy.  
+
+The CRC is comprised of a Support Unit (managed by a Contractor), the Secretariat (DFAT staff), a Steering Committee, and the QTAG.    
+The Commonwealth of Australia as represented by Department of Foreign Affairs and Trade (the Customer) is seeking submissions for the provision of the services (the Requirement) as described in this ATM comprising:
+this CCS ATM, including the Statement of Requirement
+the CCS ATM Response Form
+the CCS ATM Annexes (if any)
+the Commonwealth ATM Terms
+the Additional Contract Terms (if any)
+the Commonwealth Contract Terms
+the Commonwealth Contracting Suite Glossary and Interpretation.
+In submitting a response, Potential Suppliers are required to comply with all requirements set out in the Commonwealth Approach to Market Terms (a copy of which is included in this document), and if successful, agree to enter into a contract which incorporates the Commonwealth Contract Terms available at .
+
+The  provides information to help businesses understand how to sell to the Australian Government. If you have any general questions about how the Australian Government procures goods and services, please contact the Selling to Government team at . 
+For questions relating specifically to this ATM, please contact the ATM Contact Officer set out at A.A.5(a). 
+
+
+Statement of Requirement
+A.A.1	Key Information and Dates
+Approach to Market
+Proposed Contract
+
+
+A.A.2	The Requirement
+A Quality Technical and Assurance Group (QTAG), comprising a small team of experts, is required to provide independent advice to DFAT on the Climate Resilient Communities (CRC) program.    
+ DFAT requires the QTAG to: 
+Undertake an independent annual assessment of the CRC’s performance against the CRC Performance Assessment Framework.  
+A separate statement of work for the annual assessment will be agreed each year. The annual assessment will however typically include advice and reporting on the efficacy and efficiency of CRC technical assistance, MEL systems and reporting processes, and governance arrangement and the extent to which these support the successful implementation of the program as outlined in the CRC design..  
+The annual assessments will typically also include analysis of the extent to which CRC reporting systems are supporting DFAT to meet its development performance and quality reporting obligations (for example, the Tier 2 indicators in the Performance and Delivery Framework).  
+In undertaking the annual assessment, the QTAG may be asked to review CRC technical assistance products, designs, PAFs, performance reports, IMRs and PPAs for co-funded programs to ensure CRC is on track towards its EOFOs and IOs.  
+In undertaking the annual assessment, the QTAG may be asked to undertake deep dives into CRC workstreams to support learning and adaptation.  
+This assessment will inform DFAT’s Investment Monitoring Report process and as such will be submitted to DFAT (the CRC Secretariat) by 28 February every year. 
+This assessment will likely include travel to at least one sample country or region per year, as agreed with DFAT (CRC Secretariat and Posts). 
+Act as a ‘critical friend’ to CRC to understand what is working, what is not, why and what can be done to build on CRC’s strengths and address performance issues. This may include, but is not limited to: 
+Reviewing annual CRC workplans and assessing whether there is a clear and plausible pathway between the plans and CRC expected outcomes.  
+Leading an annual strategy testing workshop and regular informal catch ups with the CRC Secretariat and Support Unit Contractor to discuss: 
+CRC progress against outcomes - what is working and what is not,  
+Emerging opportunities and risks  
+CRC partner communications and ways of working. 
+Reviewing and assessing governance structures and ways of working for the CRC Secretariat, Steering Committee and CRC Support Unit (CRCSU), advising on issues and potential improvements to support CRC delivery. 
+Reviewing draft Investment Monitoring Reports. This may include the IMR for CRC and/ or select CRC co-funded investments, as agreed with DFAT. 
+Reviewing the CRC program logic and MEL framework to ensure they remain fit to achieve the goals, objectives and outcomes of the program. 
+Conduct ‘deep dive’ performance and/or learning reviews on partners, programs, or thematic or program management topics (to be defined in implementation).  
+Contribute to learning events managed by the CRC Support Unit or Posts, for example, as a speaker or by contributing learning publication content.  
+Support the CRC Secretariat to develop and manage mid-term and end of program evaluations, and thematic reviews. 
+Deliver other tasks, as directed by the CRC Secretariat. 
+
+Deliverables, Milestones and Reporting 
+As the QTAG will be responsive to the needs of the CRC Secretariat, deliverables, milestones and reporting will be discussed and agreed in writing in the Annual Workplan between the CRC Secretariat and the QTAG, following the Annual Planning Process.  
+Through an Annual Planning Process, DFAT and the QTAG will draft an Annual Workplan which details the QTAG’s specific activities and work for the coming year. This will be agreed between DFAT and the QTAG. Any changes will be discussed and jointly agreed in writing. Outside of the Annual Planning Process, DFAT and the QTAG may also agree, through individual tasking notes, to additional tasks in order to respond to ad hoc requests from DFAT (the CRC Secretariat and/or Posts). 
+The only fixed annual deliverable will be an Annual Program Performance and Learning Report which is to be submitted by 28 February every year (unless otherwise agreed). The Report will be informed by the QTAG’s annual independent assessment of the CRC against the CRC Performance Assessment Framework. (see ‘Scope of Work’ 1. above). 
+The format and contents of the Annual Program Performance and Learning Report will be discussed and agreed annually with the CRC Secretariat.   
+ 
+Composition 
+To fulfil the above responsibilities and requirements, the QTAG Team will comprise of three members: 
+ a Team Leader 
+ a Team Member specialising in GEDSI 
+ a Team Member specialising in climate resilient development programming.     
+Collectively, QTAG members will have expertise in monitoring, evaluation and learning, climate change, and gender equality, disability equity and social inclusion. It is essential that all QTAG Team Members demonstrate a strong understanding of relevant DFAT policies.  
+
+  
+Team Leader 
+Extensive experience supporting the delivery of international development results on behalf of the Australian Government or other international development partners is essential.  
+Experience delivering international development results for DFAT funded programs in the Indo-Pacific region is desirable. 
+Extensive experience undertaking monitoring, evaluation and learning (MEL) activities for complex development programs in the international development sector is essential.  
+Experience undertaking MEL activities for DFAT-funded development programs in the Indo-Pacific is desirable. 
+Experience working on climate resilient development programming is desirable.  
+Experience in integrating GEDSI in DFAT funded programming in the Indo-Pacific is desirable. 
+Team Member 1 – GEDSI  
+Extensive experience working on GEDSI development programming is essential.  
+Experience working on DFAT funded GEDSI development programming in the Indo-Pacific is desirable.  
+Experience undertaking monitoring, evaluation and learning (MEL) activities for development programs in the international development sector is desirable.  
+Experience undertaking MEL activities for DFAT-funded development programs in the Indo-Pacific region is desirable. 
+Team Member 2 – Climate  
+Extensive experience working on climate resilient development programming is essential.  
+Experience undertaking monitoring, evaluation and learning (MEL) activities for development programs in the international development sector is desirable.  
+Experience undertaking MEL activities for DFAT-funded development programs in the Indo-Pacific region is desirable. 
+All QTAG Team Members  
+It is essential that all QTAG Team Members demonstrate: 
+Strong understanding of relevant DFAT policies, including but not limited to: , ; ; ; ; ; ; ; ; and . 
+Good research and cross-cultural communication skills  
+A commitment to support locally led development. 
+ 
+A.A.2(a)	Commonwealth Supplier Code of Conduct
+The Commonwealth expects its suppliers to conduct themselves with high standards of ethics such that they consistently act with integrity and accountability.  
+If awarded a Contract, the Supplier must agree to comply with the Commonwealth Code of Conduct (Code) in accordance with the Commonwealth Contract Terms [Clause C.C.23]. 
+Clause C.C.23 requires the Supplier to comply with the Code when performing its obligations under the Contract, and to ensure its personnel and Subcontractors comply with the Code. The clause also requires the Supplier to proactively monitor and assess compliance with the Code, and to notify the Customer immediately of any breach of the Code.  
+In accordance with the Commonwealth ATM Terms [Clause A.B.10], where requested by the Customer, Potential Suppliers should provide information demonstrating that they have appropriate policies, frameworks, or similar, in place to comply with the Code.  
+
+Further information on the Code can be found at:  
+A.A.2(b)	Standards
+Potential Suppliers must ensure that any goods and services proposed are capable of complying with all applicable Australian standards and any Australian and international standards specified in this Statement of Requirement. Potential Suppliers should note that they may be required to enable the Customer, or an independent assessor, to conduct periodic audits to confirm compliance with those standards.
+Web Content Accessibility
+The Supplier must ensure that any website, associated material and/or online publications (where applicable) complies with the Web Content Accessibility Guidelines available at: .
+A.A.2(c)	Security Requirements
+None Specified
+A.A.2(d)	Work Health and Safety
+Prior to commencement of the Contract, the Customer’s Contract Manager and the Supplier’s Contract Manager will identify any potential work health and safety (WHS) issues anticipated to arise during the term of the contract and assign management of each issue identified to the party best able to manage it. For all issues assigned to the Supplier, the Supplier will provide the Customer with a WHS plan for approval and no work will commence until the plan is approved unless agreed in writing by the Customer.
+Throughout the Contract Term, the Customer and the Supplier will proactively identify and cooperate to manage any WHS issues that arise.
+A.A.2(e)	Delivery and Acceptance
+The Customer must accept or reject any deliverables under the Contract in accordance with the Commonwealth Contract Terms [Clause C.C.11].
+A.A.2(f)	Meetings
+The Supplier will be required to attend meetings as follows:
+A.A.2(g)	Facilities and Assistance Offered by the Customer
+The Customer will not make any facilities or assistance available to the Supplier.
+A.A.2(h)	Customer Material
+The supplier will be provided with key documents related to the delivery of the CRC program, including, but not limited to:
+CRC Investment Design Document
+CRC Monitoring, Evaluation and Learning Plan
+CRC Performance Assessment Framework
+CRC Investment Monitoring Reports
+CRCSU Quarterly and Annual Reports
+
+
+A.A.3	ATM Distribution
+AusTender Distribution
+This ATM and any updates are subject to the . Any updates to this ATM will be distributed via AusTender. 
+AusTender is the Australian Government’s procurement information system. Access to and use of AusTender is subject to the AusTender Terms of Use. In participating in this ATM process, Potential Suppliers must comply with the AusTender Terms of Use and any applicable instructions, processes, procedures and recommendations as advised on AusTender.
+A.A.4	Lodgement of Responses
+Responses must be lodged via AusTender quoting reference number DFAT 1066 by the Closing Time specified in A.A.1 [Key Information and Dates].
+Response File Format, Naming Convention and Size
+The Customer will accept Responses lodged in the following formats:
+Microsoft Word (.docx)
+PDF (.pdf)
+The Response file name/s should:
+incorporate the Potential Supplier’s full legal organisation name; and 
+reflect the various parts of the bid they represent (where the Response comprises multiple files).
+Response files must not exceed a combined file size of 10 megabytes per email.
+Responses must be completely self-contained. No embedded files can be included. No hyperlinked or other material may be incorporated by reference.
+
+
+A.A.5	Customer’s Contact Officers
+A.A.5(a)	ATM Contact Officer
+For all matters relating to this ATM, the Contact Officer is:
+Name/Position:	Tender Secretariat
+Email Address:	tender-CRCQTAG@dfat.gov.au
+Note: Question Closing Date and Time is set out at item A.A.1 [Key Information and Dates].
+A.A.5(b)	Complaints Handling
+Complaints relating to this ATM should be directed to:
+Information relating to the handling of complaints is available on the Customer’s website at: https://www.dfat.gov.au/about-us/publications/complaints-handling-procedures-procurement .
+If your issue is not resolved refer  for more information relating to complaints.
+
+Additional Contract Terms
+An executed contract will incorporate the Commonwealth Contract Terms and also the following Additional Contract Terms:
+A.C.1	Intellectual Property
+The Customer owns the Intellectual Property Rights in the Material created under the Contract. 
+To the extent the Supplier or a third party holds any Intellectual Property Rights in any existing Material, the Supplier hereby agrees to licence the Customer to enable the Customer to exercise full rights and interests in the Intellectual Property Rights in any Material provided under the Contract. The Supplier agrees to create, execute or sign any documents and perform all acts which may be necessary to allow the use of those rights by the Customer for any purpose.
+The Customer grants to the Supplier a non-exclusive, non-transferable, irrevocable, royalty-free licence for the Contract Term to exercise the Intellectual Property Rights in the Material for the sole purpose of fulfilling its obligations under the Contract. The licence in this clause is subject to any conditions or limitations of third parties that the Customer notifies to the Supplier.
+Intellectual Property Rights in Goods provided under the Contract or pre-existing Intellectual Property of the Supplier, set out below (if any), will not change as a result of the Contract.
+A.C.2	Payment Terms
+The Customer must pay the amount of a Correctly Rendered Invoice to the Supplier within thirty (30) calendar days after receiving it, or if this day is not a Business Day, on the next Business Day.
+A.C.3	Fraud
+A.C.3.1	This clause replaces clause C.C.22.F [Fraud] of the Commonwealth Contract Terms. For the purposes of this clause, ‘Fraud’ means, in delivering the Goods and/or Services under the Contract, dishonestly obtaining a benefit, or causing a loss, by deception or other means, and includes suspected, alleged or attempted fraud.
+A.C.3.2	The Supplier must take all reasonable steps to prevent and detect Fraud in relation to the performance of this Contract. 
+A.C.3.3	Subject to A.C.3.4, if the Supplier becomes aware of any Fraud, it must report the matter to the Customer in writing within five (5) business days.
+A.C.3.4	If the Supplier is under a legal obligation not to report a Fraud to the Customer, but local police or other law enforcement agencies provide an exception to permit reporting, the Supplier must report a Fraud to the Customer within five (5) business days of the exception being granted.
+A.C.3.5	The Supplier must investigate all Fraud at the Supplier’s expense and in accordance with any reasonable directions or standards required by the Customer. After the investigation is finished, the Supplier must promptly report full details of any Fraud to:
+the Customer (unless the Supplier is under a legal obligation not to report a Fraud to the Customer); and
+the local police and any other appropriate law enforcement agency in the country where the incident occurred, unless the Customer agrees otherwise in writing. 
+A.C.3.6	If the investigation finds Fraud by the Supplier or its officers, employees or agents, or the Supplier has failed to take reasonable steps to prevent Fraud by a subcontractor, the Supplier must, if directed by the Customer, promptly reimburse or compensate the Customer in full.
+A.C.3.7	This clause is a material term of the Contract and survives the termination or expiry of the Contract.
+A.C.4	Prohibited dealings
+A.C.4.1	The Supplier must ensure that it and its officers, employees, agents and subcontractors involved in delivering Goods and or Services under this Contract are not:
+directly or indirectly engaged in preparing, planning, assisting or fostering a terrorist act;
+listed terrorist organisations for the purposes of the Criminal Code Act 1995 (Cth) (details of listed terrorist organisations are available at:
+);
+subject to sanctions or similar measures under the Charter of the United Nations Act 1945 (Cth) or the Autonomous Sanctions Act 2011 (Cth) (details of individuals and entities are available at:
+;
+listed on the ‘World Bank’s Listing of Ineligible Firms and Individuals’ posted at: ;
+owned, controlled by, acting on behalf of, or at the direction of persons, or entities referred to in clauses A.C.4.1(a) to A.C.4.1(d) above; or
+providing direct or indirect support, resources or assets (including any grant monies) to persons or entities referred to in clauses A.C.4.1(a) to A.C.4.1(e) above.
+A.C.4.2	Where the Supplier becomes aware that there are reasonable grounds to suspect it or any of its officers, employees, agents and subcontractors has or may have contravened any part of clause A.C.4, the Supplier must:
+notify the Customer and confirm that information in writing as soon as possible, which must be no later than within 24 hours;
+immediately take all reasonable action to mitigate the risks; and
+take any other action reasonably required by the Customer.
+A.C.4.3	The Supplier must ensure that any subcontract entered into by the Supplier for the purposes of fulfilling its obligations under this Contract imposes on the Subcontractor the same obligations that the Supplier has under this clause A.C.4.
+A.C.4.4	This clause is a material term of the Contract and survives the termination or expiry of the Contract.
+A.C.5	Anti-corruption
+A.C.5.1	The Supplier warrants that the Supplier, its officers, employees, agents and subcontractors have not made or caused to be made, or received or sought to receive, any offer, gift or payment, consideration or benefit of any kind, which would or could be construed as an illegal or corrupt practice, either directly or indirectly to any party, as an inducement or reward in relation to the execution or performance of the Contract.
+A.C.5.2	The Supplier must not, and must ensure that its officers, employees, agents and subcontractors, do not:
+make or cause to be made, or receive or seek to receive, any offer, gift or payment, consideration or benefit of any kind, which would or could be construed as an illegal or corrupt practice, either directly or indirectly to any party, as an inducement or reward in relation to the performance of the Contract; and/or
+engage in any practice that could constitute the Australian offence of bribing a foreign public official in relation to the performance of the Contract.
+A.C.5.3	If the Supplier becomes aware of any practice, as described in A.C.5.2 (a) or (b), then it must report the matter to the Customer within five (5) business days.
+A.C.5.4	This clause is a material term of the Contract and survives the termination or expiry of the Contract.
+A.C.6	Child Protection
+A.C.6.1	The Supplier must comply, and must ensure that its officers, employees, agents and subcontractors comply with the Department of Foreign Affairs and Trade’s Child Protection Policy, accessible at .
+A.C.6.2	The Customer may conduct a review of the Supplier’s compliance with the Child Protection Policy. The Customer will give reasonable notice to the Supplier and the Supplier must participate co-operatively in any such review.
+A.C.6.3	If the Customer finds that the Supplier has failed to comply with the Child Protection Policy, the Supplier must promptly, and at the cost of the Supplier, take such actions as are required to ensure compliance with the Child Protection Policy.
+A.C.6.4	If an individual, the Supplier must sign and return to the Customer the Child Protection Professional Behaviours at Attachment B to the Child Protection Policy.
+A.C.6.5	This clause is a material term of the Contract and survives the termination or expiry of the Contract.
+A.C.7	Preventing Sexual Exploitation Abuse and Harassment 
+A.C.7.1	The Supplier must comply, and must ensure that its  officers, employees, agents and subcontractors comply with the Department of Foreign Affairs and Trade’s Preventing Sexual Exploitation Abuse and Harassment Policy, accessible at  
+A.C.7.2	The Customer may conduct a review of the Supplier’s compliance with the Preventing Sexual Exploitation, Abuse and Harassment Policy. The Customer will give reasonable notice to the Supplier and the Supplier must participate co-operatively in any such review.
+A.C.7.3	If the Customer finds that the Supplier has failed to comply with the Preventing Sexual Exploitation, Abuse and Harassment Policy, the Supplier must promptly, and at the cost of the Supplier, take such actions as are required to ensure compliance with the Preventing Sexual Exploitation Abuse and Harassment Policy.
+A.C.7.4	This clause is a material term of the Contract and survives the termination or expiry of the Contract.
+
+
+
+
+
+
+
+
+
+INSTRUCTIONS FOR POTENTIAL SUPPLIER
+Before you start
+This Response is not an offer for work.
+Read the all documentation provided by the Customer and distributed with this Response form and decide whether your organisation has the necessary skills and experience to meet the Customer’s requirement.
+Do not proceed further if:
+your organisation cannot agree to the Commonwealth Contract Terms, available at . These terms are non-negotiable and will form part of the Contract if you are successful in this ATM process.
+your organisation does not meet and/or agree to the Minimum Content and Format Requirements and the Conditions for Participation (if any), set out at item A.A.1 [Key Information and Dates], as failure to do so will mean your response cannot be considered.
+your organisation is a trust where the Trustee is not empowered to sign contracts on behalf of the Trust. Before proceeding, contact the Customer’s ATM Contact Officer at item A.A.5(a) [ATM Contact Officer].
+you are an Individual without an ABN and you do not meet the Australian Taxation Office’s (ATO) definition of an independent contractor available at: . Before proceeding, contact the ATM Contact Officer set out at item A.A.5(a) [ATM Contact Officer] to seek advice.
+The Customer will evaluate all valid Responses received by the ATM Closing Time [Item A.A.1] that meet the Minimum Content and Format Requirements and the Conditions for Participation (if any), to determine which Potential Supplier has proposed the best value for money outcome for the Customer. Responses will be evaluated as per the criteria set out at Clause A.B.5 [Evaluation].
+Participation in this ATM is at your organisation’s risk and cost. Please note this is a competitive process and your organisation may incur costs in responding. If you are unsuccessful, you will be unable to recoup these costs.
+Format Requirements
+You MUST use this form (CCS ATM Response Form) to submit your Response, which MUST comply with the Commonwealth ATM Terms, available at: .
+As this form is set out to facilitate the evaluation of responses, Potential Suppliers are to use the form as provided and are not permitted to make any changes to the structure or formatting of the document.
+Guidance for completing your Response
+Specific questions about this ATM must be directed to the ATM Contact Officer set out at Item A.A.5(a) [ATM Contact Officer] before Question Closing Date and Time set out at item A.A.1 [Key Information and Dates]. 
+In preparation of this Response, please note the Commonwealth Indigenous Procurement Policy (IPP) available at:  may apply to the Customer in respect of this procurement. During evaluation of responses, the Customer may consider the Supplier’s ability to assist the Customer to meet its IPP obligations.
+Ensure your Response is as concise as possible while including all information that your organisation wants the evaluation team to consider. Do not include general marketing material or assume that the evaluation team has any knowledge of your organisation’s capabilities or personnel.
+Do not include pricing in any other part of your response except in the relevant Pricing Schedule.
+The successful Supplier will have demonstrated its ability to provide the best value for the Customer. This will not necessarily be the lowest price.
+Submit the form as required by Item A.A.4 [Lodgement of Responses].
+If your organisation is unsuccessful with this Response, you may request a debrief to assist with future responses. The ATM Contact Officer set out at Item A.A.5(a) [ATM Contact Officer] can arrange this for you.
+
+
+
+Potential Supplier’s Contact Officer
+For all matters relating to this Response, the Potential Supplier’s Contact Officer is:
+
+Part 1 – Potential Supplier’s Details
+1.1	Potential Supplier’s Details
+1.2	Previous Judicial Decisions
+1.3	Workplace Gender Equality
+1.4	Indigenous Businesses
+1.5	Potential Supplier’s Contract Manager
+
+For matters relating to the proposed Contract, the Potential Supplier’s Contract Manager will be:
+1.6	Potential Supplier’s Address for Notices (if different from the Contract Manager)
+
+
+
+Part 2 – Executive Summary
+2.1	Executive Summary of Potential Supplier’s Proposal
+
+
+2.2	Conditions for Participation
+
+
+
+
+Part 3 – Ability to Meet the Requirement
+3.1	Detailed Proposal to Meet the Customer’s Requirement
+
+
+Commonwealth Supplier Code of Conduct
+
+
+
+
+
+
+
+
+Standards
+
+
+
+
+
+Part 4 – Potential Supplier’s Demonstrated Capability and Capacity
+4.1	Statement of Skills and Experience
+
+
+4.2	Specified Personnel
+
+# if requested at A.A.2(b)
+
+
+4.3	Subcontractors
+
+
+Scope of Works to be Subcontracted
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+4.4	Conflicts of Interest
+The Potential Supplier has identified the following potential Conflicts of Interest and management strategies:
+
+
+4.5	Referees
+
+
+
+
+
+
+
+4.6	Pre-existing Intellectual Property of Potential Supplier
+
+
+4.7	Confidentiality of Potential Supplier’s Information
+The Potential Supplier has assessed that the commercial information in the table below meets the requirements available at  and is seeking that information be kept confidential.
+4.8	Proven Ability to Meet Regulatory Considerations
+
+
+4.9	Sustainability Considerations
+
+
+4.10	Additional Information
+
+
+
+
+Part 5 – Total Costs to be incurred by the Customer
+5.1	Pricing
+Fee Rates
+
+Adjustment to Fixed Pricing for Contract Variation/Extension
+
+
+
+
+
+
+
+
+Expenses not included in Fixed Price
+
+
+5.2	Proposed Payment Schedule
+
+
+5.3	Additional Facilities and Assistance
+
+
+5.4	Non-Compliance
+
+
+
+
+
+        OPF COMPANY CAPABILITIES AND EXPERIENCE:
+        Demonstrated Capabilities of OnePointFive
+Environmental & Carbon Footprinting Support
+
+Environmental validation for carbon footprint models and outputs.
+
+Development of carbon measurement flow diagrams and methodologies for multiple industries (e.g., transportation, logistics, fintech).
+
+Research and application of environmental standards for global compliance.
+
+Creation of detailed product methodologies and industry-specific catalogs.
+
+Expert outreach and market positioning support for technology startups.
+
+Market Adoption & Lead Generation for Climate Risk Platforms
+
+Industry research and market segmentation to identify target customers and sectors.
+
+Lead generation and engagement through mass and targeted outreach.
+
+Usability testing and product development feedback via customer interviews.
+
+Building strategic partnerships for long-term market adoption.
+
+Development of connections with policy and advocacy stakeholders.
+
+Climate Education & Professional Upskilling
+
+Building strategic partnerships for long-term market adoption.
+
+Development of connections with policy and advocacy stakeholders.
+
+Climate Education & Professional Upskilling
+
+Development of remote, cohort-based climate education curricula.
+
+Delivery of interactive climate education content globally (12+ hours, 6-week program).
+
+Modular, flexible training programs designed for professionals transitioning into climate roles.
+
+High Net Promoter Scores (NPS) reflecting strong program impact on skill-building.
+
+Impact Investment & Climate Integration Frameworks
+
+Co-development of a Climate Impact Assessment Framework for integrating gender equality and climate action into investment strategies.
+
+Support for alignment with frameworks such as TCFD, MDB Paris Alignment, and SFDR for impact investments.
+
+Development of strategies to address climate-related challenges within private equity and investment portfolios.
+
+Go-to-Market Strategy & Business Development for Climate Risk Platforms
+
+Development of strategies to address climate-related challenges within private equity and investment portfolios.
+
+Go-to-Market Strategy & Business Development for Climate Risk Platforms
+
+Product-market fit analysis and lead generation for market adoption.
+
+Research and identification of high-potential customer sectors and geographic regions.
+
+Development of a strategic partnership pipeline, including outreach and customer acquisition strategy.
+
+Expert interviews to assess market needs and inform commercialization strategies.
+
+Climate Risk Software Commercialization & Market Entry
+
+Analysis and benchmarking for pricing, pain points, and market opportunities.
+
+Competitor landscape analysis to inform market positioning.
+
+Development of a go-to-market strategy based on customer feedback and market fit.
+
+Assistance in customer acquisition and strategic partnership formation for scaling in the US.
+
+Climate Technology Due Diligence & User Insights
+
+OnePointFive (OPF) demonstrates strong expertise in climate finance, ESG frameworks, and impact assessment, particularly within the APAC region. The company has proven experience working with climate-focused funds like Sarona Asset Management, providing technical assistance (TA) to build robust Environmental, Social, and Governance Management Systems (ESGMSs) for fund managers. OPF’s work with Sarona, including conducting a TCFD gap analysis and a climate risk assessment for portfolio countries, highlights their capability in guiding fund managers through climate-related financial disclosures, risk identification, and integration into investment strategies.
+
+OPF also brings sector-specific insights and expertise across diverse industries, including healthcare, food & agriculture, and renewable energy. For instance, in collaboration with Sarona, they helped integrate gender equality and climate action into investment strategies, empowering clients to drive systemic change in emerging markets. Their capability to align investments with impact taxonomies and provide actionable recommendations further supports the integration of sustainability into financial decision-making processes.
+
+Through these capabilities, OnePointFive effectively equips fund managers and investors with the tools, insights, and training needed to drive climate-focused investments and achieve measurable, scalable impact in emerging markets.
+
+
+
+
+
+
+
+
+Ask ChatGPT
+
+Life Cycle & Impact Analysis: Conducts life cycle assessments (LCA) for products and services, providing detailed environmental impact reports to guide decision-making.
+
+Competitive Analysis & Market Entry: Delivers competitive landscape analysis, market research, and strategy recommendations for businesses seeking to enter or expand in the climate and sustainability sectors.
+
+Policy & Regulatory Guidance: Offers insights into the policy landscape, advising clients on regulations, standards, and aligning business practices with environmental goals.
+
+Due Diligence & Investment Support: Provides investment due diligence for climate tech and sustainability-focused ventures, including evaluating market viability and financial returns.
+
+2. Climate Technology
+Technology Evaluation & Integration: Helps clients identify, evaluate, and implement climate technology solutions, including renewable energy, carbon capture, and building management systems.
+
+In addition to regulatory compliance, OnePointFive excels in climate risk analysis, using both qualitative and quantitative methods to assess risks across the supply chain. For Kendra Scott, they plan to analyze climate-related physical risks (e.g., flooding, extreme weather events) and transition risks (e.g., policy changes, market shifts). Their approach integrates scenario analysis tools and climate risk software recommendations, drawing on their extensive experience with similar assessments for clients like Sarona Asset Management. This capability allows them to identify and quantify climate-related financial risks, which can then inform contingency planning and strategic decision-making, thereby reducing operational disruptions and increasing supply chain resilience.
+
+OnePointFive (OPF) demonstrates strong capabilities in delivering ESG strategy and regulatory guidance, as evidenced by its role in supporting Talon’s transition towards a comprehensive ESG framework. OPF is tasked with developing a detailed roadmap for Science-Based Target initiative (SBTi) approval, regulatory alignment, and climate risk integration. This includes conducting a diagnostic to assess Talon’s current alignment with SBTi and UK regulations, and providing an implementation plan to close gaps. OPF also supports Talon in navigating sector-specific evaluations and climate risk assessments aligned with frameworks like TCFD, ensuring Talon can strategically manage climate risks and position itself favorably with investors.
+
+OnePointFive excels in capacity building and training, providing over 40 hours of content across 15 modules to upskill professionals in key areas such as GHG accounting and sustainability reporting. Their training offerings have reached over 2,000 individuals globally, demonstrating their ability to scale knowledge transfer efficiently. This includes tailored training in TCFD framework and climate risk assessments, supporting fund managers to meet evolving regulations and best practices in climate finance.
+
+Assistance in customer acquisition and strategic partnership formation for scaling in the US.
+
+Climate Technology Due Diligence & User Insights
+
+Conducted user interviews with climate investors and tech entrepreneurs to gather insights on emissions reduction technologies.
+
+Aggregation of feedback to improve the CRANE Tool's user experience and functionality.
+
+Drafting and publishing user reports to support the uptake of climate technology evaluation tools.
+
+These case studies reflect OnePointFive's expertise in supporting climate technology startups, market research, educational content development, investment strategy, and business development for climate risk and sustainability solutions across diverse sectors.
+
+Finally, OnePointFive demonstrates its commitment to capacity building and knowledge transfer through its comprehensive training programs. By integrating training sessions into their project deliverables, they ensure that EIT Food staff and project stakeholders are equipped with the knowledge to manage future GHG accounting processes and methodologies independently. This emphasis on training not only enhances the long-term sustainability of their solutions but also strengthens the client's internal capabilities in managing future projects.
+
+OnePointFive exhibits strong expertise in sustainability training and curriculum development, demonstrated by their role in designing and delivering specialized workshops like the EDF Climate Corps "Advocating for Change" workshop. The firm combines technical sustainability knowledge with hands-on, change management frameworks, providing actionable tools for sustainability professionals. Their ability to tailor content to address real-world challenges in stakeholder engagement, strategic consensus building, and driving organizational change shows a clear proficiency in delivering both practical and theoretical insights.
+
+OnePointFive has demonstrated strong capabilities in regulatory compliance and climate risk analysis, particularly in guiding organizations like Kendra Scott through complex climate regulations such as California Senate Bill 261 (SB 261) and Assembly Bill 1305 (AB 1305). Their experience in this area is reflected in their structured approach to supporting Kendra Scott with a baseline compliance framework and developing a repeatable process for future reporting cycles. This capability is reinforced by their previous work with Fortune 500 companies, where they provided actionable insights for compliance with climate-related regulations and helped clients meet their sustainability and reporting requirements.
+
+Climate Investment Strategy: Guides clients on climate investments, evaluating potential returns and environmental impacts of sustainable initiatives.
+
+Pricing & Business Case Development: Provides pricing strategies for climate solutions and helps businesses build strong financial cases for implementing sustainability initiatives.
+
+Market Feasibility & Due Diligence: Conducts financial due diligence for climate tech investments, supporting decision-making with detailed economic and market analyses.
+
+4. Training & Capacity Building
+Climate Curriculum Development: Designs and delivers customized training programs, including cohort-based learning experiences and professional upskilling for sustainability roles.
+
+Governance & Organizational Development: Advises clients on establishing sustainability governance structures and building internal capacity to manage climate-related challenges.
+
+Finally, OnePointFive's data-driven approach ensures that all recommendations are backed by comprehensive research, utilizing publicly available climate risk data and climate scenarios. This is exemplified in their approach for Kendra Scott, where they plan to leverage open-source resources and perform in-depth analysis of physical and transition risks, providing Kendra Scott with a comprehensive understanding of the potential climate impacts on their business and supply chain. This methodical, data-driven approach positions OnePointFive as a trusted partner for helping organizations navigate the complexities of climate risk and regulatory compliance.
+
+Further, OnePointFive brings significant experience in stakeholder engagement and training, as they have provided sustainability training to numerous organizations globally, including Cisco and MunichRe Ventures. Their climate fluency programs are designed to empower internal teams to effectively communicate sustainability strategies and manage compliance efforts. For Kendra Scott, they propose an optional training session to upskill their team on climate risk management and the specifics of AB 1305 and SB 261 compliance. This adds a layer of capacity building, ensuring that the team has the tools and knowledge to drive sustainability initiatives independently.
+
+OnePointFive also has robust expertise in climate strategy development, as seen in their previous work with clients like L’Oréal and Ruggable, where they integrated climate risk into broader business strategies. For Kendra Scott, they will use the TCFD framework to align the company’s climate strategy with the business's overall objectives, ensuring long-term resilience. This includes incorporating findings from the climate risk analysis into actionable business strategies that address both mitigation and adaptation efforts, aligned with governance and financial planning.
+
+The firm also has a solid track record in developing climate impact strategies and conducting due diligence assessments. For example, OnePointFive helped Sweef Capital align its investment processes with TCFD and EU SFDR guidelines by integrating climate risk evaluations into standard due diligence procedures. This approach ensured that Sweef’s portfolio companies met climate impact policies effectively. Additionally, OPF has worked with clients like L’Oréal and MunichRe Ventures to align emissions baselines with investor sustainability standards, strengthening their position on climate action.
+
+OnePointFive demonstrates key expertise in commercial due diligence and financial modeling as shown in their collaboration with Earthbase for the EIT Food project. The firm’s ability to adapt existing tools for commercial diligence, including proprietary methods, showcases their flexibility and precision in refining diligence processes. OnePointFive's approach includes benchmarking and documenting results to continuously improve EIT Food’s evaluation process, underlining their commitment to developing robust and repeatable frameworks for assessing the commercial viability of projects.
+
+Governance & Organizational Development: Advises clients on establishing sustainability governance structures and building internal capacity to manage climate-related challenges.
+
+Workshops & Learning Sessions: Facilitates in-person workshops and online training, helping teams quickly grasp climate science, strategy, and decarbonization planning.
+
+5. Expert Network & Thought Leadership
+Expert Network Integration: Utilizes a growing network of over 700 experts from various domains such as carbon modeling, ESG strategy, renewable energy, and climate finance, enabling OnePointFive to provide tailored, high-quality climate solutions.
+
+Thought Leadership & Publications: Contributes to global discussions on climate action, with publications featured by the World Economic Forum and other thought leadership platforms.
+
+Moreover, OnePointFive's ability to navigate complex climate regulations is evident in their work on green policy analysis and regulatory management. OPF has supported clients in understanding and integrating regional policies, such as the ASEAN Taxonomy for Sustainable Finance, into their investment strategies. Their expertise in policy engagement has enabled fund managers to proactively shape and align with climate disclosure mandates, ensuring compliance and positioning clients as leaders in the sustainable finance space.
+
+OnePointFive has a proven track record in capacity-building and training, as evidenced by their work on delivering training sessions for EIT Food staff. The firm designed and executed training materials and workshops to ensure that EIT Food’s internal teams can manage the due diligence and financing processes autonomously. Their approach not only empowers staff with the necessary tools but also ensures long-term sustainability in the implementation of these processes.
+
+Additionally, OnePointFive excels in stakeholder engagement and cross-functional collaboration, demonstrated by their role in managing stakeholder interviews and input during the project. Their ability to gather insights from diverse stakeholders and integrate these into the project’s development ensures that all perspectives are considered, enhancing the alignment between EIT Food’s strategic goals and the project's execution.
+
+OnePointFive (OPF) excels in delivering specialized climate training and facilitation. OPF's capability to provide impactful climate education is demonstrated through the proposed series of workshops, speaking engagements, and investor training sessions planned for June 2–6. These sessions, led by Neil Yeoh, will cover essential topics like circular economy principles, green engineering, and climate finance and reporting. OPF's focus on practical and investor-centered learning outcomes highlights its ability to engage participants in hands-on, real-world applications. Additionally, the company will support the integration of session materials into the Sweef KINETIK's LMS, ensuring continued engagement beyond the live sessions.
+
+The firm also excels in change management and organizational transformation, as evidenced by their facilitation of the "Change Agent Playbook" section in the EDF workshop. OnePointFive's approach includes structured frameworks for implementing sustainability initiatives and effective stakeholder mapping strategies. They provide clear communication techniques for building organizational buy-in, which aligns with their broader capacity to navigate and influence complex organizational dynamics.
+
+Digital Transformation: Supports businesses in integrating digital tools and platforms to decarbonize operations and improve sustainability management.
+
+Green Engineering & Product Design: Assists with sustainable product design, utilizing green engineering principles and life cycle analysis to reduce environmental footprints.
+
+Climate Data & Modeling Platforms: Offers expertise in climate data management, developing digital platforms for climate modeling, emissions tracking, and sustainability reporting.
+
+3. Financial Modeling & Analysis
+Financial & Environmental Modeling: Develops financial models to assess the cost-benefit analysis of climate-related projects, including emissions reductions, carbon offset strategies, and investment returns.
+
+Climate Investment Strategy: Guides clients on climate investments, evaluating potential returns and environmental impacts of sustainable initiatives.
+
+OnePointFive is also highly skilled in facilitating expert workshops and stakeholder consultations to build consensus and align project objectives. For the "Net Zero Beef Supply Chain Prototype," they are tasked with developing the allocation methodology for GHG footprints across beef supply chains. They will conduct literature reviews, frame workshops, and use expert input to refine this methodology. OnePointFive’s experience in facilitating such workshops ensures that all key stakeholders’ perspectives are integrated into the development of robust and scientifically sound methodologies.
+
+OnePointFive demonstrates a strong capability in climate strategy development and advisory, as evidenced by their role in assisting ASME with refining their climate transition strategy. In Phase 1 of the project, OnePointFive led the development of a climate position statement, conducting in-depth research and stakeholder interviews. Their ability to synthesize insights from over 60 internal documents and 30 external sources enabled them to present a clear climate strategy to ASME's Board of Governors. This work also involved facilitating workshops, showcasing OnePointFive’s expertise in engaging stakeholders and aligning organizational vision with actionable climate goals.
+
+OnePointFive also demonstrates strong capabilities in building ecosystems for climate investment. In collaboration with Sweef KINETIK, OPF will engage with Indonesian universities to connect environmental studies students with startups in need of LCA and green engineering expertise. The company will also facilitate relationships with Indonesian investors and integrate them into the Australian Development Investment network to co-develop pathways for gender-responsive climate capital deployment. This reflects OPF’s ability to map ecosystems, identify gaps, and develop actionable implementation roadmaps that scale investment opportunities for local entrepreneurs, particularly in underserved regions.
+
+Through these activities, OnePointFive showcases its strategic approach to combining capacity-building, technical expertise, and ecosystem development to drive impactful and scalable climate solutions across emerging markets.
+
+OPF is also well-versed in ESG reporting and disclosures, as it works with Talon to co-develop a one-year ESG implementation roadmap. This includes setting the groundwork for Talon’s first materiality assessment and ESG report, ensuring compliance with global standards such as IFRS and TCFD. OPF’s expertise in ESG reporting frameworks supports Talon in enhancing its climate transparency and meeting evolving disclosure expectations.
+
+Through its expert network of 900+ professionals and a robust methodology, OPF provides tailored, actionable insights that empower Talon to strengthen its ESG foundations. The firm’s ability to combine regulatory compliance with strategic climate impact assessment ensures that Talon’s ESG efforts are not only aligned with international standards but are also designed to deliver measurable, long-term sustainability outcomes.
+
+Their experience in designing and refining innovative finance instruments is highlighted by their contribution to the development of the Success Sharing Mechanism (SSM). OnePointFive’s involvement in adjusting the financial modeling and the creation of term sheets demonstrates their strong capacity in crafting financing tools that are adaptable and aligned with evolving regulations, such as Horizon Europe. This ensures that funding mechanisms remain effective and scalable, addressing the needs of both the applicants and EIT Food’s objectives.
+
+OnePointFive Capabilities Summary
+
+OnePointFive is a climate solutions firm that specializes in helping organizations transition to sustainable pathways, focusing on achieving net-zero emissions. The company operates across four core service areas: Services, Technology, Finance, and Training. Below are the key capabilities:
+
+1. Sustainability Strategy & Services
+Sustainability Strategy Development: Assists clients in formulating comprehensive sustainability strategies, including materiality assessments, commitment setting, and governance structure alignment.
+
+Climate Risk & Emissions Assessment: Provides climate risk assessments, Scope 1 & 2 emissions calculations, and carbon accounting services, helping clients measure and analyze their environmental impacts.
+
+Life Cycle & Impact Analysis: Conducts life cycle assessments (LCA) for products and services, providing detailed environmental impact reports to guide decision-making.
+
+OnePointFive has substantial expertise in stakeholder engagement and collaboration, which was critical to the success of the project. For example, in Phase 2, the team worked alongside ASME to build a governance framework for the Council on Sustainability (CoS) and Committee on Sustainability Management (CSM). This included developing roles, responsibilities, and an operations guide to streamline decision-making processes. OnePointFive’s ability to guide and shape the governance structure while ensuring alignment with ASME’s climate goals demonstrates their deep understanding of organizational design and sustainability governance.
+
+The firm’s project management and coordination skills are clearly demonstrated in their work on the governance model and implementation plan. OnePointFive managed complex timelines, coordinating between various stakeholders, including ASME’s Board and staff. They facilitated key milestones such as the ratification of the climate position statement and the development of the governance model. Their structured approach included delivering materials, such as stakeholder engagement trackers and educational content for ASME’s climate governance model, ensuring smooth communication across teams.
+
+The firm has proven expertise in supporting startups with climate impact measurement and communication. OPF will partner with Sweef KINETIK to provide tailored technical assistance to up to six startups. This includes guiding them through Life Cycle Analysis (LCA) and green engineering principles to assess their environmental and carbon impacts. By focusing on impact reporting, OPF helps entrepreneurs improve their climate credibility and investment readiness, preparing them to effectively communicate their sustainability efforts to investors, customers, and the broader market.
+
+The company excels in GHG accounting assurance by conducting third-party audits to ensure Talon’s Scope 1, 2, and 3 emissions are correctly calculated and aligned with best practices. OPF reviews and audits Talon’s existing carbon accounting tools and provides guidance on improvements to meet regulatory requirements. This includes building a carbon accounting diligence database and advising on effective carbon reduction plans. OPF’s ability to assess data accuracy and guide improvements in emissions reporting strengthens Talon’s investor positioning and regulatory compliance.
+
+The firm's financial modeling and budgeting capabilities were also a key asset in supporting ASME’s climate transition strategy. OnePointFive developed a refined implementation plan with financial models for proposed climate initiatives, including cost-benefit analyses and success metrics. Their work in aligning financial modeling with strategic climate initiatives for FY24-26 ensured that the climate action plans were both feasible and measurable.
+
+Finally, OnePointFive’s educational and training expertise was central to developing the necessary tools for ASME's internal teams. They designed and facilitated workshops on climate governance, providing ASME with essential resources for onboarding new governance members. By creating training materials and guiding workshops, OnePointFive empowered ASME’s leadership to drive climate action internally, reinforcing the firm’s competency in capacity-building for sustainability initiatives.
+
+The firm’s experience in managing large-scale, cohort-based training programs is also highlighted in their OnePointFive Academy and Climatebase Fellowship programs. OnePointFive has successfully delivered 25+ hours of climate-specific content across multiple cohorts, training over 700 professionals globally. Their ability to design comprehensive, structured curricula that address key sustainability topics like GHG accounting, decarbonization strategies, and life cycle assessment further underscores their expertise in scaling impactful education for the climate sector.
+
+In the realm of GHG accounting and Life Cycle Assessment (LCA), OnePointFive excels in the development and application of methodologies that adhere to international standards such as the GHG Protocol and ISO 14000. Their expertise is reflected in their work for clients like FMC, Accenture, and Sanofi, where they developed bespoke GHG emissions models and LCA tools. These models provided comprehensive insights into Scope 1, 2, and 3 emissions, while also helping clients align their emissions reduction goals with established frameworks such as the Science-Based Targets Initiative. OnePointFive’s ability to deliver precise and tailored GHG accounting solutions is further exemplified by their work on digital healthcare solutions, where they integrated GHG calculations with social and medical outcomes to inform sustainability strategies.
+
+Additionally, OnePointFive excels in developing tailored data collection and impact modeling strategies, essential for capturing CSR-related data across various touchpoints in the MPP journey. OPF will leverage Life Cycle Assessment (LCA) principles and other methodologies to track environmental and social impacts, including emissions reductions from virtual care alternatives and improved patient engagement. OPF’s ability to build and adapt complex modeling systems is evidenced by their previous work with Sanofi, where they established data-driven frameworks for measuring healthcare solutions' emissions impacts and avoided emissions potential.
+
+OnePointFive’s interactive training and workshop facilitation skills are a key capability, demonstrated through their design of the EDF workshop's interactive lab sessions. These small group breakout sessions allow fellows to apply change management frameworks to real sustainability challenges, with live coaching and peer feedback from OnePointFive’s experienced team. This reflects OnePointFive’s strength in creating engaging, participatory learning environments that enable professionals to practice and refine their skills.
+
+Finally, OnePointFive’s global experience and network are invaluable assets in supporting projects across multiple regions. Their work on previous projects with over 50 agrifood and climate startups, SMEs, and corporates across Europe, the US, and Asia Pacific, showcases their ability to navigate complex, multi-stakeholder environments and deliver tailored solutions that drive impactful innovation in the food and agriculture sectors.
+
+Furthermore, OnePointFive is proficient in sensitivity analysis and modeling for GHG accounting systems. The company is applying this expertise in the current project by testing and refining the allocation model through initial data testing and sensitivity analysis. This ensures that the methodology developed is both reliable and adaptable, providing accurate results even with changing data inputs or assumptions. Their use of sensitivity analysis to evaluate model robustness showcases their analytical rigor and attention to detail in complex environmental modeling.
+
+Furthermore, OnePointFive has proven expertise in sustainability strategy development, having previously assisted Sanofi in embedding climate-related considerations into product and program development stages. OPF’s work includes designing CSR strategies and frameworks that integrate sustainability into the core operations of client businesses. For Sanofi, this will involve developing the necessary environmental and social indicators for both MPP and LMP, ensuring that their programs are not only compliant with sustainability expectations but also positioned to lead in the healthcare sector’s growing focus on sustainability.
+
+Lastly, OnePointFive's experience with public communications and sustainability reporting will be vital in helping Sanofi share their environmental and social impact achievements with both internal and external audiences. OPF will guide Sanofi in translating complex impact data into actionable insights, which can be effectively communicated through executive-level reports and public disclosures. Their expertise in aligning with frameworks such as the Task Force on Climate-related Financial Disclosures (TCFD) further strengthens their ability to deliver clear, concise, and compliant reports that enhance Sanofi's reputation in the healthcare sector.
+
+Through these capabilities, OnePointFive is well-equipped to help Sanofi drive sustainability outcomes in its MPP and LMP programs, positioning the company as a leader in the global healthcare sector's response to climate and social challenges.
+
+Lastly, OnePointFive demonstrates strong client relationship management by offering tailored post-workshop services. This includes gathering feedback through surveys, refining training materials based on participant input, and providing ongoing access to workshop recordings for future use. Their approach ensures continuous improvement and long-term value for clients, showcasing their commitment to delivering high-quality, adaptable training solutions.
+
+OnePointFive (OPF) brings extensive expertise in environmental and social impact measurement, particularly in the healthcare sector. For Sanofi, OPF is positioned to support the quantification and communication of both environmental and social impacts in their Digital Healthcare (DHC) programs, including the Managed Patient Program (MPP) and Life Management Program (LMP). OPF has previously developed emissions models and assessed CSR impacts for Sanofi, such as for Type 2 Diabetes patient care pathways in Taiwan and Japan, where they identified significant emissions reductions from reduced doctor visits and hospitalizations. This work provides a foundation for developing similar strategies for the MPP and LMP programs, showcasing OPF’s capability to integrate sustainability metrics into healthcare solutions.
+
+OnePointFive also demonstrates a strong capability in stakeholder engagement and cross-functional collaboration. In the MPP project, OPF will work closely with Sanofi teams and external digital healthcare partners to align data collection processes and ensure accurate CSR impact assessments. Their experience in conducting stakeholder interviews and gathering feedback, as seen in past collaborations with Sanofi, is crucial for refining data collection processes and ensuring that all necessary information is captured. This collaborative approach ensures that the outcomes are aligned with Sanofi’s broader goals of enhancing sustainability leadership in the healthcare sector.
+
+Thought Leadership & Publications: Contributes to global discussions on climate action, with publications featured by the World Economic Forum and other thought leadership platforms.
+
+Cross-Industry Expertise
+Industries Served: OnePointFive serves a wide range of industries, including consumer products, fashion, healthcare, energy, financial services, and technology.
+
+Global Reach & Impact: The company has successfully supported numerous organizations, such as L'Oréal, New Balance, EDF, and ASME, delivering results in emissions reductions, sustainability strategy, and carbon accounting.
+
+Engagement Models
+OnePointFive operates through various engagement models: retainer-based, project-based, and on-demand, offering flexible solutions to meet the specific needs of clients.
+
+These capabilities reflect OnePointFive's comprehensive expertise in helping organizations navigate the complexities of climate transition while delivering actionable, results-driven solutions.
+
+OnePointFive has proven expertise in managing complex, multi-stakeholder projects, as shown by their leadership role in the PMO for the "Net Zero Beef Supply Chain Prototype" project. They have successfully executed similar PMO functions in past climate-related projects, ensuring effective project management from initiation through execution. The company utilizes best practices in project setup, communication, and milestone tracking, and applies proven strategies for stakeholder alignment and coordination. OnePointFive’s ability to track progress and manage resources efficiently contributes to project success, even when navigating competing priorities or delays.
+
+        TASK 1: METADATA EXTRACTION
+        Extract ONLY information that is explicitly stated or clearly implied in the RFP text. Use your knowledge of OPF to understand context and terminology when extracting OPF-specific information.
+
+        TASK 2: RFP ANALYSIS
+        Analyze this RFP against OPF's SPECIFIC capabilities and experience from the context above.
+
+        CRITICAL REQUIREMENTS FOR ANALYSIS:
+        1. Reference SPECIFIC projects, clients, or capabilities from OPF's context above
+        2. Use actual company names, project examples, and specific expertise mentioned
+        3. Avoid generic statements - be specific about OPF's actual experience
+        4. When mentioning capabilities, reference where they come from in the context
+        5. Use your understanding of OPF from the knowledge base to provide insightful analysis
+
+        Return a SINGLE JSON response with this exact structure:
+        {
+            "extracted_metadata": {
+                "organization_group": "The organization or group issuing the RFP (if clearly stated)",
+                "country": "The country where the project will be implemented (if clearly stated)",
+                "region": "The region or geographic area (if clearly stated)",
+                "industry": "The industry sector (if clearly stated)",
+                "project_focus": "The main focus or objective of the project (if clearly stated)",
+                "opf_gap_size": "The size or scope of OPF gaps mentioned (if clearly stated)",
+                "opf_gaps": "Specific OPF gaps or areas mentioned (if clearly stated)",
+                "deliverables": "The expected deliverables (if clearly stated)",
+                "posting_contact": "Contact information for the posting (if clearly stated)",
+                "potential_experts": "Required expertise or expert profiles (if clearly stated)",
+                "project_cost": "The project budget or cost (if clearly stated, as a number only)",
+                "currency": "The currency for the project cost (if clearly stated)",
+                "specific_staffing_needs": "Specific staffing requirements (if clearly stated)",
+                "due_date": "The project due date (if clearly stated, in YYYY-MM-DD format)"
+            },
+            "analysis": {
+                "fit_assessment": "High/Medium/Low - based on OPF's specific capabilities with detailed reasoning",
+                "key_strengths": "Specific OPF projects, clients, or expertise that directly relate to this RFP with examples",
+                "gaps_challenges": "Specific areas where OPF may need additional resources or expertise, based on actual capabilities",
+                "recommendations": "Specific recommendations based on OPF's actual experience and capabilities",
+                "resource_requirements": "Specific team members or resources OPF would need, based on current capabilities",
+                "risk_assessment": "Specific risks based on OPF's actual experience and capabilities",
+                "competitive_position": "How OPF specifically compares based on actual projects and expertise"
+            }
+        }
+
+        METADATA EXTRACTION GUIDELINES:
+        - Only extract information that is EXPLICITLY stated in the text
+        - If a field is not mentioned or unclear, use null
+        - For dates, use FULL YYYY-MM-DD format (e.g., '2029-12-31', not just '2029')
+        - If only year is given, use YYYY-01-01 format
+        - If year and month are given, use YYYY-MM-01 format
+        - For costs, extract only the numeric value
+        - Use your OPF knowledge to better understand OPF-specific terminology
+
+        ANALYSIS GUIDELINES:
+        - Every analysis point must reference specific information from OPF's context above
+        - Provide detailed, comprehensive responses using the increased token limit
+        - Be specific about OPF's actual experience, not generic consulting capabilities
+        - Reference specific client names, project types, and outcomes when relevant
+        
+
+=== KNOWLEDGE BASE CONTEXT (First 8000 chars) ===
+Demonstrated Capabilities of OnePointFive
+Environmental & Carbon Footprinting Support
+
+Environmental validation for carbon footprint models and outputs.
+
+Development of carbon measurement flow diagrams and methodologies for multiple industries (e.g., transportation, logistics, fintech).
+
+Research and application of environmental standards for global compliance.
+
+Creation of detailed product methodologies and industry-specific catalogs.
+
+Expert outreach and market positioning support for technology startups.
+
+Market Adoption & Lead Generation for Climate Risk Platforms
+
+Industry research and market segmentation to identify target customers and sectors.
+
+Lead generation and engagement through mass and targeted outreach.
+
+Usability testing and product development feedback via customer interviews.
+
+Building strategic partnerships for long-term market adoption.
+
+Development of connections with policy and advocacy stakeholders.
+
+Climate Education & Professional Upskilling
+
+Building strategic partnerships for long-term market adoption.
+
+Development of connections with policy and advocacy stakeholders.
+
+Climate Education & Professional Upskilling
+
+Development of remote, cohort-based climate education curricula.
+
+Delivery of interactive climate education content globally (12+ hours, 6-week program).
+
+Modular, flexible training programs designed for professionals transitioning into climate roles.
+
+High Net Promoter Scores (NPS) reflecting strong program impact on skill-building.
+
+Impact Investment & Climate Integration Frameworks
+
+Co-development of a Climate Impact Assessment Framework for integrating gender equality and climate action into investment strategies.
+
+Support for alignment with frameworks such as TCFD, MDB Paris Alignment, and SFDR for impact investments.
+
+Development of strategies to address climate-related challenges within private equity and investment portfolios.
+
+Go-to-Market Strategy & Business Development for Climate Risk Platforms
+
+Development of strategies to address climate-related challenges within private equity and investment portfolios.
+
+Go-to-Market Strategy & Business Development for Climate Risk Platforms
+
+Product-market fit analysis and lead generation for market adoption.
+
+Research and identification of high-potential customer sectors and geographic regions.
+
+Development of a strategic partnership pipeline, including outreach and customer acquisition strategy.
+
+Expert interviews to assess market needs and inform commercialization strategies.
+
+Climate Risk Software Commercialization & Market Entry
+
+Analysis and benchmarking for pricing, pain points, and market opportunities.
+
+Competitor landscape analysis to inform market positioning.
+
+Development of a go-to-market strategy based on customer feedback and market fit.
+
+Assistance in customer acquisition and strategic partnership formation for scaling in the US.
+
+Climate Technology Due Diligence & User Insights
+
+OnePointFive (OPF) demonstrates strong expertise in climate finance, ESG frameworks, and impact assessment, particularly within the APAC region. The company has proven experience working with climate-focused funds like Sarona Asset Management, providing technical assistance (TA) to build robust Environmental, Social, and Governance Management Systems (ESGMSs) for fund managers. OPF’s work with Sarona, including conducting a TCFD gap analysis and a climate risk assessment for portfolio countries, highlights their capability in guiding fund managers through climate-related financial disclosures, risk identification, and integration into investment strategies.
+
+OPF also brings sector-specific insights and expertise across diverse industries, including healthcare, food & agriculture, and renewable energy. For instance, in collaboration with Sarona, they helped integrate gender equality and climate action into investment strategies, empowering clients to drive systemic change in emerging markets. Their capability to align investments with impact taxonomies and provide actionable recommendations further supports the integration of sustainability into financial decision-making processes.
+
+Through these capabilities, OnePointFive effectively equips fund managers and investors with the tools, insights, and training needed to drive climate-focused investments and achieve measurable, scalable impact in emerging markets.
+
+
+
+
+
+
+
+
+Ask ChatGPT
+
+Life Cycle & Impact Analysis: Conducts life cycle assessments (LCA) for products and services, providing detailed environmental impact reports to guide decision-making.
+
+Competitive Analysis & Market Entry: Delivers competitive landscape analysis, market research, and strategy recommendations for businesses seeking to enter or expand in the climate and sustainability sectors.
+
+Policy & Regulatory Guidance: Offers insights into the policy landscape, advising clients on regulations, standards, and aligning business practices with environmental goals.
+
+Due Diligence & Investment Support: Provides investment due diligence for climate tech and sustainability-focused ventures, including evaluating market viability and financial returns.
+
+2. Climate Technology
+Technology Evaluation & Integration: Helps clients identify, evaluate, and implement climate technology solutions, including renewable energy, carbon capture, and building management systems.
+
+In addition to regulatory compliance, OnePointFive excels in climate risk analysis, using both qualitative and quantitative methods to assess risks across the supply chain. For Kendra Scott, they plan to analyze climate-related physical risks (e.g., flooding, extreme weather events) and transition risks (e.g., policy changes, market shifts). Their approach integrates scenario analysis tools and climate risk software recommendations, drawing on their extensive experience with similar assessments for clients like Sarona Asset Management. This capability allows them to identify and quantify climate-related financial risks, which can then inform contingency planning and strategic decision-making, thereby reducing operational disruptions and increasing supply chain resilience.
+
+OnePointFive (OPF) demonstrates strong capabilities in delivering ESG strategy and regulatory guidance, as evidenced by its role in supporting Talon’s transition towards a comprehensive ESG framework. OPF is tasked with developing a detailed roadmap for Science-Based Target initiative (SBTi) approval, regulatory alignment, and climate risk integration. This includes conducting a diagnostic to assess Talon’s current alignment with SBTi and UK regulations, and providing an implementation plan to close gaps. OPF also supports Talon in navigating sector-specific evaluations and climate risk assessments aligned with frameworks like TCFD, ensuring Talon can strategically manage climate risks and position itself favorably with investors.
+
+OnePointFive excels in capacity building and training, providing over 40 hours of content across 15 modules to upskill professionals in key areas such as GHG accounting and sustainability reporting. Their training offerings have reached over 2,000 individuals globally, demonstrating their ability to scale knowledge transfer efficiently. This includes tailored training in TCFD framework and climate risk assessments, supporting fund managers to meet evolving regulations and best practices in climate finance.
+
+Assistance in customer acquisition and strategic partnership formation for scaling in the US.
+
+Climate Technology Due Diligence & User Insights
+
+Conducted user interviews with climate investors and tech entrepreneurs to gather insights on emissions reduction technologies.
+
+Aggregation of feedback to improve the CRANE Tool's user experience and functionality.
+
+Drafting and publishing user reports to support the uptake of climate technology evaluation tools.
+
+These case studies reflect OnePointFive's expertise in supporting climate technology startups, market research, educational content development, investment
+... (truncated, full context is 35105 characters)
+
+=== RFP TEXT (First 5000 chars) ===
+Document: DFAT 1066 - Approach to Market CRC QTAG - Final.docx
+
+
+
+Approach to Market
+To establish Contract for Quality and Technical Assurance Group for the Climate Resilient Communities Program
+Reference ID: DFAT - 1066
+UNSPSC: 80100000 Management Advisory Services
+This Approach to Market (ATM) is for the provision of: A Quality Technical and Assurance Group (QTAG), comprising a small team of experts, is required to provide independent advice to DFAT on the Climate Resilient Communities (CRC) program, in support of accountability and learning.   
+
+The purpose of the QTAG is: 
+- Accountability: To provide independent support, advice and reporting to DFAT (the CRC Secretariat) on the performance of the CRC program. 
+- Learning: To improve the performance of the CRC program by fostering learning and adaptation in DFAT, the CRC Support Unit and CRC implementing partners. 
+
+The CRC is a five-year investment (2024-29) with the option to extend a further four years, with a current value of $221.9m million. It is designed to deliver impact so that people in the Indo-Pacific are more resilient to climate change and disasters.  
+
+CRC will contribute to this goal by achieving two End-of-Facility Outcomes (EoFOs):   
+- Indo-Pacific partner governments have taken gender-responsive and inclusive actions that strengthen climate and disaster resilience, particularly in the water, food and energy sectors.   
+- Indo-Pacific development partners have implemented gender-responsive, inclusive and locally led programs and partnerships that strengthen climate and disaster resilience, particularly in the water, food and energy sectors. 
+
+The EoFOs are being delivered through six workstreams, providing: co-funding for programs; program cycle (design, implementation and monitoring and review) support; climate integration and disaster risk reduction technical assistance; mobilising additional climate finance; sharing of lessons learnt and public diplomacy.  
+
+The CRC is comprised of a Support Unit (managed by a Contractor), the Secretariat (DFAT staff), a Steering Committee, and the QTAG.    
+The Commonwealth of Australia as represented by Department of Foreign Affairs and Trade (the Customer) is seeking submissions for the provision of the services (the Requirement) as described in this ATM comprising:
+this CCS ATM, including the Statement of Requirement
+the CCS ATM Response Form
+the CCS ATM Annexes (if any)
+the Commonwealth ATM Terms
+the Additional Contract Terms (if any)
+the Commonwealth Contract Terms
+the Commonwealth Contracting Suite Glossary and Interpretation.
+In submitting a response, Potential Suppliers are required to comply with all requirements set out in the Commonwealth Approach to Market Terms (a copy of which is included in this document), and if successful, agree to enter into a contract which incorporates the Commonwealth Contract Terms available at .
+
+The  provides information to help businesses understand how to sell to the Australian Government. If you have any general questions about how the Australian Government procures goods and services, please contact the Selling to Government team at . 
+For questions relating specifically to this ATM, please contact the ATM Contact Officer set out at A.A.5(a). 
+
+
+Statement of Requirement
+A.A.1	Key Information and Dates
+Approach to Market
+Proposed Contract
+
+
+A.A.2	The Requirement
+A Quality Technical and Assurance Group (QTAG), comprising a small team of experts, is required to provide independent advice to DFAT on the Climate Resilient Communities (CRC) program.    
+ DFAT requires the QTAG to: 
+Undertake an independent annual assessment of the CRC’s performance against the CRC Performance Assessment Framework.  
+A separate statement of work for the annual assessment will be agreed each year. The annual assessment will however typically include advice and reporting on the efficacy and efficiency of CRC technical assistance, MEL systems and reporting processes, and governance arrangement and the extent to which these support the successful implementation of the program as outlined in the CRC design..  
+The annual assessments will typically also include analysis of the extent to which CRC reporting systems are supporting DFAT to meet its development performance and quality reporting obligations (for example, the Tier 2 indicators in the Performance and Delivery Framework).  
+In undertaking the annual assessment, the QTAG may be asked to review CRC technical assistance products, designs, PAFs, performance reports, IMRs and PPAs for co-funded programs to ensure CRC is on track towards its EOFOs and IOs.  
+In undertaking the annual assessment, the QTAG may be asked to undertake deep dives into CRC workstreams to support learning and adaptation.  
+This assessment will inform DFAT’s Investment Monitoring Report process and as such will be submitted to DFAT (the CRC Secretariat) by 28 February every year. 
+This assessment will likely include travel to at least one sample country o
+... (truncated, full RFP text is 29478 characters)
+
+=== END DEBUG INFO ===

@@ -20,10 +20,28 @@ class KnowledgeBaseService:
         self.chroma_db_path = os.path.join(current_dir, "chroma_db")
         self.chroma_client = chromadb.PersistentClient(path=self.chroma_db_path)
         
-    def process_knowledge_base(self, documents_path: str):
+    def reset_knowledge_base(self):
+        """
+        Reset the knowledge base by clearing all existing embeddings
+        """
+        try:
+            import shutil
+            if os.path.exists(self.chroma_db_path):
+                shutil.rmtree(self.chroma_db_path)
+                print(f"Cleared existing knowledge base at {self.chroma_db_path}")
+            self.vector_store = None
+            return True
+        except Exception as e:
+            print(f"Error resetting knowledge base: {e}")
+            return False
+    
+    def process_knowledge_base(self, documents_path: str, force_reset: bool = False):
         """
         Process company knowledge base documents and store in vector database
         """
+        # Reset if requested
+        if force_reset:
+            self.reset_knowledge_base()
         documents = []
         
         # Load documents from various sources
@@ -89,158 +107,167 @@ class KnowledgeBaseService:
                 print(f"Knowledge base not loaded: {e}")
                 self.vector_store = None
         
-        # Retrieve more specific context (increased to 8 for better coverage)
-        relevant_docs = self.vector_store.similarity_search(rfp_text, k=8)
-        context = "\n\n".join([doc.page_content for doc in relevant_docs])
+        # Retrieve maximum context from knowledge base - get all available documents
+        try:
+            # Get total document count to retrieve all available context
+            total_docs = self.vector_store._collection.count()
+            # Use min of total docs or a high number to get maximum context
+            k_value = min(total_docs, 200)  # Retrieve up to 200 chunks for maximum context
+            relevant_docs = self.vector_store.similarity_search(rfp_text, k=k_value)
+            context = "\n\n".join([doc.page_content for doc in relevant_docs])
+            print(f"Retrieved {len(relevant_docs)} document chunks from knowledge base (total available: {total_docs})")
+        except Exception as e:
+            print(f"Error retrieving knowledge base context: {e}")
+            # Fallback to original approach
+            relevant_docs = self.vector_store.similarity_search(rfp_text, k=50)
+            context = "\n\n".join([doc.page_content for doc in relevant_docs])
         
-        # Truncate RFP text if it's too long (keep first 2000 characters)
-        if len(rfp_text) > 2000:
-            rfp_text = rfp_text[:2000] + "... [truncated]"
+        # Keep full RFP text for analysis
         
-        # Truncate context if it's too long (keep first 4000 characters for more detail)
-        if len(context) > 4000:
-            context = context[:4000] + "... [truncated]"
+        # Use full knowledge base context without truncation
         
-        # Create analysis prompt with specific company focus and metadata extraction
-        prompt = f"""
-        You are an expert RFP analyst for OPF. Analyze this RFP against our SPECIFIC company capabilities and past projects.
+        # Create comprehensive prompt that combines metadata extraction and analysis
+        combined_prompt = f"""
+        You are an expert RFP analyst for OPF with deep knowledge of the company's capabilities, projects, and expertise. You will perform TWO tasks in a single response:
+
+        1. EXTRACT METADATA from the RFP
+        2. ANALYZE the RFP against OPF's specific capabilities
 
         RFP DETAILS:
         - Project Name: {rfp_metadata.get('project_name', 'N/A')}
         - Organization: {rfp_metadata.get('organization_group', 'N/A')}
         - Project Focus: {rfp_metadata.get('project_focus', 'N/A')}
-        - RFP Content: {rfp_text[:1500]}
+        - RFP Content: {rfp_text}
 
-        OUR COMPANY CAPABILITIES AND EXPERIENCE:
-        {context[:3500]}
+        OPF COMPANY CAPABILITIES AND EXPERIENCE:
+        {context}
 
-        CRITICAL REQUIREMENTS:
-        1. Reference SPECIFIC projects, clients, or capabilities from our company context above
+        TASK 1: METADATA EXTRACTION
+        Extract ONLY information that is explicitly stated or clearly implied in the RFP text. Use your knowledge of OPF to understand context and terminology when extracting OPF-specific information.
+
+        TASK 2: RFP ANALYSIS
+        Analyze this RFP against OPF's SPECIFIC capabilities and experience from the context above.
+
+        CRITICAL REQUIREMENTS FOR ANALYSIS:
+        1. Reference SPECIFIC projects, clients, or capabilities from OPF's context above
         2. Use actual company names, project examples, and specific expertise mentioned
-        3. Avoid generic statements - be specific about our actual experience
-        4. If you mention capabilities, reference where they come from in our context
+        3. Avoid generic statements - be specific about OPF's actual experience
+        4. When mentioning capabilities, reference where they come from in the context
+        5. Use your understanding of OPF from the knowledge base to provide insightful analysis
 
-        Provide detailed JSON analysis with these keys:
+        Return a SINGLE JSON response with this exact structure:
         {{
-            "fit_assessment": "High/Medium/Low - based on our specific capabilities",
-            "key_strengths": "Specific projects, clients, or expertise from our company context that directly relate to this RFP",
-            "gaps_challenges": "Specific areas where we may need additional resources or expertise, based on our actual capabilities",
-            "recommendations": "Specific recommendation based on our actual experience and capabilities",
-            "resource_requirements": "Specific team members or resources we would need, based on our current capabilities",
-            "risk_assessment": "Specific risks based on our actual experience and capabilities",
-            "competitive_position": "How we specifically compare based on our actual projects and expertise"
+            "extracted_metadata": {{
+                "organization_group": "The organization or group issuing the RFP (if clearly stated)",
+                "country": "The country where the project will be implemented (if clearly stated)",
+                "region": "The region or geographic area (if clearly stated)",
+                "industry": "The industry sector (if clearly stated)",
+                "project_focus": "The main focus or objective of the project (if clearly stated)",
+                "opf_gap_size": "The size or scope of OPF gaps mentioned (if clearly stated)",
+                "opf_gaps": "Specific OPF gaps or areas mentioned (if clearly stated)",
+                "deliverables": "The expected deliverables (if clearly stated)",
+                "posting_contact": "Contact information for the posting (if clearly stated)",
+                "potential_experts": "Required expertise or expert profiles (if clearly stated)",
+                "project_cost": "The project budget or cost (if clearly stated, as a number only)",
+                "currency": "The currency for the project cost (if clearly stated)",
+                "specific_staffing_needs": "Specific staffing requirements (if clearly stated)",
+                "due_date": "The project due date (if clearly stated, in YYYY-MM-DD format)"
+            }},
+            "analysis": {{
+                "fit_assessment": "High/Medium/Low - based on OPF's specific capabilities with detailed reasoning",
+                "key_strengths": "Specific OPF projects, clients, or expertise that directly relate to this RFP with examples",
+                "gaps_challenges": "Specific areas where OPF may need additional resources or expertise, based on actual capabilities",
+                "recommendations": "Specific recommendations based on OPF's actual experience and capabilities",
+                "resource_requirements": "Specific team members or resources OPF would need, based on current capabilities",
+                "risk_assessment": "Specific risks based on OPF's actual experience and capabilities",
+                "competitive_position": "How OPF specifically compares based on actual projects and expertise"
+            }}
         }}
 
-        IMPORTANT: Every point must reference specific information from our company context above. Do not make generic statements.
-        """
-
-        # Create metadata extraction prompt
-        metadata_prompt = f"""
-        You are an expert at extracting structured information from RFP documents. Extract ONLY the information that is clearly stated in the RFP text below.
-
-        RFP TEXT TO ANALYZE:
-        {rfp_text[:2000]}
-
-        Extract ONLY information that is explicitly stated or clearly implied. If information is not present or unclear, return null for that field.
-
-        Return JSON with these fields:
-        {{
-            "organization_group": "The organization or group issuing the RFP (if clearly stated)",
-            "country": "The country where the project will be implemented (if clearly stated)",
-            "region": "The region or geographic area (if clearly stated)",
-            "industry": "The industry sector (if clearly stated)",
-            "project_focus": "The main focus or objective of the project (if clearly stated)",
-            "opf_gap_size": "The size or scope of OPF gaps mentioned (if clearly stated)",
-            "opf_gaps": "Specific OPF gaps or areas mentioned (if clearly stated)",
-            "deliverables": "The expected deliverables (if clearly stated)",
-            "posting_contact": "Contact information for the posting (if clearly stated)",
-            "potential_experts": "Required expertise or expert profiles (if clearly stated)",
-            "project_cost": "The project budget or cost (if clearly stated, as a number only)",
-            "currency": "The currency for the project cost (if clearly stated)",
-            "specific_staffing_needs": "Specific staffing requirements (if clearly stated)",
-            "due_date": "The project due date (if clearly stated, in YYYY-MM-DD format)"
-        }}
-
-        IMPORTANT: 
+        METADATA EXTRACTION GUIDELINES:
         - Only extract information that is EXPLICITLY stated in the text
         - If a field is not mentioned or unclear, use null
-        - For dates, you MUST use FULL YYYY-MM-DD format (e.g., '2029-12-31', not just '2029')
+        - For dates, use FULL YYYY-MM-DD format (e.g., '2029-12-31', not just '2029')
         - If only year is given, use YYYY-01-01 format
         - If year and month are given, use YYYY-MM-01 format
         - For costs, extract only the numeric value
-        - Be conservative - it's better to return null than to guess
+        - Use your OPF knowledge to better understand OPF-specific terminology
+
+        ANALYSIS GUIDELINES:
+        - Every analysis point must reference specific information from OPF's context above
+        - Provide detailed, comprehensive responses using the increased token limit
+        - Be specific about OPF's actual experience, not generic consulting capabilities
+        - Reference specific client names, project types, and outcomes when relevant
         """
         
-        # Call OpenAI API for both analysis and metadata extraction
+        # Debug: Write prompts to output.txt for debugging
+        try:
+            # Get the absolute path to the project root directory
+            current_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+            output_file_path = os.path.join(current_dir, "output.txt")
+            
+            with open(output_file_path, 'w', encoding='utf-8') as f:
+                f.write("=== DEBUG: OpenAI Combined Prompt and Context ===\n\n")
+                f.write("=== COMBINED METADATA EXTRACTION & ANALYSIS PROMPT ===\n")
+                f.write(combined_prompt)
+                f.write("\n\n=== KNOWLEDGE BASE CONTEXT (First 8000 chars) ===\n")
+                f.write(context[:8000])
+                if len(context) > 8000:
+                    f.write(f"\n... (truncated, full context is {len(context)} characters)")
+                f.write("\n\n=== RFP TEXT (First 5000 chars) ===\n")
+                f.write(rfp_text[:5000])
+                if len(rfp_text) > 5000:
+                    f.write(f"\n... (truncated, full RFP text is {len(rfp_text)} characters)")
+                f.write("\n\n=== END DEBUG INFO ===\n")
+            print(f"Debug information written to: {output_file_path}")
+        except Exception as debug_e:
+            print(f"Warning: Could not write debug output: {debug_e}")
+        
+        # Call OpenAI API with combined prompt for both analysis and metadata extraction
         client = openai.OpenAI(api_key=self.openai_api_key)
         
-        # First, extract metadata from RFP text
+        # Single API call for both metadata extraction and analysis
         try:
-            metadata_response = client.chat.completions.create(
-                model="gpt-4",
-                messages=[
-                    {"role": "system", "content": "You are an expert at extracting structured information from RFP documents. Extract ONLY information that is explicitly stated."},
-                    {"role": "user", "content": metadata_prompt}
-                ],
-                temperature=0.1,  # Very low temperature for consistent extraction
-                max_tokens=1000
-            )
-            extracted_metadata = metadata_response.choices[0].message.content.strip()
-        except Exception as e:
-            print(f"Metadata extraction failed: {e}")
-            extracted_metadata = "{}"
-        
-        # Then, perform the main analysis
-        try:
-            # Try with GPT-4 first
+            # Try with GPT-4o first
             response = client.chat.completions.create(
-                model="gpt-4",
+                model="gpt-4o",
                 messages=[
-                    {"role": "system", "content": "You are an expert RFP analyst for OPF. You must reference SPECIFIC company information, projects, clients, and capabilities from the provided context. Avoid generic statements - be specific about actual company experience and capabilities."},
-                    {"role": "user", "content": prompt}
+                    {"role": "system", "content": "You are an expert RFP analyst for OPF with deep knowledge of the company. You will extract metadata and analyze RFPs against OPF's specific capabilities in a single comprehensive response. Always return valid JSON with the exact structure requested."},
+                    {"role": "user", "content": combined_prompt}
                 ],
-                temperature=0.2,  # Lower temperature for more consistent, specific responses
-                max_tokens=2500
+                temperature=0.2,  # Lower temperature for consistent, specific responses
+                max_tokens=6000  # Increased for combined response
             )
         except Exception as e:
             if "context_length_exceeded" in str(e):
-                # Fallback to GPT-3.5-turbo if context is too long
-                print("Context too long for GPT-4, falling back to GPT-3.5-turbo")
+                # Fallback to GPT-4 if context is too long
+                print("Context too long for GPT-4o, falling back to GPT-4")
                 response = client.chat.completions.create(
-                    model="gpt-3.5-turbo",
+                    model="gpt-4",
                     messages=[
-                        {"role": "system", "content": "You are an expert RFP analyst for OPF. You must reference SPECIFIC company information, projects, clients, and capabilities from the provided context. Avoid generic statements - be specific about actual company experience and capabilities."},
-                        {"role": "user", "content": prompt}
+                        {"role": "system", "content": "You are an expert RFP analyst for OPF with deep knowledge of the company. You will extract metadata and analyze RFPs against OPF's specific capabilities in a single comprehensive response. Always return valid JSON with the exact structure requested."},
+                        {"role": "user", "content": combined_prompt}
                     ],
                     temperature=0.2,
-                    max_tokens=2500
+                    max_tokens=6000
                 )
             else:
                 raise e
         
-        # Parse and return analysis
-        analysis_text = response.choices[0].message.content.strip()
+        # Parse the combined response
+        response_text = response.choices[0].message.content.strip()
         
-        # Parse extracted metadata
-        extracted_metadata_dict = {}
-        try:
-            import json
-            extracted_metadata_dict = json.loads(extracted_metadata)
-        except json.JSONDecodeError:
-            print(f"Metadata JSON parsing failed: {extracted_metadata}")
-            extracted_metadata_dict = {}
-        
-        # Try to extract JSON from the analysis response
+        # Try to extract JSON from the response
         try:
             import json
             # Try to parse the response directly
-            analysis = json.loads(analysis_text)
+            combined_result = json.loads(response_text)
         except json.JSONDecodeError:
             # If that fails, try to extract JSON from the response
             try:
                 # Look for JSON-like content between curly braces
                 import re
-                json_match = re.search(r'\{.*\}', analysis_text, re.DOTALL)
+                json_match = re.search(r'\{.*\}', response_text, re.DOTALL)
                 if json_match:
                     json_str = json_match.group()
                     # Try to complete the JSON if it's truncated
@@ -249,45 +276,34 @@ class KnowledgeBaseService:
                         last_comma = json_str.rfind(',')
                         if last_comma != -1:
                             json_str = json_str[:last_comma] + '}'
-                    analysis = json.loads(json_str)
+                    combined_result = json.loads(json_str)
                 else:
                     raise Exception("No JSON found in response")
             except Exception as e:
-                # If all else fails, return the raw analysis
+                # If all else fails, return the raw analysis with structure
                 print(f"JSON parsing failed: {e}")
-                print(f"Raw response: {analysis_text}")
+                print(f"Raw response: {response_text}")
                 
-                # Try to extract what we can from the partial response
-                analysis = {
-                    "fit_assessment": "Analysis completed",
-                    "key_strengths": "See full analysis below",
-                    "gaps_challenges": "See full analysis below", 
-                    "recommendations": "See full analysis below",
-                    "resource_requirements": "See full analysis below",
-                    "risk_assessment": "See full analysis below",
-                    "competitive_position": "See full analysis below",
-                    "full_analysis": analysis_text
+                combined_result = {
+                    "extracted_metadata": {},
+                    "analysis": {
+                        "fit_assessment": "Analysis completed - see full response",
+                        "key_strengths": "See full analysis below",
+                        "gaps_challenges": "See full analysis below", 
+                        "recommendations": "See full analysis below",
+                        "resource_requirements": "See full analysis below",
+                        "risk_assessment": "See full analysis below",
+                        "competitive_position": "See full analysis below",
+                        "full_analysis": response_text
+                    }
                 }
-                
-                # Try to extract any partial information
-                if '"fit_assessment"' in analysis_text:
-                    try:
-                        fit_match = re.search(r'"fit_assessment":\s*"([^"]+)"', analysis_text)
-                        if fit_match:
-                            analysis["fit_assessment"] = fit_match.group(1)
-                    except:
-                        pass
-                
-                if '"key_strengths"' in analysis_text:
-                    try:
-                        strengths_match = re.search(r'"key_strengths":\s*"([^"]+)"', analysis_text)
-                        if strengths_match:
-                            analysis["key_strengths"] = strengths_match.group(1)
-                    except:
-                        pass
         
-        # Add extracted metadata to the analysis results
-        if extracted_metadata_dict:
-            analysis['extracted_metadata'] = extracted_metadata_dict
+        # Ensure proper structure - extract analysis and metadata sections
+        analysis = combined_result.get("analysis", {})
+        extracted_metadata = combined_result.get("extracted_metadata", {})
+        
+        # Add extracted metadata to analysis for backward compatibility
+        if extracted_metadata:
+            analysis['extracted_metadata'] = extracted_metadata
         
         return analysis

@@ -699,31 +699,36 @@ def get_knowledge_base_status():
 def init_knowledge_base():
     """Manually initialize the knowledge base"""
     try:
+        data = request.get_json() or {}
+        force_reset = data.get('force_reset', False)
+        
         # First check current status
         status_result = _check_knowledge_base_status()
         
         if not status_result['success']:
             return jsonify({'error': status_result['error']}), 500
         
-        # If already initialized, return status
-        if status_result['status'] == 'initialized':
+        # If already initialized and not forcing reset, return status
+        if status_result['status'] == 'initialized' and not force_reset:
             return jsonify({
                 'success': True,
                 'already_initialized': True,
-                'message': f"Knowledge base is already initialized with {status_result['document_count']} document chunks. No action needed.",
+                'message': f"Knowledge base is already initialized with {status_result['document_count']} document chunks. Use force_reset=true to reinitialize.",
                 'document_count': status_result['document_count']
             })
         
         # Initialize the knowledge base
         from app.services.knowledge_base import KnowledgeBaseService
         kb_service = KnowledgeBaseService()
-        doc_count = kb_service.process_knowledge_base("knowledge_base")
+        doc_count = kb_service.process_knowledge_base("knowledge_base", force_reset=force_reset)
         
+        action = "reinitialized" if force_reset else "initialized"
         return jsonify({
             'success': True,
             'already_initialized': False,
-            'message': f'Knowledge base initialized successfully with {doc_count} document chunks',
-            'document_count': doc_count
+            'message': f'Knowledge base {action} successfully with {doc_count} document chunks',
+            'document_count': doc_count,
+            'force_reset': force_reset
         })
         
     except Exception as e:
