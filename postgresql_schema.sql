@@ -84,6 +84,23 @@ CREATE TABLE IF NOT EXISTS documents (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+-- Create the scraped_tenders table for storing tender scraping results
+CREATE TABLE IF NOT EXISTS scraped_tenders (
+    id SERIAL PRIMARY KEY,
+    title VARCHAR(500) NOT NULL,
+    description TEXT,
+    closing_date VARCHAR(255),
+    organization VARCHAR(255),
+    link TEXT DEFAULT '',
+    source VARCHAR(255),
+    scraped_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    is_climate_related BOOLEAN DEFAULT TRUE,
+    processed BOOLEAN DEFAULT FALSE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE(title, source)
+);
+
 -- Create indexes for RFP tables
 CREATE INDEX IF NOT EXISTS idx_rfp_metadata_project_name ON rfp_metadata(project_name);
 CREATE INDEX IF NOT EXISTS idx_rfp_metadata_organization_group ON rfp_metadata(organization_group);
@@ -92,5 +109,15 @@ CREATE INDEX IF NOT EXISTS idx_rfp_metadata_due_date ON rfp_metadata(due_date);
 CREATE INDEX IF NOT EXISTS idx_documents_rfp_id ON documents(rfp_id);
 CREATE INDEX IF NOT EXISTS idx_documents_document_name ON documents(document_name);
 
+-- Create indexes for scraped_tenders table
+CREATE INDEX IF NOT EXISTS idx_scraped_tenders_title ON scraped_tenders(title);
+CREATE INDEX IF NOT EXISTS idx_scraped_tenders_source ON scraped_tenders(source);
+CREATE INDEX IF NOT EXISTS idx_scraped_tenders_closing_date ON scraped_tenders(closing_date);
+CREATE INDEX IF NOT EXISTS idx_scraped_tenders_is_climate_related ON scraped_tenders(is_climate_related);
+CREATE INDEX IF NOT EXISTS idx_scraped_tenders_processed ON scraped_tenders(processed);
+
 -- Add a full-text search index for document content
 CREATE INDEX IF NOT EXISTS idx_documents_text_search ON documents USING gin(to_tsvector('english', document_text));
+
+-- Add a full-text search index for scraped tenders
+CREATE INDEX IF NOT EXISTS idx_scraped_tenders_text_search ON scraped_tenders USING gin(to_tsvector('english', title || ' ' || COALESCE(description, '')));

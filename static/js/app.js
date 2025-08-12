@@ -79,6 +79,9 @@ class DatabaseSearchApp {
         // Handle tab switching to ensure results are shown in the correct tab
         const keywordSearchTab = document.getElementById('keyword-search-tab');
         const rfpAnalysisTab = document.getElementById('rfp-analysis-tab');
+        const australianTendersTab = document.getElementById('australian-tenders-tab');
+        const gizTendersTab = document.getElementById('giz-tenders-tab');
+        const undpTendersTab = document.getElementById('undp-tenders-tab');
         
         // When switching to RFP Analysis tab, hide any existing results and load RFP list
         rfpAnalysisTab.addEventListener('click', () => {
@@ -87,6 +90,33 @@ class DatabaseSearchApp {
                 resultsContainer.style.display = 'none';
             }
             this.loadRfpList();
+        });
+
+        // When switching to Australian Tenders tab, load Australian tenders
+        australianTendersTab.addEventListener('click', () => {
+            const resultsContainer = document.getElementById('resultsContainer');
+            if (resultsContainer.style.display !== 'none') {
+                resultsContainer.style.display = 'none';
+            }
+            this.loadTendersBySource('Australian Government Tenders');
+        });
+
+        // When switching to GIZ Tenders tab, load GIZ tenders
+        gizTendersTab.addEventListener('click', () => {
+            const resultsContainer = document.getElementById('resultsContainer');
+            if (resultsContainer.style.display !== 'none') {
+                resultsContainer.style.display = 'none';
+            }
+            this.loadTendersBySource('GIZ (German Development Agency)');
+        });
+
+        // When switching to UNDP Tenders tab, load UNDP tenders
+        undpTendersTab.addEventListener('click', () => {
+            const resultsContainer = document.getElementById('resultsContainer');
+            if (resultsContainer.style.display !== 'none') {
+                resultsContainer.style.display = 'none';
+            }
+            this.loadTendersBySource('UNDP (United Nations Development Programme)');
         });
 
         // When switching back to Keyword Search tab, show results if they exist
@@ -1607,6 +1637,437 @@ class DatabaseSearchApp {
             this.showError('An error occurred while checking knowledge base status');
         }
     }
+
+
+
+    async scrapeAustralianTenders() {
+        const scrapeBtn = document.getElementById('scrapeAusTendersBtn') || document.getElementById('scrapeAusTendersBtn2');
+        const originalText = scrapeBtn.innerHTML;
+        
+        try {
+            // Show loading state
+            scrapeBtn.disabled = true;
+            scrapeBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i>Scraping...';
+            
+            const response = await fetch('/api/tenders/scrape-aus', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            });
+            
+            const result = await response.json();
+            
+            if (result.success !== undefined) {
+                // Show success message
+                this.showNotification(result.message || 'Australian tenders scraped successfully!', 'success');
+                
+                // Refresh Australian tenders list and stats
+                await this.loadTendersBySource('Australian Government Tenders');
+                await this.loadTendersStats();
+            } else {
+                throw new Error(result.error || 'Scraping failed');
+            }
+            
+        } catch (error) {
+            console.error('Error scraping Australian tenders:', error);
+            this.showNotification(`Australian scraping failed: ${error.message}`, 'error');
+        } finally {
+            // Reset button state
+            scrapeBtn.disabled = false;
+            scrapeBtn.innerHTML = originalText;
+        }
+    }
+
+    async scrapeGizTenders() {
+        const scrapeBtn = document.getElementById('scrapeGizTendersBtn') || document.getElementById('scrapeGizTendersBtn2');
+        const originalText = scrapeBtn.innerHTML;
+        
+        try {
+            // Show loading state
+            scrapeBtn.disabled = true;
+            scrapeBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i>Scraping...';
+            
+            const response = await fetch('/api/tenders/scrape-giz', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            });
+            
+            const result = await response.json();
+            
+            if (result.success !== undefined) {
+                // Show success message
+                this.showNotification(result.message || 'GIZ tenders scraped successfully!', 'success');
+                
+                // Refresh GIZ tenders list and stats
+                await this.loadTendersBySource('GIZ (German Development Agency)');
+                await this.loadTendersStats();
+            } else {
+                throw new Error(result.error || 'Scraping failed');
+            }
+            
+        } catch (error) {
+            console.error('Error scraping GIZ tenders:', error);
+            this.showNotification(`GIZ scraping failed: ${error.message}`, 'error');
+        } finally {
+            // Reset button state
+            scrapeBtn.disabled = false;
+            scrapeBtn.innerHTML = originalText;
+        }
+    }
+
+    async scrapeUndpTenders() {
+        const scrapeBtn = document.getElementById('scrapeUndpTendersBtn2');
+        const originalText = scrapeBtn.innerHTML;
+        
+        try {
+            // Show loading state
+            scrapeBtn.disabled = true;
+            scrapeBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i>Scraping...';
+            
+            const response = await fetch('/api/tenders/scrape-undp', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            });
+            
+            const result = await response.json();
+            
+            if (result.success !== undefined) {
+                // Show success message
+                this.showNotification(result.message || 'UNDP tenders scraped successfully!', 'success');
+                
+                // Refresh UNDP tenders list and stats
+                await this.loadTendersBySource('UNDP (United Nations Development Programme)');
+                await this.loadTendersStats();
+            } else {
+                throw new Error(result.error || 'Scraping failed');
+            }
+            
+        } catch (error) {
+            console.error('Error scraping UNDP tenders:', error);
+            this.showNotification(`UNDP scraping failed: ${error.message}`, 'error');
+        } finally {
+            // Reset button state
+            scrapeBtn.disabled = false;
+            scrapeBtn.innerHTML = originalText;
+        }
+    }
+    
+    async loadTendersList(filter = 'all') {
+        try {
+            const tendersList = document.getElementById('tendersList');
+            const noTendersMessage = document.getElementById('noTendersMessage');
+            const tendersLoading = document.getElementById('tendersLoading');
+            
+            // Show loading
+            tendersList.style.display = 'none';
+            noTendersMessage.style.display = 'none';
+            tendersLoading.style.display = 'block';
+            
+            // Build query parameters
+            const params = new URLSearchParams();
+            if (filter === 'unprocessed') {
+                params.append('processed', 'false');
+            } else if (filter === 'processed') {
+                params.append('processed', 'true');
+            }
+            
+            const response = await fetch(`/api/tenders/list?${params.toString()}`);
+            const result = await response.json();
+            
+            if (result.success) {
+                if (result.tenders.length === 0) {
+                    noTendersMessage.style.display = 'block';
+                } else {
+                    this.renderTendersList(result.tenders);
+                    tendersList.style.display = 'block';
+                }
+            } else {
+                throw new Error(result.error || 'Failed to load tenders');
+            }
+            
+        } catch (error) {
+            console.error('Error loading tenders:', error);
+            this.showNotification(`Failed to load tenders: ${error.message}`, 'error');
+        } finally {
+            document.getElementById('tendersLoading').style.display = 'none';
+        }
+    }
+    
+    renderTendersList(tenders) {
+        const tendersList = document.getElementById('tendersList');
+        tendersList.innerHTML = '';
+        
+        tenders.forEach(tender => {
+            const tenderItem = document.createElement('div');
+            tenderItem.className = 'list-group-item list-group-item-action';
+            tenderItem.innerHTML = `
+                <div class="d-flex w-100 justify-content-between align-items-start">
+                    <div class="flex-grow-1">
+                        <h6 class="mb-1">${this.escapeHtml(tender.title)}</h6>
+                        <p class="mb-1 text-muted small">${this.escapeHtml(tender.description || '')}</p>
+                        <div class="d-flex align-items-center gap-3">
+                            <small class="text-muted">
+                                <i class="fas fa-building me-1"></i>${this.escapeHtml(tender.organization)}
+                            </small>
+                            <small class="text-muted">
+                                <i class="fas fa-calendar me-1"></i>${tender.closing_date || 'No deadline'}
+                            </small>
+                            <small class="fas fa-globe me-1"></i>${this.escapeHtml(tender.source)}
+                            </small>
+                            <span class="badge ${tender.processed ? 'bg-success' : 'bg-warning'}">
+                                ${tender.processed ? 'Processed' : 'Unprocessed'}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="ms-3">
+                        <div class="btn-group-vertical btn-group-sm">
+                            <button class="btn btn-outline-secondary btn-sm" onclick="app.toggleTenderProcessed(${tender.id}, ${!tender.processed})">
+                                <i class="fas fa-${tender.processed ? 'undo' : 'check'}"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            tendersList.appendChild(tenderItem);
+        });
+    }
+    
+    async toggleTenderProcessed(tenderId, processed) {
+        try {
+            const response = await fetch('/api/tenders/mark-processed', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    tender_id: tenderId,
+                    processed: processed
+                })
+            });
+            
+            const result = await response.json();
+            
+            if (result.success) {
+                this.showNotification(result.message, 'success');
+                
+                // Determine which tab is currently active and refresh accordingly
+                const activeTab = document.querySelector('.nav-link.active');
+                if (activeTab) {
+                    const tabId = activeTab.getAttribute('id');
+                    
+                                    if (tabId === 'australian-tenders-tab') {
+                    // Refresh Australian tenders list
+                    await this.loadTendersBySource('Australian Government Tenders');
+                } else if (tabId === 'giz-tenders-tab') {
+                    // Refresh GIZ tenders list
+                    await this.loadTendersBySource('GIZ (German Development Agency)');
+                } else if (tabId === 'undp-tenders-tab') {
+                    // Refresh UNDP tenders list
+                    await this.loadTendersBySource('UNDP (United Nations Development Programme)');
+                }
+                }
+                
+                // Refresh stats
+                await this.loadTendersStats();
+            } else {
+                throw new Error(result.error || 'Failed to update tender');
+            }
+            
+        } catch (error) {
+            console.error('Error updating tender:', error);
+            this.showNotification(`Failed to update tender: ${error.message}`, 'error');
+        }
+    }
+    
+    async loadTendersStats() {
+        try {
+            const response = await fetch('/api/tenders/stats');
+            const result = await response.json();
+            
+            if (result.success) {
+                // Only update stats if the elements exist (they might not in individual tabs)
+                const totalCountElement = document.getElementById('totalTendersCount');
+                const unprocessedCountElement = document.getElementById('unprocessedCount');
+                const lastScrapedElement = document.getElementById('lastScrapedDate');
+                
+                if (totalCountElement) {
+                    totalCountElement.textContent = result.total_tenders;
+                }
+                if (unprocessedCountElement) {
+                    unprocessedCountElement.textContent = result.total_unprocessed;
+                }
+                
+                // Show last scraped date if element exists
+                if (lastScrapedElement && result.recent_activity && result.recent_activity.length > 0) {
+                    const lastDate = new Date(result.recent_activity[0].date);
+                    lastScrapedElement.textContent = lastDate.toLocaleDateString();
+                } else if (lastScrapedElement) {
+                    lastScrapedElement.textContent = 'Never';
+                }
+            }
+        } catch (error) {
+            console.error('Error loading tender stats:', error);
+        }
+    }
+    
+    filterTenders(filter) {
+        this.loadTendersList(filter);
+    }
+
+    filterTendersBySource(source, filter = 'all') {
+        this.loadTendersBySource(source, filter);
+    }
+
+    async loadTendersBySource(source, filter = 'all') {
+        try {
+            let listElement, noMessageElement, loadingElement;
+            
+            // Determine which elements to use based on source
+            if (source === 'Australian Government Tenders') {
+                listElement = document.getElementById('australianTendersList');
+                noMessageElement = document.getElementById('noAustralianTendersMessage');
+                loadingElement = document.getElementById('australianTendersLoading');
+            } else if (source === 'GIZ (German Development Agency)') {
+                listElement = document.getElementById('gizTendersList');
+                noMessageElement = document.getElementById('noGizTendersMessage');
+                loadingElement = document.getElementById('gizTendersLoading');
+            } else if (source === 'UNDP (United Nations Development Programme)') {
+                listElement = document.getElementById('undpTendersList');
+                noMessageElement = document.getElementById('noUndpTendersMessage');
+                loadingElement = document.getElementById('undpTendersLoading');
+            } else {
+                console.error('Unknown source:', source);
+                return;
+            }
+            
+            // Show loading
+            listElement.style.display = 'none';
+            noMessageElement.style.display = 'none';
+            loadingElement.style.display = 'block';
+            
+            // Build query parameters
+            const params = new URLSearchParams();
+            params.append('source', source);
+            if (filter === 'unprocessed') {
+                params.append('processed', 'false');
+            } else if (filter === 'processed') {
+                params.append('processed', 'true');
+            }
+            
+            const response = await fetch(`/api/tenders/list?${params.toString()}`);
+            const result = await response.json();
+            
+            if (result.success) {
+                if (result.tenders.length === 0) {
+                    noMessageElement.style.display = 'block';
+                } else {
+                    this.renderTendersListBySource(result.tenders, source);
+                    listElement.style.display = 'block';
+                }
+            } else {
+                throw new Error(result.error || 'Failed to load tenders');
+            }
+            
+        } catch (error) {
+            console.error('Error loading tenders by source:', error);
+            this.showNotification(`Failed to load tenders: ${error.message}`, 'error');
+        } finally {
+            // Hide loading for the appropriate source
+            if (source === 'Australian Government Tenders') {
+                document.getElementById('australianTendersLoading').style.display = 'none';
+            } else if (source === 'GIZ (German Development Agency)') {
+                document.getElementById('gizTendersLoading').style.display = 'none';
+            } else if (source === 'UNDP (United Nations Development Programme)') {
+                document.getElementById('undpTendersLoading').style.display = 'none';
+            }
+        }
+    }
+
+    renderTendersListBySource(tenders, source) {
+        let listElement;
+        
+        if (source === 'Australian Government Tenders') {
+            listElement = document.getElementById('australianTendersList');
+        } else if (source === 'GIZ (German Development Agency)') {
+            listElement = document.getElementById('gizTendersList');
+        } else if (source === 'UNDP (United Nations Development Programme)') {
+            listElement = document.getElementById('undpTendersList');
+        } else {
+            return;
+        }
+        
+        listElement.innerHTML = '';
+        
+        tenders.forEach(tender => {
+            const tenderItem = document.createElement('div');
+            tenderItem.className = 'list-group-item list-group-item-action';
+            tenderItem.innerHTML = `
+                <div class="d-flex w-100 justify-content-between align-items-start">
+                    <div class="flex-grow-1">
+                        <h6 class="mb-1">${this.escapeHtml(tender.title)}</h6>
+                        <p class="mb-1 text-muted small">${this.escapeHtml(tender.description || '')}</p>
+                        <div class="d-flex align-items-center gap-3">
+                            <small class="text-muted">
+                                <i class="fas fa-building me-1"></i>${this.escapeHtml(tender.organization)}
+                            </small>
+                            <small class="text-muted">
+                                <i class="fas fa-calendar me-1"></i>${tender.closing_date || 'No deadline'}
+                            </small>
+                            <small class="text-muted">
+                                <i class="fas fa-globe me-1"></i>${this.escapeHtml(tender.source)}
+                            </small>
+                            <span class="badge ${tender.processed ? 'bg-success' : 'bg-warning'}">
+                                ${tender.processed ? 'Processed' : 'Unprocessed'}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="ms-3">
+                        <div class="btn-group-vertical btn-group-sm">
+                            <button class="btn btn-outline-secondary btn-sm" onclick="app.toggleTenderProcessed(${tender.id}, ${!tender.processed})">
+                                <i class="fas fa-${tender.processed ? 'undo' : 'check'}"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            listElement.appendChild(tenderItem);
+        });
+    }
+
+
+    
+    showNotification(message, type = 'info') {
+        // Create notification element
+        const notification = document.createElement('div');
+        notification.className = `alert alert-${type === 'error' ? 'danger' : type} alert-dismissible fade show position-fixed`;
+        notification.style.cssText = 'top: 20px; right: 20px; z-index: 9999; min-width: 300px;';
+        notification.innerHTML = `
+            ${message}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        `;
+        
+        document.body.appendChild(notification);
+        
+        // Auto-remove after 5 seconds
+        setTimeout(() => {
+            if (notification.parentNode) {
+                notification.remove();
+            }
+        }, 5000);
+    }
+    
+    escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
+
+
 }
 
 // RFP functionality removed

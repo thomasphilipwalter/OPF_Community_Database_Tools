@@ -746,3 +746,420 @@ def init_knowledge_base():
     except Exception as e:
         return jsonify({'error': f'Failed to initialize knowledge base: {str(e)}'}), 500
 
+
+# Tender Scraping Endpoints
+@bp.route('/api/tenders/scrape', methods=['POST'])
+@login_required
+def scrape_tenders():
+    """Scrape tenders from all configured sources"""
+    try:
+        from app.services.tender_scraper import TenderScraper
+        import threading
+        import time
+        
+        # Create a simple timeout mechanism
+        results = {'error': 'Scraping timed out'}
+        scraping_complete = threading.Event()
+        
+        def scrape_with_timeout():
+            nonlocal results
+            try:
+                scraper = TenderScraper()
+                results = scraper.scrape_all_sources()
+                
+                # Save to database if tenders were found
+                if results.get('total_found', 0) > 0:
+                    conn = get_database_connection()
+                    success = scraper.save_tenders_to_database(
+                        results['aus_tenders'] + results['giz_tenders'], 
+                        conn
+                    )
+                    conn.close()
+                    
+                    if success:
+                        results['message'] = f"Successfully scraped and saved {results['total_found']} tenders"
+                    else:
+                        results['message'] = f"Scraped {results['total_found']} tenders but failed to save to database"
+                else:
+                    results['message'] = "No climate-related tenders found"
+                    
+            except Exception as e:
+                results = {'error': f'Scraping failed: {str(e)}'}
+            finally:
+                scraping_complete.set()
+        
+        # Start scraping in a separate thread
+        scraping_thread = threading.Thread(target=scrape_with_timeout)
+        scraping_thread.daemon = True
+        scraping_thread.start()
+        
+        # Wait for completion or timeout (45 seconds)
+        if scraping_complete.wait(timeout=45):
+            return jsonify(results)
+        else:
+            return jsonify({'error': 'Scraping operation timed out after 45 seconds'}), 408
+            
+    except Exception as e:
+        return jsonify({'error': f'Failed to scrape tenders: {str(e)}'}), 500
+
+
+@bp.route('/api/tenders/scrape-aus', methods=['POST'])
+@login_required
+def scrape_australian_tenders():
+    """Scrape tenders from Australian Government source only"""
+    try:
+        from app.services.tender_scraper import TenderScraper
+        import threading
+        
+        # Create a simple timeout mechanism
+        results = {'error': 'Scraping timed out'}
+        scraping_complete = threading.Event()
+        
+        def scrape_with_timeout():
+            nonlocal results
+            try:
+                scraper = TenderScraper()
+                aus_tenders = scraper.scrape_aus_tenders()
+                
+                results = {
+                    'aus_tenders': aus_tenders,
+                    'total_found': len(aus_tenders),
+                    'scraped_at': scraper.scrape_all_sources()['scraped_at']
+                }
+                
+                # Save to database if tenders were found
+                if results['total_found'] > 0:
+                    conn = get_database_connection()
+                    success = scraper.save_tenders_to_database(aus_tenders, conn)
+                    conn.close()
+                    
+                    if success:
+                        results['message'] = f"Successfully scraped and saved {results['total_found']} Australian tenders"
+                        results['success'] = True
+                    else:
+                        results['message'] = f"Scraped {results['total_found']} Australian tenders but failed to save to database"
+                        results['success'] = False
+                else:
+                    results['message'] = "No climate-related Australian tenders found"
+                    results['success'] = True
+                    
+            except Exception as e:
+                results = {'error': f'Scraping failed: {str(e)}', 'success': False}
+            finally:
+                scraping_complete.set()
+        
+        # Start scraping in a separate thread
+        scraping_thread = threading.Thread(target=scrape_with_timeout)
+        scraping_thread.daemon = True
+        scraping_thread.start()
+        
+        # Wait for completion or timeout (30 seconds)
+        if scraping_complete.wait(timeout=30):
+            return jsonify(results)
+        else:
+            return jsonify({'error': 'Scraping operation timed out after 30 seconds'}), 408
+            
+    except Exception as e:
+        return jsonify({'error': f'Failed to scrape Australian tenders: {str(e)}'}), 500
+
+
+@bp.route('/api/tenders/scrape-giz', methods=['POST'])
+@login_required
+def scrape_giz_tenders():
+    """Scrape tenders from GIZ source only"""
+    try:
+        from app.services.tender_scraper import TenderScraper
+        import threading
+        
+        # Create a simple timeout mechanism
+        results = {'error': 'Scraping timed out'}
+        scraping_complete = threading.Event()
+        
+        def scrape_with_timeout():
+            nonlocal results
+            try:
+                scraper = TenderScraper()
+                giz_tenders = scraper.scrape_giz_tenders()
+                
+                results = {
+                    'giz_tenders': giz_tenders,
+                    'total_found': len(giz_tenders),
+                    'scraped_at': scraper.scrape_all_sources()['scraped_at']
+                }
+                
+                # Save to database if tenders were found
+                if results['total_found'] > 0:
+                    conn = get_database_connection()
+                    success = scraper.save_tenders_to_database(giz_tenders, conn)
+                    conn.close()
+                    
+                    if success:
+                        results['message'] = f"Successfully scraped and saved {results['total_found']} GIZ tenders"
+                        results['success'] = True
+                    else:
+                        results['message'] = f"Scraped {results['total_found']} GIZ tenders but failed to save to database"
+                        results['success'] = False
+                else:
+                    results['message'] = "No climate-related GIZ tenders found"
+                    results['success'] = True
+                    
+            except Exception as e:
+                results = {'error': f'Scraping failed: {str(e)}', 'success': False}
+            finally:
+                scraping_complete.set()
+        
+        # Start scraping in a separate thread
+        scraping_thread = threading.Thread(target=scrape_with_timeout)
+        scraping_thread.daemon = True
+        scraping_thread.start()
+        
+        # Wait for completion or timeout (30 seconds)
+        if scraping_complete.wait(timeout=30):
+            return jsonify(results)
+        else:
+            return jsonify({'error': 'Scraping operation timed out after 30 seconds'}), 408
+            
+    except Exception as e:
+        return jsonify({'error': f'Failed to scrape GIZ tenders: {str(e)}'}), 500
+
+
+@bp.route('/api/tenders/scrape-undp', methods=['POST'])
+@login_required
+def scrape_undp_tenders():
+    """Scrape tenders from UNDP source only"""
+    try:
+        from app.services.tender_scraper import TenderScraper
+        import threading
+        
+        # Create a simple timeout mechanism
+        results = {'error': 'Scraping timed out'}
+        scraping_complete = threading.Event()
+        
+        def scrape_with_timeout():
+            nonlocal results
+            try:
+                scraper = TenderScraper()
+                undp_tenders = scraper.scrape_undp_tenders()
+                
+                results = {
+                    'undp_tenders': undp_tenders,
+                    'total_found': len(undp_tenders),
+                    'scraped_at': scraper.scrape_all_sources()['scraped_at']
+                }
+                
+                # Save to database if tenders were found
+                if results['total_found'] > 0:
+                    conn = get_database_connection()
+                    success = scraper.save_tenders_to_database(undp_tenders, conn)
+                    conn.close()
+                    
+                    if success:
+                        results['message'] = f"Successfully scraped and saved {results['total_found']} UNDP tenders"
+                        results['success'] = True
+                    else:
+                        results['message'] = f"Scraped {results['total_found']} UNDP tenders but failed to save to database"
+                        results['success'] = False
+                else:
+                    results['message'] = "No climate-related UNDP tenders found"
+                    results['success'] = True
+                    
+            except Exception as e:
+                results = {'error': f'Scraping failed: {str(e)}', 'success': False}
+            finally:
+                scraping_complete.set()
+        
+        # Start scraping in a separate thread
+        scraping_thread = threading.Thread(target=scrape_with_timeout)
+        scraping_thread.daemon = True
+        scraping_thread.start()
+        
+        # Wait for completion or timeout (30 seconds)
+        if scraping_complete.wait(timeout=30):
+            return jsonify(results)
+        else:
+            return jsonify({'error': 'Scraping operation timed out after 30 seconds'}), 408
+            
+    except Exception as e:
+        return jsonify({'error': f'Failed to scrape UNDP tenders: {str(e)}'}), 500
+
+
+@bp.route('/api/tenders/list', methods=['GET'])
+@login_required
+def get_tenders_list():
+    """Get list of all scraped tenders"""
+    try:
+        conn = get_database_connection()
+        cursor = conn.cursor()
+        
+        # Get query parameters
+        source = request.args.get('source')
+        processed = request.args.get('processed')
+        limit = request.args.get('limit', 100, type=int)
+        offset = request.args.get('offset', 0, type=int)
+        
+        # Build query
+        query = """
+            SELECT id, title, description, closing_date, organization, link, source, 
+                   scraped_at, is_climate_related, processed, created_at
+            FROM scraped_tenders 
+            WHERE 1=1
+        """
+        params = []
+        
+        if source:
+            query += " AND source = %s"
+            params.append(source)
+            
+        if processed is not None:
+            query += " AND processed = %s"
+            params.append(processed == 'true')
+        
+        query += " ORDER BY created_at DESC LIMIT %s OFFSET %s"
+        params.extend([limit, offset])
+        
+        cursor.execute(query, params)
+        
+        tenders = []
+        for row in cursor.fetchall():
+            tenders.append({
+                'id': row[0],
+                'title': row[1],
+                'description': row[2],
+                'closing_date': row[3],
+                'organization': row[4],
+                'link': row[5],
+                'source': row[6],
+                'scraped_at': row[7].isoformat() if row[7] else None,
+                'is_climate_related': row[8],
+                'processed': row[9],
+                'created_at': row[10].isoformat() if row[10] else None
+            })
+        
+        # Get total count
+        count_query = "SELECT COUNT(*) FROM scraped_tenders WHERE 1=1"
+        count_params = []
+        
+        if source:
+            count_query += " AND source = %s"
+            count_params.append(source)
+            
+        if processed is not None:
+            count_query += " AND processed = %s"
+            count_params.append(processed == 'true')
+        
+        cursor.execute(count_query, count_params)
+        total_count = cursor.fetchone()[0]
+        
+        cursor.close()
+        conn.close()
+        
+        return jsonify({
+            'success': True,
+            'tenders': tenders,
+            'total_count': total_count,
+            'limit': limit,
+            'offset': offset
+        })
+        
+    except Exception as e:
+        return jsonify({'error': f'Failed to get tenders list: {str(e)}'}), 500
+
+
+@bp.route('/api/tenders/stats', methods=['GET'])
+@login_required
+def get_tenders_stats():
+    """Get statistics about scraped tenders"""
+    try:
+        conn = get_database_connection()
+        cursor = conn.cursor()
+        
+        # Get total counts by source
+        cursor.execute("""
+            SELECT source, COUNT(*) as count, 
+                   COUNT(CASE WHEN processed = true THEN 1 END) as processed_count
+            FROM scraped_tenders 
+            GROUP BY source
+        """)
+        
+        source_stats = {}
+        total_tenders = 0
+        total_processed = 0
+        
+        for row in cursor.fetchall():
+            source_stats[row[0]] = {
+                'total': row[1],
+                'processed': row[2],
+                'unprocessed': row[1] - row[2]
+            }
+            total_tenders += row[1]
+            total_processed += row[2]
+        
+        # Get recent activity
+        cursor.execute("""
+            SELECT DATE(scraped_at) as date, COUNT(*) as count
+            FROM scraped_tenders 
+            WHERE scraped_at >= CURRENT_DATE - INTERVAL '7 days'
+            GROUP BY DATE(scraped_at)
+            ORDER BY date DESC
+        """)
+        
+        recent_activity = []
+        for row in cursor.fetchall():
+            recent_activity.append({
+                'date': row[0].isoformat(),
+                'count': row[1]
+            })
+        
+        cursor.close()
+        conn.close()
+        
+        return jsonify({
+            'success': True,
+            'total_tenders': total_tenders,
+            'total_processed': total_processed,
+            'total_unprocessed': total_tenders - total_processed,
+            'source_stats': source_stats,
+            'recent_activity': recent_activity
+        })
+        
+    except Exception as e:
+        return jsonify({'error': f'Failed to get tenders stats: {str(e)}'}), 500
+
+
+@bp.route('/api/tenders/mark-processed', methods=['POST'])
+@login_required
+def mark_tender_processed():
+    """Mark a tender as processed"""
+    try:
+        data = request.get_json()
+        tender_id = data.get('tender_id')
+        processed = data.get('processed', True)
+        
+        if not tender_id:
+            return jsonify({'error': 'Tender ID is required'}), 400
+        
+        conn = get_database_connection()
+        cursor = conn.cursor()
+        
+        cursor.execute("""
+            UPDATE scraped_tenders 
+            SET processed = %s, updated_at = CURRENT_TIMESTAMP
+            WHERE id = %s
+        """, (processed, tender_id))
+        
+        if cursor.rowcount == 0:
+            conn.close()
+            return jsonify({'error': 'Tender not found'}), 404
+        
+        conn.commit()
+        cursor.close()
+        conn.close()
+        
+        return jsonify({
+            'success': True,
+            'message': f'Tender marked as {"processed" if processed else "unprocessed"}'
+        })
+        
+    except Exception as e:
+        return jsonify({'error': f'Failed to mark tender: {str(e)}'}), 500
+

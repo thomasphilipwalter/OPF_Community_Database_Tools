@@ -21,4 +21,11 @@ langchain-openai==0.3.29
 langchain-chroma==0.2.5
 langchain-text-splitters==0.3.9
 tiktoken==0.10.0
-docx2txt==0.8 
+docx2txt==0.8
+
+# Web Scraping Dependencies
+beautifulsoup4==4.12.2
+lxml==4.9.3
+selenium==4.15.2
+webdriver-manager==4.0.1
+schedule==1.2.0 
