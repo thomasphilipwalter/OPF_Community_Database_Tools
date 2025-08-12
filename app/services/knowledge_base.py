@@ -216,7 +216,7 @@ class KnowledgeBaseService:
                     {"role": "user", "content": combined_prompt}
                 ],
                 temperature=0.2,  # Lower temperature for consistent, specific responses
-                max_tokens=16000  # Significantly increased for extensive, detailed analysis sections
+                max_tokens=8000  # Balanced for comprehensive analysis while avoiding worker timeouts
             )
         except Exception as e:
             if "context_length_exceeded" in str(e):
