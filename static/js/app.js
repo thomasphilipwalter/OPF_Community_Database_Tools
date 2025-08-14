@@ -1285,7 +1285,7 @@ class DatabaseSearchApp {
                     this.showSuccess('AI Analysis completed successfully!');
                 }
                 
-                this.displayAiAnalysis(data.analysis);
+                this.displayAiAnalysis(data.analysis, data.member_matching);
                 
                 // Refresh RFP details to show the saved analysis and populated metadata
                 this.loadRfpList().then(() => {
@@ -1321,8 +1321,9 @@ class DatabaseSearchApp {
         });
     }
 
-    displayAiAnalysis(analysis) {
+    displayAiAnalysis(analysis, memberMatching = null) {
         console.log('Displaying analysis:', analysis); // Debug logging
+        console.log('Member matching:', memberMatching); // Debug logging
         const aiContent = document.getElementById('aiAnalysisContent');
         
         // Check if analysis has the expected structure
@@ -1330,6 +1331,90 @@ class DatabaseSearchApp {
             console.error('Invalid analysis data:', analysis);
             aiContent.innerHTML = '<div class="alert alert-danger">Invalid analysis data received</div>';
             return;
+        }
+        
+        // Generate member matching section
+        let memberMatchingHtml = '';
+        if (memberMatching && memberMatching.success) {
+            const keywords = memberMatching.keywords || [];
+            const members = memberMatching.members || [];
+            
+            memberMatchingHtml = `
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header bg-dark text-white">
+                                <h6 class="mb-0"><i class="fas fa-user-friends me-2"></i>Recommended Team Members</h6>
+                            </div>
+                            <div class="card-body">
+                                ${keywords.length > 0 ? `
+                                    <div class="mb-3">
+                                        <strong>Expertise Keywords Identified:</strong>
+                                        <div class="mt-2">
+                                            ${keywords.map(keyword => `<span class="badge bg-primary me-2 mb-2">${keyword}</span>`).join('')}
+                                        </div>
+                                    </div>
+                                ` : ''}
+                                
+                                ${members.length > 0 ? `
+                                    <div class="table-responsive">
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>Name</th>
+                                                    <th>Relevance Score</th>
+                                                    <th>Key Skills</th>
+                                                    <th>Explanation</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                ${members.map(member => `
+                                                    <tr>
+                                                        <td>
+                                                            <strong>${member.name || 'N/A'}</strong>
+                                                            ${member.member_id ? `<br><small class="text-muted">ID: ${member.member_id}</small>` : ''}
+                                                        </td>
+                                                        <td>
+                                                            <div class="d-flex align-items-center">
+                                                                <div class="progress me-2" style="width: 60px; height: 8px;">
+                                                                    <div class="progress-bar bg-success" style="width: ${(member.relevance_score || 5) * 10}%"></div>
+                                                                </div>
+                                                                <span class="badge bg-secondary">${member.relevance_score || 5}/10</span>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            ${(member.key_skills || []).map(skill => `<span class="badge bg-info me-1 mb-1">${skill}</span>`).join('')}
+                                                        </td>
+                                                        <td>
+                                                            <small>${member.explanation || 'Member matched by keyword search'}</small>
+                                                        </td>
+                                                    </tr>
+                                                `).join('')}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                ` : `
+                                    <div class="alert alert-info">
+                                        <i class="fas fa-info-circle me-2"></i>
+                                        ${memberMatching.message || 'No relevant team members found for the identified expertise requirements.'}
+                                    </div>
+                                `}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        } else if (memberMatching && !memberMatching.success) {
+            memberMatchingHtml = `
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <div class="alert alert-warning">
+                            <i class="fas fa-exclamation-triangle me-2"></i>
+                            <strong>Member Matching Issue:</strong> ${memberMatching.error || 'Failed to find relevant team members'}
+                        </div>
+                    </div>
+                </div>
+            `;
         }
         
         const analysisHtml = `
@@ -1416,6 +1501,8 @@ class DatabaseSearchApp {
                     </div>
                 </div>
                 
+                ${memberMatchingHtml}
+                
                 <div class="text-center mt-3">
                     <button class="btn btn-outline-primary" onclick="app.generateAiAnalysis()">
                         <i class="fas fa-refresh me-2"></i>Re-run Analysis
@@ -1446,9 +1533,14 @@ class DatabaseSearchApp {
             <div class="ai-analysis-results">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <small class="text-muted">Last analyzed: ${analysisDate}</small>
-                    <button class="btn btn-outline-primary btn-sm" onclick="app.generateAiAnalysis()">
-                        <i class="fas fa-refresh me-2"></i>Re-run Analysis
-                    </button>
+                    <div>
+                        <button class="btn btn-outline-success btn-sm me-2" onclick="app.findRelevantMembers()">
+                            <i class="fas fa-user-friends me-2"></i>Find Team Members
+                        </button>
+                        <button class="btn btn-outline-primary btn-sm" onclick="app.generateAiAnalysis()">
+                            <i class="fas fa-refresh me-2"></i>Re-run Analysis
+                        </button>
+                    </div>
                 </div>
                 
                 <div class="row">
@@ -1534,6 +1626,64 @@ class DatabaseSearchApp {
                 </div>
             </div>
         `;
+    }
+
+    findRelevantMembers() {
+        if (!this.selectedRfp) {
+            this.showError('Please select an RFP first.');
+            return;
+        }
+        
+        // Show loading state
+        const aiContent = document.getElementById('aiAnalysisContent');
+        const currentContent = aiContent.innerHTML;
+        
+        aiContent.innerHTML = `
+            <div class="text-center">
+                <div class="spinner-border text-success" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+                <p class="mt-3">Finding relevant team members...</p>
+                <small class="text-muted">This may take a few moments</small>
+            </div>
+        `;
+        
+        // Call member matching API
+        fetch(`/api/rfp/${this.selectedRfp.id}/find-members`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Member matching response:', data);
+            
+            if (data.success) {
+                this.showSuccess('Team member matching completed!');
+                
+                // Re-display the existing analysis with member matching results
+                const analysis = {
+                    fit_assessment: this.selectedRfp.ai_fit_assessment || '',
+                    competitive_position: this.selectedRfp.ai_competitive_position || '',
+                    key_strengths: this.selectedRfp.ai_key_strengths || '',
+                    gaps_challenges: this.selectedRfp.ai_gaps_challenges || '',
+                    resource_requirements: this.selectedRfp.ai_resource_requirements || '',
+                    risk_assessment: this.selectedRfp.ai_risk_assessment || '',
+                    recommendations: this.selectedRfp.ai_recommendations || ''
+                };
+                
+                this.displayAiAnalysis(analysis, data);
+            } else {
+                this.showError(data.error || 'Failed to find relevant team members');
+                aiContent.innerHTML = currentContent;
+            }
+        })
+        .catch(error => {
+            console.error('Member matching error:', error);
+            this.showError('An error occurred while finding team members');
+            aiContent.innerHTML = currentContent;
+        });
     }
 
     async initKnowledgeBase() {

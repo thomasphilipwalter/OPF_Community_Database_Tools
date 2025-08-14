@@ -622,11 +622,27 @@ def ai_analyze_rfp(rfp_id):
         cursor.close()
         conn.close()
         
+        # Try to find relevant members based on the analysis
+        member_matching_result = None
+        try:
+            from app.services.member_matcher import MemberMatcherService
+            matcher_service = MemberMatcherService()
+            member_matching_result = matcher_service.find_relevant_members(analysis)
+        except Exception as member_error:
+            print(f"Member matching failed: {member_error}")
+            member_matching_result = {
+                'success': False,
+                'error': f'Member matching failed: {str(member_error)}',
+                'keywords': [],
+                'members': []
+            }
+        
         return jsonify({
             'success': True,
             'analysis': analysis,
             'rfp_id': rfp_id,
-            'documents_analyzed': len(documents)
+            'documents_analyzed': len(documents),
+            'member_matching': member_matching_result
         })
         
     except Exception as e:
@@ -1162,4 +1178,62 @@ def mark_tender_processed():
         
     except Exception as e:
         return jsonify({'error': f'Failed to mark tender: {str(e)}'}), 500
+
+
+@bp.route('/api/rfp/<int:rfp_id>/find-members', methods=['POST'])
+@login_required
+def find_relevant_members(rfp_id):
+    """Find relevant members for an RFP based on analysis"""
+    try:
+        from app.services.member_matcher import MemberMatcherService
+        
+        # Get RFP analysis from database
+        conn = get_database_connection()
+        cursor = conn.cursor()
+        
+        cursor.execute("""
+            SELECT ai_fit_assessment, ai_competitive_position, ai_key_strengths, 
+                   ai_gaps_challenges, ai_resource_requirements, ai_risk_assessment, 
+                   ai_recommendations, project_name
+            FROM rfp_metadata 
+            WHERE id = %s
+        """, (rfp_id,))
+        
+        rfp_result = cursor.fetchone()
+        cursor.close()
+        conn.close()
+        
+        if not rfp_result:
+            return jsonify({'error': 'RFP not found'}), 404
+        
+        # Check if analysis exists
+        if not rfp_result[0]:  # ai_fit_assessment
+            return jsonify({'error': 'No AI analysis found for this RFP. Please run the analysis first.'}), 400
+        
+        # Prepare analysis data
+        analysis = {
+            'fit_assessment': rfp_result[0] or '',
+            'competitive_position': rfp_result[1] or '',
+            'key_strengths': rfp_result[2] or '',
+            'gaps_challenges': rfp_result[3] or '',
+            'resource_requirements': rfp_result[4] or '',
+            'risk_assessment': rfp_result[5] or '',
+            'recommendations': rfp_result[6] or '',
+            'project_name': rfp_result[7] or ''
+        }
+        
+        # Initialize member matcher service
+        matcher_service = MemberMatcherService()
+        
+        # Find relevant members
+        result = matcher_service.find_relevant_members(analysis)
+        
+        # Add RFP context to the result
+        result['rfp_id'] = rfp_id
+        result['project_name'] = analysis['project_name']
+        
+        return jsonify(result)
+        
+    except Exception as e:
+        return jsonify({'error': f'Error finding relevant members: {str(e)}'}), 500
 

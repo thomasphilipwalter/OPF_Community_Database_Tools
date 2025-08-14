@@ -584,6 +584,52 @@ header {
     background-color: #9E91BE !important;
 }
 
+/* Member Matching Section Styling */
+.ai-analysis-results .card-header.bg-dark {
+    background-color: #343a40 !important;
+}
+
+.ai-analysis-results .badge {
+    font-size: 0.8em;
+    padding: 0.4em 0.6em;
+}
+
+.ai-analysis-results .progress {
+    background-color: #e9ecef;
+    border-radius: 4px;
+}
+
+.ai-analysis-results .progress-bar {
+    border-radius: 4px;
+    transition: width 0.3s ease;
+}
+
+.ai-analysis-results .table {
+    font-size: 0.9em;
+}
+
+.ai-analysis-results .table th {
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #dee2e6;
+    font-weight: 600;
+}
+
+.ai-analysis-results .table td {
+    vertical-align: middle;
+}
+
+.ai-analysis-results .badge.bg-primary {
+    background-color: #008B9E !important;
+}
+
+.ai-analysis-results .badge.bg-info {
+    background-color: #17a2b8 !important;
+}
+
+.ai-analysis-results .badge.bg-secondary {
+    background-color: #6c757d !important;
+}
+
 #noRfpsMessage p,
 #rfpDetails p {
     font-family: 'Azeret Mono', monospace !important;
