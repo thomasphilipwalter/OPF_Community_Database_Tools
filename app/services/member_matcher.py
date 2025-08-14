@@ -28,7 +28,7 @@ class MemberMatcherService:
         
         prompt = f"""
         Based on the following RFP analysis sections that identify gaps and resource requirements, 
-        extract specific expertise keywords or phrases that represent areas where the company needs 
+        extract the MOST CRITICAL expertise keywords or phrases that represent areas where the company needs 
         additional expertise or team members.
         
         Focus on:
@@ -41,12 +41,14 @@ class MemberMatcherService:
         RFP Analysis Text:
         {combined_text}
         
-        Return a JSON array of specific expertise keywords/phrases. Each keyword/phrase should be:
-        - Specific and actionable (e.g., "carbon accounting", "ESG reporting", "climate risk modeling")
+        Return a JSON array of the MOST IMPORTANT expertise keywords/phrases. Each keyword/phrase should be:
+        - Specific but not overly complex (e.g., "carbon accounting", "ESG reporting", "climate risk")
         - Relevant for finding team members or expertise
+        - Common enough to likely appear in member profiles
         - Not too generic (avoid terms like "management" or "leadership" unless very specific)
         
-        Limit to 10-15 most important keywords/phrases.
+        IMPORTANT: Be very selective and conservative. Only include the 5-8 most critical expertise areas.
+        Focus on skills that are most likely to be found in the member database.
         
         Format: ["keyword1", "keyword2", "keyword3"]
         """
@@ -92,7 +94,7 @@ class MemberMatcherService:
                     quoted = re.findall(r'"([^"]*)"', line)
                     keywords.extend(quoted)
             
-            return keywords[:15]  # Limit to 15 keywords
+            return keywords[:8]  # Limit to 8 keywords
             
         except Exception as e:
             print(f"Error extracting keywords: {e}")
@@ -100,27 +102,89 @@ class MemberMatcherService:
     
     def search_members_by_keywords(self, keywords: List[str], max_results: int = 50) -> List[Dict]:
         """
-        Search the member database using the extracted keywords
+        Search the member database using the extracted keywords with OR logic
         """
         if not keywords:
             return []
         
-        # Join keywords with commas for the search function
-        keywords_string = ', '.join(keywords)
-        
         try:
-            # Use the existing search function
-            results = search_database(keywords_string)
-            
-            # Limit results to avoid overwhelming the API
-            if len(results) > max_results:
-                results = results[:max_results]
-            
+            # Use custom OR search instead of the existing AND search
+            results = self._search_members_or_logic(keywords, max_results)
             return results
             
         except Exception as e:
             print(f"Error searching members: {e}")
             return []
+    
+    def _search_members_or_logic(self, keywords: List[str], max_results: int = 50) -> List[Dict]:
+        """
+        Search members using OR logic between keywords
+        """
+        from app.services.database import get_database_connection
+        
+        conn = get_database_connection()
+        cursor = conn.cursor()
+        
+        # Get all column names from the final table
+        cursor.execute("""
+            SELECT column_name 
+            FROM information_schema.columns 
+            WHERE table_name = 'final' 
+            ORDER BY ordinal_position
+        """)
+        columns = [column[0] for column in cursor.fetchall()]
+        
+        # Build OR conditions for each keyword
+        all_conditions = []
+        
+        for keyword in keywords:
+            keyword = keyword.strip()
+            if not keyword:
+                continue
+                
+            # Build conditions for this keyword across all columns (excluding id)
+            keyword_conditions = []
+            for column in columns:
+                if column != 'id':  # Skip the id column since it's an integer
+                    keyword_conditions.append(f"LOWER({column}) LIKE LOWER('%{keyword}%')")
+            
+            # Each keyword must be found in at least one column (OR logic within keyword)
+            if keyword_conditions:
+                all_conditions.append(f"({' OR '.join(keyword_conditions)})")
+        
+        # Use OR logic between different keywords
+        if all_conditions:
+            where_clause = f"WHERE {' OR '.join(all_conditions)}"
+        else:
+            where_clause = ""
+        
+        query = f"""
+        SELECT * FROM final 
+        {where_clause}
+        ORDER BY first_name, last_name
+        LIMIT {max_results}
+        """
+        
+        print(f"Search query: {query}")  # Debug logging
+        
+        cursor.execute(query)
+        results = cursor.fetchall()
+        
+        # Convert results to list of dictionaries with column names
+        column_names = [description[0] for description in cursor.description]
+        formatted_results = []
+        
+        for row in results:
+            row_dict = {}
+            for i, value in enumerate(row):
+                row_dict[column_names[i]] = value if value else ""
+            formatted_results.append(row_dict)
+        
+        cursor.close()
+        conn.close()
+        
+        print(f"Found {len(formatted_results)} members with OR logic")  # Debug logging
+        return formatted_results
     
     def rank_members_by_relevance(self, members: List[Dict], rfp_analysis: Dict[str, Any], keywords: List[str]) -> List[Dict]:
         """
@@ -129,8 +193,8 @@ class MemberMatcherService:
         if not members:
             return []
         
-        # Limit to top 20 members for API efficiency
-        members_to_rank = members[:20]
+        # Limit to top 15 members for API efficiency
+        members_to_rank = members[:15]
         
         # Prepare member data for analysis
         member_data = []
@@ -172,7 +236,7 @@ class MemberMatcherService:
         3. Skills that address identified gaps
         4. Industry knowledge alignment
         
-        Return a JSON array with the top 10 most relevant members, ranked by relevance score (1-10, where 10 is most relevant).
+        Return a JSON array with the top 8 most relevant members, ranked by relevance score (1-10, where 10 is most relevant).
         Include a brief explanation for each ranking.
         
         Format:
@@ -222,7 +286,7 @@ class MemberMatcherService:
                     'explanation': 'Member matched by keyword search',
                     'key_skills': keywords[:3]
                 }
-                for member in members_to_rank[:10]
+                for member in members_to_rank[:8]
             ]
             
         except Exception as e:
@@ -236,7 +300,7 @@ class MemberMatcherService:
                     'explanation': 'Member matched by keyword search',
                     'key_skills': keywords[:3]
                 }
-                for member in members_to_rank[:10]
+                for member in members_to_rank[:8]
             ]
     
     def find_relevant_members(self, rfp_analysis: Dict[str, Any]) -> Dict[str, Any]:
