@@ -12,17 +12,6 @@ PyPDF2==3.0.1
 python-docx==0.8.11
 openai==1.99.5
 
-# AI Analysis Dependencies
-chromadb==1.0.16
-langchain==0.3.27
-langchain-community==0.3.27
-langchain-core==0.3.74
-langchain-openai==0.3.29
-langchain-chroma==0.2.5
-langchain-text-splitters==0.3.9
-tiktoken==0.10.0
-docx2txt==0.8
-
 # Web Scraping Dependencies
 beautifulsoup4==4.12.2
 lxml==4.9.3
