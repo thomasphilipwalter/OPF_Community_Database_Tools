@@ -8,6 +8,10 @@ opf_community.db
 *.sqlite3
 *.sql
 
+# Database backups (contain sensitive data)
+database_backup.sql
+*_backup.sql
+
 # Data export files (contain real data)
 *_export_*.csv
 *.csv
