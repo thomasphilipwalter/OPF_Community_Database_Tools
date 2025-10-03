@@ -6,6 +6,7 @@ opf_community.db
 *.db
 *.sqlite
 *.sqlite3
+*.sql
 
 # Data export files (contain real data)
 *_export_*.csv
